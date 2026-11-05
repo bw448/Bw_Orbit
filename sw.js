@@ -1,12 +1,15 @@
-const CACHE = 'orbit-shell-v13';
+const CACHE = 'orbit-shell-v14';
 const ASSETS = [
   './', './index.html', './semesters.html', './sem2-1.html', './sem2-2.html', './sem3-1.html', './sem3-2.html',
   './remote.html', './python.html', './kaoyan-remote.html', './zero-remote.html',
   './zero-python.html', './ebook.html', './manifest.webmanifest',
-  './assets/apple.css', './assets/landing.css', './assets/landing.css?v=4', './assets/landing.js', './assets/landing.js?v=2', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
+  './assets/apple.css', './assets/landing.css', './assets/landing.css?v=4', './assets/landing.js', './assets/landing.js?v=2', './assets/ebook.css', './assets/ebook.js', './assets/python-papers.css', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
   './assets/rs-ai.css?v=4', './assets/ai.js', './assets/ai.js?v=4', './assets/study.js',
   './assets/rs-ai.js', './assets/rs-ai.js?v=5', './assets/glossary.js', './assets/glossary.js?v=4',
   './assets/pwa.js',
+  './assets/ebooks/books.js',
+  './assets/ebooks/covers/nature.jpg', './assets/ebooks/covers/maogai.jpg', './assets/ebooks/covers/probability.jpg', './assets/ebooks/covers/remote.jpg', './assets/ebooks/covers/arcgis.jpg',
+  './assets/pdfjs/pdf.min.js', './assets/pdfjs/pdf.worker.min.js',
   './assets/codemirror/codemirror.min.css', './assets/codemirror/codemirror.min.js',
   './assets/codemirror/mode/python/python.min.js',
   './assets/codemirror/addon/edit/closebrackets.min.js', './assets/codemirror/addon/edit/matchbrackets.min.js',

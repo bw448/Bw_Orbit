@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="assets/apple.css">
 <link rel="stylesheet" href="assets/ai.css?v=2">
 <link rel="stylesheet" href="assets/study.css">
+<link rel="stylesheet" href="assets/python-papers.css">
 <link rel="stylesheet" href="assets/codemirror/codemirror.min.css">
 <style>
 .py-terminal{
@@ -42,14 +43,14 @@
 .type-cell .k{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
 .type-cell .v{font-family:var(--display);font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:700;letter-spacing:-.05em;margin-top:6px}
 
-.paper-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:26px}
+.paper-grid{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);margin-top:26px}
 .paper-card{
   display:flex;flex-direction:column;gap:14px;padding:24px 22px 22px;
   border-bottom:1px solid var(--line);border-right:1px solid var(--line);
   background:none;text-align:left;text-decoration:none;
   transition:background .35s var(--ease),padding .35s var(--ease);
 }
-.paper-card:nth-child(3n){border-right:0}
+.paper-card:nth-child(5n){border-right:0}
 .paper-card:hover{background:rgba(233,226,214,.035);padding-left:28px}
 .paper-num{font-family:var(--display);font-size:2.6rem;font-weight:800;line-height:.9;letter-spacing:-.06em;color:var(--accent)}
 .paper-title{font-family:var(--display);font-size:1.35rem;font-weight:650;letter-spacing:-.03em;margin-top:2px}
@@ -83,7 +84,7 @@
 
 @media(max-width:1000px){
   .paper-grid{grid-template-columns:repeat(2,1fr)}
-  .paper-card:nth-child(3n){border-right:1px solid var(--line)}
+  .paper-card:nth-child(5n){border-right:1px solid var(--line)}
   .paper-card:nth-child(2n){border-right:0}
   .paper-head{grid-template-columns:1fr;gap:8px}
 }
@@ -166,6 +167,13 @@
       </div>
       <div class="type-strip" id="typeStrip"></div>
       <div class="paper-grid" id="paperGrid"></div>
+      <div class="paper-downloads" id="paperDownloads">
+        <div class="paper-dl-head">
+          <div><div class="eyebrow">FULL PAPERS</div><h3>十套完整卷</h3><p>整卷阅读，或下载 PDF / Word。</p></div>
+          <div class="paper-dl-all"><a href="assets/papers/python-all-papers.pdf" download>全部 PDF ↓</a><a href="assets/papers/python-all-papers.docx" download>Word ↓</a></div>
+        </div>
+        <div class="paper-dl-grid" id="paperDlGrid"></div>
+      </div>
     </div>
   </section>
 
@@ -297,6 +305,76 @@ function renderPaperGrid(){
   }).join('');
 }
 
+function fullType(q){
+  if (q.type === 'short') { const parts = String(q.section || '').split('、'); return parts[1] || '填空 / 简答'; }
+  return typeName(q.type);
+}
+function paperAnswer(q){
+  if (q.type === 'single') return String.fromCharCode(65 + q.a) + '. ' + q.options[q.a];
+  if (q.type === 'multiple') return q.a.map(i => String.fromCharCode(65+i) + '. ' + q.options[i]).join('；');
+  return Array.isArray(q.a) ? q.a.join(' / ') : String(q.a == null ? '' : q.a);
+}
+function paperGroups(qs){
+  const groups = [];
+  qs.forEach(q => {
+    let g = groups.find(x => x.sec === q.section);
+    if (!g) { g = { sec:q.section, qs:[] }; groups.push(g); }
+    g.qs.push(q);
+  });
+  return groups;
+}
+function renderPaperDownloads(){
+  const el = document.getElementById('paperDlGrid'); if (!el) return;
+  el.innerHTML = PAPERS.map(n => {
+    const qs = paperQs(n);
+    const pdf = 'assets/papers/paper-' + String(n).padStart(2,'0') + '.pdf';
+    const docx = 'assets/papers/paper-' + String(n).padStart(2,'0') + '.docx';
+    return '<div class="paper-dl-card"><b>第 ' + String(n).padStart(2,'0') + ' 套</b><small>' + qs.length + ' 题</small>' +
+      '<div><a href="#paper-full-' + n + '">整卷看</a><a href="' + pdf + '" download>PDF</a><a href="' + docx + '" download>Word</a></div></div>';
+  }).join('');
+}
+function showFullPaper(n){
+  const qs = paperQs(n);
+  if (!qs.length) { go('#papers'); return; }
+  const groups = paperGroups(qs);
+  const c = { single:0, multiple:0, short:0 };
+  qs.forEach(q => { if (c[q.type] != null) c[q.type]++; });
+  const num = String(n).padStart(2,'0');
+  const pdf = 'assets/papers/paper-' + num + '.pdf';
+  const docx = 'assets/papers/paper-' + num + '.docx';
+  const toc = groups.map((g,i) => '<a href="#fsec-' + n + '-' + i + '">' + esc(g.sec) + ' · ' + g.qs.length + '</a>').join('');
+  let body = '';
+  groups.forEach((g, gi) => {
+    body += '<section class="full-section" id="fsec-' + n + '-' + gi + '"><h2>' + esc(g.sec) + '</h2>';
+    g.qs.forEach((q, qi) => {
+      body += '<article class="full-q" id="fq-' + esc(q.id) + '">' +
+        '<div class="full-q-head"><span class="n">' + String(qi+1).padStart(2,'0') + '</span><span class="tag">' + esc(fullType(q)) + '</span></div>' +
+        '<div class="full-q-text">' + esc(q.q) + '</div>';
+      if (q.options && q.options.length) {
+        body += '<div class="full-opts">' + q.options.map((o, oi) =>
+          '<div class="full-opt"><span class="k">' + String.fromCharCode(65+oi) + '</span><span>' + esc(o) + '</span></div>').join('') + '</div>';
+      }
+      body += '<div class="full-answer"><b>答案</b>' + esc(paperAnswer(q)) + '</div>' +
+        '<div class="full-explain"><b>解析</b>' + esc(q.e || '') + '</div></article>';
+    });
+    body += '</section>';
+  });
+  showView(
+    '<div class="full-head"><div class="eyebrow">FULL PAPER ' + num + ' · PYTHON</div>' +
+    '<h1>第 ' + n + ' 套 · 完整卷</h1>' +
+    '<p class="lede">' + qs.length + ' 题 · 单选 ' + c.single + ' / 多选 ' + c.multiple + ' / 填空简答 ' + c.short + '。题目、答案、解析都在这一页。</p>' +
+    '<div class="full-tools">' +
+      '<a class="btn btn-accent" href="' + pdf + '" download>下载 PDF</a>' +
+      '<a class="btn btn-ghost" href="' + docx + '" download>下载 Word</a>' +
+      '<button class="btn btn-ghost" onclick="go(\'#paper-' + n + '\')">本套详情</button>' +
+      '<button class="btn btn-ghost" onclick="go(\'#papers\')">返回试卷</button>' +
+    '</div><div class="full-toc">' + toc + '</div></div>' +
+    '<div class="full-body">' + body + '</div>' +
+    '<div class="full-note">答案来自课程题库；以课堂为准。PDF / Word 内容相同。</div>',
+    'FULL PAPER ' + num
+  );
+}
+
 /* ---------- views ---------- */
 const home = document.getElementById('home'), view = document.getElementById('view');
 const viewBody = document.getElementById('viewBody'), viewLabel = document.getElementById('viewLabel');
@@ -308,6 +386,7 @@ function hideView(){ if (examTimer) { clearInterval(examTimer); examTimer = null
 function go(hash){ if (location.hash === hash) route(); else location.hash = hash; }
 function route(){
   const h = location.hash || ''; let m;
+  if ((m = h.match(/^#paper-full-(\d+)$/))) { showFullPaper(m[1]); return; }
   if ((m = h.match(/^#paper-(\d+)$/))) { showPaper(m[1]); return; }
   if ((m = h.match(/^#practice-(.+)$/))) { startPractice(m[1]); return; }
   if (h === '#exam') { showExam(); return; }
@@ -332,7 +411,10 @@ function showPaper(n){
     Object.entries(secs).map(([k,v]) => '<div class="section-row" data-section="' + esc(k) + '" style="cursor:pointer" onclick="startSection(' + n + ', this.dataset.section)"><span>' + esc(k) + '</span><span class="m">' + v + ' 题 · 只刷这一节</span></div>').join('') +
     '</div></div><aside class="side-note"><div class="count">' + qs.length + '<small>QUESTIONS / ' + done + ' ANSWERED</small></div>' +
     '<p>自动判分题直接出结果；填空、代码阅读、设计题按参考答案自评。</p>' +
-    '<div class="q-actions"><button class="btn btn-accent btn-wide" onclick="go(\'#practice-' + n + '\')">开始本套</button>' +
+    '<div class="q-actions"><button class="btn btn-accent btn-wide" onclick="go(\'#paper-full-' + n + '\')">完整试卷</button>' +
+    '<button class="btn btn-ghost btn-wide" onclick="go(\'#practice-' + n + '\')">开始本套</button>' +
+    '<a class="btn btn-ghost btn-wide" href="assets/papers/paper-' + String(n).padStart(2,'0') + '.pdf" download>下载 PDF</a>' +
+    '<a class="btn btn-ghost btn-wide" href="assets/papers/paper-' + String(n).padStart(2,'0') + '.docx" download>下载 Word</a>' +
     '<button class="btn btn-ghost btn-wide" onclick="go(\'#papers\')">返回试卷</button></div></aside></div>', 'PAPER ' + String(n).padStart(2,'0'));
 }
 
@@ -677,7 +759,7 @@ async function runCode(){
   }catch(e){ out.textContent+='\n'+e; }
 }
 initCode();
-renderTypeStrip(); renderPaperGrid(); updateHome(); initMotion(); route();
+renderTypeStrip(); renderPaperGrid(); renderPaperDownloads(); updateHome(); initMotion(); route();
 </script>
 
 <script src="assets/ai.js?v=4"></script>

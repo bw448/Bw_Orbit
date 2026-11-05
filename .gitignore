@@ -4,6 +4,7 @@ shots/
 shots$h.png
 _qa_*.html
 _qa_*.js
+_ebook_work/
 
 # reference screenshots and unused generated images (not part of the site)
 refs/

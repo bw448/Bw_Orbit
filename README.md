@@ -32,7 +32,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 |---|---|---|
 | 大二上 | 遥感 | 7 章知识脉络、完整作业、90 道题、模拟卷、错题、收藏、75 条中英术语 |
 | 大二上 | Python | 599 道题、10 套卷、按套 / 分节刷题、模拟卷、代码练习 |
-| 跨学期 | 电子书 | 预留：教材、笔记、划线、搜索，和题库互相跳转 |
+| 跨学期 | 电子书 | 5 本大二上教材：自然地理、毛概、概率论、遥感导论、ArcGIS；在线阅读 |
 
 大二下、大三上、大三下已留好结构，课程确定后按同一模板接入。
 
@@ -53,10 +53,18 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 旧 Python 项目（`E:\python卷子` / 原 GitHub 仓库）保持只读、没有改动。新项目独立重做：
 
 - 599 题 / 10 套卷：按套刷、分节刷、综合刷、模拟卷。
+- **整卷阅读与下载**：十套卷都能在一页看完题目 + 答案 + 解析；每套可下载 PDF / Word，十套也有合集。
 - 单选、多选自动判分；填空、代码阅读、设计题按参考答案自评。
 - 错题本、收藏夹、分套进度、数据页。
 - 代码练习：CodeMirror 行号 / 高亮 / 括号补全 + Pyodide 浏览器运行；多文件；按 import 自动加载常见包。
 - AI 助教：提示、讲解、变式题、简答批改、选中解释、错题分析、今日计划。
+
+### 电子书模块
+
+- 大二上 5 本教材：自然地理学、毛概（2023 版）、概率论与数理统计（第五版）、遥感导论、ArcGIS 空间分析实验教程（第三版）。
+- 共 1,981 页、约 231 MB；网页阅读版做了压缩，保留原书页序。
+- 自带轻量 PDF 阅读器：翻页、缩放、全屏、键盘方向键、手机滑动翻页，支持直接下载。
+- 版权归原作者和出版社；仅用于个人学习与课程复习，不用于商业传播。
 
 ### 两门课共用的学习工具
 
@@ -79,6 +87,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 - 手机端选中文字后，`译 / 问` 工具条固定在底部，不遮挡选中内容。
 - `manifest.webmanifest` + `sw.js`：可添加到手机主屏；核心页面离线可用。
 - 代码练习第一次运行需要联网下载 Pyodide（约 10 MB）；离线时普通刷题可用。
+- 电子书 PDF 和成套试卷 PDF 体积较大，PWA 只缓存页面、封面和阅读器，不缓存这些 PDF；离线阅读请先下载。
 - CodeMirror 和 anime.js 已放在 `assets/` 本地，不依赖 CDN；只有 Pyodide 运行时按需联网。
 
 ### 本地运行 / 重新构建
@@ -120,7 +129,7 @@ kaoyan-remote.html         遥感 · 考研
 zero-remote.html           遥感 · 从 0 到 1
 python.html                Python · 期末复习
 zero-python.html           Python · 从 0 到 1
-ebook.html                 电子书（预留）
+ebook.html                 电子书：5 本教材 + PDF 阅读器
 assets/
   apple.css                Apple 式浅色设计系统
   landing.css / landing.js 品牌首页：轨道动效、滚动揭示
@@ -128,10 +137,16 @@ assets/
   glossary.js              75 条中英术语数据
   study.js / study.css     间隔复习、历史、目标、计划、搜索
   ai.js / ai.css           Python：AI 助教面板
+  ebook.js / ebook.css     电子书卡片与 PDF.js 阅读器
+  ebooks/                  5 本压缩 PDF、封面、书目
+  papers/                  十套 Python 完整卷 PDF / Word
+  pdfjs/                   PDF.js 本地阅读组件
   homework/                作业里的曲线图
 src/                       源模板与题库
 build.py                   构建脚本
 start.bat                  本地服务器
+tools/make_python_papers.py 生成十套完整卷 PDF / Word
+tools/prepare_ebooks.py     压缩 PDF 并提取封面
 ```
 
 ### 内容说明与边界
@@ -164,7 +179,7 @@ After the brand landing, the learning hub asks only for a semester; the next lay
 |---|---|---|
 | Year 2 Fall | Remote Sensing | 7 chapters, full homework, 90 questions, mock exam, wrong answers, bookmarks, 75 bilingual terms |
 | Year 2 Fall | Python | 599 questions, 10 papers, paper/section practice, mock exam, code lab |
-| Cross-semester | E-book | Planned: textbook, notes, highlights, search, links to questions |
+| Cross-semester | E-book | 5 Year-2 Fall textbooks: physical geography, Maoism, probability, remote sensing, ArcGIS; read online |
 
 Year 2 Spring and Year 3 are reserved and follow the same structure when courses are confirmed.
 
@@ -185,10 +200,18 @@ Year 2 Spring and Year 3 are reserved and follow the same structure when courses
 The old Python project is kept read-only and untouched. This is a new implementation:
 
 - 599 questions across 10 papers; practice by paper, section or mixed set.
+- **Whole-paper reading and downloads**: every paper can be read as one page with questions, answers and explanations; download each paper as PDF/Word, or the full 10-paper set.
 - Auto-grading for single/multiple choice; self-check against reference answers for fill-in, code-reading and design questions.
 - Wrong-answer book, bookmarks, per-paper progress and a data page.
 - Code lab: CodeMirror editor with line numbers, syntax highlighting and bracket completion; Pyodide runs Python in the browser; multi-file support; common packages loaded from imports.
 - AI tutor: hints, explanations, variant questions, short-answer review, selected-text explanation, wrong-answer analysis and a daily plan.
+
+### E-books
+
+- Five Year-2 Fall textbooks: Physical Geography, Mao Zedong Thought (2023), Probability and Statistics (5th ed.), Introduction to Remote Sensing, and the ArcGIS Spatial Analysis lab manual (3rd ed.).
+- 1,981 pages, about 231 MB; the web reading copies are compressed but keep the original page order.
+- Includes a small PDF.js reader: page turns, zoom, fullscreen, arrow keys, mobile swipe, and direct download.
+- Copyright remains with the authors and publishers; provided for personal study and course review only.
 
 ### Shared study tools
 
@@ -211,6 +234,7 @@ The old Python project is kept read-only and untouched. This is a new implementa
 - On phones, selecting text shows a bottom `译 / 问` bar that does not cover the selection.
 - `manifest.webmanifest` + `sw.js`: installable to the home screen; core pages work offline.
 - The code lab downloads the Pyodide runtime (~10 MB) on first run; ordinary practice works offline.
+- E-book and paper PDFs are large; the PWA caches pages, covers and the reader, not the PDFs. Download them first for offline reading.
 - CodeMirror and anime.js are vendored under `assets/`; only the Pyodide runtime is fetched on demand.
 
 ### Run locally / rebuild
@@ -252,7 +276,7 @@ kaoyan-remote.html         Remote Sensing · graduate entrance prep
 zero-remote.html           Remote Sensing · zero-to-one
 python.html                Python · final review
 zero-python.html           Python · zero-to-one
-ebook.html                 E-book (planned)
+ebook.html                 E-books: 5 textbooks + PDF reader
 assets/
   apple.css                Apple-inspired light design system
   landing.css / landing.js Brand landing: orbit motion, scroll reveals
@@ -260,10 +284,16 @@ assets/
   glossary.js              75 bilingual terms
   study.js / study.css     Spaced repetition, history, goals, plan, search
   ai.js / ai.css           Python: AI tutor panel
+  ebook.js / ebook.css     Library cards and PDF.js reader
+  ebooks/                  Compressed PDFs, covers, book data
+  papers/                  Full Python papers as PDF / Word
+  pdfjs/                   Local PDF.js reader component
   homework/                Figures from the assignments
 src/                       Source templates and question data
 build.py                   Build script
 start.bat                  Local server
+tools/make_python_papers.py Generate full paper PDFs / Word files
+tools/prepare_ebooks.py     Compress PDFs and extract covers
 ```
 
 ### Content notes and limits
