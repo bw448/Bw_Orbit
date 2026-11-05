@@ -1,9 +1,9 @@
-const CACHE = 'bw-orbit-shell-v9';
+const CACHE = 'orbit-shell-v12';
 const ASSETS = [
-  './', './index.html', './sem2-1.html', './sem2-2.html', './sem3-1.html', './sem3-2.html',
+  './', './index.html', './semesters.html', './sem2-1.html', './sem2-2.html', './sem3-1.html', './sem3-2.html',
   './remote.html', './python.html', './kaoyan-remote.html', './zero-remote.html',
   './zero-python.html', './ebook.html', './manifest.webmanifest',
-  './assets/apple.css', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
+  './assets/apple.css', './assets/landing.css', './assets/landing.css?v=3', './assets/landing.js', './assets/landing.js?v=2', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
   './assets/rs-ai.css?v=4', './assets/ai.js', './assets/ai.js?v=4', './assets/study.js',
   './assets/rs-ai.js', './assets/rs-ai.js?v=5', './assets/glossary.js', './assets/glossary.js?v=4',
   './assets/pwa.js',
