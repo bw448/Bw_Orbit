@@ -4,6 +4,7 @@
   var DEFAULT = { provider: 'deepseek', model: 'deepseek-chat', key: '' };
   var state = { messages: [], busy: false, el: {} };
   var CHAT_KEY = 'orbit-ai-chat';
+  var lastSelection = '';
   function loadChat(){ try { var a = JSON.parse(localStorage.getItem(CHAT_KEY) || '[]'); return Array.isArray(a) ? a : []; } catch(e){ return []; } }
   function saveChat(){ try { localStorage.setItem(CHAT_KEY, JSON.stringify(state.messages.slice(-12))); } catch(e){} }
 
@@ -204,7 +205,7 @@
     gradeShort(box ? box.value : '');
   }
   function selectText() {
-    var t = String(window.getSelection ? window.getSelection() : '').trim();
+    var t = String(window.getSelection ? window.getSelection() : '').trim() || lastSelection;
     if (!t) { open(); sys('先在页面上选中一段文字，再点“选中解释”。'); return; }
     ask('请解释这段内容（必要时结合当前题目上下文），先给一句结论，再分点讲清楚：\n' + t.slice(0, 1200));
   }
@@ -222,6 +223,11 @@
   }
 
   function bind() {
+    document.addEventListener('selectionchange', function () {
+      var sel = window.getSelection ? window.getSelection() : null;
+      var t = sel ? String(sel).trim() : '';
+      if (t && t.length <= 1600) lastSelection = t;
+    });
     state.el.fab.addEventListener('click', function () { state.el.panel.hidden ? open() : close(); });
     state.el.panel.addEventListener('click', function (e) {
       var act = e.target.getAttribute('data-act');

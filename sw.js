@@ -1,10 +1,10 @@
-const CACHE = 'orbit-shell-v7';
+const CACHE = 'orbit-shell-v8';
 const ASSETS = [
   './', './index.html', './sem2-1.html', './sem2-2.html', './sem3-1.html', './sem3-2.html',
   './remote.html', './python.html', './kaoyan-remote.html', './zero-remote.html',
   './zero-python.html', './ebook.html', './manifest.webmanifest',
   './assets/apple.css', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
-  './assets/rs-ai.css?v=4', './assets/ai.js', './assets/ai.js?v=2', './assets/study.js',
+  './assets/rs-ai.css?v=4', './assets/ai.js', './assets/ai.js?v=3', './assets/study.js',
   './assets/rs-ai.js', './assets/rs-ai.js?v=4', './assets/glossary.js', './assets/glossary.js?v=4',
   './assets/pwa.js',
   './assets/codemirror/codemirror.min.css', './assets/codemirror/codemirror.min.js',
