@@ -32,8 +32,10 @@ def wrap(html, lang="zh-CN"):
 def build_remote():
     tpl = open(os.path.join(ROOT, "src", "template.html"), encoding="utf-8").read()
     homework = json.load(open(os.path.join(ROOT, "src", "homework.json"), encoding="utf-8"))
+    notes = json.load(open(os.path.join(ROOT, "src", "notes.json"), encoding="utf-8"))
     html = tpl.replace("__DATA__", json.dumps(DATA, ensure_ascii=False))
     html = html.replace("__HOMEWORK__", json.dumps(homework, ensure_ascii=False))
+    html = html.replace("__NOTES__", json.dumps(notes, ensure_ascii=False))
     html = wrap(html)
     out = os.path.join(ROOT, "remote.html")
     open(out, "w", encoding="utf-8").write(html)
@@ -83,12 +85,38 @@ def build_static(src, out):
     print("built", path, len(html), "chars")
 
 
+
+def build_courses():
+    tpl = open(os.path.join(ROOT, "src", "course_template.html"), encoding="utf-8").read()
+    courses = json.load(open(os.path.join(ROOT, "src", "courses.json"), encoding="utf-8"))
+    for slug, c in courses.items():
+        html = tpl
+        for key, val in {
+            "__TITLE__": c["title"],
+            "__TAG__": c["tag"],
+            "__CODE__": c["code"],
+            "__EN__": c["en"],
+            "__LEAD__": c["lead"],
+            "__INTRO__": c["intro"],
+            "__NOTICE__": c["notice"],
+            "__ACCENT__": c["accent"],
+            "__DESC__": "%s 大二上复习模块：考试重点、章节勾画与资料。Orbit 地信学习站。" % c["title"],
+        }.items():
+            html = html.replace(key, val)
+        html = html.replace("__COURSE__", json.dumps(c, ensure_ascii=False))
+        html = wrap(html)
+        out = os.path.join(ROOT, slug + ".html")
+        open(out, "w", encoding="utf-8").write(html)
+        print("built", out, len(html), "chars")
+
 if __name__ == "__main__":
     build_remote()
     build_python()
     build_static("landing.html", "index.html")
     build_static("semesters.html", "semesters.html")
+    build_static("competitions.html", "competitions.html")
     build_static("ebook.html", "ebook.html")
+    build_courses()
     build_static("sem2-1.html", "sem2-1.html")
     build_static("kaoyan-remote.html", "kaoyan-remote.html")
     build_static("zero-remote.html", "zero-remote.html")

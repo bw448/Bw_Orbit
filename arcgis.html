@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>ArcGIS 空间分析 · 大二上 / Orbit</title>
+<meta name="description" content="ArcGIS 空间分析 大二上复习模块：考试重点、章节勾画与资料。Orbit 地信学习站。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/course.css?v=2">
+</head>
+<body>
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html" aria-label="Orbit">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
+      Orbit
+    </a>
+    <nav class="gn-links" aria-label="学期模块">
+      <a href="semesters.html">学习内容</a>
+      <a class="active" href="sem2-1.html">大二上</a>
+      <a href="sem2-2.html">大二下</a>
+      <a href="sem3-1.html">大三上</a>
+      <a href="sem3-2.html">大三下</a>
+      <a href="ebook.html">电子书</a>
+      <a href="competitions.html">竞赛</a>
+    </nav>
+    <div class="gn-right"><span>大二上 · 课程模块</span></div>
+  </div>
+</header>
+
+<main class="course-page" id="coursePage" style="--course-accent:#0b7285">
+  <section class="course-hero">
+    <div class="course-shell course-hero-inner">
+      <div class="course-hero-copy">
+        <div class="course-kicker">大二上 · 专业核心</div>
+        <div class="course-code">GIS · 2025</div>
+        <h1>ArcGIS 空间分析</h1>
+        <div class="course-en">GIS Spatial Analysis</div>
+        <p class="course-lead">理论、算法、软件实操三条线一起复习；PPT 和课后题是主干。</p>
+        <div class="course-actions">
+          <a class="btn-primary" href="#sections">看重点</a>
+          <a class="course-back" href="sem2-1.html">返回大二上 <span>↗</span></a>
+        </div>
+      </div>
+      <div class="course-orbit" aria-hidden="true">
+        <div class="course-ring r1"></div><div class="course-ring r2"></div><div class="course-ring r3"></div>
+        <span class="course-dot d1"></span><span class="course-dot d2"></span><span class="course-dot d3"></span>
+        <span class="course-mark">GIS · 2025 / NOTES</span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="course-subnav" aria-label="本页导航">
+    <a href="#exam">考试与重点</a>
+    <a href="#sections">重点内容</a>
+    <a href="#plan">复习路线</a>
+    <a href="#resources">资料</a>
+  </nav>
+
+  <section class="course-section" id="exam">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Exam map</div><h2>先知道，<br>考什么。</h2></div>
+        <p class="section-lede" id="courseIntro">ArcGIS 的复习要同时抓三层：概念与原理、底层算法、软件操作流程。材料里的音频总结已经把题型和分值讲得很清楚；配合章节 PPT、操作题和实验，按题型逐块准备。</p>
+      </div>
+      <div class="exam-grid" id="examGrid"></div>
+      <div class="course-notice"><b>划重点</b><span id="courseNotice">大二上经验：基本上看 PPT 复习；期末题型和分值见下方“考试结构”。</span></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="sections">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Key content</div><h2>重点，<br>按章过。</h2></div>
+        <p class="section-lede">带“勾画”标记的章节，是老师材料里明确出现、需要优先掌握的部分。</p>
+      </div>
+      <div class="course-notes" id="courseSections"></div>
+    </div>
+  </section>
+
+  <section class="course-section" id="plan">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Study path</div><h2>怎么把它<br>复习完。</h2></div>
+        <p class="section-lede">不按“从头看到尾”，按“先抓重点、再补过程、最后输出”的顺序。</p>
+      </div>
+      <div class="course-plan" id="coursePlan"></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="resources">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Materials</div><h2>最合适的<br>那几份资料。</h2></div>
+        <p class="section-lede">不用把所有文件都打开。下面的资料按用途排好：教材、重点、真题、PPT 和实操。</p>
+      </div>
+      <div class="resource-grid" id="courseResources"></div>
+      <p class="course-copyright">资料来自课程与老师复习材料，版权归原作者/出版社；仅用于个人复习，请勿商业传播。</p>
+      <div class="course-related" id="courseLinks"></div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <span>Orbit · 大二上 · ArcGIS 空间分析<br>课程模块 · 2026</span>
+      <div class="foot-links"><a href="index.html">首页</a><a href="sem2-1.html">大二上</a><a href="semesters.html">学习内容</a><a href="competitions.html">竞赛</a></div>
+    </div>
+  </footer>
+</main>
+
+<script>window.COURSE = {"title": "ArcGIS 空间分析", "en": "GIS Spatial Analysis", "code": "GIS · 2025", "tag": "大二上 · 专业核心", "accent": "#0b7285", "lead": "理论、算法、软件实操三条线一起复习；PPT 和课后题是主干。", "intro": "ArcGIS 的复习要同时抓三层：概念与原理、底层算法、软件操作流程。材料里的音频总结已经把题型和分值讲得很清楚；配合章节 PPT、操作题和实验，按题型逐块准备。", "notice": "大二上经验：基本上看 PPT 复习；期末题型和分值见下方“考试结构”。", "exam": [["成绩构成", "卷面 70% + 平时 30%（考勤 10 + 两次实验/作业 20）"], ["名词解释", "5 题 × 3 分 = 15 分；英文全称 → 中文定义 → 核心特征"], ["单选/判断", "单选 10 × 2 = 20 分；判断 5 × 2 = 10 分，判断后要写改正理由"], ["简答/实验/论述", "简答 4 题约 20—25 分；实验技能大题考综合流程；论述为开放题"]], "sections": [{"title": "GIS 基础概念", "en": "Fundamentals", "points": ["GIS 定义、地理信息、空间数据；GIS 的组成与功能。", "矢量数据与栅格数据的区别、优缺点、适用场景。", "拓扑关系、图层、属性表、空间参考与坐标投影。", "空间数据库、元数据、数据质量。"]}, {"title": "空间分析核心", "en": "Spatial Analysis", "points": ["缓冲区分析、叠加分析、网络分析、空间统计分析。", "泰森多边形（Voronoi）的生成原理与应用。", "DEM 分析：坡度、坡向、地形起伏度、可视域、流域。", "重分类、栅格计算、距离分析、密度分析。"]}, {"title": "底层算法", "en": "Algorithms", "points": ["多边形面积计算（向量叉积/坐标法）。", "曲线压缩：垂距法、Douglas-Peucker 的基本思想。", "游程编码：长度编码、终止编码；栅格数据压缩。", "曲线平移的算法步骤与 C 语言注释代码。"]}, {"title": "软件实操流程", "en": "Workflow", "points": ["地理配准：控制点选择、配准变换、残差检查、重采样。", "矢量化：新建要素类、编辑、捕捉、拓扑检查。", "叠加分析/缓冲区/专题图制作：输入、参数、输出与结果检查。", "DEM 三维建模：TIN/栅格、坡度坡向、通视性、剖面。", "多源数据融合、裁剪、投影转换、属性连接。"]}, {"title": "实验与论述", "en": "Labs & Essay", "points": ["实验题只考综合性系统实验，细碎小实验不考；按菜单/步骤顺序写。", "高频：地理配准、叠加分析、DEM 三维建模、缓冲区/专题图、经济空间分析。", "论述方向：GIS 课程整体认知、生活中的 GIS、与高中地理新技术对比、专业选择原因。", "论述题分 1/2/3 点，每点配一个例子，卷面整洁。"]}], "plan": [["01", "过 PPT", "按章节 PPT 过概念和软件界面，标出老师反复讲的图。"], ["02", "背算法", "多边形面积、垂距法、游程编码、曲线平移写成文字流程 + 注释代码。"], ["03", "练流程", "地理配准、叠加、DEM、缓冲区各做一遍，能按菜单复述。"], ["04", "刷题型", "按名词解释/单选/判断/简答/实验/论述分题型练，判断题一定写理由。"]], "resources": [["ArcGIS 操作题", "PDF · 32.4 MB", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/operations.pdf", "实操"], ["第 1 章 ArcGIS 概述", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch1-overview.pdf", "PPT"], ["第 2 章 快速入门", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch2-quickstart.pdf", "PPT"], ["第 6 章 空间分析导论", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch6-intro.pdf", "PPT"], ["第 7 章 矢量空间分析", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch7-vector.pdf", "PPT"], ["第 8 章 栅格空间分析", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch8-raster.pdf", "PPT"], ["第 9 章 三维分析", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch9-3d.pdf", "PPT"], ["第 10 章 空间统计分析", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch10-statistics.pdf", "PPT"], ["实验 13：栅格空间分析", "PDF · 学校选址/最佳路径/密度制图", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/experiment-13.pdf", "实验"], ["ArcGIS 空间分析实验教程（第三版）", "PDF · 576 页 · 58.5 MB", "assets/ebooks/arcgis-spatial-analysis.pdf", "教材"]], "links": [["电子书阅读器", "ebook.html"], ["遥感模块", "remote.html"], ["竞赛模块", "competitions.html"]]};</script>
+<script src="assets/course.js"></script>
+<script src="assets/pwa.js" defer></script>
+</body>
+</html>
