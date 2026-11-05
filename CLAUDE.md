@@ -26,7 +26,8 @@ claude
 3. 看 `build.py` 和要改的 `src/*.html`
 4. 改完运行 `python build.py`
 5. 检查 JS：`node --check assets/xxx.js`
-6. 手机 390px 检查，再 commit / push
+6. 同步总纲：`python tools/export_summaries.py`（或直接运行 `sync.bat`）
+7. 手机 390px 检查，再 commit / push
 
 ## 常用命令
 
@@ -38,6 +39,10 @@ python -m http.server 8765
 
 # 重新生成所有页面
 python build.py
+
+# 同步桌面资料：作业抽取 → 建站 → 六科总纲
+python tools/sync_content.py
+# 或双击 sync.bat
 
 # 查看状态 / 提交 / 部署
 git status
@@ -57,14 +62,17 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
   - 原有七套作业 / 90 题固定不动
   - `remote.html#notes`：从老师复习 PDF 补的 61 条讲义补充
 - Python：`python.html`
-  - 599 题 / 10 套卷
+  - 599 题 / 10 套卷；**题库固定，不因新模块改动**
   - `#paper-full-N` 整卷看
   - `assets/papers/`：十套 PDF / Word + 合集
+- Python 知识地图：`python-guide.html`
+  - 考试结构（来自 `考试.txt`）、10 个知识模块、题库主题覆盖、5 天路线
+  - 数据：`src/python_guide.json` + `src/python_topics.json`
 - 四个课程模块：
   - `nature-geo.html` 自然地理学
-  - `maogai.html` 毛概
+  - `maogai.html` 毛概（含 1065 道选择题自测）
   - `probability.html` 概率论
-  - `arcgis.html` ArcGIS
+  - `arcgis.html` ArcGIS（80 道客观题 + 算法/实操/简答/分析/论述）
 - 竞赛顶层模块：`competitions.html`（赛事 / 备考 / 技能 / 资料）
 - 电子书：`ebook.html`（5 本教材 + PDF.js 阅读器）
 - BW有话说：
@@ -82,8 +90,12 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 遥感题库 / 章节：`src/content.py`
 - 遥感作业正文：`src/homework.json`
 - 遥感讲义补充：`src/notes.json`
-- Python 599 题：`src/python_questions.json`
+- Python 599 题：`src/python_questions.json`（固定）
+- Python 知识地图：`src/python_guide.json`；题库主题统计：`src/python_topics.json`
 - 四个课程模块：`src/courses.json`
+- ArcGIS 题库 / 模板：`src/arcgis_bank.json`
+- 毛概选择题库：`src/maogai_bank.json`
+- 课程总纲生成：`tools/export_summaries.py` → 桌面 `系统整理好的复习资料/`
 - 电子书书目：`assets/ebooks/books.js`
 - 竞赛数据：`assets/competitions-data.js`
 - BW 的 CloudBase 配置：`assets/cloudbase-config.js`
@@ -92,7 +104,10 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 ## 不能动 / 注意
 
 - **遥感原有七套作业题库是固定的**，补充内容只能加到 `src/notes.json` 或新模块，不要改原题。
+- **Python 599 题 / 10 套卷是固定的**，知识地图只能新增导航，不改题、不删题、不重排。
 - 旧 Python 项目（`E:\python卷子`）保持只读，不修改、不提交。
+- 生成后的 `arcgis.html` / `maogai.html` / `python-guide.html` 不要直接改，改 `src/` 模板与 JSON 后重新 build。
+- ArcGIS 题库答案以扫描件为准；毛概补充题库以教材/课后题为准。
 - 视觉基线：浅色 Apple 风、白底、系统字体、蓝色强调；不要纯黑大面积；不要用用户生成图片，视觉用代码/SVG。
 - 手机端 390px 必须无横向溢出。
 - 不要把 SecretId / SecretKey / service_role / 数据库密码放进前端；BW 只用 publishable key。
@@ -124,7 +139,8 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 
 ## 当前待办 / 可继续优化
 
-- 第五章遥感图像处理仍无题目（知识脉络和术语可看）
+- 第五章遥感图像处理仍无作业与题目（知识脉络和术语可看）；把 `第五章作业.docx` 放进 `地信大二上/遥感作业_分章` 后运行 `sync.bat`
+- 毛概选择题补充库有少量原资料错字/争议，遇到就按教材改 `src/maogai_bank.json` 或源 PDF
 - 电子书阅读器可继续做书签、搜索、笔记
 - 竞赛模块可继续补赛事日历、获奖作品、校赛信息
 - BW有话说可继续做编辑帖子、图片多图、浏览量
@@ -135,7 +151,8 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 
 ```text
 项目在 E:\地信复习系统。先读 CLAUDE.md 和 README.md，了解当前结构；
-不要改遥感原有固定题库，不要动旧 Python 项目。
+不要改遥感原有固定题库，不要动旧 Python 项目，也不要改 Python 599 题。
+桌面资料在 C:\Users\Lenovo\Desktop\地信大二上\课程资料；总纲在 系统整理好的复习资料。
 这次我想优化：……
-改完请 build、检查 390px、commit 并 push。
+改完请 build、导出总纲、检查 390px、commit 并 push。
 ```

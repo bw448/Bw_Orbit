@@ -30,12 +30,12 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 | 学期 | 科目 | 内容 |
 |---|---|---|
-| 大二上 | 遥感 | 7 章知识脉络、完整作业、90 道题、模拟卷、错题、收藏、75 条中英术语 |
-| 大二上 | Python | 599 道题、10 套卷、按套 / 分节刷题、模拟卷、代码练习 |
+| 大二上 | 遥感 | 8 章知识脉络（第五章待补）、7 套完整作业、90 道题、模拟卷、错题、收藏、75 条中英术语 |
+| 大二上 | Python | 599 道题、10 套卷、按套 / 分节刷题、模拟卷、代码练习、知识地图 |
 | 大二上 | 自然地理学 | 老师勾画重点、章节框架、变质作用扫描、重点页 |
-| 大二上 | 毛概 | 大题背诵、选择题专项、2024/2025 真题 |
+| 大二上 | 毛概 | 大题背诵、选择题专项、1065 题自测、2024/2025 真题 |
 | 大二上 | 概率论 | 章节重点、公式、PPT 原题、2022—2023 期末卷 |
-| 大二上 | ArcGIS | 考试结构、理论/算法/实操三条线、PPT 与操作题 |
+| 大二上 | ArcGIS | 考试结构、80 道客观题自测、名词解释、算法、实操、简答/分析/论述 |
 | 顶层 | 竞赛 | 6 个 GIS 赛事、备考路线、技能地图、资料库 |
 | 顶层 | BW有话说 | 文字 / 图片 / 视频 / 链接时间线；只点赞，不设评论 |
 | 跨学期 | 电子书 | 5 本大二上教材：自然地理、毛概、概率论、遥感导论、ArcGIS；在线阅读 |
@@ -66,12 +66,21 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 - 代码练习：CodeMirror 行号 / 高亮 / 括号补全 + Pyodide 浏览器运行；多文件；按 import 自动加载常见包。
 - AI 助教：提示、讲解、变式题、简答批改、选中解释、错题分析、今日计划。
 
+#### Python 知识地图
+
+`python-guide.html` 是题库之外的“第二入口”，不改动 599 题：
+
+- **考试说明**：按《考试.txt》拆成单选 20×1、多选 10×3、填空 10×1.5、代码阅读 3 题 20 分、程序设计 5 选 3。
+- **十个知识模块**：基础语法、函数与作用域、迭代器/生成器/装饰器、类与对象、继承与多态、Pandas、Matplotlib、GeoPandas、GDAL/OGR、模块与 Jupyter。
+- **题库覆盖**：按题干关键词统计每个主题的题量，并明确标出题库覆盖不足的 Matplotlib、GeoPandas、GDAL。
+- **五天路线**：先做整卷找短板，再按题型补，最后补三个库。
+
 ### 四个课程模块
 
 - **自然地理学**：按最后一节课勾画/画勾部分整理；岩石、构造、变质作用、外力地貌分章拆开，配课本、手写扫描和重点页。
-- **毛概**：按“形成条件—主要内容—历史地位”搭框架；大题背诵、选择题专项、2024/2025 真题直接下载。
+- **毛概**：按“形成条件—主要内容—历史地位”搭框架；大题背诵、选择题专项、2024/2025 真题直接下载；页面内可刷 1065 道选择题（新教材 188 + 旧教材 522 + 期末补充 355）。
 - **概率论**：按题型和公式复习；PPT 原题、回忆版、2022—2023 期末卷和 Kira 讲义集中在一个模块。
-- **ArcGIS**：按老师音频总结拆成考试结构、理论、底层算法、软件实操、论述五块；配章节 PPT、操作题和实验。
+- **ArcGIS**：从 25 页填空题扫描件整理出 30 填空 + 20 单选 + 30 判断 + 10 简答 + 7 分析；另配 6 条名词解释、12 条中英词汇、4 个底层算法、6 个实操流程和论述模板。
 
 ### 竞赛模块
 
@@ -141,11 +150,21 @@ python -m http.server 8765
 python build.py
 ```
 
-构建只依赖 Python 标准库；会读取：
+同步桌面资料（作业抽取 → 建站 → 六科总纲）：
+
+```powershell
+python tools/sync_content.py
+# 或双击 sync.bat
+```
+
+`build.py` 只依赖 Python 标准库；总纲导出另需 `python-docx`。构建会读取：
 
 - `src/content.py`：遥感题库与章节
 - `src/homework.json`：从 Word 作业抽出的内容
-- `src/python_questions.json`：599 道 Python 题
+- `src/python_questions.json`：599 道 Python 题（固定，不改）
+- `src/python_guide.json` / `src/python_topics.json`：知识地图与题库主题统计
+- `src/arcgis_bank.json`：ArcGIS 题库、名词解释、算法、实操、论述模板
+- `src/maogai_bank.json`：毛概选择题 1065 题
 - `src/notes.json`：遥感讲义补充 61 条
 - `src/courses.json`：四个课程模块的数据
 - `src/*.html`：页面模板
@@ -163,11 +182,12 @@ remote.html                遥感 · 期末复习
 kaoyan-remote.html         遥感 · 考研
 zero-remote.html           遥感 · 从 0 到 1
 python.html                Python · 期末复习
+python-guide.html          Python · 知识地图
 zero-python.html           Python · 从 0 到 1
 nature-geo.html            自然地理学模块
 maogai.html                毛概模块
 probability.html           概率论模块
-arcgis.html                ArcGIS 模块
+arcgis.html                ArcGIS 模块（含 80 题自测）
 competitions.html          竞赛顶层模块（4 个子模块）
 bw-talk.html               BW有话说：公开时间线
 bw-admin.html              BW有话说：管理员登录/发帖/删除
@@ -180,6 +200,10 @@ assets/
   study.js / study.css     间隔复习、历史、目标、计划、搜索
   ai.js / ai.css           Python：AI 助教面板
   course.css / course.js   四个课程模块的共享布局
+  quiz.css / quiz.js       通用刷题引擎：单选/多选/判断/填空、错题、进度
+  arcgis.css / arcgis.js   ArcGIS：题库、名词、算法、实操、论述
+  maogai.js                毛概：选择题库挂载
+  python-guide.css/js      Python：知识地图与题库覆盖
   competitions.css/js      竞赛模块：赛事/备考/技能/资料
   bw.css / bw.js           BW有话说：公开页与点赞
   bw-admin.js              BW有话说：管理员登录、上传、发帖
@@ -197,6 +221,12 @@ build.py                   构建脚本
 start.bat                  本地服务器
 tools/make_python_papers.py 生成十套完整卷 PDF / Word
 tools/prepare_ebooks.py     压缩 PDF 并提取封面
+tools/extract_homework.py   遥感分章作业 -> src/homework.json
+tools/build_maogai_bank.py  毛概选择题 PDF -> src/maogai_bank.json
+tools/build_python_topics.py 599 题主题统计 -> src/python_topics.json
+tools/export_summaries.py   六科总纲 -> 桌面 系统整理好的复习资料/
+tools/sync_content.py       作业抽取 -> 建站 -> 总纲，一条命令同步
+tools/merge_materials.py    桌面原始文件/复习资料的分类合并（一次性）
 ```
 
 ### 内容说明与边界
@@ -205,7 +235,19 @@ tools/prepare_ebooks.py     压缩 PDF 并提取封面
 - 术语英文释义为课程学习用的简明定义，不替代专业词典。
 - AI 生成内容可能有误，请以教材和老师讲解为准。
 - 旧 Python 项目只读参考，不修改、不提交、不移动。
+- ArcGIS 题库来自课程扫描件《一填空题》25 页，答案以原件为准；个别表述保留原件写法。
+- 毛概选择题 1065 题由 710 题去重汇总与《毛概期末考试题库》补充合并；原资料个别答案有争议，以教材和课后题为准。
+- Python 599 题保持原样；知识地图只做导航、统计和课件补充，不改题、不删题。
 - 本项目用于个人学习与教学交流；教材、课程资料版权归原作者 / 原出版社所有。
+
+### 课程总纲（桌面）
+
+`C:/Users/Lenovo/Desktop/地信大二上/系统整理好的复习资料/` 下每个科目一份 docx：
+
+- 遥感、自然地理学、概率论、毛概、Python 地理处理、ArcGIS。
+- 文档由 `tools/export_summaries.py` 从网站数据生成，不是手写稿；网站内容变化后重新导出即可同步。
+- 桌面资料已按科目合并到 `课程资料/`：遥感、自然地理、概率论、毛概、Python、ArcGIS、通用。
+- `遥感作业_分章` 保留在桌面根目录，作为作业“收件箱”；补第五章作业后运行 `sync.bat` 即可同步网站与总纲。
 
 ---
 
@@ -227,12 +269,12 @@ After the brand landing, the learning hub asks only for a semester; the next lay
 
 | Semester | Subject | Content |
 |---|---|---|
-| Year 2 Fall | Remote Sensing | 7 chapters, full homework, 90 questions, mock exam, wrong answers, bookmarks, 75 bilingual terms |
-| Year 2 Fall | Python | 599 questions, 10 papers, paper/section practice, mock exam, code lab |
+| Year 2 Fall | Remote Sensing | 8 chapters (chapter 5 pending), 7 homework sets, 90 questions, mock exam, wrong answers, bookmarks, 75 bilingual terms |
+| Year 2 Fall | Python | 599 questions, 10 papers, paper/section practice, mock exam, code lab, knowledge map |
 | Year 2 Fall | Physical Geography | Teacher-marked key points, chapter outline, metamorphism scans |
-| Year 2 Fall | Maoism | Essay frameworks, multiple-choice drills, 2024/2025 papers |
+| Year 2 Fall | Maoism | Essay frameworks, 1,065-question choice bank, 2024/2025 papers |
 | Year 2 Fall | Probability | Chapter priorities, formulas, PPT originals, 2022–2023 paper |
-| Year 2 Fall | ArcGIS | Exam structure, theory, algorithms and software workflows |
+| Year 2 Fall | ArcGIS | Exam map, 80-question drill, terms, algorithms, workflows, short/analysis/essay templates |
 | Top level | Competitions | 6 GIS contests, prep routes, skill map and resource library |
 | Top level | BW Notes | Text / image / video / link timeline; likes only, no comments |
 | Cross-semester | E-book | 5 Year-2 Fall textbooks: physical geography, Maoism, probability, remote sensing, ArcGIS; read online |
@@ -263,12 +305,16 @@ The old Python project is kept read-only and untouched. This is a new implementa
 - Code lab: CodeMirror editor with line numbers, syntax highlighting and bracket completion; Pyodide runs Python in the browser; multi-file support; common packages loaded from imports.
 - AI tutor: hints, explanations, variant questions, short-answer review, selected-text explanation, wrong-answer analysis and a daily plan.
 
+#### Python knowledge map
+
+`python-guide.html` is a second entrance that leaves the 599-question bank untouched: the exam structure from the teacher's `考试.txt`, ten knowledge modules (syntax, scope, iterators/decorators, OOP, inheritance, Pandas, Matplotlib, GeoPandas, GDAL/OGR, tooling), bank coverage per topic, and a five-day route. It flags the three areas the bank barely covers: Matplotlib, GeoPandas and GDAL.
+
 ### Four course modules
 
 - **Physical Geography**: built around the teacher's last-class highlights; rocks, structures, metamorphism and landforms with textbook, scanned notes and key-point page.
-- **Maoism**: “background — content — historical status” frameworks, essay memorization, multiple-choice drills and 2024/2025 papers.
+- **Maoism**: “background — content — historical status” frameworks, essay memorization, a 1,065-question interactive choice bank and 2024/2025 papers.
 - **Probability**: question types and formulas, PPT originals, recall sheet, 2022–2023 paper and a Kira handout.
-- **ArcGIS**: exam structure, theory, algorithms, software workflows and essay strategy; chapter slides, operation PDF and labs.
+- **ArcGIS**: exam map, 30 fill-in + 20 single + 30 true/false + 10 short + 7 analysis questions from a 25-page scan, six terms, twelve bilingual terms, four algorithms, six workflows and essay templates.
 
 ### Competitions
 
@@ -358,11 +404,12 @@ remote.html                Remote Sensing · final review
 kaoyan-remote.html         Remote Sensing · graduate entrance prep
 zero-remote.html           Remote Sensing · zero-to-one
 python.html                Python · final review
+python-guide.html          Python · knowledge map
 zero-python.html           Python · zero-to-one
 nature-geo.html            Physical Geography module
 maogai.html                Maoism module
 probability.html           Probability module
-arcgis.html                ArcGIS module
+arcgis.html                ArcGIS module (with 80-question drill)
 competitions.html          Competitions: events/prepare/skills/resources
 bw-talk.html               BW Notes: public timeline
 bw-admin.html              BW Notes: admin login/publish/delete
@@ -375,6 +422,10 @@ assets/
   study.js / study.css     Spaced repetition, history, goals, plan, search
   ai.js / ai.css           Python: AI tutor panel
   course.css / course.js   Shared layout for the four course modules
+  quiz.css / quiz.js       Shared quiz engine: single/multi/judge/fill, wrong-only, progress
+  arcgis.css / arcgis.js   ArcGIS bank, terms, algorithms, workflows, essay templates
+  maogai.js                Maoism choice-bank mount
+  python-guide.css/js      Python knowledge map and bank coverage
   competitions.css/js      Competitions: events/prepare/skills/resources
   bw.css / bw.js           BW Notes: public page and likes
   bw-admin.js              BW Notes: admin login, upload, publish
@@ -392,6 +443,11 @@ build.py                   Build script
 start.bat                  Local server
 tools/make_python_papers.py Generate full paper PDFs / Word files
 tools/prepare_ebooks.py     Compress PDFs and extract covers
+tools/extract_homework.py   Chapter homework docx -> src/homework.json
+tools/build_maogai_bank.py  Maoism choice PDFs -> src/maogai_bank.json
+tools/build_python_topics.py 599-question topic counts
+tools/export_summaries.py   One review master .docx per subject
+tools/sync_content.py       Homework -> build -> summaries in one command
 ```
 
 ### Content notes and limits
@@ -399,5 +455,8 @@ tools/prepare_ebooks.py     Compress PDFs and extract covers
 - Remote-sensing questions come from course assignments and textbook priorities; they are **not official school answers**. Chapter 5, “Remote Sensing Image Processing”, has no questions yet, but its outline and bilingual terms are readable.
 - English definitions are concise study definitions, not a substitute for a professional dictionary.
 - AI output can be wrong; always check against the textbook and your instructor's notes.
+- ArcGIS questions come from the 25-page scanned fill-in bank; answers follow the scan.
+- The Maoism choice bank merges the 710-question summary with 355 deduplicated questions from the final-exam bank; a few source answers are disputed, so trust the textbook and post-class questions.
+- The Python 599-question bank is fixed; the knowledge map only adds navigation, counts and courseware notes.
 - The old Python project is read-only and is not modified, committed or moved.
 - This project is for personal study and teaching exchange. Copyright in textbooks and course materials remains with their original authors and publishers.

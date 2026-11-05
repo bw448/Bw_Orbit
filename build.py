@@ -13,6 +13,11 @@ from content import DATA
 BODY_START = re.compile(r"(?=<(?:header|main|div|section|nav|svg|article)\b)", re.I)
 
 
+def js_json(obj):
+    """JSON safe to embed inside a <script> block."""
+    return json.dumps(obj, ensure_ascii=False).replace("</", "<\\/")
+
+
 def wrap(html, lang="zh-CN"):
     """Turn a source fragment into a complete HTML document (standards mode)."""
     text = html.lstrip("﻿\n ")
@@ -86,10 +91,69 @@ def build_static(src, out):
 
 
 
+def build_arcgis():
+    tpl = open(os.path.join(ROOT, "src", "arcgis.html"), encoding="utf-8").read()
+    data = json.load(open(os.path.join(ROOT, "src", "arcgis_bank.json"), encoding="utf-8"))
+    course = json.load(open(os.path.join(ROOT, "src", "courses.json"), encoding="utf-8"))["arcgis"]
+    for key, val in {
+        "__TITLE__": course["title"],
+        "__TAG__": course["tag"],
+        "__CODE__": course["code"],
+        "__EN__": course["en"],
+        "__LEAD__": course["lead"],
+        "__INTRO__": course["intro"],
+        "__NOTICE__": course["notice"],
+        "__ACCENT__": course["accent"],
+    }.items():
+        tpl = tpl.replace(key, val)
+    tpl = tpl.replace("__ARCGIS__", js_json(data))
+    html = wrap(tpl)
+    out = os.path.join(ROOT, "arcgis.html")
+    open(out, "w", encoding="utf-8").write(html)
+    print("built", out, len(html), "chars,", len(data["bank"]), "questions")
+
+
+def build_maogai():
+    tpl = open(os.path.join(ROOT, "src", "maogai.html"), encoding="utf-8").read()
+    course = json.load(open(os.path.join(ROOT, "src", "courses.json"), encoding="utf-8"))["maogai"]
+    bank = json.load(open(os.path.join(ROOT, "src", "maogai_bank.json"), encoding="utf-8"))
+    for key, val in {
+        "__TITLE__": course["title"],
+        "__TAG__": course["tag"],
+        "__CODE__": course["code"],
+        "__EN__": course["en"],
+        "__LEAD__": course["lead"],
+        "__INTRO__": course["intro"],
+        "__NOTICE__": course["notice"],
+        "__ACCENT__": course["accent"],
+        "__DESC__": "%s 大二上复习模块：考试重点、章节勾画与资料。Orbit 地信学习站。" % course["title"],
+    }.items():
+        tpl = tpl.replace(key, val)
+    tpl = tpl.replace("__COURSE__", js_json(course))
+    tpl = tpl.replace("__MAOGAI_BANK__", js_json(bank))
+    html = wrap(tpl)
+    out = os.path.join(ROOT, "maogai.html")
+    open(out, "w", encoding="utf-8").write(html)
+    print("built", out, len(html), "chars,", len(bank["items"]), "choice questions")
+
+
+def build_python_guide():
+    tpl = open(os.path.join(ROOT, "src", "python-guide.html"), encoding="utf-8").read()
+    guide = json.load(open(os.path.join(ROOT, "src", "python_guide.json"), encoding="utf-8"))
+    topics = json.load(open(os.path.join(ROOT, "src", "python_topics.json"), encoding="utf-8"))
+    tpl = tpl.replace("__PYGUIDE__", js_json(guide)).replace("__PYTOPICS__", js_json(topics))
+    html = wrap(tpl)
+    out = os.path.join(ROOT, "python-guide.html")
+    open(out, "w", encoding="utf-8").write(html)
+    print("built", out, len(html), "chars")
+
+
 def build_courses():
     tpl = open(os.path.join(ROOT, "src", "course_template.html"), encoding="utf-8").read()
     courses = json.load(open(os.path.join(ROOT, "src", "courses.json"), encoding="utf-8"))
     for slug, c in courses.items():
+        if slug in ("arcgis", "maogai"):
+            continue
         html = tpl
         for key, val in {
             "__TITLE__": c["title"],
@@ -119,6 +183,9 @@ if __name__ == "__main__":
     build_static("bw-admin.html", "bw-admin.html")
     build_static("ebook.html", "ebook.html")
     build_courses()
+    build_arcgis()
+    build_maogai()
+    build_python_guide()
     build_static("sem2-1.html", "sem2-1.html")
     build_static("kaoyan-remote.html", "kaoyan-remote.html")
     build_static("zero-remote.html", "zero-remote.html")

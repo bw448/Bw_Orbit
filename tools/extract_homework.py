@@ -7,19 +7,21 @@ import re
 from docx import Document
 from docx.oxml.ns import qn
 
-BASE = r"C:\Users\Lenovo\Desktop\遥感作业_分章"
+BASE = r"C:\Users\Lenovo\Desktop\地信大二上\遥感作业_分章"
 OUT = r"E:\地信复习系统\src\homework.json"
 IMG_DIR = r"E:\地信复习系统\assets\homework"
 os.makedirs(IMG_DIR, exist_ok=True)
 
-FILES = {
-    1: ("第一章作业.docx", "第一章作业", "绪论"),
-    2: ("第二章作业.docx", "第二章作业", "电磁辐射与地物光谱特征"),
-    3: ("第三章作业.docx", "第三章作业", "遥感平台"),
-    4: ("第四章作业.docx", "第四章作业", "遥感传感器"),
-    6: ("第六章作业.docx", "第六章作业", "遥感图像解译"),
-    7: ("第七章作业.docx", "第七章作业", "遥感应用"),
-    8: ("第八章作业.docx", "第八章作业", "3S综合应用"),
+CN = {1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八"}
+SUBTITLES = {
+    1: "绪论",
+    2: "电磁辐射与地物光谱特征",
+    3: "遥感平台",
+    4: "遥感传感器",
+    5: "遥感图像处理",
+    6: "遥感图像解译",
+    7: "遥感应用",
+    8: "3S综合应用",
 }
 
 SECTION_RE = re.compile(r"^[一二三四五六七八九十]+、")
@@ -117,13 +119,16 @@ def extract(ch, fname, title, subtitle):
 
 def main():
     chapters = []
-    for ch in [1, 2, 3, 4, 5, 6, 7, 8]:
-        if ch == 5:
-            chapters.append({"chapter": 5, "title": "第五章作业", "subtitle": "遥感图像处理",
+    for ch in range(1, 9):
+        fname = "第%s章作业.docx" % CN[ch]
+        title = "第%s章作业" % CN[ch]
+        path = os.path.join(BASE, fname)
+        if not os.path.exists(path):
+            chapters.append({"chapter": ch, "title": title, "subtitle": SUBTITLES[ch],
                              "status": "soon", "blocks": []})
+            print(ch, title, "missing -> soon")
             continue
-        fname, title, subtitle = FILES[ch]
-        data = extract(ch, fname, title, subtitle)
+        data = extract(ch, fname, title, SUBTITLES[ch])
         chapters.append(data)
         print(ch, title, len(data["blocks"]), "blocks")
     with open(OUT, "w", encoding="utf-8") as f:
