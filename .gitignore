@@ -1,0 +1,17 @@
+# local QA / screenshots / browser profiles
+.edge-qa/
+shots/
+shots$h.png
+_qa_*.html
+_qa_*.js
+
+# reference screenshots and unused generated images (not part of the site)
+refs/
+assets/_generated_unused/
+
+# local build/test artefacts
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+Thumbs.db

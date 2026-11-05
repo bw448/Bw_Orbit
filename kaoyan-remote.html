@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>ORBIT 考研 · 遥感</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/rs-ai.css?v=4">
+<style>
+.k-list{margin-top:40px;border-top:1px solid var(--line)}
+.k-row{display:grid;grid-template-columns:62px 1fr 1.4fr auto;gap:18px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line-soft);transition:background .2s var(--ease),padding .2s var(--ease)}
+.k-row:hover{background:var(--paper-soft);padding-left:10px;padding-right:10px}
+.k-row .n{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.k-row h3{font-size:1.35rem;font-weight:600;letter-spacing:-.02em}
+.k-row p{color:var(--muted);font-size:13px;line-height:1.65}
+.k-row .go{color:var(--blue);font-size:13px}
+.three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line-strong);margin-top:32px}
+.three-grid div{padding:20px 20px 22px 0;border-bottom:1px solid var(--line-soft);border-right:1px solid var(--line-soft)}
+.three-grid div:last-child{border-right:0}
+.three-grid .k{font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:.08em}
+.three-grid h3{font-size:1.15rem;font-weight:600;margin-top:8px}
+.three-grid p{color:var(--muted);font-size:13px;line-height:1.7;margin-top:5px}
+@media(max-width:700px){.k-row{grid-template-columns:40px 1fr}.k-row p{grid-column:2}.three-grid{grid-template-columns:1fr}.three-grid div{border-right:0}}
+</style>
+</head>
+<body>
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>ORBIT</a>
+    <nav class="gn-links" aria-label="学期模块"><a href="index.html">首页</a><a class="active" href="sem2-1.html">大二上</a><a href="sem2-2.html">大二下</a><a href="sem3-1.html">大三上</a><a href="sem3-2.html">大三下</a><a href="ebook.html">电子书</a></nav>
+    <div class="gn-right"><span>大二上 · 遥感 · 考研</span></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">大二上 · 遥感 · 考研</div>
+      <h1>把遥感体系，<br>重新搭一遍。</h1>
+      <p class="hero-sub">大二上的期末只覆盖本校考试；考研要回到遥感学科本身。这里先搭知识树，再按目标院校接真题、习题和专题。</p>
+      <div class="hero-links">
+        <a class="btn-primary" href="#tree">看知识树</a>
+        <button class="link-arrow" onclick="window.RSAI && RSAI.ask('请按考研遥感/地信的方向，给我一个 3 个月的专业课复习规划：先列知识模块，再安排真题和专题。')">考研规划 · 问一句 <span>›</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="trajectory" id="tree">
+    <div class="trajectory-inner">
+      <div class="sec-head"><div><div class="sec-label">知识树</div><h2>从物理基础，<br>到 3S 综合。</h2></div><p>先按《遥感导论》的骨架搭；每一块之后再接目标院校的真题和专题。点进已有章节先看基础。</p></div>
+      <div class="k-list">
+        <a class="k-row" href="remote.html#chapter-2"><span class="n">01</span><h3>遥感物理基础</h3><p>电磁辐射、大气窗口、地物光谱</p><span class="go">进入 ›</span></a>
+        <a class="k-row" href="remote.html#chapter-3"><span class="n">02</span><h3>平台与传感器</h3><p>轨道、平台、摄影/扫描、分辨率</p><span class="go">进入 ›</span></a>
+        <a class="k-row" href="remote.html#chapter-5"><span class="n">03</span><h3>图像处理</h3><p>校正、增强、变换、融合（待补）</p><span class="go">待补 ›</span></a>
+        <a class="k-row" href="remote.html#chapter-6"><span class="n">04</span><h3>图像解译</h3><p>解译标志、目视/计算机分类、专家系统</p><span class="go">进入 ›</span></a>
+        <a class="k-row" href="remote.html#chapter-7"><span class="n">05</span><h3>遥感应用</h3><p>水体、植被、地质、土壤、高光谱</p><span class="go">进入 ›</span></a>
+        <a class="k-row" href="remote.html#chapter-8"><span class="n">06</span><h3>3S / GIS</h3><p>RS + GIS + GPS 的集成与应用</p><span class="go">进入 ›</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="index">
+    <div class="index-inner">
+      <div class="sec-head"><div><div class="sec-label">真题与习题</div><h2>等目标院校。</h2></div><p>不先编真题。把目标院校、专业代码、参考书目和历年真题给我后，按院校题型接入。</p></div>
+      <div class="index-table">
+        <div class="index-row"><span class="sem">题型 01</span><span class="name">名词解释</span><span class="desc">按院校高频词条整理</span><span class="num">—</span><span class="st">待接入</span><span class="arrow">›</span></div>
+        <div class="index-row"><span class="sem">题型 02</span><span class="name">简答 / 论述</span><span class="desc">学科框架 + 真题问法</span><span class="num">—</span><span class="st">待接入</span><span class="arrow">›</span></div>
+        <div class="index-row"><span class="sem">题型 03</span><span class="name">计算 / 综合</span><span class="desc">辐射计算、分辨率、综合题</span><span class="num">—</span><span class="st">待接入</span><span class="arrow">›</span></div>
+        <div class="index-row"><span class="sem">专题</span><span class="name">研究前沿</span><span class="desc">高光谱、定量遥感、3S 集成</span><span class="num">—</span><span class="st">待接入</span><span class="arrow">›</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tracks">
+    <div class="tracks-inner">
+      <div class="sec-head"><div><div class="sec-label">和校内期末的区别</div><h2>不是把期末题<br>再做一遍。</h2></div><p>校内期末是范围明确的闭卷考试；考研是学科体系、理论深度和综合论述。</p></div>
+      <div class="three-grid">
+        <div><div class="k">DEPTH</div><h3>更深</h3><p>从“记住结论”到“解释机制、比较方法、写论述”。</p></div>
+        <div><div class="k">BREADTH</div><h3>更广</h3><p>遥感 + GIS + 自然地理/数学基础，按目标院校补。</p></div>
+        <div><div class="k">OUTPUT</div><h3>更综合</h3><p>真题、专题、研究前沿，最后落到答题结构。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-foot"><div class="foot-inner"><span>ORBIT · 大二上 / 遥感 / 考研</span><div class="foot-links"><a href="index.html">首页</a><a href="sem2-1.html">大二上</a><a href="remote.html">遥感期末</a><a href="zero-remote.html">从 0 到 1</a><a href="ebook.html">电子书</a></div></div></footer>
+</main>
+<script>
+window.ORBIT_CONTEXT = { semester:'大二上', subject:'遥感', track:'考研', note:'考研遥感，和本校期末分开' };
+</script>
+<script src="assets/glossary.js?v=4"></script>
+<script src="assets/rs-ai.js?v=4"></script>
+<script src="assets/pwa.js" defer></script>
+</body>
+</html>

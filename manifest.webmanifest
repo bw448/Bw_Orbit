@@ -1,0 +1,14 @@
+{
+  "name": "ORBIT 地信学习站 · GIS Learning System",
+  "short_name": "ORBIT",
+  "description": "地信专业学习站：遥感、Python、期末复习、考研、零基础、电子书。A bilingual study system for GIS undergraduates.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f5f7",
+  "theme_color": "#f5f5f7",
+  "icons": [
+    {"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
