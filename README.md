@@ -37,6 +37,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 | 大二上 | 概率论 | 章节重点、公式、PPT 原题、2022—2023 期末卷 |
 | 大二上 | ArcGIS | 考试结构、理论/算法/实操三条线、PPT 与操作题 |
 | 顶层 | 竞赛 | 6 个 GIS 赛事、备考路线、技能地图、资料库 |
+| 顶层 | BW有话说 | 文字 / 图片 / 视频 / 链接时间线；只点赞，不设评论 |
 | 跨学期 | 电子书 | 5 本大二上教材：自然地理、毛概、概率论、遥感导论、ArcGIS；在线阅读 |
 
 大二下、大三上、大三下已留好结构，课程确定后按同一模板接入。
@@ -80,6 +81,15 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 2. **怎么备考**：制图/设计、开发/WebGIS、遥感/分析三条路线 + 八周起步节奏。
 3. **技能地图**：GIS 基础、制图、数据处理、WebGIS、后端、Python、遥感、论文答辩。
 4. **资料库**：ArcGIS Pro、SuperMap、MapGIS、QGIS、OpenLayers、Leaflet、Turf.js、GeoPandas、GDAL 官方文档，以及国内/国际数据源。
+
+### BW有话说
+
+- 顶层个人时间线：文字、图片、视频、链接，按日期倒序。
+- 只保留点赞，不做评论，避免留言审核和垃圾评论。
+- 管理员用 Supabase 邮箱登录后发帖；访客只能看和点赞。
+- 配置：`assets/supabase-config.js` 只放 Project URL 和 publishable key；管理密钥不进入前端。
+- 数据表与 RLS：`supabase/schema.sql`（posts + likes，无 comments）。
+- 公开页：`bw-talk.html`；管理页：`bw-admin.html`（不放进导航）。
 
 ### 电子书模块
 
@@ -158,6 +168,8 @@ maogai.html                毛概模块
 probability.html           概率论模块
 arcgis.html                ArcGIS 模块
 competitions.html          竞赛顶层模块（4 个子模块）
+bw-talk.html               BW有话说：公开时间线
+bw-admin.html              BW有话说：管理员登录/发帖/删除
 ebook.html                 电子书：5 本教材 + PDF 阅读器
 assets/
   apple.css                Apple 式浅色设计系统
@@ -168,6 +180,10 @@ assets/
   ai.js / ai.css           Python：AI 助教面板
   course.css / course.js   四个课程模块的共享布局
   competitions.css/js      竞赛模块：赛事/备考/技能/资料
+  bw.css / bw.js           BW有话说：公开页与点赞
+  bw-admin.js              BW有话说：管理员登录、上传、发帖
+  supabase-config.js       公开的 Supabase URL / publishable key
+supabase/schema.sql        BW有话说数据库表、RLS、Storage 策略
   notes.css                遥感讲义补充
   ebook.js / ebook.css     电子书卡片与 PDF.js 阅读器
   courses/ (release)       四个课程模块的 PDF/JPG，放在 GitHub Release
@@ -217,6 +233,7 @@ After the brand landing, the learning hub asks only for a semester; the next lay
 | Year 2 Fall | Probability | Chapter priorities, formulas, PPT originals, 2022–2023 paper |
 | Year 2 Fall | ArcGIS | Exam structure, theory, algorithms and software workflows |
 | Top level | Competitions | 6 GIS contests, prep routes, skill map and resource library |
+| Top level | BW Notes | Text / image / video / link timeline; likes only, no comments |
 | Cross-semester | E-book | 5 Year-2 Fall textbooks: physical geography, Maoism, probability, remote sensing, ArcGIS; read online |
 
 Year 2 Spring and Year 3 are reserved and follow the same structure when courses are confirmed.
@@ -260,6 +277,15 @@ A top-level module with four submodules:
 2. **Prepare**: mapping/design, development/WebGIS and remote-sensing/analysis routes plus an 8-week starter plan.
 3. **Skills**: GIS fundamentals, cartography, data processing, WebGIS, backend, Python, remote sensing and presentation.
 4. **Resources**: official docs for ArcGIS Pro, SuperMap, MapGIS, QGIS, OpenLayers, Leaflet, Turf.js, GeoPandas and GDAL, plus data sources.
+
+### BW Notes
+
+- A top-level personal timeline: text, images, video and links in reverse date order.
+- Likes only; no comments, so there is no comment moderation to manage.
+- The admin signs in with Supabase email/password to publish; visitors can only read and like.
+- Public config lives in `assets/supabase-config.js` (Project URL + publishable key). The service key never reaches the browser.
+- Schema and RLS: `supabase/schema.sql` (posts + likes, no comments table).
+- Public page: `bw-talk.html`; admin page: `bw-admin.html` (not in navigation).
 
 ### E-books
 
@@ -336,6 +362,8 @@ maogai.html                Maoism module
 probability.html           Probability module
 arcgis.html                ArcGIS module
 competitions.html          Competitions: events/prepare/skills/resources
+bw-talk.html               BW Notes: public timeline
+bw-admin.html              BW Notes: admin login/publish/delete
 ebook.html                 E-books: 5 textbooks + PDF reader
 assets/
   apple.css                Apple-inspired light design system
@@ -346,6 +374,10 @@ assets/
   ai.js / ai.css           Python: AI tutor panel
   course.css / course.js   Shared layout for the four course modules
   competitions.css/js      Competitions: events/prepare/skills/resources
+  bw.css / bw.js           BW Notes: public page and likes
+  bw-admin.js              BW Notes: admin login, upload, publish
+  supabase-config.js       Public Supabase URL / publishable key
+supabase/schema.sql        BW Notes tables, RLS and Storage policies
   notes.css                Remote-sensing lecture-note supplement
   ebook.js / ebook.css     Library cards and PDF.js reader
   courses/ (release)       PDF/JPG resources hosted in a GitHub Release
