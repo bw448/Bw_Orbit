@@ -27,18 +27,17 @@
       <section class="bw-login" id="loginBox">
         <div class="bw-kicker">BW / ADMIN</div>
         <h1>BW有话说 · 管理</h1>
-        <p>用 Supabase 里创建的管理员邮箱登录。只有登录后才能发帖、上传和删除；访客只能看和点赞。</p>
+        <p>用你在 CloudBase SQL 里设置的管理密码登录。访客只能看和点赞，不能发帖或删除。</p>
         <form id="loginForm">
-          <div class="bw-field"><label for="email">管理员邮箱</label><input id="email" type="email" autocomplete="username" required></div>
-          <div class="bw-field"><label for="password">密码</label><input id="password" type="password" autocomplete="current-password" required></div>
-          <button class="bw-btn primary" type="submit">登录</button>
+          <div class="bw-field"><label for="password">管理密码</label><input id="password" type="password" autocomplete="current-password" required></div>
+          <button class="bw-btn primary" type="submit">进入管理</button>
           <div class="bw-status" id="loginStatus"></div>
         </form>
       </section>
 
       <section class="bw-app" id="appBox" hidden>
         <div class="bw-app-head">
-          <div><div class="bw-kicker">BW / ADMIN</div><h1>发一条新的</h1><div class="who" id="who"></div></div>
+          <div><div class="bw-kicker">BW / ADMIN</div><h1>发一条新的</h1><div class="who" id="who">已登录</div></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="bw-btn" href="bw-talk.html">查看公开页 ↗</a><button class="bw-btn" type="button" id="logout">退出</button></div>
         </div>
         <form class="bw-composer" id="postForm">
@@ -46,7 +45,8 @@
           <div class="bw-field"><label for="title">标题（可选）</label><input id="title" type="text" maxlength="120" placeholder="一句话标题"></div>
           <div class="bw-field"><label for="body">正文</label><textarea id="body" maxlength="5000" placeholder="想说的话…"></textarea></div>
           <div class="bw-field"><label for="link">链接（可选）</label><input id="link" type="url" placeholder="https://…"></div>
-          <div class="bw-row"><input id="media" type="file" accept="image/*,video/*" class="bw-file"><span class="bw-file" id="fileHint">图片或视频，最大 50MB</span></div>
+          <div class="bw-field"><label for="videoUrl">视频链接（可选）</label><input id="videoUrl" type="url" placeholder="B 站 / MP4 直链"></div>
+          <div class="bw-row"><input id="media" type="file" accept="image/*" class="bw-file"><span class="bw-file" id="fileHint">图片会自动压缩；视频请用上面的链接</span></div>
           <div class="bw-composer-actions"><button class="bw-btn primary" type="submit" id="publish">发布</button><span class="bw-status" id="postStatus"></span></div>
         </form>
         <div class="bw-admin-list" id="adminList"></div>
@@ -55,7 +55,7 @@
   </div>
 </main>
 
-<script src="assets/supabase-config.js"></script>
+<script src="assets/cloudbase-config.js"></script>
 <script src="assets/bw-admin.js"></script>
 </body>
 </html>

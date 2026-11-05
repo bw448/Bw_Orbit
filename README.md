@@ -87,8 +87,9 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 - 顶层个人时间线：文字、图片、视频、链接，按日期倒序。
 - 只保留点赞，不做评论，避免留言审核和垃圾评论。
 - 管理员用 Supabase 邮箱登录后发帖；访客只能看和点赞。
-- 配置：`assets/supabase-config.js` 只放 Project URL 和 publishable key；管理密钥不进入前端。
-- 数据表与 RLS：`supabase/schema.sql`（posts + likes，无 comments）。
+- 后端：腾讯云 CloudBase PostgreSQL + PostgREST，国内直连，不需要梯子。
+- 配置：`assets/cloudbase-config.js` 只放网关地址和 publishable key；SecretId/SecretKey 不进入前端。
+- 数据表、RLS 和 RPC：`cloudbase/schema.sql`（posts + likes，无 comments）。
 - 公开页：`bw-talk.html`；管理页：`bw-admin.html`（不放进导航）。
 
 ### 电子书模块
@@ -182,8 +183,8 @@ assets/
   competitions.css/js      竞赛模块：赛事/备考/技能/资料
   bw.css / bw.js           BW有话说：公开页与点赞
   bw-admin.js              BW有话说：管理员登录、上传、发帖
-  supabase-config.js       公开的 Supabase URL / publishable key
-supabase/schema.sql        BW有话说数据库表、RLS、Storage 策略
+  cloudbase-config.js      公开的 CloudBase 网关地址 / publishable key
+cloudbase/schema.sql       BW有话说 PostgreSQL 表、RLS 与 RPC
   notes.css                遥感讲义补充
   ebook.js / ebook.css     电子书卡片与 PDF.js 阅读器
   courses/ (release)       四个课程模块的 PDF/JPG，放在 GitHub Release
@@ -283,8 +284,9 @@ A top-level module with four submodules:
 - A top-level personal timeline: text, images, video and links in reverse date order.
 - Likes only; no comments, so there is no comment moderation to manage.
 - The admin signs in with Supabase email/password to publish; visitors can only read and like.
-- Public config lives in `assets/supabase-config.js` (Project URL + publishable key). The service key never reaches the browser.
-- Schema and RLS: `supabase/schema.sql` (posts + likes, no comments table).
+- Backend: Tencent CloudBase PostgreSQL + PostgREST, reachable in mainland China without a VPN.
+- Public config lives in `assets/cloudbase-config.js` (gateway URL + publishable key). SecretId/SecretKey never reach the browser.
+- Schema, RLS and RPC: `cloudbase/schema.sql` (posts + likes, no comments).
 - Public page: `bw-talk.html`; admin page: `bw-admin.html` (not in navigation).
 
 ### E-books
@@ -376,8 +378,8 @@ assets/
   competitions.css/js      Competitions: events/prepare/skills/resources
   bw.css / bw.js           BW Notes: public page and likes
   bw-admin.js              BW Notes: admin login, upload, publish
-  supabase-config.js       Public Supabase URL / publishable key
-supabase/schema.sql        BW Notes tables, RLS and Storage policies
+  cloudbase-config.js      Public CloudBase gateway URL / publishable key
+cloudbase/schema.sql       BW Notes PostgreSQL tables, RLS and RPC
   notes.css                Remote-sensing lecture-note supplement
   ebook.js / ebook.css     Library cards and PDF.js reader
   courses/ (release)       PDF/JPG resources hosted in a GitHub Release
