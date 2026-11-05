@@ -99,7 +99,7 @@
           <div class="eyebrow">Chapters</div>
           <h2>八章，<br>七章已上线。</h2>
         </div>
-        <p class="lede">点开一章：先看知识脉络，再刷本章题；点每一行右侧的“深聊”，可以把一个知识点一直问下去。第五章先留空，之后补入图像处理。</p>
+        <p class="lede">点开一章：先看知识脉络，再刷本章题；点每一行右侧的“深聊”，可以把一个知识点一直问下去。第五章题目还没补，但知识脉络和术语可以先看。</p>
       </div>
       <div class="chapter-list" id="chapterList"></div>
     </div>
@@ -323,12 +323,11 @@ function renderChapterList(){
   el.innerHTML = DATA.chapters.map(c => {
     const done = c.questions.filter(q => store.answers[q.id]).length;
     const meta = c.status === 'soon' ? '待补' : (c.questions.length + ' 题 · ' + done + '/' + c.questions.length);
-    return '<button class="chapter-row ' + (c.status === 'soon' ? 'soon' : '') + '" ' +
-      (c.status === 'soon' ? 'disabled' : 'onclick="go(\'#chapter-' + c.id + '\')"') + '>' +
+    return '<button class="chapter-row ' + (c.status === 'soon' ? 'soon' : '') + '" onclick="go(\'#chapter-' + c.id + '\')">' +
       '<span class="n">' + c.num + '</span>' +
       '<span class="t">' + c.title + '</span>' +
       '<span class="m">' + meta + '</span>' +
-      '<span class="arrow">' + (c.status === 'soon' ? '—' : '→') + '</span></button>';
+      '<span class="arrow">→</span></button>';
   }).join('');
 }
 function renderCoverageList(){

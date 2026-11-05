@@ -133,7 +133,7 @@ start.bat                  本地服务器
 
 ### 内容说明与边界
 
-- 遥感题目来自课程作业与《遥感导论》教材重点，**不是学校官方答案**；第五章“遥感图像处理”暂未生成题目，先留空。
+- 遥感题目来自课程作业与《遥感导论》教材重点，**不是学校官方答案**；第五章“遥感图像处理”暂未生成题目，但知识脉络和中英术语可以先看。
 - 术语英文释义为课程学习用的简明定义，不替代专业词典。
 - AI 生成内容可能有误，请以教材和老师讲解为准。
 - 旧 Python 项目只读参考，不修改、不提交、不移动。
@@ -263,7 +263,7 @@ start.bat                  Local server
 
 ### Content notes and limits
 
-- Remote-sensing questions come from course assignments and textbook priorities; they are **not official school answers**. Chapter 5, “Remote Sensing Image Processing”, is intentionally left empty for now.
+- Remote-sensing questions come from course assignments and textbook priorities; they are **not official school answers**. Chapter 5, “Remote Sensing Image Processing”, has no questions yet, but its outline and bilingual terms are readable.
 - English definitions are concise study definitions, not a substitute for a professional dictionary.
 - AI output can be wrong; always check against the textbook and your instructor's notes.
 - The old Python project is read-only and is not modified, committed or moved.
