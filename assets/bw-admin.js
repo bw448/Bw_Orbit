@@ -1,11 +1,9 @@
-/* Orbit · BW有话说 — admin (Supabase Auth + posts + storage). */
+/* Orbit · BW有话说 — CloudBase PostgreSQL admin (password → RPC). */
 (function () {
   'use strict';
-  var C = window.SUPABASE_CONFIG || {};
-  var TOKEN_KEY = 'orbit-bw-admin-token';
-  var EMAIL_KEY = 'orbit-bw-admin-email';
-  var token = '';
-  var email = '';
+  var C = window.CLOUDBASE_CONFIG || {};
+  var PASS_KEY = 'orbit-bw-admin-pass';
+  var password = '';
   var loginBox = document.getElementById('loginBox');
   var appBox = document.getElementById('appBox');
   var loginForm = document.getElementById('loginForm');
@@ -15,22 +13,32 @@
   var adminList = document.getElementById('adminList');
   var mediaInput = document.getElementById('media');
   var fileHint = document.getElementById('fileHint');
+  var who = document.getElementById('who');
 
-  try { token = sessionStorage.getItem(TOKEN_KEY) || ''; email = sessionStorage.getItem(EMAIL_KEY) || ''; } catch (e) {}
+  try { password = sessionStorage.getItem(PASS_KEY) || ''; } catch (e) {}
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
   function api(path, opts) {
     opts = opts || {};
-    var headers = Object.assign({ apikey: C.key }, opts.headers || {});
-    if (token) headers.Authorization = 'Bearer ' + token;
-    if (opts.json) headers['Content-Type'] = 'application/json';
-    return fetch(C.url + path, {
+    var headers = Object.assign({ Authorization: 'Bearer ' + C.key, 'Content-Type': 'application/json' }, opts.headers || {});
+    return fetch(C.url + (C.rest || '/v1/rdb/rest') + path, {
       method: opts.method || 'GET',
       headers: headers,
       body: opts.body,
       cache: 'no-store'
+    });
+  }
+  function rpc(name, data) {
+    return api('/rpc/' + name, { method: 'POST', body: JSON.stringify(data || {}) }).then(function (r) {
+      return r.json().then(function (j) {
+        if (!r.ok) {
+          var msg = (j && (j.message || j.details || j.hint)) || ('请求失败 ' + r.status);
+          throw new Error(msg);
+        }
+        return j;
+      });
     });
   }
   function setStatus(el, text, kind) {
@@ -39,44 +47,36 @@
     el.className = 'bw-status' + (kind ? ' ' + kind : '');
   }
   function logout() {
-    token = ''; email = '';
-    try { sessionStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(EMAIL_KEY); } catch (e) {}
+    password = '';
+    try { sessionStorage.removeItem(PASS_KEY); } catch (e) {}
     if (appBox) appBox.hidden = true;
     if (loginBox) loginBox.hidden = false;
+    setStatus(loginStatus, '');
   }
   function enterApp() {
     if (loginBox) loginBox.hidden = true;
     if (appBox) appBox.hidden = false;
-    var who = document.getElementById('who');
-    if (who) who.textContent = email ? ('已登录 · ' + email) : '已登录';
+    if (who) who.textContent = '管理员模式';
     loadPosts();
   }
-  function authHeaders(json) { return json ? { 'Content-Type': 'application/json' } : {}; }
+  function checkPassword(p) {
+    return rpc('bw_admin_check', { p_password: p }).then(function (v) { return v === true || v === 'true'; });
+  }
 
   if (loginForm) {
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      var em = document.getElementById('email').value.trim();
-      var pw = document.getElementById('password').value;
-      if (!em || !pw) return;
-      setStatus(loginStatus, '登录中…');
-      fetch(C.url + '/auth/v1/token?grant_type=password', {
-        method: 'POST',
-        headers: { apikey: C.key, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: em, password: pw })
-      }).then(function (r) {
-        return r.json().then(function (j) {
-          if (!r.ok) throw new Error(j.error_description || j.msg || j.message || ('登录失败 ' + r.status));
-          return j;
-        });
-      }).then(function (j) {
-        token = j.access_token;
-        email = (j.user && j.user.email) || em;
-        try { sessionStorage.setItem(TOKEN_KEY, token); sessionStorage.setItem(EMAIL_KEY, email); } catch (e) {}
+      var p = document.getElementById('password').value;
+      if (!p) return;
+      setStatus(loginStatus, '验证中…');
+      checkPassword(p).then(function (ok) {
+        if (!ok) throw new Error('密码不对');
+        password = p;
+        try { sessionStorage.setItem(PASS_KEY, p); } catch (e) {}
         setStatus(loginStatus, '');
         enterApp();
       }).catch(function (err) {
-        setStatus(loginStatus, err.message || '登录失败，检查邮箱和密码', 'bad');
+        setStatus(loginStatus, err.message || '登录失败，先确认 SQL 是否已运行', 'bad');
       });
     });
   }
@@ -84,16 +84,15 @@
   if (mediaInput) {
     mediaInput.addEventListener('change', function () {
       var f = mediaInput.files && mediaInput.files[0];
-      if (!f) { fileHint.textContent = '图片或视频，最大 50MB'; return; }
-      fileHint.textContent = f.name + ' · ' + (f.size / 1024 / 1024).toFixed(1) + ' MB';
+      if (!f) { fileHint.textContent = '图片会自动压缩；视频请用上面的链接'; return; }
+      fileHint.textContent = f.name + ' · ' + (f.size / 1024 / 1024).toFixed(1) + ' MB · 会压缩后保存';
     });
   }
 
   function loadPosts() {
     if (!adminList) return;
-    adminList.innerHTML = '<div class="bw-loading"><i></i><span>正在读取…</span></div>';
-    api('/rest/v1/posts?select=id,created_at,title,body,media_url,media_type,link_url&order=created_at.desc').then(function (r) {
-      if (r.status === 401) { logout(); throw new Error('登录已过期，请重新登录'); }
+    adminList.innerHTML = '<div class="bw-loading" style="padding:20px"><i></i><span>正在读取…</span></div>';
+    api('/posts?select=id,created_at,title,body,media_url,media_type,link_url&order=created_at.desc').then(function (r) {
       if (!r.ok) throw new Error('读取失败 ' + r.status);
       return r.json();
     }).then(function (rows) {
@@ -103,7 +102,7 @@
       }
       adminList.innerHTML = rows.map(function (p) {
         return '<div class="bw-admin-row" data-id="' + esc(p.id) + '"><div><b>' + esc(p.title || '(无标题)') + '</b><small>' + esc((p.body || '').slice(0, 100)) + '</small><small>' + esc(p.created_at || '') + '</small></div>' +
-          '<div class="actions"><button class="bw-btn danger" type="button" data-del="' + esc(p.id) + '" data-media="' + esc(p.media_url || '') + '">删除</button></div></div>';
+          '<div class="actions"><button class="bw-btn danger" type="button" data-del="' + esc(p.id) + '">删除</button></div></div>';
       }).join('');
     }).catch(function (err) {
       adminList.innerHTML = '<div class="bw-error" style="padding:20px">' + esc(err.message || '读取失败') + '</div>';
@@ -114,19 +113,10 @@
     adminList.addEventListener('click', function (e) {
       var b = e.target.closest('[data-del]');
       if (!b) return;
-      var id = b.getAttribute('data-del');
       if (!confirm('确定删除这条帖子？')) return;
+      var id = b.getAttribute('data-del');
       b.disabled = true;
-      var media = b.getAttribute('data-media') || '';
-      var delMedia = Promise.resolve();
-      if (media.indexOf('/object/public/bw-talk/') >= 0) {
-        var path = media.split('/object/public/bw-talk/')[1];
-        delMedia = api('/storage/v1/object/bw-talk/' + path, { method: 'DELETE' }).catch(function () {});
-      }
-      delMedia.then(function () {
-        return api('/rest/v1/posts?id=eq.' + encodeURIComponent(id), { method: 'DELETE' });
-      }).then(function (r) {
-        if (!r.ok) throw new Error('删除失败 ' + r.status);
+      rpc('bw_admin_delete', { p_password: password, p_id: id }).then(function () {
         loadPosts();
       }).catch(function (err) {
         b.disabled = false;
@@ -135,57 +125,72 @@
     });
   }
 
+  function compressImage(file) {
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        var max = 1400;
+        var scale = Math.min(1, max / Math.max(img.width, img.height));
+        var canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(url);
+        var q = 0.82;
+        var data = canvas.toDataURL('image/jpeg', q);
+        while (data.length > 950000 && q > 0.45) {
+          q -= 0.1;
+          data = canvas.toDataURL('image/jpeg', q);
+        }
+        if (data.length > 1200000) reject(new Error('图片压缩后仍然太大，换一张小一点的'));
+        else resolve(data);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('图片读取失败')); };
+      img.src = url;
+    });
+  }
+
+  function safeUrl(value) {
+    try { var u = new URL(value); return (u.protocol === 'http:' || u.protocol === 'https:') ? u.href : ''; } catch (e) { return ''; }
+  }
+
   if (postForm) {
     postForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var title = document.getElementById('title').value.trim();
       var body = document.getElementById('body').value.trim();
       var link = document.getElementById('link').value.trim();
+      var video = document.getElementById('videoUrl').value.trim();
       var file = mediaInput && mediaInput.files ? mediaInput.files[0] : null;
-      if (!title && !body && !link && !file) { setStatus(postStatus, '至少写一点内容或选一个文件。', 'bad'); return; }
-      if (link) {
-        try { var u = new URL(link); if (u.protocol !== 'http:' && u.protocol !== 'https:') throw new Error(); } catch (err) {
-          setStatus(postStatus, '链接要以 http:// 或 https:// 开头。', 'bad'); return;
-        }
+      if (!title && !body && !link && !video && !file) {
+        setStatus(postStatus, '至少写一点内容、选一张图或填一个链接。', 'bad');
+        return;
       }
-      if (file && file.size > 50 * 1024 * 1024) { setStatus(postStatus, '文件超过 50MB，请压缩或换成链接。', 'bad'); return; }
+      if (link && !safeUrl(link)) { setStatus(postStatus, '普通链接要以 http:// 或 https:// 开头。', 'bad'); return; }
+      if (video && !safeUrl(video)) { setStatus(postStatus, '视频链接要以 http:// 或 https:// 开头。', 'bad'); return; }
       var btn = document.getElementById('publish');
       btn.disabled = true;
       setStatus(postStatus, '准备发布…');
-      var mediaPromise = Promise.resolve(null);
-      if (file) {
-        var ext = (file.name.split('.').pop() || 'bin').toLowerCase().replace(/[^a-z0-9]/g, '');
-        var path = Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
-        setStatus(postStatus, '上传媒体…');
-        mediaPromise = api('/storage/v1/object/bw-talk/' + encodeURIComponent(path), {
-          method: 'POST',
-          headers: { 'Content-Type': file.type || 'application/octet-stream', 'x-upsert': 'false' },
-          body: file
-        }).then(function (r) {
-          if (!r.ok) throw new Error('上传失败 ' + r.status);
-          return { url: C.url + '/storage/v1/object/public/bw-talk/' + encodeURIComponent(path), type: file.type.indexOf('video/') === 0 ? 'video' : 'image' };
-        });
-      }
+      var mediaPromise = file ? compressImage(file).then(function (data) {
+        return { url: data, type: 'image' };
+      }) : Promise.resolve(video ? { url: video, type: 'video' } : null);
       mediaPromise.then(function (media) {
         setStatus(postStatus, '发布中…');
-        var payload = {
-          title: title || null,
-          body: body,
-          link_url: link || null,
-          media_url: media ? media.url : null,
-          media_type: media ? media.type : null,
-          published: true
-        };
-        return api('/rest/v1/posts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Prefer: 'return=representation' },
-          body: JSON.stringify(payload)
+        return rpc('bw_admin_create', {
+          p_password: password,
+          p_title: title,
+          p_body: body,
+          p_media_url: media ? media.url : null,
+          p_media_type: media ? media.type : null,
+          p_link_url: link || null
         });
-      }).then(function (r) {
-        if (r.status === 401) { logout(); throw new Error('登录已过期，请重新登录'); }
-        if (!r.ok) throw new Error('发布失败 ' + r.status);
+      }).then(function () {
         postForm.reset();
-        if (fileHint) fileHint.textContent = '图片或视频，最大 50MB';
+        if (fileHint) fileHint.textContent = '图片会自动压缩；视频请用上面的链接';
         setStatus(postStatus, '已发布。', 'ok');
         loadPosts();
       }).catch(function (err) {
@@ -198,5 +203,12 @@
 
   var logoutBtn = document.getElementById('logout');
   if (logoutBtn) logoutBtn.addEventListener('click', logout);
-  if (token) enterApp(); else if (loginBox) loginBox.hidden = false;
+
+  if (password) {
+    checkPassword(password).then(function (ok) {
+      if (ok) enterApp(); else logout();
+    }).catch(function () { logout(); });
+  } else if (loginBox) {
+    loginBox.hidden = false;
+  }
 })();

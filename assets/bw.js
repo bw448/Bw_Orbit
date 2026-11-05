@@ -1,7 +1,7 @@
 /* Orbit · BW有话说 — public timeline (posts + likes only). */
 (function () {
   'use strict';
-  var C = window.SUPABASE_CONFIG || {};
+  var C = window.CLOUDBASE_CONFIG || {};
   var list = document.getElementById('bwPosts');
   var countEl = document.getElementById('bwCount');
   var visitorKey = 'orbit-bw-visitor';
@@ -30,8 +30,8 @@
   function saveLiked() { try { localStorage.setItem(likedKey, JSON.stringify([].slice.call(liked))); } catch (e) {} }
   function api(path, opts) {
     opts = opts || {};
-    var headers = Object.assign({ apikey: C.key, 'Content-Type': 'application/json' }, opts.headers || {});
-    return fetch(C.url + path, {
+    var headers = Object.assign({ Authorization: 'Bearer ' + C.key, 'Content-Type': 'application/json' }, opts.headers || {});
+    return fetch(C.url + (C.rest || '/v1/rdb/rest') + path, {
       method: opts.method || 'GET',
       headers: headers,
       body: opts.body,
@@ -79,15 +79,15 @@
   }
   function load() {
     if (!C.url || !C.key) {
-      list.innerHTML = '<div class="bw-error"><b>BW有话说还没有连接。</b><br>请在 assets/supabase-config.js 填入 Supabase Project URL 和 publishable key。</div>';
+      list.innerHTML = '<div class="bw-error"><b>BW有话说还没有连接。</b><br>请在 assets/cloudbase-config.js 填入 CloudBase 网关地址和 publishable key。</div>';
       return;
     }
     Promise.all([
-      api('/rest/v1/posts?select=id,created_at,title,body,media_url,media_type,link_url&published=eq.true&order=created_at.desc').then(function (r) {
+      api('/posts?select=id,created_at,title,body,media_url,media_type,link_url&published=eq.true&order=created_at.desc').then(function (r) {
         if (!r.ok) throw new Error('posts ' + r.status);
         return r.json();
       }),
-      api('/rest/v1/rpc/like_counts', { method: 'POST', body: '{}' }).then(function (r) {
+      api('/rpc/like_counts', { method: 'POST', body: '{}' }).then(function (r) {
         if (!r.ok) return [];
         return r.json();
       }).catch(function () { return []; })
@@ -97,7 +97,7 @@
       (Array.isArray(res[1]) ? res[1] : []).forEach(function (x) { counts[x.post_id] = Number(x.likes) || 0; });
       render();
     }).catch(function () {
-      list.innerHTML = '<div class="bw-error"><b>内容暂时没有打开。</b><br>可能是网络或 Supabase 表还没有建好；稍后再试。</div>';
+      list.innerHTML = '<div class="bw-error"><b>内容暂时没有打开。</b><br>可能是网络或 CloudBase 表还没有建好；稍后再试。</div>';
     });
   }
   if (list) {
@@ -107,7 +107,7 @@
       var id = btn.getAttribute('data-like');
       if (btn.disabled) return;
       btn.disabled = true;
-      api('/rest/v1/rpc/toggle_like', {
+      api('/rpc/toggle_like', {
         method: 'POST',
         body: JSON.stringify({ p_post: id, p_visitor: visitor })
       }).then(function (r) {
