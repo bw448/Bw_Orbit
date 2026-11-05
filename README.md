@@ -86,7 +86,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 - 顶层个人时间线：文字、图片、视频、链接，按日期倒序。
 - 只保留点赞，不做评论，避免留言审核和垃圾评论。
-- 管理员用 Supabase 邮箱登录后发帖；访客只能看和点赞。
+- 管理员用 CloudBase SQL 里设置的管理密码发帖；访客只能看和点赞。
 - 后端：腾讯云 CloudBase PostgreSQL + PostgREST，国内直连，不需要梯子。
 - 配置：`assets/cloudbase-config.js` 只放网关地址和 publishable key；SecretId/SecretKey 不进入前端。
 - 数据表、RLS 和 RPC：`cloudbase/schema.sql`（posts + likes，无 comments）。
@@ -283,7 +283,7 @@ A top-level module with four submodules:
 
 - A top-level personal timeline: text, images, video and links in reverse date order.
 - Likes only; no comments, so there is no comment moderation to manage.
-- The admin signs in with Supabase email/password to publish; visitors can only read and like.
+- The admin signs in with the management password set in CloudBase SQL to publish; visitors can only read and like.
 - Backend: Tencent CloudBase PostgreSQL + PostgREST, reachable in mainland China without a VPN.
 - Public config lives in `assets/cloudbase-config.js` (gateway URL + publishable key). SecretId/SecretKey never reach the browser.
 - Schema, RLS and RPC: `cloudbase/schema.sql` (posts + likes, no comments).
