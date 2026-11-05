@@ -2,7 +2,7 @@
 """One command to sync desktop source material -> site -> summary docs.
 
 Steps:
-  1. tools/extract_homework.py   (遥感作业_分章 -> src/homework.json)
+  1. tools/extract_homework.py   (课程资料/遥感/作业分章 -> src/homework.json)
   2. build.py                    (rebuild all pages)
   3. tools/export_summaries.py   (one .docx per subject)
 
