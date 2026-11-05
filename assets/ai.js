@@ -1,4 +1,4 @@
-/* ORBIT AI assistant — one DeepSeek key, integrated into study flow */
+/* Bw_Orbit AI assistant — one DeepSeek key, integrated into study flow */
 (function () {
   var KEY = 'orbit-ai-config';
   var DEFAULT = { provider: 'deepseek', model: 'deepseek-chat', key: '' };
@@ -171,7 +171,7 @@
     state.messages.push({ role: 'user', content: text }); saveChat();
     var wait = add('assistant', '思考中…');
     state.busy = true; state.el.send.disabled = true;
-    var system = '你是 ORBIT 地信复习系统的 AI 助教，服务对象是地理信息科学本科生。回答准确、简洁、按考点组织；遥感优先依据《遥感导论》（梅安新等），Python 依据课程题库。代码题先给结论再解释关键行；简答题给答题要点。不要编造教材页码。' + contextText();
+    var system = '你是 Bw_Orbit 地信复习系统的 AI 助教，服务对象是地理信息科学本科生。回答准确、简洁、按考点组织；遥感优先依据《遥感导论》（梅安新等），Python 依据课程题库。代码题先给结论再解释关键行；简答题给答题要点。不要编造教材页码。' + contextText();
     var messages = [{ role: 'system', content: system }].concat(state.messages.slice(-8));
     api(messages).then(function (answer) {
       wait.innerHTML = md(answer || '（没有返回内容）');

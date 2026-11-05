@@ -1,4 +1,4 @@
-/* ORBIT remote sensing — selection-first reading companion.
+/* Bw_Orbit remote sensing — selection-first reading companion.
    No global assistant panel: select text, then translate or ask. */
 (function () {
   'use strict';
@@ -7,7 +7,7 @@
   var MODEL = 'deepseek-chat';
   var G = Array.isArray(window.RS_GLOSSARY) ? window.RS_GLOSSARY : [];
   var CH = Array.isArray(window.RS_CHAPTERS) ? window.RS_CHAPTERS : [];
-  var SYSTEM = '你是 ORBIT 的遥感阅读伙伴，服务地理信息科学本科生。只回答与遥感、地理信息或当前学习内容有关的问题。' +
+  var SYSTEM = '你是 Bw_Orbit 的遥感阅读伙伴，服务地理信息科学本科生。只回答与遥感、地理信息或当前学习内容有关的问题。' +
     '中文回答；术语第一次出现时给出英文。讲解按“一句话定义 → 机制/公式 → 一个具体例子 → 易混点或考试怎么考”组织。' +
     '如果选中内容是句子，先给自然英文翻译，再解释其中 1—3 个关键术语。不要编造教材页码；不确定就直说。';
 

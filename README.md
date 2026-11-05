@@ -1,13 +1,13 @@
-# ORBIT · 地信学习站 / GIS Learning System
+# Bw_Orbit · 地信学习站 / GIS Learning System
 
 **中文** · [English](#english)
 
 > 面向地理信息科学（GIS）本科生的学习站：按学期 → 科目 → 学习方式组织。
 > A semester-by-semester study system for GIS undergraduates: semester → subject → mode.
 
-- 在线访问 / Live site: **https://bw448.github.io/orbit-gis/**
+- 在线访问 / Live site: **https://bw448.github.io/Bw_Orbit/**
 - 本地启动 / Run locally: 双击 `start.bat`，或运行 `python -m http.server 8765`
-- 源码 / Source: **https://github.com/bw448/orbit-gis**
+- 源码 / Source: **https://github.com/bw448/Bw_Orbit**
 
 ---
 
@@ -15,7 +15,7 @@
 
 ### 这是什么
 
-ORBIT 不是把资料堆在一个页面里，而是把大学课程拆成一条可以持续走的学习路径：
+Bw_Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条可以持续走的学习路径：
 
 ```
 学期（大二上 / 大二下 / 大三上 / 大三下 / 电子书）
@@ -145,7 +145,7 @@ start.bat                  本地服务器
 
 ### What this is
 
-ORBIT is a study system for GIS undergraduates. It does not put every resource on one page. It keeps a clear hierarchy:
+Bw_Orbit is a study system for GIS undergraduates. It does not put every resource on one page. It keeps a clear hierarchy:
 
 ```
 Semester (Year 2 Fall / Year 2 Spring / Year 3 Fall / Year 3 Spring / E-book)
