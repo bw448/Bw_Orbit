@@ -7,7 +7,7 @@ import re
 from docx import Document
 from docx.oxml.ns import qn
 
-BASE = r"C:\Users\Lenovo\Desktop\地信大二上\遥感作业_分章"
+BASE = r"C:\Users\Lenovo\Desktop\地信大二上\课程资料\遥感\作业分章"
 OUT = r"E:\地信复习系统\src\homework.json"
 IMG_DIR = r"E:\地信复习系统\assets\homework"
 os.makedirs(IMG_DIR, exist_ok=True)

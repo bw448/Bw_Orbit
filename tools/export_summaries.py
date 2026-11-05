@@ -209,6 +209,62 @@ def load_json(name):
     return json.load(open(os.path.join(ROOT, "src", name), encoding="utf-8"))
 
 
+def code_block(doc, text):
+    p = doc.add_paragraph()
+    p.paragraph_format.left_indent = Cm(0.4)
+    p.paragraph_format.space_after = Pt(6)
+    r = p.add_run(text)
+    r.font.name = "Consolas"
+    r.font.size = Pt(8.5)
+    r.font.color.rgb = INK
+    r._element.get_or_add_rPr().get_or_add_rFonts().set(qn("w:eastAsia"), "等线")
+
+
+def homework_blocks(doc, blocks):
+    for b in blocks or []:
+        t = b.get("type")
+        if t == "h2":
+            h2(doc, b.get("text", ""))
+        elif t == "q":
+            p = doc.add_paragraph()
+            p.paragraph_format.space_before = Pt(6)
+            r = p.add_run(b.get("text", ""))
+            r.bold = True
+            r.font.size = Pt(10)
+        elif t == "answer":
+            para(doc, b.get("text", ""))
+        elif t == "bullet":
+            txt = b.get("text", "")
+            if txt.startswith("•") or txt.startswith("·"):
+                txt = txt.lstrip("•· ").strip()
+                p = doc.add_paragraph(style="List Bullet")
+            elif re.match(r"^[①-⑩]", txt):
+                p = doc.add_paragraph()
+                p.paragraph_format.left_indent = Cm(0.6)
+            else:
+                p = doc.add_paragraph(style="List Bullet")
+            r = p.add_run(txt)
+            r.font.size = Pt(9.5)
+        elif t == "p":
+            para(doc, b.get("text", ""), size=9.5, color=MUTED)
+        elif t == "note":
+            note(doc, b.get("text", ""))
+        elif t == "formula":
+            code_block(doc, b.get("text", ""))
+        elif t == "table":
+            rows = b.get("rows") or []
+            if rows:
+                table(doc, rows[0], rows[1:])
+        elif t == "image":
+            src = b.get("src", "")
+            path = os.path.join(ROOT, src.replace("/", os.sep))
+            if os.path.exists(path):
+                try:
+                    doc.add_picture(path, width=Cm(13.5))
+                except Exception:
+                    pass
+
+
 # ---------- 1. remote sensing ----------
 def doc_remote():
     from content import DATA
@@ -246,7 +302,7 @@ def doc_remote():
                      "待补" if (hw and hw.get("status") == "soon") else "已录入"])
     rows.append(["教材补全", len(DATA["supplement"].get("questions", [])), "独立标签"])
     table(doc, ["章节", "题量", "作业状态"], rows)
-    para(doc, "第五章目前没有作业与题目；知识脉络和术语可以先看。补齐第五章作业后，把 docx 放进桌面“遥感作业_分章”，"
+    para(doc, "第五章目前没有作业与题目；知识脉络和术语可以先看。补齐第五章作业后，把 docx 放进“课程资料/遥感/作业分章”，"
               "运行同步脚本，题库与这份总纲会一起更新。")
 
     h1(doc, "四、复习路线")
@@ -261,12 +317,22 @@ def doc_remote():
     h1(doc, "五、资料清单")
     table(doc, ["资料", "用途", "位置"], [
         ["遥感导论教材 PDF", "补作业之外的 30%", "assets/ebooks/remote-sensing-intro.pdf"],
-        ["七套作业原文", "划重点、计算题", "remote.html 各章“完整作业”"],
+        ["七套作业原文", "划重点、计算题", "课程资料/遥感/作业分章；本文件第六节"],
         ["老师复习讲义补充", "61 条遗漏知识点", "remote.html#notes"],
         ["中英术语表", "75 条", "remote.html#glossary"],
         ["遥感.pdf（原始）", "完整教材/扫描", "课程资料/遥感/原始/遥感.pdf"],
     ])
-    sync_note(doc, ["src/content.py", "src/homework.json", "src/notes.json", "assets/glossary.js"], ["remote.html"])
+    h1(doc, "六、分章作业原文（1—8）")
+    para(doc, "按章保存作业原文、答案与表格，方便离线背诵；第五章补齐后，这一节会自动出现。")
+    for hw in homework:
+        status = "待补" if hw.get("status") == "soon" else "已完成"
+        h2(doc, "第%s章作业 · %s（%s）" % ("一二三四五六七八"[hw["chapter"] - 1], hw.get("subtitle", ""), status))
+        if hw.get("status") == "soon":
+            para(doc, "本章作业尚未录入；知识脉络和中英术语可以先看。", color=MUTED)
+            continue
+        homework_blocks(doc, hw.get("blocks", []))
+
+    sync_note(doc, ["src/content.py", "src/homework.json", "src/notes.json", "assets/glossary.js"], ["remote.html"], num="七")
     return "遥感复习总纲.docx", doc
 
 
@@ -479,7 +545,7 @@ def write_index(names):
         "",
         "| 科目 | 文档 | 对应网站 |",
         "|---|---|---|",
-        "| 遥感 | 遥感复习总纲.docx | remote.html |",
+        "| 遥感 | 遥感复习总纲.docx（含“六、分章作业原文”） | remote.html |",
         "| 自然地理学 | 自然地理学复习总纲.docx | nature-geo.html |",
         "| 概率论 | 概率论复习总纲.docx | probability.html |",
         "| 毛概 | 毛概复习总纲.docx | maogai.html |",
@@ -498,7 +564,7 @@ def write_index(names):
         "",
         "如果补了新的遥感作业（例如第五章）：",
         "",
-        "1. 把 `第五章作业.docx` 放进桌面 `遥感作业_分章`；",
+        "1. 把 `第五章作业.docx` 放进 `课程资料/遥感/作业分章/`；",
         "2. 运行 `python tools/sync_content.py`；",
         "3. 它会依次执行作业抽取、建站和本文件夹的总纲导出。",
         "",
