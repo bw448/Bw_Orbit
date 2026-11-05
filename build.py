@@ -86,7 +86,8 @@ def build_static(src, out):
 if __name__ == "__main__":
     build_remote()
     build_python()
-    build_static("hub.html", "index.html")
+    build_static("landing.html", "index.html")
+    build_static("semesters.html", "semesters.html")
     build_static("ebook.html", "ebook.html")
     build_static("sem2-1.html", "sem2-1.html")
     build_static("kaoyan-remote.html", "kaoyan-remote.html")
@@ -94,6 +95,6 @@ if __name__ == "__main__":
     build_static("zero-python.html", "zero-python.html")
     build_semesters()
     # legacy URLs: keep old links from confusion / old bookmarks working
-    write_redirect("modules.html", "sem2-1.html", "Bw_Orbit 大二上")
-    write_redirect("kaoyan.html", "kaoyan-remote.html", "Bw_Orbit 考研 · 遥感")
-    write_redirect("zero.html", "sem2-1.html", "Bw_Orbit 大二上")
+    write_redirect("modules.html", "sem2-1.html", "Orbit 大二上")
+    write_redirect("kaoyan.html", "kaoyan-remote.html", "Orbit 考研 · 遥感")
+    write_redirect("zero.html", "sem2-1.html", "Orbit 大二上")

@@ -1,6 +1,6 @@
 {
-  "name": "Bw_Orbit 地信学习站 · GIS Learning System",
-  "short_name": "Bw_Orbit",
+  "name": "Orbit 地信学习站 · GIS Learning System",
+  "short_name": "Orbit",
   "description": "地信专业学习站：遥感、Python、期末复习、考研、零基础、电子书。A bilingual study system for GIS undergraduates.",
   "start_url": "./index.html",
   "scope": "./",

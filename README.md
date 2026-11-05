@@ -1,4 +1,4 @@
-# Bw_Orbit · 地信学习站 / GIS Learning System
+# Orbit · 地信学习站 / GIS Learning System
 
 **中文** · [English](#english)
 
@@ -8,6 +8,7 @@
 - 在线访问 / Live site: **https://bw448.github.io/Bw_Orbit/**
 - 本地启动 / Run locally: 双击 `start.bat`，或运行 `python -m http.server 8765`
 - 源码 / Source: **https://github.com/bw448/Bw_Orbit**
+- 站内显示名 / Display name: **Orbit** · 仓库名 / Repository: **Bw_Orbit**
 
 ---
 
@@ -15,7 +16,7 @@
 
 ### 这是什么
 
-Bw_Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条可以持续走的学习路径：
+Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条可以持续走的学习路径：
 
 ```
 学期（大二上 / 大二下 / 大三上 / 大三下 / 电子书）
@@ -23,7 +24,7 @@ Bw_Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一�
         └── 学习方式（期末复习 / 考研 / 从 0 到 1）
 ```
 
-第一层只让你选学期；第二层只让你选科目；第三层才进入具体内容。这样第一次打开网站也知道该点哪里。
+首页先展示 Orbit 是什么；点“进入学习内容”后，第一层才让你选学期，第二层选科目，第三层进入具体内容。这样第一次打开网站不会一上来就被功能淹没。
 
 目前已经上线：
 
@@ -106,12 +107,13 @@ python build.py
 - `src/*.html`：页面模板
 - `assets/glossary.js`：75 条中英术语
 
-生成 `index.html`、`remote.html`、`python.html`、`sem*.html` 等完整页面。
+生成 `index.html`（品牌首页）、`semesters.html`（学习内容）、`remote.html`、`python.html`、`sem*.html` 等完整页面。
 
 ### 目录
 
 ```
-index.html                 首页：选学期
+index.html                 Orbit 品牌首页：介绍 + 动效 + 进入内容
+semesters.html             学习内容：选学期
 sem2-1.html                大二上：选科目
 remote.html                遥感 · 期末复习
 kaoyan-remote.html         遥感 · 考研
@@ -121,6 +123,7 @@ zero-python.html           Python · 从 0 到 1
 ebook.html                 电子书（预留）
 assets/
   apple.css                Apple 式浅色设计系统
+  landing.css / landing.js 品牌首页：轨道动效、滚动揭示
   rs-ai.js / rs-ai.css     遥感：选中翻译 / 追问 + 术语表
   glossary.js              75 条中英术语数据
   study.js / study.css     间隔复习、历史、目标、计划、搜索
@@ -145,7 +148,7 @@ start.bat                  本地服务器
 
 ### What this is
 
-Bw_Orbit is a study system for GIS undergraduates. It does not put every resource on one page. It keeps a clear hierarchy:
+Orbit is a study system for GIS undergraduates. It does not put every resource on one page. It keeps a clear hierarchy:
 
 ```
 Semester (Year 2 Fall / Year 2 Spring / Year 3 Fall / Year 3 Spring / E-book)
@@ -236,12 +239,13 @@ The build uses only the Python standard library. Inputs:
 - `src/*.html` — page templates
 - `assets/glossary.js` — 75 bilingual terms
 
-Outputs include `index.html`, `remote.html`, `python.html` and the semester pages.
+Outputs include `index.html` (brand landing), `semesters.html` (learning hub), `remote.html`, `python.html` and the semester pages.
 
 ### Project structure
 
 ```
-index.html                 Home: choose a semester
+index.html                 Brand landing: Orbit intro, motion, enter content
+semesters.html             Learning hub: choose a semester
 sem2-1.html                Year 2 Fall: choose a subject
 remote.html                Remote Sensing · final review
 kaoyan-remote.html         Remote Sensing · graduate entrance prep
@@ -251,6 +255,7 @@ zero-python.html           Python · zero-to-one
 ebook.html                 E-book (planned)
 assets/
   apple.css                Apple-inspired light design system
+  landing.css / landing.js Brand landing: orbit motion, scroll reveals
   rs-ai.js / rs-ai.css     Remote Sensing: select-to-translate/ask + glossary
   glossary.js              75 bilingual terms
   study.js / study.css     Spaced repetition, history, goals, plan, search

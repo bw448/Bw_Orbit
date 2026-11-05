@@ -8,100 +8,188 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
-<title>Bw_Orbit · 地信学习站 / GIS Learning System</title>
-<meta name="description" content="Bw_Orbit 是面向地信专业本科生的学习站：按学期、科目和学习方式组织遥感与 Python；含题库、术语表、学习工具和手机端。A semester-by-semester learning system for GIS undergraduates.">
+<title>Orbit · 地信学习站 / GIS Learning System</title>
+<meta name="description" content="Orbit 是面向地信专业本科生的学习站：一条从大二上走到毕业的学习轨道。A learning orbit for GIS undergraduates — remote sensing, Python and everything after.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/apple.css">
-<style>
-.manifesto-en{max-width:720px;margin:22px auto 0;color:var(--muted);font-size:14px;line-height:1.7;font-weight:400;letter-spacing:0}
-.about-links{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:28px;font-size:13px;color:var(--blue)}
-.about-links a:hover{text-decoration:underline}
-</style>
+<link rel="stylesheet" href="assets/landing.css?v=3">
 </head>
 <body>
-<header class="global-nav">
-  <div class="gn-inner">
-    <a class="gn-brand" href="index.html" aria-label="Bw_Orbit 地信学习站">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
-      Bw_Orbit
-    </a>
-    <nav class="gn-links" aria-label="学期模块">
-      <a class="active" href="index.html">首页</a>
-      <a href="sem2-1.html">大二上</a>
-      <a href="sem2-2.html">大二下</a>
-      <a href="sem3-1.html">大三上</a>
-      <a href="sem3-2.html">大三下</a>
-      <a href="ebook.html">电子书</a>
-    </nav>
-    <div class="gn-right">
-      <span>地信专业 · 2026 / GIS</span>
-    </div>
-  </div>
+<header class="land-nav" id="landNav">
+  <a class="land-brand" href="index.html" aria-label="Orbit 首页">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.8" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
+    Orbit
+  </a>
+  <nav class="land-links" aria-label="页面导航">
+    <a href="#story">关于</a>
+    <a href="#showcase">看见</a>
+    <a href="semesters.html">学习内容</a>
+    <a class="land-github" href="https://github.com/bw448/Bw_Orbit">GitHub <span>↗</span></a>
+  </nav>
+  <a class="land-nav-cta" href="semesters.html">进入内容 <span>›</span></a>
 </header>
 
-<main>
-  <section class="choice-hero">
-    <div class="hero-eyebrow">地理信息科学 · 按学期进入</div>
-    <h1>先选学期，<br>再选科目。</h1>
-    <p class="sub">所有内容都挂在学期下面：大二上 → 遥感 / Python；大二下、大三上、大三下按同一套结构往后接。科目里再分期末、考研、从 0 到 1。</p>
-    <p class="sub" style="font-size:13px;color:var(--faint);margin-top:12px">A semester-by-semester path for GIS undergraduates: choose a semester, then a subject, then how you want to study.</p>
-    <div class="semester-grid">
-      <a class="choice primary" href="sem2-1.html">
-        <span class="num">01 · 当前学期</span>
-        <h2>大二上</h2>
-        <p>遥感、Python、电子书。作者本校的期末范围 + 两门课的深入学习。</p>
-        <span class="meta">2 门课 · 689 题</span>
-        <span class="cta">进入大二上 ›</span>
-      </a>
-      <a class="choice" href="sem2-2.html">
-        <span class="num">02</span>
-        <h2>大二下</h2>
-        <p>课程确定后，按大二上的结构接入科目和题库。</p>
-        <span class="meta">RESERVED</span>
-        <span class="cta">看预留 ›</span>
-      </a>
-      <a class="choice" href="sem3-1.html">
-        <span class="num">03</span>
-        <h2>大三上</h2>
-        <p>预留学期。课程、作业、教材确定后再接。</p>
-        <span class="meta">RESERVED</span>
-        <span class="cta">看预留 ›</span>
-      </a>
-      <a class="choice" href="sem3-2.html">
-        <span class="num">04</span>
-        <h2>大三下</h2>
-        <p>预留学期。先跑通大二上，再往后接。</p>
-        <span class="meta">RESERVED</span>
-        <span class="cta">看预留 ›</span>
-      </a>
-      <a class="choice" href="ebook.html">
-        <span class="num">05 · 跨学期</span>
-        <h2>电子书</h2>
-        <p>教材、笔记、划线、搜索；和题库互相跳转。装订中。</p>
-        <span class="meta">PLANNED</span>
-        <span class="cta">看电子书 ›</span>
-      </a>
+<main class="landing">
+  <section class="land-hero" id="top">
+    <div class="hero-aurora" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <div class="hero-system" id="heroSystem" aria-hidden="true">
+      <svg viewBox="0 0 900 900" role="presentation">
+        <defs>
+          <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#0071e3" stop-opacity=".14"/>
+            <stop offset="55%" stop-color="#0071e3" stop-opacity=".035"/>
+            <stop offset="100%" stop-color="#0071e3" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="ringFade" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#9db8d8" stop-opacity=".12"/>
+            <stop offset=".45" stop-color="#8aa9cd" stop-opacity=".62"/>
+            <stop offset="1" stop-color="#9db8d8" stop-opacity=".08"/>
+          </linearGradient>
+        </defs>
+        <circle cx="450" cy="450" r="330" fill="url(#heroGlow)"/>
+        <g class="orbit-ring r1"><ellipse cx="450" cy="450" rx="360" ry="132" fill="none" stroke="url(#ringFade)" stroke-width="1.2"/></g>
+        <g class="orbit-ring r2"><ellipse cx="450" cy="450" rx="300" ry="108" fill="none" stroke="#9bb6d4" stroke-opacity=".32" stroke-width="1" stroke-dasharray="2 9"/></g>
+        <g class="orbit-ring r3"><ellipse cx="450" cy="450" rx="232" ry="82" fill="none" stroke="#0071e3" stroke-opacity=".22" stroke-width="1"/></g>
+        <g class="orbit-ring r4"><circle cx="450" cy="450" r="112" fill="none" stroke="#9bb6d4" stroke-opacity=".25" stroke-width="1"/></g>
+        <g class="orbit-marks" stroke="#8aa9cd" stroke-opacity=".35">
+          <path d="M450 74v15M450 811v15M74 450h15M811 450h15"/>
+        </g>
+        <g class="orbit-sat s1"><circle cx="810" cy="450" r="4.5" fill="#0071e3"/></g>
+        <g class="orbit-sat s2"><circle cx="748" cy="450" r="3" fill="#1d1d1f" fill-opacity=".55"/></g>
+        <g class="orbit-sat s3"><circle cx="682" cy="450" r="2.3" fill="#0071e3" fill-opacity=".7"/></g>
+        <circle cx="450" cy="450" r="2.5" fill="#0071e3"/>
+      </svg>
+      <span class="orbit-tag t1">39.9°N · 116.4°E</span>
+      <span class="orbit-tag t2">ORBIT / 2026</span>
+      <span class="orbit-tag t3">SENSOR / SCAN 08</span>
     </div>
-    <p class="choice-note">进站顺序：<b>学期 → 科目 → 期末 / 考研 / 从 0 到 1</b>。不要从顶部直接找题；先选你在哪个学期、学哪门课。</p>
+
+    <div class="hero-content">
+      <div class="land-eyebrow">GEOGRAPHIC INFORMATION SCIENCE · 2026</div>
+      <h1 class="hero-word"><span>O</span>rbit</h1>
+      <p class="hero-title-zh">一条属于地信学生的<br><em>学习轨道。</em></p>
+      <p class="hero-sub">从大二上的第一章，到毕业前的最后一次复习。<br>先看它怎么走，再进入你的内容。</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="semesters.html">进入学习内容</a>
+        <a class="land-textlink" href="#story">先看看 Orbit 是什么 <span>↓</span></a>
+      </div>
+    </div>
+
+    <div class="hero-foot">
+      <span>REMOTE SENSING</span><i></i><span>PYTHON</span><i></i><span>GIS</span>
+      <span class="hero-scroll">SCROLL <b>↓</b></span>
+    </div>
   </section>
 
-  <section class="manifesto" id="about">
-    <p>这是地信专业的学习站。<br><span>先按学期分，再按科目分；每个科目里，期末、考研、从 0 到 1 各自独立。</span></p>
-    <p class="manifesto-en">Bw_Orbit is a learning system built for GIS undergraduates. It keeps the semester → subject → mode structure, and keeps your answers, wrong questions and reading notes in your own browser.</p>
-    <div class="about-links">
-      <a href="sem2-1.html">从大二上开始 ›</a>
-      <a href="https://github.com/bw448/Bw_Orbit">GitHub · README ›</a>
+  <section class="land-story" id="story">
+    <div class="story-inner">
+      <div class="land-kicker reveal">01 / THE IDEA</div>
+      <h2 class="reveal">不是资料堆，<br>是一条可以<span>回看的轨道</span>。</h2>
+      <p class="story-lede reveal">大学四年的课不会同时发生。Orbit 把它们放回时间顺序：先选学期，再选科目，再进入期末、考研或从 0 到 1。你走过的每一步，都留在同一条线上。</p>
+      <div class="story-points">
+        <div class="story-point reveal"><b>按学期</b><span>先站到你所在的位置，再决定往哪走。</span></div>
+        <div class="story-point reveal"><b>按科目</b><span>遥感、Python、后面的 GIS 课程，各自成页。</span></div>
+        <div class="story-point reveal"><b>留痕迹</b><span>错题、收藏和进度，回到浏览器里继续。</span></div>
+      </div>
+    </div>
+    <div class="story-line" aria-hidden="true">
+      <svg viewBox="0 0 1200 260" preserveAspectRatio="none"><path d="M-20 218C180 218 210 72 420 72s232 126 420 126 190-96 380-96" fill="none" stroke="#0071e3" stroke-opacity=".22" stroke-width="1.2" stroke-dasharray="3 10"/></svg>
+      <i></i><i></i><i></i>
     </div>
   </section>
 
-  <footer class="site-foot">
-    <div class="foot-inner">
-      <span>Bw_Orbit · 地信学习站 · 2026<br>GIS Learning System · 中文 / English</span>
-      <div class="foot-links"><a href="sem2-1.html">大二上</a><a href="sem2-2.html">大二下</a><a href="sem3-1.html">大三上</a><a href="sem3-2.html">大三下</a><a href="ebook.html">电子书</a><a href="https://github.com/bw448/Bw_Orbit">GitHub</a></div>
+  <section class="land-showcase" id="showcase">
+    <div class="showcase-inner">
+      <div class="showcase-copy">
+        <div class="land-kicker reveal">02 / REMOTE SENSING</div>
+        <h2 class="reveal">先看见，<br>再理解。</h2>
+        <p class="reveal">从电磁波到一张影像，从一条作业到一张覆盖地图。七章知识脉络、完整作业和 90 道题，被放在同一条阅读线上。</p>
+        <div class="showcase-facts reveal">
+          <span><b>7</b> 章</span><span><b>90</b> 题</span><span><b>75</b> 条中英术语</span>
+        </div>
+        <a class="land-textlink reveal" href="remote.html">去看遥感 <span>↗</span></a>
+      </div>
+      <div class="scan-visual reveal" aria-hidden="true">
+        <div class="scan-frame">
+          <svg viewBox="0 0 560 560" role="presentation">
+            <g fill="none" stroke="#9bb6d4" stroke-width="1" stroke-opacity=".55">
+              <path d="M46 388c54-58 92-32 132-74s70-104 132-88 72 84 114 102 64-8 90 24"/>
+              <path d="M26 420c64-66 106-34 150-80s76-112 140-94 76 90 120 108 66-8 98 24"/>
+              <path d="M72 350c44-46 78-26 112-62s58-86 110-74 62 72 100 88 58-6 84 22"/>
+              <path d="M16 470c74-78 122-42 174-96s88-132 164-110 88 106 140 128 78-10 116 30"/>
+              <path d="M94 300c34-36 60-20 86-48s42-66 84-56 48 56 76 68 44-4 64 16"/>
+              <path d="M130 252c24-26 42-14 60-34s30-46 60-38 34 40 54 48 30-2 46 12"/>
+            </g>
+            <g fill="#0071e3" fill-opacity=".9"><circle cx="196" cy="236" r="2.2"/><circle cx="382" cy="204" r="1.8"/><circle cx="446" cy="330" r="2"/></g>
+            <g stroke="#1d1d1f" stroke-opacity=".18" stroke-width="1"><path d="M280 54v452M54 280h452"/></g>
+            <circle cx="280" cy="280" r="46" fill="none" stroke="#0071e3" stroke-opacity=".35" stroke-width="1" stroke-dasharray="2 6"/>
+          </svg>
+          <div class="scan-line"></div>
+          <div class="scan-label">SENSOR / SCAN 08</div>
+          <div class="scan-pin p1"></div><div class="scan-pin p2"></div><div class="scan-pin p3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="land-showcase code-show">
+    <div class="showcase-inner">
+      <div class="code-window reveal" aria-hidden="true">
+        <div class="code-bar"><i></i><i></i><i></i><span>orbit / practice.py</span></div>
+        <pre class="code-body"><code><span class="c-k">class</span> <span class="c-t">Orbit</span>:
+    papers = <span class="c-n">10</span>
+    questions = <span class="c-n">599</span>
+
+    <span class="c-k">def</span> <span class="c-f">practice</span>(self):
+        <span class="c-k">for</span> paper <span class="c-k">in</span> self.papers:
+            read(paper)
+            answer()
+            review()
+
+<span class="c-c"># 错题会回来，做对的会走远。</span>
+<span class="c-p">>>></span> Orbit().practice()<span class="c-cursor">▍</span></code></pre>
+        <div class="code-status"><span>599 QUESTIONS</span><span>10 PAPERS</span><span>ONE PROGRESS</span></div>
+      </div>
+      <div class="showcase-copy">
+        <div class="land-kicker reveal">03 / PYTHON</div>
+        <h2 class="reveal">把练习，<br>变成手感。</h2>
+        <p class="reveal">599 道题、十套卷，按套刷、按节刷、随机刷。做错的题会回来，做对的题会走远；学习不是一次看完，而是反复回到手上。</p>
+        <div class="showcase-facts reveal">
+          <span><b>599</b> 题</span><span><b>10</b> 套卷</span><span><b>30</b> 天节奏</span>
+        </div>
+        <a class="land-textlink reveal" href="python.html">去看 Python <span>↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="land-path">
+    <div class="path-inner">
+      <div class="land-kicker reveal">04 / THE PATH</div>
+      <h2 class="reveal">从大二上，<br>一直走到毕业。</h2>
+      <div class="path-track reveal">
+        <div class="path-stop on"><b>01</b><span>大二上</span><small>遥感 / Python</small></div>
+        <div class="path-stop"><b>02</b><span>大二下</span><small>继续接入</small></div>
+        <div class="path-stop"><b>03</b><span>大三上</span><small>课程 / 题库</small></div>
+        <div class="path-stop"><b>04</b><span>大三下</span><small>方向 / 实践</small></div>
+        <div class="path-stop"><b>05</b><span>毕业</span><small>把学过的带走</small></div>
+      </div>
+      <p class="path-note reveal">不急着展开所有功能。先看它往哪走，再进入你现在需要的那一页。</p>
+      <a class="btn-primary reveal" href="semesters.html">进入学习内容 <span>›</span></a>
+    </div>
+  </section>
+
+  <footer class="land-foot">
+    <div class="land-foot-inner">
+      <span>Orbit · 地信学习站 · 2026</span>
+      <div><a href="semesters.html">学习内容</a><a href="https://github.com/bw448/Bw_Orbit">GitHub</a><a href="#top">回到顶部 ↑</a></div>
     </div>
   </footer>
 </main>
+
+<script src="assets/landing.js?v=2"></script>
 <script src="assets/pwa.js" defer></script>
 </body>
 </html>

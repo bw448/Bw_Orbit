@@ -1,4 +1,4 @@
-/* Bw_Orbit remote-sensing glossary: Chinese term + English term + English definition + Chinese note. */
+/* Orbit remote-sensing glossary: Chinese term + English term + English definition + Chinese note. */
 window.RS_GLOSSARY = [
   {ch:1, zh:"遥感", en:"remote sensing", def:"The acquisition of information about an object or phenomenon without making physical contact, usually by measuring reflected or emitted electromagnetic radiation.", zhDef:"不与目标接触，通过传感器接收电磁波信息，对目标进行探测和识别的理论和技术。"},
   {ch:1, zh:"电磁波", en:"electromagnetic wave", def:"Oscillating electric and magnetic fields that propagate through space and carry energy.", zhDef:"由电场和磁场交替变化形成的、可在空间传播的能量波。"},
