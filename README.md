@@ -156,7 +156,7 @@ Semester (Year 2 Fall / Year 2 Spring / Year 3 Fall / Year 3 Spring / E-book)
         └── Mode (Final exam review / Graduate entrance prep / Zero-to-one)
 ```
 
-The first screen asks only for a semester; the second asks for a subject; the third opens the actual material. A first-time visitor can see where to click.
+After the brand landing, the learning hub asks only for a semester; the next layer asks for a subject; the third opens the actual material. A first-time visitor can see where to click without meeting every feature at once.
 
 ### What is included
 
