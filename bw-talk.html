@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>BW有话说 · Orbit</title>
+<meta name="description" content="BW有话说：文字、图片、视频和链接，按日期排列。Orbit 的个人分享时间线。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%23b05a00'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/bw.css">
+</head>
+<body>
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html" aria-label="Orbit">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
+      Orbit
+    </a>
+    <nav class="gn-links" aria-label="主导航">
+      <a href="semesters.html">学习内容</a>
+      <a href="sem2-1.html">大二上</a>
+      <a href="sem2-2.html">大二下</a>
+      <a href="sem3-1.html">大三上</a>
+      <a href="sem3-2.html">大三下</a>
+      <a href="ebook.html">电子书</a>
+      <a href="competitions.html">竞赛</a>
+      <a class="active" href="bw-talk.html">BW有话说</a>
+    </nav>
+    <div class="gn-right"><span>只点赞 · 不设评论</span></div>
+  </div>
+</header>
+
+<main class="bw-page">
+  <section class="bw-hero">
+    <div class="bw-shell bw-hero-inner">
+      <div>
+        <div class="bw-kicker">BW / NOTES</div>
+        <h1>BW<br><span>有话说。</span></h1>
+        <p class="bw-lead">一些想说的话，放在这里。文字、图片、视频、链接，按时间排好；觉得有意思，就点个赞。</p>
+        <div class="bw-hero-meta">
+          <span>文字 / 图片 / 视频 / 链接</span>
+          <span>只点赞 · 不设评论</span>
+        </div>
+      </div>
+      <div class="bw-hero-mark" aria-hidden="true">
+        <span>“</span>
+        <small>SAY SOMETHING<br>WORTH KEEPING</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="bw-feed">
+    <div class="bw-shell">
+      <div class="bw-feed-head">
+        <div><div class="eyebrow">Timeline</div><h2>最近，<br>说过的。</h2></div>
+        <span id="bwCount" class="bw-count"></span>
+      </div>
+      <div id="bwPosts" class="bw-posts" aria-live="polite">
+        <div class="bw-loading"><i></i><span>正在打开 BW 的话匣子…</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <span>Orbit · BW有话说<br>Notes · 2026</span>
+      <div class="foot-links"><a href="index.html">首页</a><a href="semesters.html">学习内容</a><a href="competitions.html">竞赛</a><a href="https://github.com/bw448/Bw_Orbit">GitHub</a></div>
+    </div>
+  </footer>
+</main>
+
+<script src="assets/supabase-config.js"></script>
+<script src="assets/bw.js"></script>
+<script src="assets/pwa.js" defer></script>
+</body>
+</html>
