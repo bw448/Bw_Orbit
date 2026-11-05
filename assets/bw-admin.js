@@ -11,6 +11,7 @@
   var loginStatus = document.getElementById('loginStatus');
   var postStatus = document.getElementById('postStatus');
   var adminList = document.getElementById('adminList');
+  var adminStatus = document.getElementById('adminStatus');
   var mediaInput = document.getElementById('media');
   var fileHint = document.getElementById('fileHint');
   var who = document.getElementById('who');
@@ -113,14 +114,36 @@
     adminList.addEventListener('click', function (e) {
       var b = e.target.closest('[data-del]');
       if (!b) return;
-      if (!confirm('确定删除这条帖子？')) return;
+      if (b.getAttribute('data-armed') !== '1') {
+        adminList.querySelectorAll('[data-del]').forEach(function (x) {
+          x.removeAttribute('data-armed');
+          x.textContent = '删除';
+        });
+        b.setAttribute('data-armed', '1');
+        b.textContent = '再点一次确认';
+        setTimeout(function () {
+          if (b.getAttribute('data-armed') === '1') {
+            b.removeAttribute('data-armed');
+            b.textContent = '删除';
+          }
+        }, 4000);
+        return;
+      }
       var id = b.getAttribute('data-del');
       b.disabled = true;
-      rpc('bw_admin_delete', { p_password: password, p_id: id }).then(function () {
+      b.textContent = '删除中…';
+      setStatus(adminStatus, '');
+      rpc('bw_admin_delete', { p_password: password, p_id: id }).then(function (deleted) {
+        if (deleted === false) {
+          setStatus(adminStatus, '没有找到这条帖子，可能已经删除。', 'bad');
+          b.disabled = false; b.removeAttribute('data-armed'); b.textContent = '删除';
+          return;
+        }
+        setStatus(adminStatus, '已删除。', 'ok');
         loadPosts();
       }).catch(function (err) {
-        b.disabled = false;
-        alert(err.message || '删除失败');
+        b.disabled = false; b.removeAttribute('data-armed'); b.textContent = '删除';
+        setStatus(adminStatus, err.message || '删除失败', 'bad');
       });
     });
   }
