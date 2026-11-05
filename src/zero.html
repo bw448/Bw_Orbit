@@ -1,0 +1,161 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>ORBIT 从 0 到 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/ai.css">
+<style>
+.stage{margin-top:44px;border-top:1px solid var(--line-strong)}
+.stage-head{display:grid;grid-template-columns:88px 1fr;gap:20px;padding:24px 0 14px}
+.stage-num{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--blue);padding-top:5px}
+.stage-head h3{font-size:clamp(1.45rem,2.5vw,1.95rem);font-weight:600;letter-spacing:-.02em}
+.stage-head p{color:var(--muted);font-size:13px;line-height:1.7;margin-top:4px;max-width:640px}
+.lesson-list{border-top:1px solid var(--line-soft)}
+.lesson-row{display:grid;grid-template-columns:46px 1fr 1.5fr 90px auto;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line-soft);transition:background .2s var(--ease),padding .2s var(--ease)}
+a.lesson-row:hover{background:var(--paper-soft);padding-left:10px;padding-right:10px}
+.lesson-row .n{font-family:var(--mono);font-size:10px;color:var(--faint)}
+.lesson-row b{font-size:15px;font-weight:600}
+.lesson-row p{color:var(--muted);font-size:12.5px;line-height:1.6}
+.lesson-row .time{font-family:var(--mono);font-size:9.5px;color:var(--faint);white-space:nowrap}
+.lesson-row .go{color:var(--blue);font-size:12px;white-space:nowrap}
+.lesson-row.soon{opacity:.5}
+.lesson-row.soon .go{color:var(--muted)}
+.lesson-row.done .go{color:var(--green)}
+.lesson-body{max-width:760px;margin:34px auto 0}
+.lesson-body p{font-size:15.5px;line-height:1.9;color:var(--muted);margin:0 0 14px}
+.lesson-body p strong{color:var(--ink);font-weight:600}
+.lesson-key{max-width:760px;margin:26px auto 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0;display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.lesson-key b{color:var(--ink);font-weight:500}
+.lesson-next{max-width:760px;margin:26px auto 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.lesson-next a{color:var(--blue);font-size:14px}
+.lesson-next a:hover{text-decoration:underline}
+.three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line-strong);margin-top:32px}
+.three-grid div{padding:20px 20px 22px 0;border-bottom:1px solid var(--line-soft);border-right:1px solid var(--line-soft)}
+.three-grid div:last-child{border-right:0}
+.three-grid .k{font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:.08em}
+.three-grid h3{font-size:1.15rem;font-weight:600;margin-top:8px}
+.three-grid p{color:var(--muted);font-size:13px;line-height:1.7;margin-top:5px}
+@media(max-width:700px){
+  .stage-head{grid-template-columns:54px 1fr;gap:10px}
+  .lesson-row{grid-template-columns:30px 1fr auto}
+  .lesson-row p{grid-column:2}
+  .lesson-row .time{display:none}
+  .three-grid{grid-template-columns:1fr}
+  .three-grid div{border-right:0}
+}
+</style>
+
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>ORBIT</a>
+    <nav class="gn-links" aria-label="主导航"><a href="index.html">首页</a><a href="modules.html">期末复习</a><a href="kaoyan.html">考研</a><a class="active" href="zero.html">零基础</a><a href="ebook.html">电子书</a></nav>
+    <div class="gn-right"><span>零基础 · 持续学习</span><button class="gn-ai" onclick="window.ORBIT_AI && ORBIT_AI.open()">AI 助教</button></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">从 0 到 1 · 零基础 · 持续学习</div>
+      <h1>没学过，<br>也能一直学下去。</h1>
+      <p class="hero-sub">给零基础的人：从“这个学科在学什么”开始，按阶段持续学。不按考试范围，不要求先修，不先塞题。</p>
+      <div class="hero-links">
+        <a class="btn-primary" href="#lesson-0">从第 0 课开始</a>
+        <button class="link-arrow" onclick="ORBIT_AI && ORBIT_AI.ask('我完全没学过地理信息科学/遥感。请先不要用术语，用生活化的方式告诉我：这个学科在学什么、它解决什么问题、我该从哪三个概念开始。')">AI 从零讲起 <span>›</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="trajectory" id="map">
+    <div class="trajectory-inner">
+      <div class="sec-head">
+        <div><div class="sec-label">课程地图</div><h2>四个阶段，<br>从零到一。</h2></div>
+        <p>不是“期末速成”。阶段 0 先建立学科地图；阶段 1—3 再逐步进入遥感、GIS 和方法。每一节都按“先懂、再练”组织。</p>
+      </div>
+
+      <div class="stage" id="stage-0">
+        <div class="stage-head"><div class="stage-num">STAGE 0</div><div><h3>入门：这个学科在学什么</h3><p>不碰公式。先知道空间、遥感、GIS 三件事，建立一张学科地图。</p></div></div>
+        <div class="lesson-list">
+          <a class="lesson-row" href="#lesson-0"><span class="n">00</span><b>这个学科，在学什么</b><p>空间数据、遥感、GIS：三个词先讲清楚。</p><span class="time">15 min</span><span class="go">开始 ›</span></a>
+          <a class="lesson-row" href="remote.html#chapter-1"><span class="n">01</span><b>遥感是什么</b><p>不接触目标，用电磁波获取信息；主动/被动。</p><span class="time">20 min</span><span class="go">阅读 ›</span></a>
+          <div class="lesson-row soon"><span class="n">02</span><b>GIS 是什么</b><p>空间数据怎么存、怎么查、怎么分析。</p><span class="time">编写中</span><span class="go">待补</span></div>
+          <div class="lesson-row soon"><span class="n">03</span><b>需要哪些基础</b><p>数学、物理、编程：先补什么，哪些可以后补。</p><span class="time">编写中</span><span class="go">待补</span></div>
+        </div>
+      </div>
+
+      <div class="stage" id="stage-1">
+        <div class="stage-head"><div class="stage-num">STAGE 1</div><div><h3>基础：信息怎么变成数据</h3><p>从电磁波到传感器，再到一张数字图像。先建立“遥感为什么能工作”的直觉。</p></div></div>
+        <div class="lesson-list">
+          <a class="lesson-row" href="remote.html#chapter-2"><span class="n">04</span><b>电磁波与大气</b><p>为什么有的大气窗口能穿透，有的不能。</p><span class="time">30 min</span><span class="go">阅读 ›</span></a>
+          <a class="lesson-row" href="remote.html#chapter-3"><span class="n">05</span><b>平台与轨道</b><p>站在地面、飞机、卫星上，看到的有什么不同。</p><span class="time">25 min</span><span class="go">阅读 ›</span></a>
+          <a class="lesson-row" href="remote.html#chapter-4"><span class="n">06</span><b>传感器与分辨率</b><p>空间、光谱、辐射、时间：四种分辨率怎么选。</p><span class="time">35 min</span><span class="go">阅读 ›</span></a>
+          <div class="lesson-row soon"><span class="n">07</span><b>图像是什么</b><p>像元、波段、灰度：一张遥感图怎么读。</p><span class="time">编写中</span><span class="go">待补</span></div>
+        </div>
+      </div>
+
+      <div class="stage" id="stage-2">
+        <div class="stage-head"><div class="stage-num">STAGE 2</div><div><h3>方法：从图像到信息</h3><p>处理、解译、GIS 分析。开始把“看见”变成“看懂”和“能用”。</p></div></div>
+        <div class="lesson-list">
+          <div class="lesson-row soon"><span class="n">08</span><b>图像处理</b><p>校正、增强、变换、融合：让图像可用。</p><span class="time">编写中</span><span class="go">待补</span></div>
+          <a class="lesson-row" href="remote.html#chapter-6"><span class="n">09</span><b>图像解译</b><p>解译标志、目视方法、计算机分类。</p><span class="time">35 min</span><span class="go">阅读 ›</span></a>
+          <div class="lesson-row soon"><span class="n">10</span><b>GIS 与 3S</b><p>把遥感结果放进 GIS，和 GPS 一起工作。</p><span class="time">编写中</span><span class="go">待补</span></div>
+          <div class="lesson-row soon"><span class="n">11</span><b>小项目</b><p>用一张影像做一次完整分析：从数据到结论。</p><span class="time">编写中</span><span class="go">待补</span></div>
+        </div>
+      </div>
+
+      <div class="stage" id="stage-3">
+        <div class="stage-head"><div class="stage-num">STAGE 3</div><div><h3>进阶：把学科用起来</h3><p>应用、定量遥感、科研与考研衔接。0 到 1 之后，继续往深处走。</p></div></div>
+        <div class="lesson-list">
+          <a class="lesson-row" href="remote.html#chapter-7"><span class="n">12</span><b>应用：水体、植被、地质</b><p>同一套方法，怎么落到不同对象上。</p><span class="time">30 min</span><span class="go">阅读 ›</span></a>
+          <div class="lesson-row soon"><span class="n">13</span><b>定量遥感</b><p>从目视到反演：叶面积指数、地表温度、水质。</p><span class="time">编写中</span><span class="go">待补</span></div>
+          <div class="lesson-row soon"><span class="n">14</span><b>科研与考研衔接</b><p>文献、问题、方法：把学习变成研究。</p><span class="time">编写中</span><span class="go">待补</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="index" id="lesson-0">
+    <div class="index-inner">
+      <div class="sec-head">
+        <div><div class="sec-label">第 0 课</div><h2>这个学科，<br>在学什么？</h2></div>
+        <p>先不用记定义。先知道三件事：空间、遥感、GIS。</p>
+      </div>
+      <div class="lesson-body">
+        <p><strong>地理信息科学（GIS）关心的是“空间”。</strong>东西在哪里、为什么在那里、接下来会怎样。地图是它的语言，数据是它的材料。</p>
+        <p><strong>遥感是获取空间信息的一种方式。</strong>不接触目标，用传感器接收电磁波，推断地表是什么、变了没有。它解决的是“怎么大范围、重复地看见”。</p>
+        <p><strong>GIS 是把这些空间数据管起来、分析、画成图。</strong>它解决的是“看见之后，怎么组织、比较、决策”。遥感给你数据，GIS 给你结构和答案。</p>
+        <p>所以这门学科不是“背遥感定义”，而是学会一条链：<strong>物理 → 传感器 → 图像 → 信息 → 决策</strong>。后面的每一节，都是在补这条链上的一环。</p>
+      </div>
+      <div class="lesson-key"><span>三个词：<b>空间数据</b></span><span><b>遥感</b></span><span><b>GIS</b></span></div>
+      <div class="lesson-next">
+        <span style="color:var(--muted);font-size:13px">学完这节，试着用自己的话回答：遥感解决什么问题？GIS 解决什么问题？</span>
+        <a href="#stage-1">下一阶段：基础 ›</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tracks">
+    <div class="tracks-inner">
+      <div class="sec-head"><div><div class="sec-label">怎么持续学</div><h2>不跳步，<br>每节留一个动作。</h2></div><p>从 0 到 1 不是看完一篇文章，而是持续学习。每一节只做三件事：懂一个概念、做一道题、记一个疑问。</p></div>
+      <div class="three-grid">
+        <div><div class="k">CONCEPT</div><h3>先懂一个概念</h3><p>不追求一次学完；每节只抓一个核心概念。</p></div>
+        <div><div class="k">PRACTICE</div><h3>再做一道题</h3><p>用题目检查是否真的理解，而不是“看过了”。</p></div>
+        <div><div class="k">ASK</div><h3>留一个疑问</h3><p>卡住就问 AI，让它换一种说法或举一个例子。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-foot"><div class="foot-inner"><span>ORBIT · 从 0 到 1 · 零基础持续学习</span><div class="foot-links"><a href="index.html">首页</a><a href="modules.html">校内期末</a><a href="kaoyan.html">考研</a><a href="ebook.html">电子书</a></div></div></footer>
+</main>
+<script>
+window.ORBIT_CONTEXT = { track:'从0到1', level:'零基础', note:'持续学习学科本身，不按考试范围，不要求先修' };
+</script>
+<script src="assets/ai.js"></script>
+
+<script src="assets/pwa.js" defer></script>

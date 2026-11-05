@@ -1,0 +1,127 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>ORBIT 校内期末</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/ai.css">
+<style>
+.hero{padding:64px 0 48px;background:var(--paper-alt)}
+.hero h1{font-size:clamp(2rem,4.2vw,3.3rem)}
+.hero-sub{font-size:16px}
+</style>
+
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>ORBIT</a>
+    <nav class="gn-links" aria-label="主导航"><a href="index.html">首页</a><a class="active" href="modules.html">期末复习</a><a href="kaoyan.html">考研</a><a href="zero.html">零基础</a><a href="ebook.html">电子书</a></nav>
+    <div class="gn-right"><span>作者本校 · 大二上</span><button class="gn-ai" onclick="window.ORBIT_AI && ORBIT_AI.open()">AI 助教</button></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">期末复习 · 作者本校 · 大二上</div>
+      <h1>两门课，<br>先把期末跑通。</h1>
+      <p class="hero-sub">这里只放作者本校的期末范围：遥感 90 题、Python 599 题、电子书。和考研、从 0 到 1 两条线完全分开。</p>
+    </div>
+  </section>
+
+  <section class="tile-section" id="modules">
+    <div class="tile-grid">
+      <a class="tile" href="remote.html">
+        <div class="tile-copy">
+          <div class="tile-label">遥感 · 大二上</div>
+          <h2>七章作业，<br>变成可刷的题。</h2>
+          <p>90 题 · 7 章 · 第五章图像处理待补。知识脉络、完整作业、错题、模拟卷都在一条线上。</p>
+          <span class="tile-link">进入遥感 ›</span>
+        </div>
+        <div class="tile-visual">
+          <div class="mini-panel">
+            <div class="mini-row"><b>01 绪论</b><span>10 题 · 80%</span></div><div class="mini-bar"><i style="width:80%"></i></div>
+            <div class="mini-row"><b>02 电磁辐射</b><span>11 题 · 45%</span></div><div class="mini-bar"><i style="width:45%"></i></div>
+            <div class="mini-row"><b>03 遥感平台</b><span>10 题 · 20%</span></div><div class="mini-bar"><i style="width:20%"></i></div>
+            <div class="mini-row"><b>04 传感器</b><span>13 题 · 12%</span></div><div class="mini-bar"><i style="width:12%"></i></div>
+          </div>
+        </div>
+      </a>
+      <a class="tile alt" href="python.html">
+        <div class="tile-copy">
+          <div class="tile-label">Python · 大二上</div>
+          <h2>十套卷，<br>按套刷完。</h2>
+          <p>599 题 · 10 套卷。单选、多选自动判分；填空、代码阅读、设计题自评。</p>
+          <span class="tile-link">进入 Python ›</span>
+        </div>
+        <div class="tile-visual">
+          <div class="mini-code"><b>class</b> Review:
+    papers = 10
+    questions = 599
+
+    <b>def</b> score(self):
+        <b>return</b> "A"</div>
+          <div class="mini-grid" style="margin-top:14px"><i></i><i></i><i class="hot"></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </a>
+      <a class="tile" href="ebook.html">
+        <div class="tile-copy">
+          <div class="tile-label">电子书 · 跨学期</div>
+          <h2>教材和笔记，<br>装订在一起。</h2>
+          <p>遥感导论 8 章 · 笔记 · 划线 · 搜索 · 和题库互相跳转。装订中。</p>
+          <span class="tile-link">看电子书 ›</span>
+        </div>
+        <div class="tile-visual">
+          <div class="mini-book"><div class="line" style="width:48%;height:8px;background:#d2d2d7"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line" style="width:76%"></div></div>
+        </div>
+      </a>
+      <a class="tile alt" href="sem2-2.html">
+        <div class="tile-copy">
+          <div class="tile-label">大二下 · 预留</div>
+          <h2>下一段轨迹，<br>等课程确定。</h2>
+          <p>课程、作业、教材确定后，按大二上的结构接进来。不先塞占位内容。</p>
+          <span class="tile-link">看预留页 ›</span>
+        </div>
+        <div class="tile-visual">
+          <div class="mini-panel"><div class="mini-row"><b>课程</b><span>待定</span></div><div class="mini-row"><b>题库</b><span>0</span></div><div class="mini-row"><b>电子书</b><span>待装订</span></div><div class="mini-row"><b>状态</b><span>RESERVED</span></div></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="trajectory" id="trajectory">
+    <div class="trajectory-inner">
+      <div class="sec-head"><div><div class="sec-label">学习轨迹</div><h2>一门一门，<br>接成一条线。</h2></div><p>每一段都对应真实学过的课、做过的作业、留下的错题；新的学期按同一套结构往后接。</p></div>
+      <div class="timeline">
+        <div class="tl-item active"><span class="tl-dot"></span><b>大二上</b><em>遥感 · Python · 电子书</em><small>进行中</small></div>
+        <a class="tl-item reserved" href="sem2-2.html"><span class="tl-dot"></span><b>大二下</b><em>课程待定</em><small>预留</small></a>
+        <a class="tl-item reserved" href="sem3-1.html"><span class="tl-dot"></span><b>大三上</b><em>课程待定</em><small>预留</small></a>
+        <a class="tl-item reserved" href="sem3-2.html"><span class="tl-dot"></span><b>大三下</b><em>课程待定</em><small>预留</small></a>
+        <div class="tl-item reserved"><span class="tl-dot"></span><b>大四</b><em>毕业设计 · 待定</em><small>预留</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="index" id="all">
+    <div class="index-inner">
+      <div class="sec-head"><div><div class="sec-label">全部模块</div><h2>还会继续长。</h2></div><p>模块按学期和课程组织。现在只有大二上，后面的学期和课程按同一张表往后加。</p></div>
+      <div class="index-table">
+        <a class="index-row" href="remote.html"><span class="sem">大二上</span><span class="name">遥感</span><span class="desc">7 章 + 教材补全</span><span class="num">90 题</span><span class="st live">已上线</span><span class="arrow">›</span></a>
+        <a class="index-row" href="python.html"><span class="sem">大二上</span><span class="name">Python</span><span class="desc">10 套卷 · 599 题</span><span class="num">599 题</span><span class="st live">已上线</span><span class="arrow">›</span></a>
+        <a class="index-row" href="ebook.html"><span class="sem">跨学期</span><span class="name">电子书</span><span class="desc">教材 · 笔记 · 阅读器</span><span class="num">8 章</span><span class="st">装订中</span><span class="arrow">›</span></a>
+        <a class="index-row soon" href="sem2-2.html"><span class="sem">大二下</span><span class="name">待接入</span><span class="desc">课程确定后接入</span><span class="num">—</span><span class="st">预留</span><span class="arrow">›</span></a>
+        <a class="index-row soon" href="sem3-1.html"><span class="sem">大三上</span><span class="name">待接入</span><span class="desc">课程确定后接入</span><span class="num">—</span><span class="st">预留</span><span class="arrow">›</span></a>
+        <a class="index-row soon" href="sem3-2.html"><span class="sem">大三下</span><span class="name">待接入</span><span class="desc">课程确定后接入</span><span class="num">—</span><span class="st">预留</span><span class="arrow">›</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-foot"><div class="foot-inner"><span>ORBIT · 校内期末 · 作者本校</span><div class="foot-links"><a href="index.html">首页</a><a href="kaoyan.html">考研</a><a href="zero.html">从 0 到 1</a><a href="ebook.html">电子书</a></div></div></footer>
+</main>
+<script src="assets/ai.js"></script>
+
+<script src="assets/pwa.js" defer></script>

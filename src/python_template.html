@@ -1,0 +1,686 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>ORBIT Python</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%23e9a23b'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%23e9e2d6' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/orbit.css">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/ai.css?v=2">
+<link rel="stylesheet" href="assets/study.css">
+<link rel="stylesheet" href="assets/codemirror/codemirror.min.css">
+<style>
+.py-terminal{
+  position:relative;border:1px solid var(--line-soft);background:var(--paper-alt);overflow:hidden;
+  border-radius:16px;box-shadow:none;min-height:430px;display:flex;flex-direction:column;text-align:left;
+}
+.term-bar{
+  display:flex;justify-content:space-between;align-items:center;padding:10px 14px;
+  border-bottom:1px solid var(--line-soft);font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--muted);
+}
+.py-mark{position:absolute;right:18px;top:56px;width:52px;height:52px;color:var(--accent);opacity:.9;overflow:visible}
+.py-terminal pre{
+  margin:0;padding:26px 22px 12px;white-space:pre-wrap;
+  font-family:var(--mono);font-size:12.5px;line-height:1.9;color:var(--ink);
+}
+.py-terminal pre .k{color:var(--accent)}
+.py-terminal pre .m{color:var(--muted)}
+.term-foot{
+  margin:auto 22px 18px;padding-top:12px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--muted);
+}
+.cursor{display:inline-block;width:7px;height:1.1em;background:var(--accent);vertical-align:-2px;animation:blink 1.2s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.type-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-strong);margin-top:36px}
+.type-cell{padding:16px 18px 18px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.type-cell:nth-child(3n){border-right:0}
+.type-cell .k{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.type-cell .v{font-family:var(--display);font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:700;letter-spacing:-.05em;margin-top:6px}
+
+.paper-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:26px}
+.paper-card{
+  display:flex;flex-direction:column;gap:14px;padding:24px 22px 22px;
+  border-bottom:1px solid var(--line);border-right:1px solid var(--line);
+  background:none;text-align:left;text-decoration:none;
+  transition:background .35s var(--ease),padding .35s var(--ease);
+}
+.paper-card:nth-child(3n){border-right:0}
+.paper-card:hover{background:rgba(233,226,214,.035);padding-left:28px}
+.paper-num{font-family:var(--display);font-size:2.6rem;font-weight:800;line-height:.9;letter-spacing:-.06em;color:var(--accent)}
+.paper-title{font-family:var(--display);font-size:1.35rem;font-weight:650;letter-spacing:-.03em;margin-top:2px}
+.paper-sub{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--muted);line-height:1.8;margin-top:4px}
+.paper-bar{height:2px;background:rgba(233,226,214,.14);position:relative;margin-top:6px}
+.paper-bar i{position:absolute;left:0;top:0;height:100%;background:var(--accent)}
+.paper-meta{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted)}
+
+.paper-head{display:grid;grid-template-columns:140px 1fr;gap:clamp(20px,4vw,52px);align-items:start}
+.paper-head .num{font-family:var(--display);font-size:clamp(4.2rem,10vw,8rem);font-weight:800;line-height:.8;letter-spacing:-.07em;color:var(--accent)}
+.paper-head h1{font-family:var(--display);font-size:clamp(2.4rem,6vw,5.2rem);line-height:.98;letter-spacing:-.055em;font-weight:800;margin-top:10px}
+.paper-head .lede{max-width:620px;color:var(--muted);font-size:15.5px;line-height:1.85;margin-top:18px}
+.section-list{border-top:1px solid var(--line-strong);margin-top:26px}
+.section-row{display:grid;grid-template-columns:1fr auto;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink)}
+.section-row .m{font-family:var(--mono);font-size:10px;color:var(--muted);white-space:nowrap}
+
+.q-title.code{font-family:var(--mono);font-size:1.02rem;font-weight:400;line-height:1.75;letter-spacing:0;white-space:pre-wrap;text-wrap:pretty}
+.explain{white-space:pre-wrap}
+.opt span{white-space:pre-wrap}
+
+.code-app{border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;background:var(--paper-alt)}
+.code-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px;border-bottom:1px solid var(--line-soft);background:#fff}
+.code-bar select,.code-bar input{border:1px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;font-size:12px;color:var(--ink);background:#fff}
+.code-bar input{width:130px}
+.code-bar button{border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:12px;background:#fff;color:var(--ink)}
+.code-bar button.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+#codeArea{width:100%;min-height:300px;border:0;padding:16px;font:13px/1.7 var(--mono);resize:vertical;outline:none;background:#fff}
+.CodeMirror{height:360px;font-size:13px;background:#fff}
+.code-out{margin:0;background:#f5f5f7;border-top:1px solid var(--line-soft);padding:14px 16px;font:12px/1.7 var(--mono);color:var(--ink);white-space:pre-wrap;min-height:80px;max-height:260px;overflow:auto}
+@media(max-width:640px){.code-bar input{width:100%}.CodeMirror{height:260px}#codeArea{min-height:240px}}
+
+@media(max-width:1000px){
+  .paper-grid{grid-template-columns:repeat(2,1fr)}
+  .paper-card:nth-child(3n){border-right:1px solid var(--line)}
+  .paper-card:nth-child(2n){border-right:0}
+  .paper-head{grid-template-columns:1fr;gap:8px}
+}
+@media(max-width:640px){
+  .paper-grid{grid-template-columns:1fr}
+  .paper-card{border-right:0!important}
+  .type-strip{grid-template-columns:1fr}
+  .type-cell{border-right:0}
+  .py-terminal{min-height:360px}
+  .py-terminal pre{font-size:11.5px}
+}
+</style>
+
+<div class="bg-contour" aria-hidden="true"></div>
+<div class="scroll-progress"><i id="scrollBar"></i></div>
+
+<header class="nav">
+  <a class="brand" href="index.html" aria-label="ORBIT Python"><svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".5" transform="rotate(34 16 16)"/></svg><span class="brand-word">ORBIT</span><span class="brand-sub">Python</span></a>
+  <nav class="gn-links" aria-label="学期模块"><a href="index.html">首页</a><a class="active" href="sem2-1.html">大二上</a><a href="sem2-2.html">大二下</a><a href="sem3-1.html">大三上</a><a href="sem3-2.html">大三下</a><a href="ebook.html">电子书</a></nav>
+  <div class="nav-right">
+    <span class="nav-progress" id="navProgress">已答 <b>0</b> / 599</span>
+    <button class="btn btn-accent btn-small" onclick="go('#exam')">模拟卷</button>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-head">
+        <div class="eyebrow">大二上 / Python / 期末复习</div>
+        <h1>
+          <span class="line">599 题，</span>
+          <span class="line">按十套卷<span class="accent">刷</span>。</span>
+        </h1>
+      </div>
+      <div class="hero-lower">
+        <div class="hero-copy">
+          <p class="lede">旧 Python 项目保持原样，题库已只读导入。单选、多选自动判分，填空、代码阅读、设计题自评；按套刷，也可以直接开模拟卷。</p>
+          <div class="hero-actions">
+            <button class="btn btn-accent" onclick="go('#paper-1')">从第 1 套开始</button>
+            <button class="btn btn-ghost" onclick="go('#practice-all')">综合刷题</button>
+          </div>
+          <div class="hero-meta">
+            <span><b>599</b> 道题</span>
+            <span><b>10</b> 套卷</span>
+            <span><b>450</b> 道自动判分</span>
+          </div>
+        </div>
+        <div class="py-terminal" aria-hidden="true">
+          <div class="term-bar"><span>python / 599</span><span>ORBIT</span></div>
+          <svg class="py-mark" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 10h-4a4 4 0 0 0-4 4v7a4 4 0 0 1-4 4 4 4 0 0 1 4 4v7a4 4 0 0 0 4 4h4"/><path d="M32 10h4a4 4 0 0 1 4 4v7a4 4 0 0 0 4 4 4 4 0 0 0-4 4v7a4 4 0 0 1-4 4h-4"/><path d="M21 21h10M21 29h10"/></svg>
+          <pre><span class="m">class</span> <span class="k">Review</span>:
+    papers = <span class="k">10</span>
+    questions = <span class="k">599</span>
+
+    <span class="m">def</span> <span class="k">score</span>(self):
+        <span class="m">return</span> <span class="k">"A"</span>
+
+<span class="m">>>></span> review.score()
+<span class="k">'A'</span><span class="cursor"></span></pre>
+          <div class="term-foot">300 SINGLE · 150 MULTI · 149 SHORT</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-foot"><span>PYTHON</span><span>·</span><span>10 PAPERS</span><span>·</span><span>599 QUESTIONS</span><span>·</span><span>SCROLL</span></div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>PAPER 01—10 <b>·</b> 300 SINGLE <b>·</b> 150 MULTI <b>·</b> 149 SHORT <b>·</b> MOCK EXAM <b>·</b></span>
+      <span>PAPER 01—10 <b>·</b> 300 SINGLE <b>·</b> 150 MULTI <b>·</b> 149 SHORT <b>·</b> MOCK EXAM <b>·</b></span>
+    </div>
+  </div>
+
+  <section class="section" id="papers">
+    <div class="section-inner">
+      <div class="section-head">
+        <div><div class="eyebrow">Papers</div><h2>十套卷，<br>一条进度。</h2></div>
+        <p class="lede">按老师发的十套卷顺序刷。每套卷显示题型构成和完成度；点进去先看分节，再开始。</p>
+      </div>
+      <div class="type-strip" id="typeStrip"></div>
+      <div class="paper-grid" id="paperGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="modes">
+    <div class="section-inner">
+      <div class="section-head">
+        <div><div class="eyebrow">Practice modes</div><h2>四种刷法，<br>同一份错题。</h2></div>
+        <p class="lede">按套刷打底；综合刷打乱顺序；模拟卷看时间；错题本和收藏夹考前收口。</p>
+      </div>
+      <div class="modes">
+        <button class="mode" onclick="go('#papers')"><span class="idx">01 / PAPERS</span><h3>按套刷</h3><p>十套卷逐套推进，适合第一轮。</p><span class="go">↗</span></button>
+        <button class="mode" onclick="go('#practice-all')"><span class="idx">02 / MIXED</span><h3>综合刷</h3><p>599 题随机抽，打乱试卷边界。</p><span class="go">↗</span></button>
+        <button class="mode" onclick="go('#exam')"><span class="idx">03 / MOCK</span><h3>模拟卷</h3><p>20 题、30 分钟，只抽自动判分题。</p><span class="go">↗</span></button>
+        <button class="mode" onclick="go('#wrong')"><span class="idx">04 / WRONG</span><h3>错题本</h3><p>答错自动收，按套回看、重做。</p><span class="go">↗</span></button>
+        <button class="mode" onclick="go('#bookmarks')"><span class="idx">05 / SAVED</span><h3>收藏夹</h3><p>没吃透的题，考前只看这一摞。</p><span class="go">↗</span></button>
+        <button class="mode" onclick="go('#stats')"><span class="idx">06 / DATA</span><h3>数据</h3><p>总进度、正确率、分套进度。</p><span class="go">↗</span></button>
+        <button class="mode" onclick="document.getElementById('code').scrollIntoView({behavior:'smooth'})"><span class="idx">07 / CODE</span><h3>代码练习</h3><p>浏览器里运行 Python；多文件、补全、numpy / pandas。</p><span class="go">↗</span></button>
+        <button class="mode" onclick="ORBIT_AI.open()"><span class="idx">08 / AI</span><h3>AI 助教</h3><p>提示、讲解、批改、错题分析。</p><span class="go">↗</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="code">
+    <div class="section-inner">
+      <div class="section-head"><div><div class="eyebrow">Code lab</div><h2>代码练习</h2></div><p>浏览器里运行 Python；支持多文件、补全、numpy / pandas。首次运行需要下载 Pyodide 运行时（约 10 MB）。</p></div>
+      <div class="code-app">
+        <div class="code-bar">
+          <select id="codeFile" aria-label="选择文件"></select>
+          <input id="codeName" placeholder="新文件名.py">
+          <button type="button" id="codeAdd">新建</button>
+          <button type="button" id="codeDel">删除</button>
+          <button type="button" id="codeRun" class="primary">运行</button>
+        </div>
+        <textarea id="codeArea" spellcheck="false"></textarea>
+        <pre class="code-out" id="codeOut">点击“运行”开始。首次运行会下载 Pyodide 运行时（约 10 MB）。</pre>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><div class="brand"><svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".5" transform="rotate(34 16 16)"/></svg><span class="brand-word">ORBIT</span><span class="brand-sub">Python</span></div><p style="margin-top:12px">ORBIT · 大二上 · Python 模块<br>旧项目只读导入，新项目独立维护</p></div>
+      <div class="right"><p>599 题 · 10 套卷<br>300 单选 / 150 多选 / 149 简答</p></div>
+    </div>
+  </footer>
+</main>
+
+<div id="view" class="view" hidden>
+  <div class="view-top"><button class="linkish" onclick="go('#top')">← 返回</button><span class="view-label" id="viewLabel"></span></div>
+  <div class="view-body" id="viewBody"></div>
+</div>
+
+<script src="assets/codemirror/codemirror.min.js"></script>
+<script src="assets/codemirror/mode/python/python.min.js"></script>
+<script src="assets/codemirror/addon/edit/closebrackets.min.js"></script>
+<script src="assets/codemirror/addon/edit/matchbrackets.min.js"></script>
+<script src="assets/vendor/anime.min.js"></script>
+<script>
+const PY = __PYDATA__;
+window.STUDY_KEY = 'orbit-python-v1'; window.STUDY_QUESTIONS = PY;
+const PAPERS = [...new Set(PY.map(q => q.paper))].sort((a,b) => a-b);
+const KEY = 'orbit-python-v1';
+const TYPE = { single:'单选', multiple:'多选', short:'简答' };
+let store = load();
+let session = null, examTimer = null;
+
+function load(){
+  try {
+    const raw = localStorage.getItem(KEY); if (!raw) return { answers:{}, wrong:[], bookmarks:[] };
+    const s = JSON.parse(raw); return { answers:s.answers||{}, wrong:s.wrong||[], bookmarks:s.bookmarks||[] };
+  } catch(e){ return { answers:{}, wrong:[], bookmarks:[] }; }
+}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
+function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function qById(id){ return PY.find(q => q.id === id); }
+function paperQs(n){ return PY.filter(q => q.paper === Number(n)); }
+function typeName(t){ return TYPE[t] || t; }
+function isBookmarked(id){ return (store.bookmarks||[]).includes(id); }
+function toggleBookmark(id){
+  if (!store.bookmarks) store.bookmarks = [];
+  if (store.bookmarks.includes(id)) store.bookmarks = store.bookmarks.filter(x => x !== id);
+  else store.bookmarks.push(id);
+  save();
+  document.querySelectorAll('.bookmark[data-id="' + id + '"]').forEach(b => {
+    const on = isBookmarked(id); b.classList.toggle('on', on); b.textContent = on ? '已收藏' : '收藏';
+  });
+}
+function record(q, ok, choice){
+  store.answers[q.id] = { ok: !!ok, choice:choice, at:Date.now() };
+  if (ok) store.wrong = store.wrong.filter(x => x !== q.id);
+  else if (!store.wrong.includes(q.id)) store.wrong.push(q.id);
+  save(); if (window.StudyTools) StudyTools.onAnswer(q, !!ok); updateHome();
+}
+function answeredCount(){ return Object.keys(store.answers).length; }
+function updateHome(){
+  const n = answeredCount();
+  const np = document.getElementById('navProgress'); if (np) np.innerHTML = '已答 <b>' + n + '</b> / 599';
+  const grid = document.getElementById('paperGrid');
+  if (grid) grid.querySelectorAll('[data-paper]').forEach(card => {
+    const p = Number(card.dataset.paper), qs = paperQs(p);
+    const done = qs.filter(q => store.answers[q.id]).length;
+    const rate = qs.length ? Math.round(done / qs.length * 100) : 0;
+    const bar = card.querySelector('.paper-bar i'); if (bar) bar.style.width = rate + '%';
+    const meta = card.querySelector('[data-done]'); if (meta) meta.textContent = done + ' / ' + qs.length;
+  });
+}
+function renderTypeStrip(){
+  const c = { single:0, multiple:0, short:0 };
+  PY.forEach(q => { if (c[q.type] != null) c[q.type]++; });
+  const el = document.getElementById('typeStrip'); if (!el) return;
+  el.innerHTML = '<div class="type-cell"><div class="k">Single</div><div class="v">' + c.single + '</div></div>' +
+    '<div class="type-cell"><div class="k">Multiple</div><div class="v">' + c.multiple + '</div></div>' +
+    '<div class="type-cell"><div class="k">Short / Self-check</div><div class="v">' + c.short + '</div></div>';
+}
+function renderPaperGrid(){
+  const el = document.getElementById('paperGrid'); if (!el) return;
+  el.innerHTML = PAPERS.map(n => {
+    const qs = paperQs(n);
+    const done = qs.filter(q => store.answers[q.id]).length;
+    const rate = qs.length ? Math.round(done / qs.length * 100) : 0;
+    const c = { single:0, multiple:0, short:0 };
+    qs.forEach(q => { if (c[q.type] != null) c[q.type]++; });
+    return '<a class="paper-card" href="#paper-' + n + '" data-paper="' + n + '">' +
+      '<div class="paper-num">' + String(n).padStart(2,'0') + '</div>' +
+      '<div class="paper-title">第 ' + n + ' 套</div>' +
+      '<div class="paper-sub">' + qs.length + ' 题 · 单选 ' + c.single + ' / 多选 ' + c.multiple + ' / 简答 ' + c.short + '</div>' +
+      '<div class="paper-bar"><i style="width:' + rate + '%"></i></div>' +
+      '<div class="paper-meta"><span data-done>' + done + ' / ' + qs.length + '</span><span>进入 ↗</span></div></a>';
+  }).join('');
+}
+
+/* ---------- views ---------- */
+const home = document.getElementById('home'), view = document.getElementById('view');
+const viewBody = document.getElementById('viewBody'), viewLabel = document.getElementById('viewLabel');
+function showView(html, label){
+  home.hidden = true; view.hidden = false; viewBody.innerHTML = html; viewLabel.textContent = label || '';
+  window.scrollTo(0,0);
+}
+function hideView(){ if (examTimer) { clearInterval(examTimer); examTimer = null; } view.hidden = true; home.hidden = false; }
+function go(hash){ if (location.hash === hash) route(); else location.hash = hash; }
+function route(){
+  const h = location.hash || ''; let m;
+  if ((m = h.match(/^#paper-(\d+)$/))) { showPaper(m[1]); return; }
+  if ((m = h.match(/^#practice-(.+)$/))) { startPractice(m[1]); return; }
+  if (h === '#exam') { showExam(); return; }
+  if (h === '#wrong') { showWrong(); return; }
+  if (h === '#bookmarks') { showBookmarks(); return; }
+  if (h === '#stats') { showStats(); return; }
+  hideView();
+  if (h && h !== '#top') { const el = document.querySelector(h); if (el) setTimeout(() => el.scrollIntoView({behavior:'smooth',block:'start'}), 30); }
+}
+window.addEventListener('hashchange', route);
+
+function showPaper(n){
+  const qs = paperQs(n); if (!qs.length) { go('#papers'); return; }
+  const c = { single:0, multiple:0, short:0 }; qs.forEach(q => { if (c[q.type] != null) c[q.type]++; });
+  const secs = {};
+  qs.forEach(q => { secs[q.section] = (secs[q.section]||0)+1; });
+  const done = qs.filter(q => store.answers[q.id]).length;
+  showView('<div class="paper-head"><div class="num">' + String(n).padStart(2,'0') + '</div><div>' +
+    '<div class="eyebrow">PAPER ' + String(n).padStart(2,'0') + ' · PYTHON</div><h1>第 ' + n + ' 套</h1>' +
+    '<p class="lede">' + qs.length + ' 题 · 单选 ' + c.single + ' / 多选 ' + c.multiple + ' / 简答 ' + c.short + '。已完成 ' + done + ' / ' + qs.length + '。</p></div></div>' +
+    '<div class="chapter-grid" style="margin-top:44px"><div><div class="block-title">分节</div><div class="section-list">' +
+    Object.entries(secs).map(([k,v]) => '<div class="section-row" data-section="' + esc(k) + '" style="cursor:pointer" onclick="startSection(' + n + ', this.dataset.section)"><span>' + esc(k) + '</span><span class="m">' + v + ' 题 · 只刷这一节</span></div>').join('') +
+    '</div></div><aside class="side-note"><div class="count">' + qs.length + '<small>QUESTIONS / ' + done + ' ANSWERED</small></div>' +
+    '<p>自动判分题直接出结果；填空、代码阅读、设计题按参考答案自评。</p>' +
+    '<div class="q-actions"><button class="btn btn-accent btn-wide" onclick="go(\'#practice-' + n + '\')">开始本套</button>' +
+    '<button class="btn btn-ghost btn-wide" onclick="go(\'#papers\')">返回试卷</button></div></aside></div>', 'PAPER ' + String(n).padStart(2,'0'));
+}
+
+/* ---------- practice ---------- */
+function startSection(n, sec){
+  var qs = paperQs(n).filter(function(q){ return q.section === sec; });
+  if(!qs.length) return;
+  session = { mode:'practice', queue:qs, idx:0, selected:null, done:false, correct:null, title:'第 ' + n + ' 套 · ' + sec, num:'P' + String(n).padStart(2,'0'), back:'#paper-' + n, id:String(n) };
+  renderPractice();
+}
+function startPractice(id){
+  let qs, title, num, back;
+  if (id === 'wrong') {
+    qs = store.wrong.map(qById).filter(Boolean); title = '错题回看'; num = '—'; back = '#wrong';
+    if (!qs.length) { showView('<div class="empty">还没有错题。先去做几道题，答错的会自动收进来。</div>', 'WRONG'); return; }
+  } else if (id === 'bookmarks') {
+    qs = (store.bookmarks||[]).map(qById).filter(Boolean); title = '收藏夹'; num = 'SAVED'; back = '#bookmarks';
+    if (!qs.length) { showView('<div class="empty">收藏夹是空的。刷题时点“收藏”，题目会留在这里。</div>', 'BOOKMARKS'); return; }
+  } else if (id === 'all') {
+    qs = PY.slice().sort(() => Math.random() - .5); title = '综合刷题'; num = 'ALL'; back = '#papers';
+  } else {
+    qs = paperQs(id).slice(); title = '第 ' + id + ' 套'; num = 'P' + String(id).padStart(2,'0'); back = '#paper-' + id;
+    if (!qs.length) { go('#papers'); return; }
+  }
+  session = { mode:'practice', queue:qs, idx:0, selected:null, done:false, correct:null, title:title, num:num, back:back, id:id };
+  renderPractice();
+}
+function optsHTML(q, selected, handler){
+  if (q.type !== 'single' && q.type !== 'multiple') return '';
+  const fn = handler || 'selectOpt';
+  return '<div class="opts">' + q.options.map((o,i) => {
+    let cls = 'opt';
+    const on = q.type === 'multiple' ? (Array.isArray(selected) && selected.includes(i)) : selected === i;
+    if (on) cls += ' sel';
+    return '<button class="' + cls + '" data-i="' + i + '" onclick="' + fn + '(' + i + ')"><span class="k">' + String.fromCharCode(65+i) + '</span><span>' + esc(o) + '</span></button>';
+  }).join('') + '</div>';
+}
+function isCorrect(q, val){
+  if (q.type === 'single') return val === q.a;
+  if (q.type === 'multiple') {
+    if (!Array.isArray(val)) return false;
+    return [...q.a].sort().join(',') === [...val].sort().join(',');
+  }
+  return false;
+}
+function isCode(q){ return /\n/.test(q.q) || /\b(def|class|import|for|while|return)\b/.test(q.q); }
+function tagsHTML(q){
+  return '<div class="q-tags"><span class="tag">' + esc(q.tag) + '</span><span class="tag">' + typeName(q.type) + '</span>' +
+    '<button class="bookmark ' + (isBookmarked(q.id)?'on':'') + '" data-id="' + q.id + '" onclick="toggleBookmark(\'' + q.id + '\')">' + (isBookmarked(q.id)?'已收藏':'收藏') + '</button></div>';
+}
+function feedbackHTML(q, ok, selected){
+  if (ok === null) return '';
+  let ans = '';
+  if (q.type === 'single') ans = q.options[q.a];
+  else if (q.type === 'multiple') ans = q.a.map(i => q.options[i]).join('；');
+  return '<div class="feedback ' + (ok?'ok':'bad') + '"><div class="res">' + (ok?'正确':'再想想') + '</div>' +
+    (ok?'':'<p class="ans">正确答案：' + esc(ans) + '</p>') +
+    '<p class="explain">' + esc(q.e) + '</p></div>';
+}
+function renderPractice(){
+  if (!session) return;
+  const s = session, q = s.queue[s.idx];
+  if (!q) { finishPractice(); return; }
+  const pct = Math.round(s.idx / s.queue.length * 100);
+  let body = tagsHTML(q) + '<div class="q-title ' + (isCode(q)?'code':'') + '">' + esc(q.q) + '</div>';
+  if (q.type === 'single' || q.type === 'multiple') {
+    body += '<p class="q-hint">' + (q.type === 'multiple' ? '选择所有正确项，再提交。' : '选择一个答案。') + '</p>' + optsHTML(q, s.selected);
+  } else {
+    body += '<textarea class="short-box" id="shortBox" placeholder="先自己写一遍，再看参考答案。"></textarea><div class="self-grade"><button class="btn btn-ghost" onclick="revealShort()">查看参考答案</button><button class="btn btn-ghost" onclick="ORBIT_AI.gradeShortFromBox()">AI 批改</button></div>';
+  }
+  if (s.done) body += feedbackHTML(q, s.correct, s.selected);
+  body += '<div class="ai-tools"><button class="ai-tool" onclick="ORBIT_AI.hint()">AI 提示</button><button class="ai-tool" onclick="ORBIT_AI.explain()">AI 讲解</button><button class="ai-tool" onclick="ORBIT_AI.variant()">AI 变式题</button></div>';
+  body += '<div class="practice-actions"><div><button class="linkish" onclick="go(\'' + s.back + '\')">退出</button></div><div class="right">' +
+    (s.done ? '<button class="btn btn-accent" onclick="nextQuestion()">' + (s.idx === s.queue.length-1 ? '完成' : '下一题') + '</button>' :
+      (q.type === 'single' || q.type === 'multiple' ? '<button class="btn btn-accent" id="submitBtn" onclick="submitChoice()" disabled>提交答案</button>' : '')) +
+    '</div></div>';
+  const ansText = q.type === 'single' ? q.options[q.a] : (q.type === 'multiple' ? q.a.map(i => q.options[i]).join('；') : q.a);
+  window.ORBIT_CONTEXT = { module:'Python', paper:q.paper, section:q.section, question:q.q, type:q.type, options:q.options || [], answer:ansText };
+  showView('<div class="practice"><div class="practice-top"><span>' + s.num + ' · ' + s.title + '</span><span>' + String(s.idx+1).padStart(2,'0') + ' / ' + String(s.queue.length).padStart(2,'0') + '</span></div>' +
+    '<div class="progress-line"><i style="width:' + pct + '%"></i></div><div class="q-wrap">' + body + '</div></div>', 'PRACTICE · ' + s.title);
+  if (s.done) disableOpts(q, s.selected);
+}
+function disableOpts(q, selected){
+  document.querySelectorAll('#view .opt').forEach((b,i) => {
+    b.disabled = true;
+    if (i === q.a) b.classList.add('ok');
+    else if (q.type === 'single' ? i === selected : (Array.isArray(selected) && selected.includes(i))) b.classList.add('bad');
+  });
+}
+function selectOpt(i){
+  if (!session || session.done) return;
+  const q = session.queue[session.idx];
+  if (q.type === 'multiple') {
+    let arr = Array.isArray(session.selected) ? session.selected.slice() : [];
+    if (arr.includes(i)) arr = arr.filter(x => x !== i); else arr.push(i);
+    session.selected = arr;
+  } else session.selected = i;
+  const btn = document.getElementById('submitBtn');
+  if (btn) btn.disabled = !(q.type === 'multiple' ? session.selected.length > 0 : session.selected !== null);
+  document.querySelectorAll('#view .opt').forEach((b,j) => {
+    const on = q.type === 'multiple' ? session.selected.includes(j) : session.selected === j;
+    b.classList.toggle('sel', on);
+  });
+}
+function submitChoice(){
+  if (!session || session.done) return;
+  const q = session.queue[session.idx];
+  if (session.selected === null || (Array.isArray(session.selected) && !session.selected.length)) return;
+  const ok = isCorrect(q, session.selected);
+  session.done = true; session.correct = ok; record(q, ok, session.selected); renderPractice();
+}
+function revealShort(){
+  if (!session || session.done) return;
+  const q = session.queue[session.idx]; session.done = true; session.correct = null;
+  const box = document.getElementById('shortBox'); session.selected = box ? box.value : '';
+  const wrap = document.querySelector('#view .q-wrap'); if (!wrap) return;
+  const old = wrap.querySelector('.self-grade'); if (old) old.remove();
+  const ref = document.createElement('div');
+  ref.className = 'feedback';
+  ref.innerHTML = '<div class="res" style="color:var(--accent)">参考答案</div><p class="ans" style="white-space:pre-wrap">' + esc(q.a) + '</p>' +
+    '<div class="self-grade"><button class="btn btn-ghost" onclick="selfGrade(true)">我答对了</button><button class="btn btn-ghost" onclick="selfGrade(false)">没答全</button></div>';
+  wrap.appendChild(ref);
+}
+function selfGrade(ok){ if (!session) return; const q = session.queue[session.idx]; session.correct = ok; record(q, ok, session.selected); renderPractice(); }
+function nextQuestion(){
+  if (!session) return;
+  session.idx++; session.selected = null; session.done = false; session.correct = null;
+  if (session.idx >= session.queue.length) { finishPractice(); return; }
+  renderPractice();
+}
+function finishPractice(){
+  const s = session; if (!s) return;
+  const total = s.queue.length, done = s.queue.filter(q => store.answers[q.id]).length;
+  const correct = s.queue.filter(q => store.answers[q.id] && store.answers[q.id].ok).length;
+  showView('<div class="result"><div class="eyebrow">SESSION COMPLETE</div><div class="score">' + correct + '<small>CORRECT / ' + total + '</small></div>' +
+    '<h2>' + (correct === total ? '全对。' : '这一套，还差一点。') + '</h2>' +
+    '<p>' + s.title + ' 已完成 ' + done + ' / ' + total + ' 题。答错的题已进入错题列表。</p>' +
+    '<div class="q-actions"><button class="btn btn-accent" onclick="go(\'#papers\')">回到试卷</button>' +
+    '<button class="btn btn-ghost" onclick="ORBIT_AI.report()">AI 学习报告</button><button class="btn btn-ghost" onclick="go(\'#wrong\')">错题本</button>' +
+    '<button class="btn btn-ghost" onclick="startPractice(\'' + s.id + '\')">再做一遍</button></div></div>', 'SESSION COMPLETE');
+  session = null;
+}
+
+/* ---------- exam ---------- */
+const AUTO = PY.filter(q => q.type === 'single' || q.type === 'multiple');
+function shuffle(a){ const x=a.slice(); for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];} return x; }
+function showExam(){
+  if (examTimer) { clearInterval(examTimer); examTimer = null; }
+  showView('<div class="exam-setup"><div class="eyebrow">MOCK EXAM</div><h1>一张卷，<br>二十道题。</h1>' +
+    '<p class="lede" style="margin-top:22px">从 10 套卷的自动判分题里随机抽 20 题，30 分钟。简答题不进入模拟卷。</p>' +
+    '<div class="exam-facts"><div class="exam-fact"><div class="k">Questions</div><div class="v">20</div></div>' +
+    '<div class="exam-fact"><div class="k">Time</div><div class="v">30:00</div></div>' +
+    '<div class="exam-fact"><div class="k">Pool</div><div class="v">' + AUTO.length + '</div></div></div>' +
+    '<div class="q-actions"><button class="btn btn-accent" onclick="beginExam()">开始模拟卷</button><button class="btn btn-ghost" onclick="go(\'#papers\')">先按套刷</button></div></div>', 'MOCK EXAM');
+}
+function beginExam(){
+  session = { mode:'exam', queue:shuffle(AUTO).slice(0,20), idx:0, answers:{}, submitted:false, timeLeft:1800 };
+  renderExam();
+  if (examTimer) clearInterval(examTimer);
+  examTimer = setInterval(() => {
+    if (!session || session.mode !== 'exam' || session.submitted) return;
+    session.timeLeft--;
+    const t = document.getElementById('examTimer'); if (t) t.textContent = fmtTime(session.timeLeft);
+    if (session.timeLeft <= 0) { clearInterval(examTimer); examTimer = null; submitExam(true); }
+  }, 1000);
+}
+function fmtTime(s){ const m=Math.floor(Math.max(0,s)/60), sec=Math.max(0,s)%60; return String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0'); }
+function renderExam(){
+  if (!session || session.mode !== 'exam') return;
+  const s=session, q=s.queue[s.idx], sel=s.answers[q.id]?s.answers[q.id].choice:null;
+  let body = tagsHTML(q) + '<div class="q-title ' + (isCode(q)?'code':'') + '">' + esc(q.q) + '</div>' +
+    '<p class="q-hint">' + (q.type==='multiple'?'多选：选全才得分。':'单选。') + '</p>' + optsHTML(q, sel, 'examSelect');
+  body += '<div class="practice-actions"><div><button class="linkish" onclick="go(\'#papers\')">退出</button></div><div class="right">' +
+    '<button class="btn btn-ghost" onclick="examNav(-1)" ' + (s.idx===0?'disabled':'') + '>上一题</button>' +
+    '<button class="btn btn-ghost" onclick="examNav(1)" ' + (s.idx===s.queue.length-1?'disabled':'') + '>下一题</button>' +
+    '<button class="btn btn-accent" onclick="askSubmit()">交卷</button></div></div><div id="confirmBar"></div>';
+  showView('<div class="practice"><div class="exam-bar"><span>MOCK EXAM · ' + String(s.idx+1).padStart(2,'0') + ' / ' + s.queue.length + '</span><span class="timer" id="examTimer">' + fmtTime(s.timeLeft) + '</span></div>' +
+    '<div class="progress-line"><i style="width:' + Math.round(s.idx/s.queue.length*100) + '%"></i></div><div class="q-wrap">' + body + '</div></div>', 'MOCK EXAM');
+}
+function examSelect(i){
+  if (!session || session.mode !== 'exam' || session.submitted) return;
+  const q = session.queue[session.idx];
+  let choice;
+  if (q.type === 'multiple') {
+    let arr = session.answers[q.id] ? session.answers[q.id].choice.slice() : [];
+    if (arr.includes(i)) arr = arr.filter(x => x !== i); else arr.push(i);
+    choice = arr;
+  } else choice = i;
+  session.answers[q.id] = { choice:choice };
+  document.querySelectorAll('#view .opt').forEach((b,j) => {
+    const on = q.type === 'multiple' ? choice.includes(j) : choice === j;
+    b.classList.toggle('sel', on);
+  });
+}
+function examNav(d){ if (!session || session.mode !== 'exam') return; session.idx = Math.max(0, Math.min(session.queue.length-1, session.idx+d)); renderExam(); }
+function askSubmit(){
+  if (!session || session.mode !== 'exam') return;
+  const un = session.queue.filter(q => !session.answers[q.id]).length;
+  const bar = document.getElementById('confirmBar'); if (!bar) return;
+  bar.innerHTML = '<div class="confirm-bar"><p>' + (un?'还有 '+un+' 题未答。':'已全部作答。') + '确定交卷？</p><div class="actions"><button class="btn btn-ghost" onclick="document.getElementById(\'confirmBar\').innerHTML=\'\'">继续答题</button><button class="btn btn-accent" onclick="submitExam(false)">交卷</button></div></div>';
+}
+function submitExam(auto){
+  if (!session || session.mode !== 'exam') return;
+  if (examTimer) { clearInterval(examTimer); examTimer = null; }
+  const s = session; let correct=0, answered=0; const wrongList=[];
+  s.queue.forEach(q => {
+    const a = s.answers[q.id]; if (!a) return; answered++;
+    const ok = isCorrect(q, a.choice); if (ok) correct++; else wrongList.push(q);
+    record(q, ok, a.choice);
+  });
+  s.submitted = true;
+  const score = Math.round(correct / s.queue.length * 100);
+  const wrongHTML = wrongList.length ? '<div class="result-list">' + wrongList.map(q => '<div class="result-item"><b>!</b><span>' + esc(q.q).slice(0,120) + '</span><span>' + typeName(q.type) + '</span></div>').join('') + '</div>' : '';
+  showView('<div class="result"><div class="eyebrow">MOCK EXAM · RESULT</div><div class="score">' + score + '<small>SCORE / 100</small></div>' +
+    '<h2>' + (score>=80?'这一张，稳了。':score>=60?'及格线以上，再补错题。':'先回试卷，把错题吃透。') + '</h2>' +
+    '<p>答对 ' + correct + ' / ' + s.queue.length + ' 题；已答 ' + answered + ' 题。' + (auto?' 时间到，已自动交卷。':'') + '</p>' + wrongHTML +
+    '<div class="q-actions"><button class="btn btn-accent" onclick="go(\'#exam\')">再来一张</button><button class="btn btn-ghost" onclick="go(\'#wrong\')">错题本</button><button class="btn btn-ghost" onclick="go(\'#papers\')">回到试卷</button></div></div>', 'RESULT');
+  session = null;
+}
+
+/* ---------- lists / stats ---------- */
+function rows(qs){ return qs.map(q => '<div class="wrong-row"><b>!</b><div class="q">' + esc(q.q).slice(0,160) + '</div><span class="m">P' + String(q.paper).padStart(2,'0') + ' · ' + typeName(q.type) + '</span></div>').join(''); }
+function showWrong(){
+  const qs = store.wrong.map(qById).filter(Boolean);
+  if (!qs.length) { showView('<div class="chapter-head"><div class="chapter-num">00</div><div><div class="eyebrow">WRONG</div><h1>错题本</h1><p class="lede">还没有错题。先去做几道题，答错的会自动收进来。</p></div></div><div class="q-actions" style="margin-top:36px"><button class="btn btn-accent" onclick="go(\'#papers\')">去刷题</button></div>', 'WRONG'); return; }
+  window.ORBIT_CONTEXT = { module:'Python', wrongQuestions: qs.map(q => q.q).slice(0,20) };
+  showView('<div class="chapter-head"><div class="chapter-num">' + String(qs.length).padStart(2,'0') + '</div><div><div class="eyebrow">WRONG</div><h1>错题本</h1><p class="lede">答错的题自动收在这里。先重做，再回试卷补知识点。</p></div></div><div style="margin-top:40px;border-top:1px solid var(--line-strong)">' + rows(qs) + '</div><div class="q-actions" style="margin-top:30px"><button class="btn btn-accent" onclick="go(\'#practice-wrong\')">重做全部错题</button><button class="btn btn-ghost" onclick="ORBIT_AI.analyzeWrong()">AI 分析错题</button><button class="btn btn-ghost" onclick="go(\'#stats\')">看数据</button><button class="btn btn-ghost" onclick="go(\'#papers\')">返回试卷</button></div>', 'WRONG');
+}
+function showBookmarks(){
+  const qs = (store.bookmarks||[]).map(qById).filter(Boolean);
+  if (!qs.length) { showView('<div class="chapter-head"><div class="chapter-num">00</div><div><div class="eyebrow">SAVED</div><h1>收藏夹</h1><p class="lede">收藏夹是空的。刷题时点“收藏”，题目会留在这里。</p></div></div><div class="q-actions" style="margin-top:36px"><button class="btn btn-accent" onclick="go(\'#papers\')">去刷题</button></div>', 'SAVED'); return; }
+  showView('<div class="chapter-head"><div class="chapter-num">' + String(qs.length).padStart(2,'0') + '</div><div><div class="eyebrow">SAVED</div><h1>收藏夹</h1><p class="lede">考前只看这一摞：没吃透的、容易混的、想再看一遍的。</p></div></div><div style="margin-top:40px;border-top:1px solid var(--line-strong)">' + rows(qs) + '</div><div class="q-actions" style="margin-top:30px"><button class="btn btn-accent" onclick="go(\'#practice-bookmarks\')">开始刷收藏</button><button class="btn btn-ghost" onclick="go(\'#papers\')">返回试卷</button></div>', 'SAVED');
+}
+function showStats(){
+  const n = answeredCount(), total = PY.length;
+  const correct = Object.values(store.answers).filter(a => a.ok).length;
+  const rate = n ? Math.round(correct/n*100) : 0;
+  const cards = PAPERS.map(p => {
+    const qs = paperQs(p), done = qs.filter(q => store.answers[q.id]).length;
+    const pct = qs.length ? Math.round(done/qs.length*100) : 0;
+    return '<div class="stat"><div class="k">第 ' + p + ' 套</div><div class="v">' + done + '<small>/ ' + qs.length + '</small></div><div class="barline"><i style="width:' + pct + '%"></i></div></div>';
+  }).join('');
+  window.ORBIT_CONTEXT = { module:'Python', stats:{ answered:n, total:total, accuracy:rate, wrong:store.wrong.length, saved:(store.bookmarks||[]).length } };
+  showView('<div class="chapter-head"><div class="chapter-num">' + rate + '</div><div><div class="eyebrow">DATA</div><h1>数据</h1><p class="lede">所有刷法共用一份记录：按套、综合、模拟卷、错题、收藏。</p></div></div>' +
+    '<div class="stat-grid"><div class="stat"><div class="k">Answered</div><div class="v">' + n + '<small>/ ' + total + '</small></div></div>' +
+    '<div class="stat"><div class="k">Accuracy</div><div class="v">' + rate + '<small>%</small></div></div>' +
+    '<div class="stat"><div class="k">Wrong</div><div class="v">' + store.wrong.length + '<small>题</small></div></div>' +
+    '<div class="stat"><div class="k">Saved</div><div class="v">' + (store.bookmarks||[]).length + '<small>题</small></div></div></div>' +
+    '<div class="block-title" style="margin-top:44px">分套进度</div><div class="stat-grid">' + cards + '</div>' +
+    '<div class="q-actions" style="margin-top:30px"><button class="btn btn-accent" onclick="go(\'#papers\')">继续刷题</button><button class="btn btn-ghost" onclick="go(\'#wrong\')">错题本</button></div>', 'DATA');
+}
+
+/* ---------- motion ---------- */
+function initMotion(){
+  document.querySelectorAll('.hero h1 .line').forEach(line => {
+    if (!line.querySelector('.line-inner')) {
+      const inner = document.createElement('span'); inner.className = 'line-inner';
+      while (line.firstChild) inner.appendChild(line.firstChild); line.appendChild(inner);
+    }
+  });
+  if (window.anime) {
+    const tl = anime.timeline({ easing:'easeOutExpo' });
+    tl.add({ targets:'.hero .eyebrow', translateY:[10,0], duration:700 }, 0)
+      .add({ targets:'.hero h1 .line-inner', translateY:['115%',0], duration:1100, delay:anime.stagger(120) }, 120)
+      .add({ targets:'.hero .lede', translateY:[14,0], duration:800 }, 480)
+      .add({ targets:'.hero-actions .btn', translateY:[12,0], duration:700, delay:anime.stagger(70) }, 560)
+      .add({ targets:'.hero-meta span', translateY:[10,0], duration:600, delay:anime.stagger(50) }, 700)
+      .add({ targets:'.py-terminal', scale:[.95,1], duration:1200 }, 320);
+  }
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      btn.style.setProperty('--tx', ((e.clientX-r.left-r.width/2)*.16)+'px');
+      btn.style.setProperty('--ty', ((e.clientY-r.top-r.height/2)*.16)+'px');
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.removeProperty('--tx'); btn.style.removeProperty('--ty'); });
+  });
+  const bar = document.getElementById('scrollBar');
+  const term = document.querySelector('.py-terminal');
+  function onScroll(){
+    const d = document.documentElement;
+    const p = d.scrollTop / Math.max(1, d.scrollHeight - d.clientHeight);
+    if (bar) bar.style.transform = 'scaleX(' + Math.min(1, Math.max(0,p)) + ')';
+    if (term && window.scrollY < window.innerHeight * 1.2) term.style.transform = 'translateY(' + (window.scrollY*.06) + 'px)';
+  }
+  window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
+}
+
+let codeFiles = loadCodeFiles(), currentFile = 'main.py', codeMirror = null, pyodideReady = null;
+function loadCodeFiles(){
+  try{ var raw=localStorage.getItem('orbit-code-files-v1'); if(raw){ var o=JSON.parse(raw); if(o && Object.keys(o).length) return o; } }catch(e){}
+  return { 'main.py': 'print("Hello, ORBIT")\n\nfor i in range(3):\n    print("line", i)' };
+}
+function saveCodeFiles(){ try{ localStorage.setItem('orbit-code-files-v1', JSON.stringify(codeFiles)); }catch(e){} }
+function initCode(){
+  var sel=document.getElementById('codeFile'), area=document.getElementById('codeArea');
+  if(!sel || !area) return;
+  function options(){ sel.innerHTML=Object.keys(codeFiles).map(function(n){return '<option'+(n===currentFile?' selected':'')+'>'+n+'</option>';}).join(''); }
+  function code(){ return codeMirror ? codeMirror.getValue() : area.value; }
+  function setCode(v){ if(codeMirror) codeMirror.setValue(v); else area.value=v; }
+  if(window.CodeMirror){
+    codeMirror=CodeMirror.fromTextArea(area,{mode:'python',lineNumbers:true,matchBrackets:true,autoCloseBrackets:true,indentUnit:4,tabSize:4});
+    codeMirror.on('change',function(){ codeFiles[currentFile]=codeMirror.getValue(); saveCodeFiles(); });
+  } else {
+    area.value=codeFiles[currentFile];
+    area.addEventListener('input',function(){ codeFiles[currentFile]=area.value; saveCodeFiles(); });
+  }
+  options();
+  setCode(codeFiles[currentFile] || '');
+  sel.addEventListener('change',function(){ currentFile=sel.value; setCode(codeFiles[currentFile]||''); });
+  document.getElementById('codeAdd').addEventListener('click',function(){
+    var input=document.getElementById('codeName'); var name=(input.value||'').trim();
+    if(!name) name='file'+(Object.keys(codeFiles).length+1)+'.py';
+    if(!/\.py$/.test(name)) name+='.py';
+    if(codeFiles[name]) return;
+    codeFiles[name]='# '+name+'\n'; currentFile=name; saveCodeFiles(); options(); setCode(codeFiles[name]); input.value='';
+  });
+  document.getElementById('codeDel').addEventListener('click',function(){
+    if(currentFile==='main.py' || Object.keys(codeFiles).length<=1) return;
+    delete codeFiles[currentFile]; currentFile='main.py'; saveCodeFiles(); options(); setCode(codeFiles[currentFile]);
+  });
+  document.getElementById('codeRun').addEventListener('click',runCode);
+}
+function loadPyodideScript(){
+  if(window.loadPyodide) return Promise.resolve();
+  return new Promise(function(res,rej){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+}
+async function runCode(){
+  var out=document.getElementById('codeOut'); out.textContent='加载运行时…';
+  var code=codeMirror?codeMirror.getValue():document.getElementById('codeArea').value;
+  codeFiles[currentFile]=code;
+  try{
+    await loadPyodideScript();
+    if(!pyodideReady){ pyodideReady=await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/'}); }
+    var py=pyodideReady;
+    Object.keys(codeFiles).forEach(function(n){ py.FS.writeFile(n, codeFiles[n]||''); });
+    out.textContent='';
+    py.setStdout({batched:function(s){ out.textContent+=s+(/\n$/.test(s)?'':'\n'); out.scrollTop=out.scrollHeight; }});
+    py.setStderr({batched:function(s){ out.textContent+=s+(/\n$/.test(s)?'':'\n'); out.scrollTop=out.scrollHeight; }});
+    try{ await py.loadPackagesFromImports(code); }catch(e){}
+    await py.runPythonAsync(code);
+  }catch(e){ out.textContent+='\n'+e; }
+}
+initCode();
+renderTypeStrip(); renderPaperGrid(); updateHome(); initMotion(); route();
+</script>
+
+<script src="assets/ai.js?v=2"></script>
+<script src="assets/study.js"></script>
+
+<script src="assets/pwa.js" defer></script>

@@ -1,0 +1,59 @@
+/* ORBIT AI assistant — shared across pages */
+.ai-fab{
+  position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));
+  z-index:90;width:52px;height:52px;border-radius:50%;border:1px solid rgba(233,162,59,.55);
+  background:var(--accent);color:var(--accent-ink);font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:.08em;cursor:pointer;box-shadow:0 12px 34px rgba(0,0,0,.4);
+  transition:transform .25s var(--ease),background .25s var(--ease);
+}
+.ai-fab:hover{transform:translateY(-2px);background:#f0b04f}
+.ai-panel{
+  position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(82px,calc(env(safe-area-inset-bottom,0px) + 82px));
+  z-index:95;width:min(400px,calc(100vw - 32px));max-height:min(640px,calc(100vh - 120px));
+  display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
+  box-shadow:0 30px 90px rgba(0,0,0,.55);overflow:hidden;
+}
+.ai-panel[hidden]{display:none}
+.ai-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.ai-head b{font-family:var(--mono);font-size:10px;letter-spacing:.14em;font-weight:500;color:var(--ink)}
+.ai-head .st{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted)}
+.ai-head button{background:none;border:0;color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:.08em;cursor:pointer}
+.ai-head button:hover{color:var(--ink)}
+.ai-msgs{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:12px;min-height:180px}
+.ai-msg{max-width:92%;font-size:13.5px;line-height:1.75;white-space:pre-wrap;word-break:break-word}
+.ai-msg.user{align-self:flex-end;background:var(--accent-soft);border:1px solid rgba(233,162,59,.3);padding:9px 12px;color:var(--ink)}
+.ai-msg.assistant{align-self:flex-start;color:#d8d1c4;border-left:2px solid var(--accent);padding:2px 0 2px 11px}
+.ai-msg.sys{align-self:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--muted);text-align:center;max-width:100%}
+.ai-input{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line);align-items:flex-end}
+.ai-input textarea{
+  flex:1;min-height:42px;max-height:110px;resize:vertical;background:transparent;border:1px solid var(--line);
+  color:var(--ink);padding:9px 10px;font:inherit;font-size:13px;line-height:1.5;outline:none;
+}
+.ai-input textarea:focus{border-color:rgba(233,162,59,.55)}
+.ai-input button{
+  border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:10px 12px;cursor:pointer;white-space:nowrap;
+}
+.ai-input button:disabled{opacity:.45;cursor:default}
+.ai-settings{
+  position:fixed;inset:0;z-index:100;background:rgba(10,8,6,.72);
+  display:grid;place-items:center;padding:18px;
+}
+.ai-settings[hidden]{display:none}
+.ai-card{width:min(520px,100%);max-height:calc(100vh - 36px);overflow:auto;background:var(--surface);border:1px solid var(--line);padding:22px;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+.ai-card h2{font-family:var(--display);font-size:1.6rem;letter-spacing:-.03em;margin:0 0 4px}
+.ai-card p{color:var(--muted);font-size:12.5px;line-height:1.8;margin:0 0 16px}
+.ai-card label{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin:14px 0 6px}
+.ai-card input{width:100%;background:transparent;border:1px solid var(--line);color:var(--ink);padding:10px 12px;font:inherit;font-size:13px;outline:none}
+.ai-card input:focus{border-color:rgba(233,162,59,.55)}
+.ai-card .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.ai-card .row button{font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:10px 12px;cursor:pointer;border:1px solid var(--line);background:none;color:var(--ink)}
+.ai-card .row button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ai-card .note{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;color:#7f7568;margin-top:12px;line-height:1.7}
+.ai-status{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--muted);margin-top:10px;min-height:16px}
+.ai-status.ok{color:var(--ok)}
+.ai-status.bad{color:var(--bad)}
+@media(max-width:640px){
+  .ai-panel{right:12px;left:12px;width:auto;bottom:78px}
+  .ai-fab{right:14px;bottom:14px}
+}
