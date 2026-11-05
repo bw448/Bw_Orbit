@@ -1,0 +1,188 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>ArcGIS 空间分析 · 大二上 / Orbit</title>
+<meta name="description" content="ArcGIS 空间分析期末复习：考试结构、80 道客观题自测、名词解释、四个底层算法、六个实操流程与论述模板。Orbit 地信学习站。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230b7285'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/course.css?v=4">
+<link rel="stylesheet" href="assets/quiz.css?v=2">
+<link rel="stylesheet" href="assets/arcgis.css?v=2">
+
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html" aria-label="Orbit">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
+      Orbit
+    </a>
+    <nav class="gn-links" aria-label="学期模块">
+      <a href="semesters.html">学习内容</a>
+      <a class="active" href="sem2-1.html">大二上</a>
+      <a href="sem2-2.html">大二下</a>
+      <a href="sem3-1.html">大三上</a>
+      <a href="sem3-2.html">大三下</a>
+      <a href="ebook.html">电子书</a>
+      <a href="competitions.html">竞赛</a>
+      <a href="bw-talk.html">BW有话说</a>
+    </nav>
+    <div class="gn-right"><span>大二上 · 课程模块</span></div>
+  </div>
+</header>
+
+<main class="course-page" id="coursePage" style="--course-accent:__ACCENT__">
+  <section class="course-hero">
+    <div class="course-shell course-hero-inner">
+      <div class="course-hero-copy">
+        <div class="course-kicker">__TAG__</div>
+        <div class="course-code">__CODE__</div>
+        <h1>__TITLE__</h1>
+        <div class="course-en">__EN__</div>
+        <p class="course-lead">__LEAD__</p>
+        <div class="course-actions">
+          <a class="btn-primary" href="#quiz">开始刷题</a>
+          <a class="course-back" href="sem2-1.html">返回大二上 <span>↗</span></a>
+        </div>
+      </div>
+      <div class="course-orbit" aria-hidden="true">
+        <div class="course-ring r1"></div><div class="course-ring r2"></div><div class="course-ring r3"></div>
+        <span class="course-dot d1"></span><span class="course-dot d2"></span><span class="course-dot d3"></span>
+        <span class="course-mark">__CODE__ / NOTES</span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="course-subnav" aria-label="本页导航">
+    <a href="#exam">考试地图</a>
+    <a href="#quiz">题库</a>
+    <a href="#terms">名词解释</a>
+    <a href="#algo">算法</a>
+    <a href="#workflows">实操</a>
+    <a href="#qa">简答·分析</a>
+    <a href="#essay">论述</a>
+    <a href="#resources">资料</a>
+  </nav>
+
+  <section class="course-section" id="exam">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Exam map</div><h2>先知道，<br>考什么。</h2></div>
+        <p class="section-lede" id="courseIntro">__INTRO__</p>
+      </div>
+      <div class="exam-grid" id="examGrid"></div>
+      <div class="ag-score" id="scoreBar"></div>
+      <div class="course-notice"><b>划重点</b><span id="courseNotice">__NOTICE__</span></div>
+      <p class="ag-section-note"><b>复习顺序建议：</b>先用 80 道客观题把概念过一遍，再背 10 道简答和 7 道分析，最后练四个算法和六个实操流程。判断题一定要写改正理由，这是最容易丢的一半分。</p>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="quiz">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Question bank · 80</div><h2>八十道，<br>按题型刷。</h2></div>
+        <p class="section-lede">30 道填空、20 道单选、30 道判断。单选和判断自动判分，填空按参考答案自评；答错自动进“只看错题”。</p>
+      </div>
+      <div class="quiz-shell" id="agQuiz"></div>
+      <p class="ag-section-note">题库来自课程扫描件《一填空题》25 页，答案以原扫描件为准；判断题的解析保留了原件的改正说明。填空题为自评，答案允许同义表述。</p>
+    </div>
+  </section>
+
+  <section class="course-section" id="terms">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Terms · 15 分</div><h2>五个名词，<br>先写英文。</h2></div>
+        <p class="section-lede">名词解释 5 题 × 3 分：先英文全称，再中文定义，最后补核心特征。下面六条是最高频的，背骨架即可。</p>
+      </div>
+      <div class="term-grid" id="termGrid"></div>
+      <div class="vocab-wrap">
+        <div class="essay-k" style="margin-top:18px">专业词汇中英对照 · 必背 12 条</div>
+        <table class="vocab-table"><tbody id="vocabTable"></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="algo">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Algorithms</div><h2>四个算法，<br>文字＋代码。</h2></div>
+        <p class="section-lede">简答必考算法思想。答题格式：先完整文字描述流程，再写带注释代码；不要只背公式。</p>
+      </div>
+      <div class="algo-list" id="algoList"></div>
+    </div>
+  </section>
+
+  <section class="course-section" id="workflows">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Workflows</div><h2>六个流程，<br>按菜单复述。</h2></div>
+        <p class="section-lede">实验技能大题只考综合性系统实验。每个流程按“数据准备—工具调用—核心操作—结果输出—结果验证”组织。</p>
+      </div>
+      <div class="wf-grid" id="workflowGrid"></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="qa">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Short answer · Analysis</div><h2>十道简答，<br>七道分析。</h2></div>
+        <p class="section-lede">简答按点给分，分析题按步骤给分。先自己能说出骨架，再展开；不要一上来写长段。</p>
+      </div>
+      <div class="essay-k">简答题 · 10</div>
+      <div class="qa-list" id="shortList"></div>
+      <div class="essay-k" style="margin-top:30px">分析题 · 7</div>
+      <div class="qa-list" id="analysisList"></div>
+    </div>
+  </section>
+
+  <section class="course-section" id="essay">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Essay</div><h2>论述题，<br>按模板展开。</h2></div>
+        <p class="section-lede">开放题没有标准答案，评分看逻辑、条理、卷面和例子。分 1/2/3 点，每点配一个例子。</p>
+      </div>
+      <div class="essay-box" id="essayBox"></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="plan">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Study path</div><h2>五天，<br>把它复习完。</h2></div>
+        <p class="section-lede">先过题型，再背概念与算法，之后练流程、刷题库、背模板。</p>
+      </div>
+      <div class="course-plan" id="agPlan"></div>
+    </div>
+  </section>
+
+  <section class="course-section" id="resources">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Materials</div><h2>最合适的<br>那几份资料。</h2></div>
+        <p class="section-lede">题库已经在页面里；下面只放还需要翻的 PPT、操作题和教材。</p>
+      </div>
+      <div class="resource-grid" id="agResources"></div>
+      <p class="course-copyright">资料来自课程与老师复习材料，版权归原作者/出版社；仅用于个人复习，请勿商业传播。</p>
+      <div class="course-related">
+        <a href="remote.html">遥感模块 ↗</a>
+        <a href="python.html">Python 模块 ↗</a>
+        <a href="ebook.html">ArcGIS 教材 ↗</a>
+        <a href="competitions.html">竞赛模块 ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <span>Orbit · 大二上 · __TITLE__<br>课程模块 · 2026</span>
+      <div class="foot-links"><a href="index.html">首页</a><a href="sem2-1.html">大二上</a><a href="semesters.html">学习内容</a><a href="competitions.html">竞赛</a></div>
+    </div>
+  </footer>
+</main>
+
+<script>window.ARCGIS = __ARCGIS__;</script>
+<script src="assets/quiz.js?v=3"></script>
+<script src="assets/arcgis.js?v=2"></script>
+<script src="assets/pwa.js" defer></script>

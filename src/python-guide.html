@@ -1,0 +1,125 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>Python 知识地图 · 大二上 / Orbit</title>
+<meta name="description" content="Python 地理数据处理期末知识地图：考试结构、类与对象、Pandas、Matplotlib、GeoPandas、GDAL，以及 599 题题库的主题覆盖与复习路线。Orbit 地信学习站。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%23e9a23b'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/python-guide.css?v=2">
+
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html" aria-label="Orbit">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
+      Orbit
+    </a>
+    <nav class="gn-links" aria-label="学期模块">
+      <a href="semesters.html">学习内容</a>
+      <a class="active" href="sem2-1.html">大二上</a>
+      <a href="sem2-2.html">大二下</a>
+      <a href="sem3-1.html">大三上</a>
+      <a href="sem3-2.html">大三下</a>
+      <a href="ebook.html">电子书</a>
+      <a href="competitions.html">竞赛</a>
+      <a href="bw-talk.html">BW有话说</a>
+    </nav>
+    <div class="gn-right"><span>大二上 · Python</span></div>
+  </div>
+</header>
+
+<main class="pg-page">
+  <section class="pg-hero">
+    <div class="pg-shell">
+      <div class="pg-kicker">大二上 / Python / 知识地图</div>
+      <h1>599 题之外，<br>先把知识<em>串起来</em>。</h1>
+      <p class="pg-lede">题库是按十套卷组织的，适合刷题，不适合建立结构。这一页把老师课件里的类与对象、函数作用域、Pandas、Matplotlib、GeoPandas、GDAL 重新排成一条线，并标出题库覆盖不到的部分。</p>
+      <div class="pg-chips">
+        <span class="pg-chip"><b>599</b> 道题</span>
+        <span class="pg-chip"><b>100</b> 分结构</span>
+        <span class="pg-chip"><b>10</b> 个知识模块</span>
+        <span class="pg-chip">题库不动 · 只加导航</span>
+      </div>
+      <div class="pg-actions">
+        <a class="btn-primary" href="python.html">去刷 599 题</a>
+        <a class="btn-secondary" href="#map">看知识地图</a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="pg-nav" aria-label="本页导航">
+    <a href="#exam">考试说明</a>
+    <a href="#map">知识地图</a>
+    <a href="#coverage">题库覆盖</a>
+    <a href="#plan">复习路线</a>
+    <a href="#sources">原始资料</a>
+  </nav>
+
+  <section class="pg-section" id="exam">
+    <div class="pg-shell">
+      <div class="pg-head">
+        <div><div class="pg-k">Exam structure</div><h2>先按分值，<br>分配时间。</h2></div>
+        <p>考试说明来自老师发在群里的《考试.txt》。原话是“考试题要比复习题简单得多”，所以不要被题库里的偏题吓到；先把基本用法和代码阅读拿稳。</p>
+      </div>
+      <div class="py-exam" id="pyExam"></div>
+      <div class="py-notes"><ul id="pyExamNotes"></ul></div>
+    </div>
+  </section>
+
+  <section class="pg-section alt" id="map">
+    <div class="pg-shell">
+      <div class="pg-head">
+        <div><div class="pg-k">Knowledge map</div><h2>十个模块，<br>四层结构。</h2></div>
+        <p>从语言核心到数据分析，再到地理处理与工程环境。每个模块给出“必须会”“最小代码”“易错点”，并标出题库里能练到多少题。</p>
+      </div>
+      <div class="pg-map-tools"><button type="button" class="pg-btn" id="pyOpenAll">展开全部</button></div>
+      <div id="pyMap"></div>
+    </div>
+  </section>
+
+  <section class="pg-section" id="coverage">
+    <div class="pg-shell">
+      <div class="pg-head">
+        <div><div class="pg-k">Bank coverage</div><h2>题库覆盖了<br>什么，没覆盖什么。</h2></div>
+        <p>题库 599 题以类与对象、容器、函数为主；Pandas 有约 95 题；Matplotlib 只有 2 题，GeoPandas 和 GDAL 基本没有。这不是题库的问题，是它按十套卷组织，覆盖不到所有库。</p>
+      </div>
+      <div class="py-cov" id="pyCoverage"></div>
+    </div>
+  </section>
+
+  <section class="pg-section alt" id="plan">
+    <div class="pg-shell">
+      <div class="pg-head">
+        <div><div class="pg-k">Study path</div><h2>五天，<br>按题型推进。</h2></div>
+        <p>先做整卷找短板，再按题型补，最后补三个题库覆盖不到的库。每天的练习都回到 599 题题库，不另起炉灶。</p>
+      </div>
+      <div class="py-plan" id="pyPlan"></div>
+    </div>
+  </section>
+
+  <section class="pg-section" id="sources">
+    <div class="pg-shell">
+      <div class="pg-head">
+        <div><div class="pg-k">Sources</div><h2>这些内容<br>从哪来。</h2></div>
+        <p>知识地图只做压缩和重组，不替代原始课件。遇到不确定的细节，回到原文件核对。</p>
+      </div>
+      <div class="py-sources" id="pySources"></div>
+      <p class="py-cov-note">原始文件在桌面 `地信大二上/课程资料/Python/原始/`；题库和十套卷仍在 `python.html`，本页不改动任何题目。</p>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <span>Orbit · 大二上 · Python 知识地图<br>2026</span>
+      <div class="foot-links"><a href="python.html">Python 题库</a><a href="sem2-1.html">大二上</a><a href="index.html">首页</a><a href="competitions.html">竞赛</a></div>
+    </div>
+  </footer>
+</main>
+
+<script>window.PYGUIDE = __PYGUIDE__;</script>
+<script>window.PYTOPICS = __PYTOPICS__;</script>
+<script src="assets/python-guide.js?v=2"></script>
+<script src="assets/pwa.js" defer></script>

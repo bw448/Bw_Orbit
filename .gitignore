@@ -12,6 +12,7 @@ assets/_generated_unused/
 assets/courses/
 
 # local build/test artefacts
+.work/
 __pycache__/
 *.pyc
 *.log

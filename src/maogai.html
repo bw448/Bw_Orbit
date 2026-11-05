@@ -1,0 +1,134 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>__TITLE__ · 大二上 / Orbit</title>
+<meta name="description" content="__DESC__">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%23a33a32'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/course.css?v=4">
+<link rel="stylesheet" href="assets/quiz.css?v=2">
+
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html" aria-label="Orbit">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
+      Orbit
+    </a>
+    <nav class="gn-links" aria-label="学期模块">
+      <a href="semesters.html">学习内容</a>
+      <a class="active" href="sem2-1.html">大二上</a>
+      <a href="sem2-2.html">大二下</a>
+      <a href="sem3-1.html">大三上</a>
+      <a href="sem3-2.html">大三下</a>
+      <a href="ebook.html">电子书</a>
+      <a href="competitions.html">竞赛</a>
+      <a href="bw-talk.html">BW有话说</a>
+    </nav>
+    <div class="gn-right"><span>大二上 · 课程模块</span></div>
+  </div>
+</header>
+
+<main class="course-page" id="coursePage" style="--course-accent:__ACCENT__">
+  <section class="course-hero">
+    <div class="course-shell course-hero-inner">
+      <div class="course-hero-copy">
+        <div class="course-kicker">__TAG__</div>
+        <div class="course-code">__CODE__</div>
+        <h1>__TITLE__</h1>
+        <div class="course-en">__EN__</div>
+        <p class="course-lead">__LEAD__</p>
+        <div class="course-actions">
+          <a class="btn-primary" href="#choice">刷选择题</a>
+          <a class="course-back" href="sem2-1.html">返回大二上 <span>↗</span></a>
+        </div>
+      </div>
+      <div class="course-orbit" aria-hidden="true">
+        <div class="course-ring r1"></div><div class="course-ring r2"></div><div class="course-ring r3"></div>
+        <span class="course-dot d1"></span><span class="course-dot d2"></span><span class="course-dot d3"></span>
+        <span class="course-mark">__CODE__ / NOTES</span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="course-subnav" aria-label="本页导航">
+    <a href="#exam">考试与重点</a>
+    <a href="#choice">选择题</a>
+    <a href="#sections">重点内容</a>
+    <a href="#plan">复习路线</a>
+    <a href="#resources">资料</a>
+  </nav>
+
+  <section class="course-section" id="exam">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Exam map</div><h2>先知道，<br>考什么。</h2></div>
+        <p class="section-lede" id="courseIntro">__INTRO__</p>
+      </div>
+      <div class="exam-grid" id="examGrid"></div>
+      <div class="course-notice"><b>划重点</b><span id="courseNotice">__NOTICE__</span></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="choice">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Choice bank · <span id="mgTotal">1065</span></div><h2>一千道，<br>按章节刷。</h2></div>
+        <p class="section-lede">新教材 188 题、旧教材 522 题、期末补充 355 题，去重后共 <b id="mgPrimary">1065</b> 题。单选自动判分，多选少选/错选不得分；错题自动进“只看错题”。</p>
+      </div>
+      <div class="quiz-shell" id="mgQuiz"></div>
+      <p class="ag-note" style="margin-top:16px;font-size:10.5px;line-height:1.75;color:var(--faint)">
+        题库来自《毛概选择题题库（去重汇总）》710 题与《毛概期末考试题库》扫描件；后者按题干去重后补充 355 题。原资料个别题目存在错字或答案争议，以教材和课后题答案为准。
+      </p>
+    </div>
+  </section>
+
+  <section class="course-section" id="sections">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Key content</div><h2>重点，<br>按章过。</h2></div>
+        <p class="section-lede">按“形成条件—主要内容—历史地位”搭框架；带“勾画”标记的章节优先。</p>
+      </div>
+      <div class="course-notes" id="courseSections"></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="plan">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Study path</div><h2>怎么把它<br>复习完。</h2></div>
+        <p class="section-lede">不按“从头看到尾”，按“先抓重点、再补过程、最后输出”的顺序。</p>
+      </div>
+      <div class="course-plan" id="coursePlan"></div>
+    </div>
+  </section>
+
+  <section class="course-section" id="resources">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Materials</div><h2>最合适的<br>那几份资料。</h2></div>
+        <p class="section-lede">大题背诵、选择题专项、真题和教材；不用把所有文件都打开。</p>
+      </div>
+      <div class="resource-grid" id="courseResources"></div>
+      <p class="course-copyright">资料来自课程与老师复习材料，版权归原作者/出版社；仅用于个人复习，请勿商业传播。</p>
+      <div class="course-related" id="courseLinks"></div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <span>Orbit · 大二上 · __TITLE__<br>课程模块 · 2026</span>
+      <div class="foot-links"><a href="index.html">首页</a><a href="sem2-1.html">大二上</a><a href="semesters.html">学习内容</a><a href="competitions.html">竞赛</a></div>
+    </div>
+  </footer>
+</main>
+
+<script>window.COURSE = __COURSE__;</script>
+<script>window.MAOGAI_BANK = __MAOGAI_BANK__;</script>
+<script src="assets/course.js"></script>
+<script src="assets/quiz.js?v=3"></script>
+<script src="assets/maogai.js?v=2"></script>
+<script src="assets/pwa.js" defer></script>
