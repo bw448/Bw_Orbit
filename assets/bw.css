@@ -96,3 +96,14 @@ body{padding-left:0;padding-right:0;background:var(--paper)}
   .bw-admin-row{grid-template-columns:1fr}
   .bw-admin-row small{max-width:100%}
 }
+
+/* admin row delete confirmation */
+.bw-admin-list-title span{font-weight:400;color:var(--faint)}
+.bw-admin-row{transition:opacity .2s var(--ease),transform .2s var(--ease),background .2s var(--ease)}
+.bw-admin-row.removing{opacity:0;transform:translateX(8px);background:var(--bw-soft)}
+.bw-confirm{gap:6px!important;align-items:center}
+.bw-confirm span{font-size:10.5px;color:var(--muted);margin-right:2px}
+.bw-confirm .bw-btn{padding:6px 10px;font-size:11px}
+.bw-confirm .bw-btn.danger{background:#fff}
+.bw-confirm .bw-btn.danger:hover{background:rgba(179,38,30,.06)}
+#adminStatus{min-height:18px;margin-top:8px}

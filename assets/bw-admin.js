@@ -90,6 +90,16 @@
     });
   }
 
+  function setListCount(n) {
+    var el = document.getElementById('adminCount');
+    if (el) el.textContent = n ? ('· ' + n) : '';
+  }
+  function actionsHTML(id) {
+    return '<div class="actions"><button class="bw-btn danger" type="button" data-del="' + esc(id) + '">删除</button></div>';
+  }
+  function confirmHTML(id) {
+    return '<div class="actions bw-confirm"><span>删除这条？</span><button class="bw-btn" type="button" data-cancel="1">取消</button><button class="bw-btn danger" type="button" data-confirm="' + esc(id) + '">确认删除</button></div>';
+  }
   function loadPosts() {
     if (!adminList) return;
     adminList.innerHTML = '<div class="bw-loading" style="padding:20px"><i></i><span>正在读取…</span></div>';
@@ -97,54 +107,67 @@
       if (!r.ok) throw new Error('读取失败 ' + r.status);
       return r.json();
     }).then(function (rows) {
+      setListCount(rows.length);
       if (!rows.length) {
         adminList.innerHTML = '<div class="bw-empty" style="padding:20px">还没有帖子。写下第一条。</div>';
         return;
       }
       adminList.innerHTML = rows.map(function (p) {
-        return '<div class="bw-admin-row" data-id="' + esc(p.id) + '"><div><b>' + esc(p.title || '(无标题)') + '</b><small>' + esc((p.body || '').slice(0, 100)) + '</small><small>' + esc(p.created_at || '') + '</small></div>' +
-          '<div class="actions"><button class="bw-btn danger" type="button" data-del="' + esc(p.id) + '">删除</button></div></div>';
+        return '<div class="bw-admin-row" data-id="' + esc(p.id) + '"><div><b>' + esc(p.title || '(无标题)') + '</b><small>' + esc((p.body || '').slice(0, 100)) + '</small><small>' + esc(p.created_at || '') + '</small></div>' + actionsHTML(p.id) + '</div>';
       }).join('');
     }).catch(function (err) {
+      setListCount(0);
       adminList.innerHTML = '<div class="bw-error" style="padding:20px">' + esc(err.message || '读取失败') + '</div>';
     });
   }
 
   if (adminList) {
     adminList.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-del]');
-      if (!b) return;
-      if (b.getAttribute('data-armed') !== '1') {
-        adminList.querySelectorAll('[data-del]').forEach(function (x) {
-          x.removeAttribute('data-armed');
-          x.textContent = '删除';
-        });
-        b.setAttribute('data-armed', '1');
-        b.textContent = '再点一次确认';
-        setTimeout(function () {
-          if (b.getAttribute('data-armed') === '1') {
-            b.removeAttribute('data-armed');
-            b.textContent = '删除';
-          }
-        }, 4000);
+      var del = e.target.closest('[data-del]');
+      var cancel = e.target.closest('[data-cancel]');
+      var confirm = e.target.closest('[data-confirm]');
+      if (del) {
+        var row = del.closest('.bw-admin-row');
+        var id = del.getAttribute('data-del');
+        var acts = row && row.querySelector('.actions');
+        if (acts) acts.outerHTML = confirmHTML(id);
+        var c = row && row.querySelector('[data-confirm]');
+        if (c) c.focus();
         return;
       }
-      var id = b.getAttribute('data-del');
-      b.disabled = true;
-      b.textContent = '删除中…';
-      setStatus(adminStatus, '');
-      rpc('bw_admin_delete', { p_password: password, p_id: id }).then(function (deleted) {
-        if (deleted === false) {
-          setStatus(adminStatus, '没有找到这条帖子，可能已经删除。', 'bad');
-          b.disabled = false; b.removeAttribute('data-armed'); b.textContent = '删除';
-          return;
-        }
-        setStatus(adminStatus, '已删除。', 'ok');
-        loadPosts();
-      }).catch(function (err) {
-        b.disabled = false; b.removeAttribute('data-armed'); b.textContent = '删除';
-        setStatus(adminStatus, err.message || '删除失败', 'bad');
-      });
+      if (cancel) {
+        var r = cancel.closest('.bw-admin-row');
+        var old = cancel.closest('.actions');
+        if (r && old) old.outerHTML = actionsHTML(r.getAttribute('data-id'));
+        return;
+      }
+      if (confirm) {
+        var row2 = confirm.closest('.bw-admin-row');
+        var id2 = confirm.getAttribute('data-confirm');
+        confirm.disabled = true;
+        confirm.textContent = '删除中…';
+        setStatus(adminStatus, '');
+        rpc('bw_admin_delete', { p_password: password, p_id: id2 }).then(function (deleted) {
+          if (deleted === false) {
+            setStatus(adminStatus, '没有找到这条帖子，可能已经删除。', 'bad');
+          } else {
+            setStatus(adminStatus, '已删除。', 'ok');
+          }
+          if (row2) {
+            row2.classList.add('removing');
+            setTimeout(function () {
+              if (row2.parentNode) row2.parentNode.removeChild(row2);
+              var left = adminList.querySelectorAll('.bw-admin-row').length;
+              setListCount(left);
+              if (!left) adminList.innerHTML = '<div class="bw-empty" style="padding:20px">还没有帖子。写下第一条。</div>';
+            }, 220);
+          }
+        }).catch(function (err) {
+          confirm.disabled = false;
+          confirm.textContent = '确认删除';
+          setStatus(adminStatus, err.message || '删除失败', 'bad');
+        });
+      }
     });
   }
 
