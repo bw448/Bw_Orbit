@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>自然地理学 · 大二上 / Orbit</title>
+<meta name="description" content="自然地理学 大二上复习模块：考试重点、章节勾画与资料。Orbit 地信学习站。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/course.css?v=2">
+</head>
+<body>
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html" aria-label="Orbit">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
+      Orbit
+    </a>
+    <nav class="gn-links" aria-label="学期模块">
+      <a href="semesters.html">学习内容</a>
+      <a class="active" href="sem2-1.html">大二上</a>
+      <a href="sem2-2.html">大二下</a>
+      <a href="sem3-1.html">大三上</a>
+      <a href="sem3-2.html">大三下</a>
+      <a href="ebook.html">电子书</a>
+      <a href="competitions.html">竞赛</a>
+    </nav>
+    <div class="gn-right"><span>大二上 · 课程模块</span></div>
+  </div>
+</header>
+
+<main class="course-page" id="coursePage" style="--course-accent:#2f7d5a">
+  <section class="course-hero">
+    <div class="course-shell course-hero-inner">
+      <div class="course-hero-copy">
+        <div class="course-kicker">大二上 · 专业基础</div>
+        <div class="course-code">NAT · 201</div>
+        <h1>自然地理学</h1>
+        <div class="course-en">Physical Geography</div>
+        <p class="course-lead">先看老师勾画的部分，再把自然地理读成一张有层次的图。</p>
+        <div class="course-actions">
+          <a class="btn-primary" href="#sections">看重点</a>
+          <a class="course-back" href="sem2-1.html">返回大二上 <span>↗</span></a>
+        </div>
+      </div>
+      <div class="course-orbit" aria-hidden="true">
+        <div class="course-ring r1"></div><div class="course-ring r2"></div><div class="course-ring r3"></div>
+        <span class="course-dot d1"></span><span class="course-dot d2"></span><span class="course-dot d3"></span>
+        <span class="course-mark">NAT · 201 / NOTES</span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="course-subnav" aria-label="本页导航">
+    <a href="#exam">考试与重点</a>
+    <a href="#sections">重点内容</a>
+    <a href="#plan">复习路线</a>
+    <a href="#resources">资料</a>
+  </nav>
+
+  <section class="course-section" id="exam">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Exam map</div><h2>先知道，<br>考什么。</h2></div>
+        <p class="section-lede" id="courseIntro">这门课的重点很集中：最后一节课老师会划重点，材料里的画勾、圈画和手写问题就是最直接的复习线索。先把这些线索过一遍，再回到课本补图和过程。</p>
+      </div>
+      <div class="exam-grid" id="examGrid"></div>
+      <div class="course-notice"><b>划重点</b><span id="courseNotice">老师最后一节课会划重点；优先看材料中画勾、圈画、手写的题目与段落。</span></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="sections">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Key content</div><h2>重点，<br>按章过。</h2></div>
+        <p class="section-lede">带“勾画”标记的章节，是老师材料里明确出现、需要优先掌握的部分。</p>
+      </div>
+      <div class="course-notes" id="courseSections"></div>
+    </div>
+  </section>
+
+  <section class="course-section" id="plan">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Study path</div><h2>怎么把它<br>复习完。</h2></div>
+        <p class="section-lede">不按“从头看到尾”，按“先抓重点、再补过程、最后输出”的顺序。</p>
+      </div>
+      <div class="course-plan" id="coursePlan"></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="resources">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Materials</div><h2>最合适的<br>那几份资料。</h2></div>
+        <p class="section-lede">不用把所有文件都打开。下面的资料按用途排好：教材、重点、真题、PPT 和实操。</p>
+      </div>
+      <div class="resource-grid" id="courseResources"></div>
+      <p class="course-copyright">资料来自课程与老师复习材料，版权归原作者/出版社；仅用于个人复习，请勿商业传播。</p>
+      <div class="course-related" id="courseLinks"></div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <span>Orbit · 大二上 · 自然地理学<br>课程模块 · 2026</span>
+      <div class="foot-links"><a href="index.html">首页</a><a href="sem2-1.html">大二上</a><a href="semesters.html">学习内容</a><a href="competitions.html">竞赛</a></div>
+    </div>
+  </footer>
+</main>
+
+<script>window.COURSE = {"title": "自然地理学", "en": "Physical Geography", "code": "NAT · 201", "tag": "大二上 · 专业基础", "accent": "#2f7d5a", "lead": "先看老师勾画的部分，再把自然地理读成一张有层次的图。", "intro": "这门课的重点很集中：最后一节课老师会划重点，材料里的画勾、圈画和手写问题就是最直接的复习线索。先把这些线索过一遍，再回到课本补图和过程。", "notice": "老师最后一节课会划重点；优先看材料中画勾、圈画、手写的题目与段落。", "exam": [["重点来源", "最后一节课划重点 + 材料中的勾画/画勾部分"], ["复习依据", "《自然地理学》教材 + 变质作用手写扫描 + 重点页"], ["作答方式", "名词解释、简答、过程/读图分析；以老师课堂说明为准"]], "sections": [{"title": "绪论：自然地理学在学什么", "en": "Introduction", "marked": true, "points": ["五大圈层：大气圈、水圈、生物圈、岩石圈、土壤圈（有的教材把人类圈单列，按老师口径）。", "自然地理学的研究对象是地球表层自然地理环境，研究各圈层之间的相互作用与地域分异。", "复习时先能用自己的话说明：它研究什么、为什么要把圈层放在一起看。"]}, {"title": "地球表层的基本特征", "en": "Earth Surface", "marked": true, "points": ["地球的内外圈层：外部为大气、水、生物，内部为地壳、地幔、地核。", "地球表层是各圈层相互接触、相互渗透的界面，能量交换和物质循环最活跃。", "表层特征要能和自然地理的整体性、差异性联系起来。"]}, {"title": "矿物、岩石与岩浆岩", "en": "Minerals & Rocks", "marked": true, "points": ["矿物：天然形成的单质或化合物，有相对固定的化学成分和物理性质。", "矿物物理性质：颜色、条痕、光泽、硬度、解理、断口、密度等；要能用来区分主要造岩矿物。", "岩石是矿物的集合体；岩浆岩由岩浆冷却凝固形成。", "岩浆岩产状：深成、浅成、喷出；结构：结晶程度、颗粒大小、晶体形态；构造：块状、流纹、气孔、杏仁状。", "按 SiO₂ 含量：超基性（<45%）、基性（45%—52%）、中性（52%—65%）、酸性（>65%）；花岗岩是酸性侵入岩。"]}, {"title": "沉积岩、变质作用与岩石循环", "en": "Sedimentary & Metamorphic", "marked": true, "points": ["沉积岩形成：风化—搬运—沉积—成岩；特征包括层理、层面构造、化石、成分/结构/构造。", "沉积岩分类：碎屑岩（砾岩、砂岩、粉砂岩）、黏土岩（页岩、泥岩）、化学岩/生物化学岩（石灰岩、白云岩）。", "变质作用：原岩在温度、压力、化学活动性流体作用下，结构、构造和矿物发生改变。", "大理岩：碳酸盐岩受接触变质形成，主要由方解石组成，粒状变晶结构、块状构造，滴稀盐酸起泡。", "三大岩石转化：岩浆岩、沉积岩、变质岩在风化、搬运、沉积、变质、熔融等作用下互相转化。"]}, {"title": "地质构造与产状", "en": "Geological Structure", "marked": true, "points": ["地层接触关系：整合（产状一致、时代连续、无沉积间断）、假整合（平行不整合，有缺失）、不整合（角度不整合）。", "海侵：地壳下降、海水向陆地推进，沉积物粒径下粗上细；海退：地壳上升、海水退出，粒径下细上粗。", "产状三要素：走向（层面与水平面交线，两个方向相差 180°）、倾向（倾斜线在水平面的投影方向）、倾角（0°—90°）。", "褶皱基本类型：背斜（岩层向上弯曲，核部老、两翼新）、向斜（向下弯曲，核部新、两翼老）。", "断裂构造：岩层断裂后有明显位移为断层；断层识别看线性影像、地层错断、水系错动、断层崖/三角面等。"]}, {"title": "构造运动、地震与外力地貌", "en": "Tectonics & Landforms", "marked": true, "points": ["构造运动：水平运动（挤压、拉张、剪切）与垂直运动（上升、下降）；上升形成山地/高原，下降形成盆地/谷地。", "地震要素：震源、震中、震源深度、震级、烈度；烈度受震级、震源深度、距离、场地条件影响。", "外力作用主线：风化—块体运动—流水—喀斯特—冰川—风沙—海岸；每种地貌抓住“作用过程 + 典型形态”。", "风化壳：岩石风化产物残留原地，自下而上常为基岩、碎石角砾层、高岭土残积层、硅铝土残积层、土壤。", "复习时把地貌类型与气候、岩性、构造条件对应起来，而不是只背名词。"]}], "plan": [["01", "先过勾画", "把最后一节课的勾画、圈画、手写问题按章节排成清单。"], ["02", "回课本补图", "每个重点找到课本对应图/过程，能口述形成机制。"], ["03", "整理对比", "岩浆岩/沉积岩/变质岩、背斜/向斜、整合/不整合做成对比表。"], ["04", "自测输出", "遮住答案，按“定义—特征—过程—例子”复述。"]], "resources": [["自然地理学课本", "PDF · 337 页 · 45.8 MB", "assets/ebooks/nature-geography.pdf", "教材"], ["变质作用手写扫描", "PDF · 13 页 · 老师勾画", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/metamorphism-notes.pdf", "划重点"], ["重点页（五大圈层/岩石/构造）", "JPG · 手写清单", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/key-points.jpg", "划重点"]], "links": [["电子书阅读器", "ebook.html"], ["遥感复习", "remote.html"], ["ArcGIS 模块", "arcgis.html"]]};</script>
+<script src="assets/course.js"></script>
+<script src="assets/pwa.js" defer></script>
+</body>
+</html>

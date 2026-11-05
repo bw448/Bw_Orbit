@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="assets/orbit.css">
 <link rel="stylesheet" href="assets/apple.css">
 <link rel="stylesheet" href="assets/rs-ai.css?v=4">
+<link rel="stylesheet" href="assets/notes.css">
 <link rel="stylesheet" href="assets/study.css">
 
 
@@ -19,7 +20,9 @@
 <div class="scroll-progress"><i id="scrollBar"></i></div>
 <header class="nav">
   <a class="brand" href="index.html" aria-label="Orbit 遥感"><svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".5" transform="rotate(34 16 16)"/></svg><span class="brand-word">Orbit</span><span class="brand-sub">遥感</span></a>
-  <nav class="gn-links" aria-label="学期模块"><a href="semesters.html">学习内容</a><a class="active" href="sem2-1.html">大二上</a><a href="sem2-2.html">大二下</a><a href="sem3-1.html">大三上</a><a href="sem3-2.html">大三下</a><a href="ebook.html">电子书</a><a href="#glossary">术语</a></nav>
+  <nav class="gn-links" aria-label="学期模块"><a href="semesters.html">学习内容</a><a class="active" href="sem2-1.html">大二上</a><a href="sem2-2.html">大二下</a><a href="sem3-1.html">大三上</a><a href="sem3-2.html">大三下</a><a href="ebook.html">电子书</a><a href="#glossary">术语</a><a href="#notes">补充</a>
+      <a href="competitions.html">竞赛</a>
+    </nav>
   <div class="nav-right">
     <span class="nav-progress" id="navProgress">已答 <b>0</b> / 90</span>
     <button class="btn btn-accent btn-small" onclick="go('#exam')">模拟卷</button>
@@ -99,6 +102,7 @@
         <p class="lede">点开一章：先看知识脉络，再刷本章题；点每一行右侧的“深聊”，可以把一个知识点一直问下去。第五章题目还没补，但知识脉络和术语可以先看。</p>
       </div>
       <div class="chapter-list" id="chapterList"></div>
+      <button type="button" class="notes-banner" onclick="go('#notes')"><span><b>讲义补充</b><em>从老师复习 PDF 补入的遗漏知识点，不动原有作业题库。</em></span><span class="arr">查看补充 →</span></button>
     </div>
   </section>
 
@@ -221,6 +225,7 @@
 document.body.classList.add('rs-page');
 const DATA = __DATA__;
 const HOMEWORK = __HOMEWORK__;
+const NOTES = __NOTES__;
 window.RS_CHAPTERS = DATA.chapters.map(c => ({ id:c.id, num:c.num, title:c.title, en:c.en }));
 
 /* ---------- state ---------- */
@@ -391,6 +396,7 @@ function go(hash){
 function route(){
   const h = location.hash || '';
   let m;
+  if (h === '#notes') { showNotes(); return; }
   if ((m = h.match(/^#chapter-(\d+)$/))) { showChapter(m[1]); return; }
   if ((m = h.match(/^#homework-(\d+)$/))) { showHomework(m[1]); return; }
   if ((m = h.match(/^#practice-(.+)$/))) { startPractice(m[1]); return; }
@@ -452,6 +458,30 @@ function showHomework(id){
     '<div class="hw-actions"><button class="btn btn-ghost" onclick="RSAI.discussHomework(' + n + ')">串讲这一章</button>' +
     '<button class="btn btn-accent" onclick="go(\'#practice-' + n + '\')">去做本章题</button>' +
     '<button class="btn btn-ghost" onclick="go(\'#chapter-' + n + '\')">返回章节</button></div>', 'HOMEWORK ' + String(n).padStart(2,'0'));
+}
+
+
+/* ---------- lecture-note supplements ---------- */
+function showNotes(){
+  const groups = (NOTES || []).map((n, i) => {
+    const pts = (n.points || []).map(p => '<p>' + esc(p) + '</p>').join('');
+    return '<details class="note-group"' + (i === 0 ? ' open' : '') + '>' +
+      '<summary><span class="num">' + String(n.id).padStart(2,'0') + '</span>' +
+      '<span class="tt">' + esc(n.title) + '<span class="en">' + esc(n.en || '') + '</span></span>' +
+      '<span class="count">' + (n.points || []).length + ' 条</span></summary>' +
+      '<div class="note-points">' + pts +
+      '<div class="note-actions"><a href="#chapter-' + n.id + '">去看本章知识脉络 →</a>' +
+      (n.id === 5 ? '' : '<a href="#practice-' + n.id + '">去做本章题 →</a>') +
+      '<a href="#glossary" onclick="setTimeout(function(){RSAI.glossaryFor(' + n.id + ')},80);return true;">查本章术语 →</a></div></div></details>';
+  }).join('');
+  showView(
+    '<div class="notes-head"><div class="eyebrow">LECTURE NOTES · SUPPLEMENT</div>' +
+    '<h1>讲义补充</h1><p class="lede">从老师复习讲义里补入的知识点，专门补现有作业题库没有覆盖的细节。原有七套作业题保持不动，这里只是加一层阅读材料。</p>' +
+    '<span class="notes-source">SOURCE / 遥感.pdf · 30 页复习讲义</span></div>' +
+    '<div class="notes-list">' + groups + '</div>' +
+    '<div class="note-foot">这些是补充阅读，不是新的作业题；刷题仍按原来的七章题库进行。带“去看本章知识脉络”可回到原章节。</div>',
+    'LECTURE NOTES'
+  );
 }
 
 /* ---------- chapter view ---------- */

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>毛概 · 大二上 / Orbit</title>
+<meta name="description" content="毛概 大二上复习模块：考试重点、章节勾画与资料。Orbit 地信学习站。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/course.css?v=2">
+</head>
+<body>
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html" aria-label="Orbit">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
+      Orbit
+    </a>
+    <nav class="gn-links" aria-label="学期模块">
+      <a href="semesters.html">学习内容</a>
+      <a class="active" href="sem2-1.html">大二上</a>
+      <a href="sem2-2.html">大二下</a>
+      <a href="sem3-1.html">大三上</a>
+      <a href="sem3-2.html">大三下</a>
+      <a href="ebook.html">电子书</a>
+      <a href="competitions.html">竞赛</a>
+    </nav>
+    <div class="gn-right"><span>大二上 · 课程模块</span></div>
+  </div>
+</header>
+
+<main class="course-page" id="coursePage" style="--course-accent:#a33a32">
+  <section class="course-hero">
+    <div class="course-shell course-hero-inner">
+      <div class="course-hero-copy">
+        <div class="course-kicker">大二上 · 思想政治</div>
+        <div class="course-code">MAO · 2023</div>
+        <h1>毛概</h1>
+        <div class="course-en">Mao Zedong Thought</div>
+        <p class="course-lead">大题基本从课后题里出；先把框架背顺，再用选择题和真题查漏。</p>
+        <div class="course-actions">
+          <a class="btn-primary" href="#sections">看重点</a>
+          <a class="course-back" href="sem2-1.html">返回大二上 <span>↗</span></a>
+        </div>
+      </div>
+      <div class="course-orbit" aria-hidden="true">
+        <div class="course-ring r1"></div><div class="course-ring r2"></div><div class="course-ring r3"></div>
+        <span class="course-dot d1"></span><span class="course-dot d2"></span><span class="course-dot d3"></span>
+        <span class="course-mark">MAO · 2023 / NOTES</span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="course-subnav" aria-label="本页导航">
+    <a href="#exam">考试与重点</a>
+    <a href="#sections">重点内容</a>
+    <a href="#plan">复习路线</a>
+    <a href="#resources">资料</a>
+  </nav>
+
+  <section class="course-section" id="exam">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Exam map</div><h2>先知道，<br>考什么。</h2></div>
+        <p class="section-lede" id="courseIntro">这门课不是把整本书背完。先按“理论的形成条件—主要内容—历史地位”搭框架，再用课后题、选择题专项和近两年真题反复核对。材料里的大题背诵版和选择题专项就是最合适的主干。</p>
+      </div>
+      <div class="exam-grid" id="examGrid"></div>
+      <div class="course-notice"><b>划重点</b><span id="courseNotice">大二上经验：大题考的基本上都是课后题；选择题用专项和题库反复过。</span></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="sections">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Key content</div><h2>重点，<br>按章过。</h2></div>
+        <p class="section-lede">带“勾画”标记的章节，是老师材料里明确出现、需要优先掌握的部分。</p>
+      </div>
+      <div class="course-notes" id="courseSections"></div>
+    </div>
+  </section>
+
+  <section class="course-section" id="plan">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Study path</div><h2>怎么把它<br>复习完。</h2></div>
+        <p class="section-lede">不按“从头看到尾”，按“先抓重点、再补过程、最后输出”的顺序。</p>
+      </div>
+      <div class="course-plan" id="coursePlan"></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="resources">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Materials</div><h2>最合适的<br>那几份资料。</h2></div>
+        <p class="section-lede">不用把所有文件都打开。下面的资料按用途排好：教材、重点、真题、PPT 和实操。</p>
+      </div>
+      <div class="resource-grid" id="courseResources"></div>
+      <p class="course-copyright">资料来自课程与老师复习材料，版权归原作者/出版社；仅用于个人复习，请勿商业传播。</p>
+      <div class="course-related" id="courseLinks"></div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <span>Orbit · 大二上 · 毛概<br>课程模块 · 2026</span>
+      <div class="foot-links"><a href="index.html">首页</a><a href="sem2-1.html">大二上</a><a href="semesters.html">学习内容</a><a href="competitions.html">竞赛</a></div>
+    </div>
+  </footer>
+</main>
+
+<script>window.COURSE = {"title": "毛概", "en": "Mao Zedong Thought", "code": "MAO · 2023", "tag": "大二上 · 思想政治", "accent": "#a33a32", "lead": "大题基本从课后题里出；先把框架背顺，再用选择题和真题查漏。", "intro": "这门课不是把整本书背完。先按“理论的形成条件—主要内容—历史地位”搭框架，再用课后题、选择题专项和近两年真题反复核对。材料里的大题背诵版和选择题专项就是最合适的主干。", "notice": "大二上经验：大题考的基本上都是课后题；选择题用专项和题库反复过。", "exam": [["大题", "以课后题为主；按“形成条件—主要内容—历史地位”组织"], ["选择题", "高频考点 + 2024/2025 真题 + 去重题库"], ["复习顺序", "框架 → 课后题 → 选择题 → 真题 → 默写"]], "sections": [{"title": "导论与毛泽东思想", "en": "Introduction", "points": ["马克思主义中国化的内涵与两次历史性飞跃。", "毛泽东思想形成发展的时代背景、实践基础与历史过程。", "毛泽东思想的主要内容与活的灵魂（实事求是、群众路线、独立自主）。", "历史地位：马克思主义中国化的第一次历史性飞跃，中国革命和建设的科学指南。"]}, {"title": "新民主主义革命理论", "en": "New Democratic Revolution", "points": ["近代中国国情与两大历史任务；新民主主义革命的总路线。", "领导权、动力、对象、性质、前途。", "三大法宝：统一战线、武装斗争、党的建设。", "农村包围城市、武装夺取政权道路的形成与意义。"]}, {"title": "社会主义改造理论", "en": "Socialist Transformation", "points": ["新民主主义社会的性质与主要矛盾。", "过渡时期总路线：“一化三改”。", "农业、手工业、资本主义工商业改造的道路与经验。", "社会主义基本制度确立的意义。"]}, {"title": "社会主义建设道路的初步探索", "en": "Early Exploration", "points": ["《论十大关系》与《关于正确处理人民内部矛盾的问题》。", "社会主义社会矛盾学说；正确处理人民内部矛盾。", "初步探索的理论成果与意义。"]}, {"title": "邓小平理论", "en": "Deng Xiaoping Theory", "points": ["形成条件与过程；解放思想、实事求是。", "社会主义本质论；“三个有利于”。", "社会主义初级阶段与党的基本路线。", "社会主义市场经济理论；“一国两制”。"]}, {"title": "“三个代表”与科学发展观", "en": "Three Represents & Scientific Outlook", "points": ["“三个代表”重要思想的形成、核心观点与历史地位。", "科学发展观的形成、科学内涵（第一要义、核心立场、基本要求、根本方法）。", "两套理论都要能按“背景—内容—地位”作答。"]}, {"title": "习近平新时代中国特色社会主义思想", "en": "Xi Jinping Thought", "points": ["时代背景、核心要义、主要内容。", "“十个明确”“十四个坚持”“十三个方面成就”的框架关系。", "中国式现代化的中国特色与本质要求。", "结合课后题准备综合论述。"]}], "plan": [["01", "搭框架", "每章先背“背景—内容—地位”三层，不急着逐字背。"], ["02", "课后题", "把课后题按章过一遍，能分点口述。"], ["03", "选择题", "用专项和题库刷高频点，错题回到章节。"], ["04", "真题默写", "用 2024/2025 真题限时写大题，再对照背诵版补要点。"]], "resources": [["大题背诵版 · 核心篇", "PDF · 导论—第四章", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/maogai-big-core.pdf", "大题"], ["大题背诵版 · 后半篇", "PDF · 第五章—跨章节", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/maogai-big-back.pdf", "大题"], ["选择题专项", "PDF · 高频考点 + 2024—2025 真题", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/maogai-choice-special.pdf", "选择题"], ["选择题题库（去重）", "PDF · 汇总题库", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/maogai-choice-bank.pdf", "选择题"], ["2024 年毛概真题", "PDF · 带答案", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/past-2024.pdf", "真题"], ["2025 年毛概真题", "PDF · 带答案", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/past-2025.pdf", "真题"]], "links": [["电子书阅读器", "ebook.html"], ["自然地理模块", "nature-geo.html"], ["竞赛模块", "competitions.html"]]};</script>
+<script src="assets/course.js"></script>
+<script src="assets/pwa.js" defer></script>
+</body>
+</html>

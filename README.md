@@ -20,7 +20,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 ```
 学期（大二上 / 大二下 / 大三上 / 大三下 / 电子书）
-  └── 科目（遥感 / Python / 后续课程）
+  └── 科目（遥感 / Python / 自然地理 / 毛概 / 概率论 / ArcGIS）
         └── 学习方式（期末复习 / 考研 / 从 0 到 1）
 ```
 
@@ -32,6 +32,11 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 |---|---|---|
 | 大二上 | 遥感 | 7 章知识脉络、完整作业、90 道题、模拟卷、错题、收藏、75 条中英术语 |
 | 大二上 | Python | 599 道题、10 套卷、按套 / 分节刷题、模拟卷、代码练习 |
+| 大二上 | 自然地理学 | 老师勾画重点、章节框架、变质作用扫描、重点页 |
+| 大二上 | 毛概 | 大题背诵、选择题专项、2024/2025 真题 |
+| 大二上 | 概率论 | 章节重点、公式、PPT 原题、2022—2023 期末卷 |
+| 大二上 | ArcGIS | 考试结构、理论/算法/实操三条线、PPT 与操作题 |
+| 顶层 | 竞赛 | 6 个 GIS 赛事、备考路线、技能地图、资料库 |
 | 跨学期 | 电子书 | 5 本大二上教材：自然地理、毛概、概率论、遥感导论、ArcGIS；在线阅读 |
 
 大二下、大三上、大三下已留好结构，课程确定后按同一模板接入。
@@ -46,6 +51,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
   - `译`：术语直接显示英文和英文释义；句子交给 AI 翻译并解释关键术语。
   - `问`：围绕选中的内容继续追问，讲机制、公式、例子和易混点。
 - **知识点深聊**：每个知识点右侧有“深聊”，不必复制粘贴，直接围绕它继续对话。
+- **讲义补充**：从老师 30 页复习讲义补入 61 条遗漏知识点，按章折叠；原有七套作业题库完全不动。
 - **不设独立 AI 助手面板**：遥感页没有右下角聊天窗，AI 只在“选中 / 深聊”时出现。
 
 ### Python 模块
@@ -59,6 +65,22 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 - 代码练习：CodeMirror 行号 / 高亮 / 括号补全 + Pyodide 浏览器运行；多文件；按 import 自动加载常见包。
 - AI 助教：提示、讲解、变式题、简答批改、选中解释、错题分析、今日计划。
 
+### 四个课程模块
+
+- **自然地理学**：按最后一节课勾画/画勾部分整理；岩石、构造、变质作用、外力地貌分章拆开，配课本、手写扫描和重点页。
+- **毛概**：按“形成条件—主要内容—历史地位”搭框架；大题背诵、选择题专项、2024/2025 真题直接下载。
+- **概率论**：按题型和公式复习；PPT 原题、回忆版、2022—2023 期末卷和 Kira 讲义集中在一个模块。
+- **ArcGIS**：按老师音频总结拆成考试结构、理论、底层算法、软件实操、论述五块；配章节 PPT、操作题和实验。
+
+### 竞赛模块
+
+顶层模块，下面分四个子模块：
+
+1. **赛事总览**：易智瑞杯、SuperMap 杯、苍穹杯、全国高校 GIS 技能大赛、GIS 应用技能大赛、地理信息技能赛；含报名时间、组别、难度、官网链接。
+2. **怎么备考**：制图/设计、开发/WebGIS、遥感/分析三条路线 + 八周起步节奏。
+3. **技能地图**：GIS 基础、制图、数据处理、WebGIS、后端、Python、遥感、论文答辩。
+4. **资料库**：ArcGIS Pro、SuperMap、MapGIS、QGIS、OpenLayers、Leaflet、Turf.js、GeoPandas、GDAL 官方文档，以及国内/国际数据源。
+
 ### 电子书模块
 
 - 大二上 5 本教材：自然地理学、毛概（2023 版）、概率论与数理统计（第五版）、遥感导论、ArcGIS 空间分析实验教程（第三版）。
@@ -66,7 +88,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 - 自带轻量 PDF 阅读器：翻页、缩放、全屏、键盘方向键、手机滑动翻页，支持直接下载。
 - 版权归原作者和出版社；仅用于个人学习与课程复习，不用于商业传播。
 
-### 两门课共用的学习工具
+### 学习工具
 
 - 间隔复习：答错的题 1 天后回来；答对后拉长到 3 / 7 / 14 / 30 天，连对 5 次毕业。
 - 答题历史、每日目标、连续打卡、10 天计划。
@@ -113,6 +135,8 @@ python build.py
 - `src/content.py`：遥感题库与章节
 - `src/homework.json`：从 Word 作业抽出的内容
 - `src/python_questions.json`：599 道 Python 题
+- `src/notes.json`：遥感讲义补充 61 条
+- `src/courses.json`：四个课程模块的数据
 - `src/*.html`：页面模板
 - `assets/glossary.js`：75 条中英术语
 
@@ -129,6 +153,11 @@ kaoyan-remote.html         遥感 · 考研
 zero-remote.html           遥感 · 从 0 到 1
 python.html                Python · 期末复习
 zero-python.html           Python · 从 0 到 1
+nature-geo.html            自然地理学模块
+maogai.html                毛概模块
+probability.html           概率论模块
+arcgis.html                ArcGIS 模块
+competitions.html          竞赛顶层模块（4 个子模块）
 ebook.html                 电子书：5 本教材 + PDF 阅读器
 assets/
   apple.css                Apple 式浅色设计系统
@@ -137,7 +166,11 @@ assets/
   glossary.js              75 条中英术语数据
   study.js / study.css     间隔复习、历史、目标、计划、搜索
   ai.js / ai.css           Python：AI 助教面板
+  course.css / course.js   四个课程模块的共享布局
+  competitions.css/js      竞赛模块：赛事/备考/技能/资料
+  notes.css                遥感讲义补充
   ebook.js / ebook.css     电子书卡片与 PDF.js 阅读器
+  courses/ (release)       四个课程模块的 PDF/JPG，放在 GitHub Release
   ebooks/                  5 本压缩 PDF、封面、书目
   papers/                  十套 Python 完整卷 PDF / Word
   pdfjs/                   PDF.js 本地阅读组件
@@ -167,8 +200,8 @@ Orbit is a study system for GIS undergraduates. It does not put every resource o
 
 ```
 Semester (Year 2 Fall / Year 2 Spring / Year 3 Fall / Year 3 Spring / E-book)
-  └── Subject (Remote Sensing / Python / future courses)
-        └── Mode (Final exam review / Graduate entrance prep / Zero-to-one)
+  └── Subject (Remote Sensing / Python / Physical Geography / Maoism / Probability / ArcGIS)
+        └── Mode (Final exam review / key-point modules / e-books / competitions)
 ```
 
 After the brand landing, the learning hub asks only for a semester; the next layer asks for a subject; the third opens the actual material. A first-time visitor can see where to click without meeting every feature at once.
@@ -179,6 +212,11 @@ After the brand landing, the learning hub asks only for a semester; the next lay
 |---|---|---|
 | Year 2 Fall | Remote Sensing | 7 chapters, full homework, 90 questions, mock exam, wrong answers, bookmarks, 75 bilingual terms |
 | Year 2 Fall | Python | 599 questions, 10 papers, paper/section practice, mock exam, code lab |
+| Year 2 Fall | Physical Geography | Teacher-marked key points, chapter outline, metamorphism scans |
+| Year 2 Fall | Maoism | Essay frameworks, multiple-choice drills, 2024/2025 papers |
+| Year 2 Fall | Probability | Chapter priorities, formulas, PPT originals, 2022–2023 paper |
+| Year 2 Fall | ArcGIS | Exam structure, theory, algorithms and software workflows |
+| Top level | Competitions | 6 GIS contests, prep routes, skill map and resource library |
 | Cross-semester | E-book | 5 Year-2 Fall textbooks: physical geography, Maoism, probability, remote sensing, ArcGIS; read online |
 
 Year 2 Spring and Year 3 are reserved and follow the same structure when courses are confirmed.
@@ -193,6 +231,7 @@ Year 2 Spring and Year 3 are reserved and follow the same structure when courses
   - `译`: a known term opens its English name and English definition instantly; a sentence is translated and its key terms explained by AI.
   - `问`: continue a conversation about the selected passage — mechanism, formula, example, common confusions.
 - **Deep chat per knowledge point**: every point has a “深聊” action, so there is no copy-paste step.
+- **Lecture-note supplement**: 61 additional points extracted from the teacher's 30-page review PDF, grouped by chapter. The original seven homework sets are untouched.
 - **No separate AI assistant panel** on the remote-sensing page. AI appears only when you select text or open a knowledge point.
 
 ### Python
@@ -205,6 +244,22 @@ The old Python project is kept read-only and untouched. This is a new implementa
 - Wrong-answer book, bookmarks, per-paper progress and a data page.
 - Code lab: CodeMirror editor with line numbers, syntax highlighting and bracket completion; Pyodide runs Python in the browser; multi-file support; common packages loaded from imports.
 - AI tutor: hints, explanations, variant questions, short-answer review, selected-text explanation, wrong-answer analysis and a daily plan.
+
+### Four course modules
+
+- **Physical Geography**: built around the teacher's last-class highlights; rocks, structures, metamorphism and landforms with textbook, scanned notes and key-point page.
+- **Maoism**: “background — content — historical status” frameworks, essay memorization, multiple-choice drills and 2024/2025 papers.
+- **Probability**: question types and formulas, PPT originals, recall sheet, 2022–2023 paper and a Kira handout.
+- **ArcGIS**: exam structure, theory, algorithms, software workflows and essay strategy; chapter slides, operation PDF and labs.
+
+### Competitions
+
+A top-level module with four submodules:
+
+1. **Events**: Esri China, SuperMap, KQGIS, MapGIS, CAGIS and CIIA contests; dates, groups, difficulty and official links.
+2. **Prepare**: mapping/design, development/WebGIS and remote-sensing/analysis routes plus an 8-week starter plan.
+3. **Skills**: GIS fundamentals, cartography, data processing, WebGIS, backend, Python, remote sensing and presentation.
+4. **Resources**: official docs for ArcGIS Pro, SuperMap, MapGIS, QGIS, OpenLayers, Leaflet, Turf.js, GeoPandas and GDAL, plus data sources.
 
 ### E-books
 
@@ -276,6 +331,11 @@ kaoyan-remote.html         Remote Sensing · graduate entrance prep
 zero-remote.html           Remote Sensing · zero-to-one
 python.html                Python · final review
 zero-python.html           Python · zero-to-one
+nature-geo.html            Physical Geography module
+maogai.html                Maoism module
+probability.html           Probability module
+arcgis.html                ArcGIS module
+competitions.html          Competitions: events/prepare/skills/resources
 ebook.html                 E-books: 5 textbooks + PDF reader
 assets/
   apple.css                Apple-inspired light design system
@@ -284,7 +344,11 @@ assets/
   glossary.js              75 bilingual terms
   study.js / study.css     Spaced repetition, history, goals, plan, search
   ai.js / ai.css           Python: AI tutor panel
+  course.css / course.js   Shared layout for the four course modules
+  competitions.css/js      Competitions: events/prepare/skills/resources
+  notes.css                Remote-sensing lecture-note supplement
   ebook.js / ebook.css     Library cards and PDF.js reader
+  courses/ (release)       PDF/JPG resources hosted in a GitHub Release
   ebooks/                  Compressed PDFs, covers, book data
   papers/                  Full Python papers as PDF / Word
   pdfjs/                   Local PDF.js reader component

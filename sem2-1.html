@@ -12,6 +12,12 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/apple.css">
+
+<style>
+@media(min-width:1001px){.subject-grid.four{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:1000px){.subject-grid.four{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.subject-grid.four{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="global-nav">
@@ -24,6 +30,7 @@
       <a href="sem3-1.html">大三上</a>
       <a href="sem3-2.html">大三下</a>
       <a href="ebook.html">电子书</a>
+      <a href="competitions.html">竞赛</a>
     </nav>
     <div class="gn-right"><span>大二上 · 作者本校</span></div>
   </div>
@@ -33,9 +40,9 @@
   <section class="choice-hero">
     <div class="hero-eyebrow">大二上 · 科目</div>
     <h1>先选科目，<br>再选怎么学。</h1>
-    <p class="sub">大二上现在有两门课：遥感、Python。每门课里再分期末复习、考研、从 0 到 1；电子书跨学期共用。</p>
-    <p class="sub" style="font-size:13px;color:var(--faint);margin-top:10px">Two subjects, one structure: exam review, graduate entrance prep, or zero-to-one learning.</p>
-    <div class="subject-grid">
+    <p class="sub">大二上现在有六门课：遥感、Python、自然地理、毛概、概率论、ArcGIS。每门课一个模块；电子书和竞赛单独入口。</p>
+    <p class="sub" style="font-size:13px;color:var(--faint);margin-top:10px">Six subjects, one structure: exam review, key-point modules, e-books and competitions.</p>
+    <div class="subject-grid four">
       <div class="subject-card">
         <div class="label">科目 01 / REMOTE SENSING</div>
         <h2>遥感</h2>
@@ -54,6 +61,42 @@
         <div class="modes">
           <a href="python.html">期末复习 ›</a>
           <a href="zero-python.html">从 0 到 1 · Python ›</a>
+        </div>
+      </div>
+      <div class="subject-card">
+        <div class="label">科目 03 / PHYSICAL GEOGRAPHY</div>
+        <h2>自然地理学</h2>
+        <p>老师最后一节课划重点；材料里的勾画、手写问题优先。课本、变质作用扫描、重点页。</p>
+        <div class="modes">
+          <a href="nature-geo.html">重点模块 ›</a>
+          <a href="assets/courses/nature/key-points.jpg">重点页 ›</a>
+        </div>
+      </div>
+      <div class="subject-card">
+        <div class="label">科目 04 / MAO ZEDONG THOUGHT</div>
+        <h2>毛概</h2>
+        <p>大题基本考课后题；大题背诵、选择题专项、2024/2025 真题都在模块里。</p>
+        <div class="modes">
+          <a href="maogai.html">重点模块 ›</a>
+          <a href="assets/courses/maogai/past-2025.pdf">2025 真题 ›</a>
+        </div>
+      </div>
+      <div class="subject-card">
+        <div class="label">科目 05 / PROBABILITY</div>
+        <h2>概率论与数理统计</h2>
+        <p>老师 PPT 原题优先级最高；按题型、公式、真题三步复习。</p>
+        <div class="modes">
+          <a href="probability.html">重点模块 ›</a>
+          <a href="assets/courses/probability/past-2023.pdf">期末卷 ›</a>
+        </div>
+      </div>
+      <div class="subject-card">
+        <div class="label">科目 06 / ARCGIS</div>
+        <h2>ArcGIS 空间分析</h2>
+        <p>理论、算法、实操三条线；题型分值和操作流程按老师音频总结整理。</p>
+        <div class="modes">
+          <a href="arcgis.html">重点模块 ›</a>
+          <a href="assets/courses/arcgis/operations.pdf">操作题 ›</a>
         </div>
       </div>
       <div class="subject-card">

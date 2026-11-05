@@ -1,9 +1,9 @@
-const CACHE = 'orbit-shell-v14';
+const CACHE = 'orbit-shell-v16';
 const ASSETS = [
   './', './index.html', './semesters.html', './sem2-1.html', './sem2-2.html', './sem3-1.html', './sem3-2.html',
   './remote.html', './python.html', './kaoyan-remote.html', './zero-remote.html',
-  './zero-python.html', './ebook.html', './manifest.webmanifest',
-  './assets/apple.css', './assets/landing.css', './assets/landing.css?v=4', './assets/landing.js', './assets/landing.js?v=2', './assets/ebook.css', './assets/ebook.js', './assets/python-papers.css', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
+  './zero-python.html', './ebook.html', './nature-geo.html', './maogai.html', './probability.html', './arcgis.html', './competitions.html', './manifest.webmanifest',
+  './assets/apple.css', './assets/landing.css', './assets/landing.css?v=5', './assets/landing.js', './assets/landing.js?v=2', './assets/ebook.css', './assets/ebook.js', './assets/python-papers.css', './assets/course.css', './assets/course.css?v=2', './assets/course.js', './assets/competitions.css', './assets/competitions.css?v=2', './assets/competitions.js', './assets/competitions-data.js', './assets/notes.css', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
   './assets/rs-ai.css?v=4', './assets/ai.js', './assets/ai.js?v=4', './assets/study.js',
   './assets/rs-ai.js', './assets/rs-ai.js?v=5', './assets/glossary.js', './assets/glossary.js?v=4',
   './assets/pwa.js',
