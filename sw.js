@@ -1,9 +1,9 @@
-const CACHE = 'orbit-shell-v20';
+const CACHE = 'orbit-shell-v21';
 const ASSETS = [
   './', './index.html', './semesters.html', './sem2-1.html', './sem2-2.html', './sem3-1.html', './sem3-2.html',
   './remote.html', './python.html', './kaoyan-remote.html', './zero-remote.html',
   './zero-python.html', './ebook.html', './bw-talk.html', './nature-geo.html', './maogai.html', './probability.html', './arcgis.html', './competitions.html', './manifest.webmanifest',
-  './assets/apple.css', './assets/landing.css', './assets/landing.css?v=5', './assets/landing.js', './assets/landing.js?v=2', './assets/ebook.css', './assets/ebook.js', './assets/python-papers.css', './assets/course.css', './assets/course.css?v=2', './assets/course.js', './assets/competitions.css', './assets/competitions.css?v=2', './assets/competitions.js', './assets/bw.css', './assets/bw.css?v=3', './assets/bw.js', './assets/bw.js?v=2', './assets/cloudbase-config.js', './assets/cloudbase-config.js?v=2', './assets/competitions-data.js', './assets/notes.css', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
+  './assets/apple.css', './assets/landing.css', './assets/landing.css?v=5', './assets/landing.js', './assets/landing.js?v=2', './assets/ebook.css', './assets/ebook.js', './assets/python-papers.css', './assets/course.css', './assets/course.css?v=2', './assets/course.js', './assets/competitions.css', './assets/competitions.css?v=2', './assets/competitions.js', './assets/bw.css', './assets/bw.css?v=4', './assets/bw.js', './assets/bw.js?v=2', './assets/cloudbase-config.js', './assets/cloudbase-config.js?v=2', './assets/competitions-data.js', './assets/notes.css', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
   './assets/rs-ai.css?v=4', './assets/ai.js', './assets/ai.js?v=4', './assets/study.js',
   './assets/rs-ai.js', './assets/rs-ai.js?v=5', './assets/glossary.js', './assets/glossary.js?v=4',
   './assets/pwa.js',
@@ -26,11 +26,23 @@ self.addEventListener('activate', e => {
 });
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
-  if (url.hostname === 'api.deepseek.com') return;
+  if (url.origin !== location.origin) return;
   if (e.request.method !== 'GET') return;
-  if (e.request.mode === 'navigate') {
-    e.respondWith(fetch(e.request).then(r => { const copy = r.clone(); caches.open(CACHE).then(c => c.put(e.request, copy)); return r; }).catch(() => caches.match(e.request).then(r => r || caches.match('./index.html'))));
-    return;
+  // Never cache large downloads or handle them in the SW.
+  if (/\.(pdf|docx|zip|mp4|mov|webm)$/i.test(url.pathname) || url.pathname.includes('/assets/ebooks/') || url.pathname.includes('/assets/papers/')) return;
+
+  function networkFirst(request) {
+    return fetch(request, { cache: 'no-store' }).then(function (resp) {
+      if (resp && resp.ok) {
+        const copy = resp.clone();
+        caches.open(CACHE).then(function (c) { c.put(request, copy); });
+      }
+      return resp;
+    }).catch(function () {
+      return caches.match(request).then(function (r) {
+        return r || (request.mode === 'navigate' ? caches.match('./index.html') : Response.error());
+      });
+    });
   }
-  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(resp => { const copy = resp.clone(); caches.open(CACHE).then(c => c.put(e.request, copy)); return resp; }).catch(() => r)));
+  e.respondWith(networkFirst(e.request));
 });
