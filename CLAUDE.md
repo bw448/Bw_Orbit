@@ -40,7 +40,7 @@ python -m http.server 8765
 # 重新生成所有页面
 python build.py
 
-# 同步桌面资料：作业抽取 → 建站 → 六科总纲
+# 同步桌面资料：作业抽取 → 数据检查 → 建站 → 六科总纲
 python tools/sync_content.py
 # 或双击 sync.bat
 
@@ -70,9 +70,9 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
   - 数据：`src/python_guide.json` + `src/python_topics.json`
 - 四个课程模块：
   - `nature-geo.html` 自然地理学
-  - `maogai.html` 毛概（含 1065 道选择题自测）
+  - `maogai.html` 毛概（1065 题系统题库 + 100 道真题 + 256 条高频考点 + 39 组易混对比）
   - `probability.html` 概率论
-  - `arcgis.html` ArcGIS（80 道客观题 + 算法/实操/简答/分析/论述）
+  - `arcgis.html` ArcGIS（80 道客观题 + 18 条名词解释 + 算法/实操/简答/分析/论述）
 - 竞赛顶层模块：`competitions.html`（赛事 / 备考 / 技能 / 资料）
 - 电子书：`ebook.html`（5 本教材 + PDF.js 阅读器）
 - BW有话说：
@@ -94,8 +94,9 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - Python 知识地图：`src/python_guide.json`；题库主题统计：`src/python_topics.json`
 - 四个课程模块：`src/courses.json`
 - ArcGIS 题库 / 模板：`src/arcgis_bank.json`
-- 毛概选择题库：`src/maogai_bank.json`
+- 毛概选择题库：`src/maogai_bank.json`；高频考点/真题/易混：`src/maogai_special.json`
 - 课程总纲生成：`tools/export_summaries.py` → 桌面 `系统整理好的复习资料/`
+- 数据检查：`tools/check_site.py`（题库结构、答案下标、本地链接）
 - 电子书书目：`assets/ebooks/books.js`
 - 竞赛数据：`assets/competitions-data.js`
 - BW 的 CloudBase 配置：`assets/cloudbase-config.js`

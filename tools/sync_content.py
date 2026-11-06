@@ -3,8 +3,9 @@
 
 Steps:
   1. tools/extract_homework.py   (课程资料/遥感/作业分章 -> src/homework.json)
-  2. build.py                    (rebuild all pages)
-  3. tools/export_summaries.py   (one .docx per subject)
+  2. tools/check_site.py         (validate data and local links)
+  3. build.py                    (rebuild all pages)
+  4. tools/export_summaries.py   (one .docx per subject)
 
 Run: python tools/sync_content.py
 """
@@ -22,6 +23,7 @@ def run(script):
 
 def main():
     run(os.path.join("tools", "extract_homework.py"))
+    run(os.path.join("tools", "check_site.py"))
     run("build.py")
     run(os.path.join("tools", "export_summaries.py"))
     print("\nAll synced. 网站已重建，总纲已更新。")

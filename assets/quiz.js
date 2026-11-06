@@ -43,6 +43,16 @@
     return x === y;
   }
 
+  function iso(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function today() { return iso(new Date()); }
+  function daysFromNow(n) {
+    var d = new Date();
+    d.setDate(d.getDate() + n);
+    return iso(d);
+  }
+
   function typeName(t) {
     return { single: '单选', multi: '多选', judge: '判断', fill: '填空' }[t] || t;
   }
@@ -70,7 +80,7 @@
     var state = load(key);
     var perPage = cfg.perPage || 12;
 
-    var filter = { type: 'all', chapter: '', source: '', q: '', wrong: false };
+    var filter = { type: 'all', chapter: '', source: '', q: '', wrong: false, marked: false, due: false, random: false };
     var shown = perPage;
 
     var types = [];
@@ -107,8 +117,14 @@
             '<option value="">全部章节</option>' +
             chapters.map(function (c) { return '<option value="' + esc(c) + '">' + esc(c) + '</option>'; }).join('') +
             '</select></label>' : '') +
+          '<button type="button" class="quiz-chip" data-act="random20" aria-pressed="false">随机 20 题</button>' +
+          '<button type="button" class="quiz-chip" data-act="due" aria-pressed="false">今日复习</button>' +
+          '<button type="button" class="quiz-chip" data-act="marked" aria-pressed="false">收藏</button>' +
           '<button type="button" class="quiz-chip" data-act="wrong" aria-pressed="false">只看错题</button>' +
           '<button type="button" class="quiz-chip" data-act="shuffle">打乱顺序</button>' +
+          '<button type="button" class="quiz-chip" data-act="export">导出</button>' +
+          '<button type="button" class="quiz-chip" data-act="import">导入</button>' +
+          '<input type="file" class="quiz-import" accept=".json" hidden>' +
           '<button type="button" class="quiz-chip" data-act="reset">重置进度</button>' +
         '</div>' +
       '</div>' +
@@ -136,6 +152,11 @@
           if (hay.indexOf(filter.q.toLowerCase()) < 0) return false;
         }
         if (filter.wrong && !(state[it.id] && state[it.id].ok === false)) return false;
+        if (filter.marked && !(state[it.id] && state[it.id].bm)) return false;
+        if (filter.due) {
+          var st = state[it.id];
+          if (!st || !st.due || st.due > today()) return false;
+        }
         return true;
       });
       return out;
@@ -157,7 +178,12 @@
       var o = overall();
       var pct = o.total ? Math.round(o.answered / o.total * 100) : 0;
       progressEl.querySelector('i').style.width = pct + '%';
-      countEl.textContent = o.answered + ' / ' + o.total + ' 已答 · 正确 ' + o.ok;
+      var due = 0;
+      items.forEach(function (it) {
+        var st = state[it.id];
+        if (st && st.due && st.due <= today()) due++;
+      });
+      countEl.textContent = o.answered + ' / ' + o.total + ' 已答 · 正确 ' + o.ok + (due ? ' · 今日待复习 ' + due : '');
     }
 
     function card(it) {
@@ -166,6 +192,7 @@
       if (s.ok === true) cls += ' ok';
       if (s.ok === false) cls += ' bad';
       if (s.revealed) cls += ' revealed';
+      if (s.bm) cls += ' marked';
       var body = '';
       if (it.type === 'fill') body = fillBody(it, s);
       else if (it.type === 'judge') body = judgeBody(it, s);
@@ -174,6 +201,7 @@
         '<div class="qcard-head"><span class="qnum">' + String(it._n).padStart(2, '0') + '</span>' +
         '<span class="qtype">' + typeName(it.type) + '</span>' +
         (it.chapter ? '<span class="qchapter">' + esc(it.chapter) + '</span>' : '') +
+        '<button type="button" class="qbm' + (s.bm ? ' on' : '') + '" data-bm="' + esc(it.id) + '" aria-pressed="' + (!!s.bm) + '" aria-label="收藏">' + (s.bm ? '★' : '☆') + '</button>' +
         '<span class="qmark" aria-hidden="true"></span></div>' +
         (it.type === 'fill' ? '' : '<p class="qtext">' + formatQ(it.q) + '</p>') + body +
         '<div class="qfeedback" role="status"></div>' +
@@ -203,7 +231,8 @@
       }).join('');
       return '<div class="qopts' + (multi ? ' multi' : '') + '">' + opts + '</div>' +
         (multi && !locked ? '<div class="qactions"><button type="button" class="qsubmit"' + (picked.length ? '' : ' disabled') + '>提交答案</button></div>' : '') +
-        (!locked ? '<div class="qactions"><button type="button" class="qreveal">显示答案</button></div>' : '');
+        (!locked ? '<div class="qactions"><button type="button" class="qreveal">显示答案</button></div>' :
+          '<div class="qactions"><button type="button" class="qredo">重做</button></div>');
     }
 
     function judgeBody(it, s) {
@@ -219,7 +248,8 @@
         return '<button type="button" class="' + c + '" data-j="' + val + '"' + (locked ? ' disabled' : '') + '>' + label + '</button>';
       };
       return '<div class="qopts judge">' + mk(true, '对') + mk(false, '错') + '</div>' +
-        (!locked ? '<div class="qactions"><button type="button" class="qreveal">显示答案</button></div>' : '');
+        (!locked ? '<div class="qactions"><button type="button" class="qreveal">显示答案</button></div>' :
+          '<div class="qactions"><button type="button" class="qredo">重做</button></div>');
     }
 
     function fillBody(it, s) {
@@ -235,7 +265,8 @@
       }
       html += '</div>' +
         (!locked ? '<div class="qactions"><button type="button" class="qsubmit fill">检查答案</button>' +
-          '<button type="button" class="qreveal">显示答案</button></div>' : '');
+          '<button type="button" class="qreveal">显示答案</button></div>' :
+          '<div class="qactions"><button type="button" class="qredo">重做</button></div>');
       return html;
     }
 
@@ -257,20 +288,33 @@
 
     function mark(it, ok, extra) {
       var prev = state[it.id] || {};
-      state[it.id] = Object.assign({}, prev, extra || {}, { ok: ok });
+      var next = Object.assign({}, prev, extra || {}, { ok: ok });
+      if (!(extra && extra.revealed)) {
+        if (ok) {
+          var step = (prev.step || 0) + 1;
+          var days = [1, 3, 7, 14, 30][Math.min(step - 1, 4)] || 30;
+          next.step = step;
+          next.due = daysFromNow(days);
+        } else {
+          next.step = 0;
+          next.due = daysFromNow(1);
+        }
+      }
+      state[it.id] = next;
       save(key, state);
     }
 
     function render() {
       var list = filtered();
-      var slice = list.slice(0, shown);
+      var limit = filter.random ? 20 : shown;
+      var slice = list.slice(0, limit);
       listEl.innerHTML = slice.map(card).join('');
       Array.prototype.forEach.call(listEl.querySelectorAll('.qcard'), function (el) {
         var st = state[el.dataset.id];
         var item = items.find(function (x) { return x.id === el.dataset.id; });
         if (st && st.ok !== undefined && item) showFeedback(el, item, st.ok, st);
       });
-      moreEl.hidden = slice.length >= list.length;
+      moreEl.hidden = filter.random || slice.length >= list.length;
       emptyEl.hidden = list.length !== 0;
       updateProgress();
     }
@@ -282,6 +326,25 @@
       var it = items.find(function (x) { return x.id === cardEl.dataset.id; });
       if (!it) return;
       var s = state[it.id] || {};
+
+      var bm = e.target.closest('.qbm');
+      if (bm) {
+        state[it.id] = Object.assign({}, s, { bm: !s.bm });
+        save(key, state);
+        render();
+        return;
+      }
+
+      var redo = e.target.closest('.qredo');
+      if (redo) {
+        var st = state[it.id] || {};
+        delete st.ok; delete st.a; delete st.v; delete st.revealed;
+        state[it.id] = st;
+        save(key, state);
+        render();
+        return;
+      }
+
       if (s.ok !== undefined) return;
 
       var opt = e.target.closest('.qopt');
@@ -351,6 +414,47 @@
           filter.wrong = !filter.wrong;
           act.setAttribute('aria-pressed', String(filter.wrong));
           act.classList.toggle('on', filter.wrong);
+        } else if (a === 'marked') {
+          filter.marked = !filter.marked;
+          act.setAttribute('aria-pressed', String(filter.marked));
+          act.classList.toggle('on', filter.marked);
+        } else if (a === 'due') {
+          filter.due = !filter.due;
+          act.setAttribute('aria-pressed', String(filter.due));
+          act.classList.toggle('on', filter.due);
+        } else if (a === 'random20') {
+          filter.random = !filter.random;
+          act.setAttribute('aria-pressed', String(filter.random));
+          act.classList.toggle('on', filter.random);
+          if (filter.random) {
+            filter.type = 'all'; filter.source = ''; filter.chapter = ''; filter.q = '';
+            filter.wrong = false; filter.marked = false; filter.due = false;
+            Array.prototype.forEach.call(root.querySelectorAll('[data-type]'), function (b) {
+              b.classList.toggle('on', b.dataset.type === 'all');
+            });
+            var srcSel = root.querySelector('.quiz-source'); if (srcSel) srcSel.value = '';
+            var chSel = root.querySelector('.quiz-chapter'); if (chSel) chSel.value = '';
+            var srch = root.querySelector('.quiz-search input'); if (srch) srch.value = '';
+            for (var k = items.length - 1; k > 0; k--) {
+              var j = Math.floor(Math.random() * (k + 1));
+              var tmp = items[k]; items[k] = items[j]; items[j] = tmp;
+            }
+            items.forEach(function (x, idx) { x._n = idx + 1; });
+          }
+        } else if (a === 'export') {
+          var blob = new Blob([JSON.stringify({ key: key, state: state }, null, 2)], { type: 'application/json' });
+          var url = URL.createObjectURL(blob);
+          var link = document.createElement('a');
+          link.href = url;
+          link.download = 'orbit-quiz-' + key + '.json';
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        } else if (a === 'import') {
+          var fileInput = root.querySelector('.quiz-import');
+          if (fileInput) fileInput.click();
+          return;
         } else if (a === 'shuffle') {
           for (var i = items.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
@@ -380,7 +484,23 @@
       }
     });
     root.addEventListener('change', function (e) {
-      if (e.target.matches('.quiz-source')) {
+      if (e.target.matches('.quiz-import')) {
+        var f = e.target.files && e.target.files[0];
+        if (!f) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          try {
+            var data = JSON.parse(reader.result);
+            if (data && data.state && typeof data.state === 'object') {
+              Object.keys(data.state).forEach(function (k) { state[k] = data.state[k]; });
+              save(key, state);
+              render();
+            }
+          } catch (err) {}
+          e.target.value = '';
+        };
+        reader.readAsText(f);
+      } else if (e.target.matches('.quiz-source')) {
         filter.source = e.target.value;
         filter.chapter = '';
         var ch = root.querySelector('.quiz-chapter');

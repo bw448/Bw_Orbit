@@ -10,8 +10,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230b7285'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/apple.css">
 <link rel="stylesheet" href="assets/course.css?v=4">
-<link rel="stylesheet" href="assets/quiz.css?v=2">
-<link rel="stylesheet" href="assets/arcgis.css?v=2">
+<link rel="stylesheet" href="assets/quiz.css?v=4">
+<link rel="stylesheet" href="assets/arcgis.css?v=3">
 
 <header class="global-nav">
   <div class="gn-inner">
@@ -94,8 +94,9 @@
     <div class="course-shell">
       <div class="section-head">
         <div><div class="eyebrow">Terms · 15 分</div><h2>五个名词，<br>先写英文。</h2></div>
-        <p class="section-lede">名词解释 5 题 × 3 分：先英文全称，再中文定义，最后补核心特征。下面六条是最高频的，背骨架即可。</p>
+        <p class="section-lede">名词解释 5 题 × 3 分：先英文全称，再中文定义，最后补核心特征。下面 18 条覆盖高频概念，先背骨架，再遮住释义自测。</p>
       </div>
+      <div class="ag-term-tools"><button type="button" id="termHide">遮住释义</button><button type="button" id="termShuffle">随机抽 5 条</button></div>
       <div class="term-grid" id="termGrid"></div>
       <div class="vocab-wrap">
         <div class="essay-k" style="margin-top:18px">专业词汇中英对照 · 必背 12 条</div>
@@ -130,6 +131,7 @@
         <div><div class="eyebrow">Short answer · Analysis</div><h2>十道简答，<br>七道分析。</h2></div>
         <p class="section-lede">简答按点给分，分析题按步骤给分。先自己能说出骨架，再展开；不要一上来写长段。</p>
       </div>
+      <div class="ag-term-tools"><button type="button" id="qaWrongOnly" aria-pressed="false">隐藏已会</button><span id="qaProgress"></span></div>
       <div class="essay-k">简答题 · 10</div>
       <div class="qa-list" id="shortList"></div>
       <div class="essay-k" style="margin-top:30px">分析题 · 7</div>
@@ -183,6 +185,6 @@
 </main>
 
 <script>window.ARCGIS = __ARCGIS__;</script>
-<script src="assets/quiz.js?v=3"></script>
-<script src="assets/arcgis.js?v=2"></script>
+<script src="assets/quiz.js?v=5"></script>
+<script src="assets/arcgis.js?v=3"></script>
 <script src="assets/pwa.js" defer></script>

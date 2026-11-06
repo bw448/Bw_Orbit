@@ -43,13 +43,45 @@
   /* terms */
   var terms = byId('termGrid');
   if (terms) {
-    terms.innerHTML = (A.terms || []).map(function (t) {
-      return '<article class="term-card">' +
-        '<div class="term-head"><span class="term-en">' + esc(t.en) + '</span><span class="term-zh">' + esc(t.zh) + '</span></div>' +
-        '<p class="term-def">' + esc(t.def) + '</p>' +
-        '<div class="term-key"><b>记忆骨架</b>' + esc(t.key) + '</div>' +
-        '</article>';
-    }).join('');
+    var allTerms = A.terms || [];
+    function renderTerms(list) {
+      terms.innerHTML = list.map(function (t) {
+        return '<article class="term-card">' +
+          '<div class="term-head"><span class="term-en">' + esc(t.en) + '</span><span class="term-zh">' + esc(t.zh) + '</span></div>' +
+          '<p class="term-def">' + esc(t.def) + '</p>' +
+          '<div class="term-key"><b>记忆骨架</b>' + esc(t.key) + '</div>' +
+          '</article>';
+      }).join('');
+    }
+    renderTerms(allTerms);
+    var hideBtn = byId('termHide');
+    if (hideBtn) hideBtn.addEventListener('click', function () {
+      terms.classList.toggle('hide-def');
+      hideBtn.textContent = terms.classList.contains('hide-def') ? '显示释义' : '遮住释义';
+      hideBtn.classList.toggle('on', terms.classList.contains('hide-def'));
+    });
+    var shuffleBtn = byId('termShuffle');
+    var showingAll = true;
+    if (shuffleBtn) shuffleBtn.addEventListener('click', function () {
+      if (showingAll) {
+        var copy = allTerms.slice();
+        for (var i = copy.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = copy[i]; copy[i] = copy[j]; copy[j] = tmp;
+        }
+        renderTerms(copy.slice(0, 5));
+        shuffleBtn.textContent = '看全部 ' + allTerms.length + ' 条';
+        showingAll = false;
+      } else {
+        renderTerms(allTerms);
+        shuffleBtn.textContent = '随机抽 5 条';
+        showingAll = true;
+      }
+    });
+    terms.addEventListener('click', function (e) {
+      var card = e.target.closest('.term-card');
+      if (card) card.classList.toggle('revealed');
+    });
   }
   var vocab = byId('vocabTable');
   if (vocab) {
@@ -99,29 +131,79 @@
     });
   }
 
-  /* short answers */
+  /* short answers + analysis, with mastery marks */
+  var qaState = {};
+  try { qaState = JSON.parse(localStorage.getItem('orbit.arcgis.qa') || '{}') || {}; } catch (e) { qaState = {}; }
+  var allQa = (A.short || []).concat(A.analysis || []);
+
+  function qaButtons(id) {
+    var st = qaState[id];
+    return '<div class="qa-mastery">' +
+      '<button type="button" class="qa-mark' + (st === 1 ? ' on ok' : '') + '" data-qa="' + esc(id) + '" data-ok="1">会</button>' +
+      '<button type="button" class="qa-mark' + (st === 0 ? ' on bad' : '') + '" data-qa="' + esc(id) + '" data-ok="0">不会</button>' +
+      '</div>';
+  }
+  function saveQa() {
+    try { localStorage.setItem('orbit.arcgis.qa', JSON.stringify(qaState)); } catch (e) {}
+    var done = allQa.filter(function (q) { return qaState[q.id] === 1; }).length;
+    var prog = byId('qaProgress');
+    if (prog) prog.textContent = '已掌握 ' + done + ' / ' + allQa.length;
+  }
+
   var short = byId('shortList');
   if (short) {
     short.innerHTML = (A.short || []).map(function (q, i) {
       return '<details class="qa-card">' +
         '<summary><span class="qa-num">' + String(i + 1).padStart(2, '0') + '</span>' +
-        '<span class="qa-q">' + esc(q.q) + '</span><span class="qa-ch">' + esc(q.chapter || '') + '</span></summary>' +
+        '<span class="qa-q">' + esc(q.q) + '</span><span class="qa-ch">' + esc(q.chapter || '') + '</span>' + qaButtons(q.id) + '</summary>' +
         '<div class="qa-body">' + (q.answer || []).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
         '<div class="qa-tip"><b>记忆提示</b>' + esc(q.tip || '') + '</div></div></details>';
     }).join('');
   }
 
-  /* analysis */
   var analysis = byId('analysisList');
   if (analysis) {
     analysis.innerHTML = (A.analysis || []).map(function (q, i) {
       return '<details class="qa-card analysis">' +
         '<summary><span class="qa-num">' + String(i + 1).padStart(2, '0') + '</span>' +
-        '<span class="qa-q">' + esc(q.q) + '</span><span class="qa-ch">分析题</span></summary>' +
+        '<span class="qa-q">' + esc(q.q) + '</span><span class="qa-ch">分析题</span>' + qaButtons(q.id) + '</summary>' +
         '<div class="qa-body">' + (q.answer || []).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
         '<div class="qa-tip"><b>答题骨架</b>' + esc(q.tip || '') + '</div></div></details>';
     }).join('');
   }
+  saveQa();
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.qa-mark');
+    if (btn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var id = btn.dataset.qa;
+      var val = Number(btn.dataset.ok);
+      qaState[id] = qaState[id] === val ? undefined : val;
+      if (qaState[id] === undefined) delete qaState[id];
+      var card = btn.closest('.qa-card');
+      if (card) {
+        card.querySelectorAll('.qa-mark').forEach(function (b) { b.classList.remove('on', 'ok', 'bad'); });
+        if (qaState[id] !== undefined) {
+          btn.classList.add('on');
+          btn.classList.add(val === 1 ? 'ok' : 'bad');
+        }
+      }
+      saveQa();
+      return;
+    }
+    var filterBtn = e.target.closest('#qaWrongOnly');
+    if (filterBtn) {
+      var only = filterBtn.getAttribute('aria-pressed') !== 'true';
+      filterBtn.setAttribute('aria-pressed', String(only));
+      filterBtn.classList.toggle('on', only);
+      document.querySelectorAll('.qa-card').forEach(function (card) {
+        var qid = card.querySelector('.qa-mark') ? card.querySelector('.qa-mark').dataset.qa : '';
+        card.hidden = only && qaState[qid] === 1;
+      });
+    }
+  });
 
   /* essay */
   var essay = byId('essayBox');

@@ -117,6 +117,7 @@ def build_maogai():
     tpl = open(os.path.join(ROOT, "src", "maogai.html"), encoding="utf-8").read()
     course = json.load(open(os.path.join(ROOT, "src", "courses.json"), encoding="utf-8"))["maogai"]
     bank = json.load(open(os.path.join(ROOT, "src", "maogai_bank.json"), encoding="utf-8"))
+    special = json.load(open(os.path.join(ROOT, "src", "maogai_special.json"), encoding="utf-8"))
     for key, val in {
         "__TITLE__": course["title"],
         "__TAG__": course["tag"],
@@ -131,6 +132,7 @@ def build_maogai():
         tpl = tpl.replace(key, val)
     tpl = tpl.replace("__COURSE__", js_json(course))
     tpl = tpl.replace("__MAOGAI_BANK__", js_json(bank))
+    tpl = tpl.replace("__MAOGAI_SPECIAL__", js_json(special))
     html = wrap(tpl)
     out = os.path.join(ROOT, "maogai.html")
     open(out, "w", encoding="utf-8").write(html)

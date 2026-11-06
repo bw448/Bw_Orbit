@@ -10,7 +10,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%23a33a32'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/apple.css">
 <link rel="stylesheet" href="assets/course.css?v=4">
-<link rel="stylesheet" href="assets/quiz.css?v=2">
+<link rel="stylesheet" href="assets/quiz.css?v=4">
+<link rel="stylesheet" href="assets/maogai.css?v=2">
 
 <header class="global-nav">
   <div class="gn-inner">
@@ -56,8 +57,11 @@
 
   <nav class="course-subnav" aria-label="本页导航">
     <a href="#exam">考试与重点</a>
-    <a href="#choice">选择题</a>
-    <a href="#sections">重点内容</a>
+    <a href="#points">高频考点</a>
+    <a href="#choice">系统题库</a>
+    <a href="#real">真题</a>
+    <a href="#confusions">易混对比</a>
+    <a href="#sections">章节框架</a>
     <a href="#plan">复习路线</a>
     <a href="#resources">资料</a>
   </nav>
@@ -73,7 +77,24 @@
     </div>
   </section>
 
-  <section class="course-section course-section-alt" id="choice">
+  <section class="course-section course-section-alt" id="points">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Key points · <span id="mgPointTotal">256</span></div><h2>高频考点，<br>按关键词记。</h2></div>
+        <p class="section-lede">从《毛概选择题专项》整理出 256 条考点，★ 为高频。先记冒号前的关键词，再记冒号后的关键术语；选择题往往只考其中一个对应关系。</p>
+      </div>
+      <div class="mg-tools">
+        <input type="search" id="mgPointSearch" placeholder="搜索考点关键词或内容" autocomplete="off">
+        <select id="mgPointChapter"><option value="">全部章节</option></select>
+        <button type="button" id="mgPointStar" aria-pressed="false">只看 ★</button>
+      </div>
+      <div class="mg-points" id="mgPoints"></div>
+      <div class="mg-more"><button type="button" id="mgPointMore">加载更多</button></div>
+      <p class="mg-count" id="mgPointCount"></p>
+    </div>
+  </section>
+
+  <section class="course-section" id="choice">
     <div class="course-shell">
       <div class="section-head">
         <div><div class="eyebrow">Choice bank · <span id="mgTotal">1065</span></div><h2>一千道，<br>按章节刷。</h2></div>
@@ -86,7 +107,27 @@
     </div>
   </section>
 
-  <section class="course-section" id="sections">
+  <section class="course-section course-section-alt" id="real">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Real papers · 100</div><h2>两年真题，<br>按卷刷。</h2></div>
+        <p class="section-lede">2024、2025 年真题选择题各 50 道，带答案和一句考点解析。单选自动判分，多选少选/错选不得分。</p>
+      </div>
+      <div class="quiz-shell" id="mgRealQuiz"></div>
+    </div>
+  </section>
+
+  <section class="course-section" id="confusions">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">Confusions · <span id="mgConfTotal">39</span></div><h2>最容易混的，<br>放一起看。</h2></div>
+        <p class="section-lede">把“毛泽东思想 / 毛泽东个人的思想”“基本矛盾 / 主要矛盾”“改革 / 革命”这类成对概念放在一张卡上，用一句话说清区别。</p>
+      </div>
+      <div class="mg-confusions" id="mgConfusions"></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="sections">
     <div class="course-shell">
       <div class="section-head">
         <div><div class="eyebrow">Key content</div><h2>重点，<br>按章过。</h2></div>
@@ -96,7 +137,7 @@
     </div>
   </section>
 
-  <section class="course-section course-section-alt" id="plan">
+  <section class="course-section" id="plan">
     <div class="course-shell">
       <div class="section-head">
         <div><div class="eyebrow">Study path</div><h2>怎么把它<br>复习完。</h2></div>
@@ -106,7 +147,7 @@
     </div>
   </section>
 
-  <section class="course-section" id="resources">
+  <section class="course-section course-section-alt" id="resources">
     <div class="course-shell">
       <div class="section-head">
         <div><div class="eyebrow">Materials</div><h2>最合适的<br>那几份资料。</h2></div>
@@ -128,7 +169,8 @@
 
 <script>window.COURSE = __COURSE__;</script>
 <script>window.MAOGAI_BANK = __MAOGAI_BANK__;</script>
+<script>window.MAOGAI_SPECIAL = __MAOGAI_SPECIAL__;</script>
 <script src="assets/course.js"></script>
-<script src="assets/quiz.js?v=3"></script>
-<script src="assets/maogai.js?v=2"></script>
+<script src="assets/quiz.js?v=5"></script>
+<script src="assets/maogai.js?v=3"></script>
 <script src="assets/pwa.js" defer></script>
