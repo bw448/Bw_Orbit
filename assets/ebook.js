@@ -84,7 +84,6 @@
       canvas.style.width = vp.width + 'px';
       canvas.style.height = vp.height + 'px';
       var ctx = canvas.getContext('2d');
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       renderTask = page.render({ canvasContext: ctx, viewport: vp, transform: [dpr, 0, 0, dpr, 0, 0] });
       return renderTask.promise.then(function () {
         if (myToken !== loadToken) return;
