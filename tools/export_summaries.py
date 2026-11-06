@@ -372,6 +372,7 @@ def doc_course(slug, filename, title, subtitle, sources, pages, extra_rows=None,
 def doc_maogai():
     c = load_json("courses.json")["maogai"]
     bank = load_json("maogai_bank.json")
+    special = load_json("maogai_special.json")
     meta = bank["meta"]
     doc = new_doc("毛概 · 期末复习总纲", "大二上 · 毛泽东思想和中国特色社会主义理论体系概论")
     h1(doc, "一、考试与复习总览")
@@ -385,24 +386,42 @@ def doc_maogai():
         ["新教材章节题库", meta["new"], "已纳入", "《毛概选择题题库（去重汇总）》第一部分"],
         ["旧教材综合题库", meta["old"], "已纳入", "同上，第二部分；第 1—8 章优先"],
         ["期末补充题库", meta["supplement"], "本次补齐", "《毛概期末考试题库 1.pdf》，按题干去重后新增"],
-        ["2024/2025 真题选择题", 100, "已在专项 PDF", "《毛概选择题专项》第三、四部分，带解析"],
-        ["合计可刷", meta["total"], "网站已上线", "maogai.html#choice；单选自动判分，多选少选/错选不得分"],
+        ["2024/2025 真题选择题", 100, "已上线", "maogai.html#real；2024、2025 各 50 题，带考点解析"],
+        ["合计可刷", meta["total"] + 100, "网站已上线", "系统题库 1065 ＋ 真题 100；单选自动判分，多选少选/错选不得分"],
     ])
     note(doc, "原资料个别题目有错字或答案争议；遇到与教材、课后题不一致的，以教材和课后题为准。")
 
-    h1(doc, "三、章节框架")
+    h1(doc, "三、高频考点（★ 优先）")
+    para(doc, "从《毛概选择题专项》整理出 %d 条考点，其中 ★ 高频 %d 条。背法：先记冒号前的关键词，再记冒号后的关键术语。" %
+         (len(special["points"]), sum(1 for p in special["points"] if p["star"])))
+    current = ""
+    for p in special["points"]:
+        if not p["star"]:
+            continue
+        if p["chapter"] != current:
+            current = p["chapter"]
+            h2(doc, current)
+        bullets(doc, ["%s：%s" % (p["keyword"], p["text"])])
+    para(doc, "完整 %d 条考点在 maogai.html#points，可按章节、关键词、★ 筛选。" % len(special["points"]))
+
+    h1(doc, "四、易混对比")
+    para(doc, "考前最后一遍：把成对概念放在一起，用一句话说清区别。")
+    table(doc, ["概念 A", "概念 B", "一句话区别"],
+          [[x["a"], x["b"], x["diff"]] for x in special["confusions"]], widths=[4.0, 4.0, 8.0])
+
+    h1(doc, "五、章节框架")
     for i, s in enumerate(c.get("sections", []), 1):
         h2(doc, "%02d %s" % (i, s["title"]))
         bullets(doc, s.get("points", []))
 
-    h1(doc, "四、复习路线")
+    h1(doc, "六、复习路线")
     numbered(doc, [p[1] + "：" + p[2] for p in c.get("plan", [])])
-    para(doc, "选择题建议每天 1—2 章：新教材题库优先，旧教材第 1—8 章次之，期末补充题库用于查漏；错题回到章节框架找对应考点。")
+    para(doc, "选择题建议每天 1—2 章：新教材题库优先，旧教材第 1—8 章次之，期末补充题库用于查漏；真题 100 道放在考前一周限时做。")
 
-    h1(doc, "五、资料清单")
+    h1(doc, "七、资料清单")
     table(doc, ["资料", "说明", "位置"], [[r[0], r[1], short_loc(r[2])] for r in c.get("resources", [])])
-    para(doc, "网站内还直接提供 1065 道选择题自测；PDF 资料用于看解析和打印。")
-    sync_note(doc, ["src/courses.json", "src/maogai_bank.json"], ["maogai.html"])
+    para(doc, "网站内提供系统题库 1065 道、真题 100 道、高频考点 256 条和易混对比 39 组；PDF 资料用于看解析和打印。")
+    sync_note(doc, ["src/courses.json", "src/maogai_bank.json", "src/maogai_special.json"], ["maogai.html"], num="八")
     return "毛概复习总纲.docx", doc
 
 
@@ -548,7 +567,7 @@ def write_index(names):
         "| 遥感 | 遥感复习总纲.docx（含“六、分章作业原文”） | remote.html |",
         "| 自然地理学 | 自然地理学复习总纲.docx | nature-geo.html |",
         "| 概率论 | 概率论复习总纲.docx | probability.html |",
-        "| 毛概 | 毛概复习总纲.docx | maogai.html |",
+        "| 毛概 | 毛概复习总纲.docx（含高频考点/易混/章节框架） | maogai.html |",
         "| Python | Python地理处理复习总纲.docx | python.html / python-guide.html |",
         "| ArcGIS | ArcGIS空间分析复习总纲.docx | arcgis.html |",
         "",
@@ -558,6 +577,7 @@ def write_index(names):
         "",
         "```powershell",
         "cd E:\\地信复习系统",
+        "python tools/check_site.py",
         "python build.py",
         "python tools/export_summaries.py",
         "```",
