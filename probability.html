@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/apple.css">
 <link rel="stylesheet" href="assets/course.css?v=4">
+<link rel="stylesheet" href="assets/course-ai.css?v=1">
 </head>
 <body>
 <header class="global-nav">
@@ -35,7 +36,7 @@
   </div>
 </header>
 
-<main class="course-page" id="coursePage" style="--course-accent:#0071e3">
+<main class="course-page" id="coursePage" data-ai-subject="概率论与数理统计" style="--course-accent:#0071e3">
   <section class="course-hero">
     <div class="course-shell course-hero-inner">
       <div class="course-hero-copy">
@@ -117,6 +118,7 @@
 
 <script>window.COURSE = {"title": "概率论与数理统计", "en": "Probability & Statistics", "code": "PROB · 05", "tag": "大二上 · 数学基础", "accent": "#0071e3", "lead": "先把题型认出来，再把公式用熟；老师 PPT 上的原题优先级最高。", "intro": "概率论不是只看懂公式，而是看到题能判断“考哪一类”。先过老师 PPT 上的题和近年的真题，再按章节补基本方法；计算题要动手写到能独立复现。", "notice": "大二上经验：看老师 PPT 上的题，考过一些原题；基本解题方法要会。", "exam": [["重点来源", "老师 PPT 上的题 + 2022—2023 期末卷 + 回忆版"], ["题型", "选择/填空/计算/证明；以老师说明为准"], ["复习顺序", "题型识别 → 公式 → 原题 → 限时真题"]], "sections": [{"title": "随机事件与概率", "en": "Events & Probability", "points": ["样本空间、事件关系与运算；概率的公理化定义与性质。", "古典概型、几何概型；条件概率、乘法公式、全概率公式、贝叶斯公式。", "事件的独立性；独立与互斥不要混。"]}, {"title": "随机变量及其分布", "en": "Random Variables", "points": ["分布函数 F(x) 的性质；离散型分布律与连续型概率密度。", "常见分布：0-1、二项、泊松、几何、均匀、指数、正态。", "随机变量函数的分布：分布函数法、公式法。"]}, {"title": "多维随机变量", "en": "Multivariate", "points": ["联合分布、边缘分布、条件分布。", "独立性判断；二维均匀/正态的联合密度。", "两个随机变量函数的分布（和、商、最大值/最小值）。"]}, {"title": "数字特征", "en": "Numerical Characteristics", "points": ["数学期望、方差、标准差；期望与方差的性质。", "协方差、相关系数；不相关与独立的关系。", "常见分布的期望/方差要熟到能直接写。"]}, {"title": "大数定律与中心极限定理", "en": "LLN & CLT", "points": ["切比雪夫不等式；大数定律的直观含义。", "独立同分布中心极限定理；正态近似计算。", "什么时候用中心极限定理，什么时候用精确分布。"]}, {"title": "数理统计基础与参数估计", "en": "Statistics & Estimation", "points": ["总体、样本、统计量；样本均值、样本方差。", "χ²、t、F 分布；正态总体下的抽样分布。", "矩估计、极大似然估计；估计量的无偏性、有效性、一致性。", "置信区间：均值、方差、比例的区间估计。"]}, {"title": "假设检验", "en": "Hypothesis Testing", "points": ["原假设/备择假设；第一类、第二类错误。", "显著性水平、拒绝域、p 值。", "正态总体均值/方差的检验；检验步骤要写完整。"]}], "plan": [["01", "认题型", "把 PPT 原题按章节标注：考分布、数字特征、估计还是检验。"], ["02", "补公式", "做一张 A4 公式表：条件概率、全概率、常见分布、期望方差、区间估计。"], ["03", "做原题", "先做 PPT 上的题和回忆版，确保每一步计算能复现。"], ["04", "限时真题", "用 2022—2023 期末卷限时完成，错题回到对应章节。"]], "resources": [["概率论回忆版", "PDF · 考点回忆", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/recall.pdf", "重点"], ["2022—2023 期末试卷", "PDF · 陕西师范大学", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/past-2023.pdf", "真题"], ["Kira 概率统计 4 小时速通讲义", "PDF · 空白截图版", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/kira-4h.pdf", "课程"], ["概率论与数理统计（第五版）", "PDF · 443 页 · 41.4 MB", "assets/ebooks/probability-statistics.pdf", "教材"]], "links": [["电子书阅读器", "ebook.html"], ["毛概模块", "maogai.html"], ["竞赛模块", "competitions.html"]]};</script>
 <script src="assets/course.js"></script>
+<script src="assets/course-ai.js?v=1" defer></script>
 <script src="assets/pwa.js" defer></script>
 </body>
 </html>

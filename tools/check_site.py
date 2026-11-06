@@ -83,6 +83,14 @@ def check_maogai():
             if len(x.get("options", [])) != 4 or not x.get("answer"):
                 err("maogai_special %s bad options/answer" % x.get("id"))
         print("maogai special:", len(s.get("points", [])), "points,", len(s.get("real", [])), "real,", len(s.get("confusions", [])), "confusions")
+    e = load("maogai_essay.json")
+    if e:
+        if len(e.get("items", [])) < 100:
+            err("maogai_essay too few items")
+        for x in e.get("items", []):
+            if not x.get("q") or not x.get("points"):
+                err("maogai_essay %s missing q/points" % x.get("id"))
+        print("maogai essays:", len(e.get("items", [])), "items")
 
 
 def check_python():
