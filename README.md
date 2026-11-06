@@ -107,8 +107,8 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 - 大二上 5 本教材：自然地理学、毛概（2023 版）、概率论与数理统计（第五版）、遥感导论、ArcGIS 空间分析实验教程（第三版）。
 - 共 1,981 页、约 231 MB；网页阅读版做了压缩，保留原书页序。
-- 自带轻量 PDF 阅读器：翻页、缩放、全屏、键盘方向键、手机滑动翻页，支持直接下载。
-- 在线阅读默认打开“前 16 页试读”（1—4 MB），打开更快；完整版在阅读器里下载，或点“完整版”用浏览器打开。
+- 自带轻量阅读器：翻页、缩放、键盘方向键、手机滑动翻页；全页图片按需加载，支持分卷和整本下载。
+- 在线阅读为全页图片：翻到哪页加载哪页，打开快、可看完全书；每 50 页另有 3—6 MB 的分卷 PDF，单卷下载快；完整版仍可下载。
 - 版权归原作者和出版社；仅用于个人学习与课程复习，不用于商业传播。
 
 ### 学习工具
@@ -198,7 +198,7 @@ arcgis.html                ArcGIS 模块（含 80 题自测）
 competitions.html          竞赛顶层模块（4 个子模块）
 bw-talk.html               BW有话说：公开时间线
 bw-admin.html              BW有话说：管理员登录/发帖/删除
-ebook.html                 电子书：5 本教材 + PDF 阅读器
+ebook.html                 电子书：5 本教材 + 全页图片阅读器
 assets/
   apple.css                Apple 式浅色设计系统
   landing.css / landing.js 品牌首页：轨道动效、滚动揭示
@@ -453,7 +453,7 @@ build.py                   Build script
 start.bat                  Local server
 tools/make_python_papers.py Generate full paper PDFs / Word files
 tools/prepare_ebooks.py     Compress PDFs and extract covers
-tools/make_ebook_previews.py 生成前 16 页试读 PDF（快速打开）
+tools/make_ebook_pages.py    生成全页图片与 50 页分卷 PDF
 tools/extract_homework.py   Chapter homework docx -> src/homework.json
 tools/build_maogai_bank.py  Maoism choice PDFs -> src/maogai_bank.json
 tools/build_python_topics.py 599-question topic counts
