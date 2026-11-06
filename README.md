@@ -116,6 +116,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 - 答题历史、每日目标、连续打卡、10 天计划。
 - 全库搜索、按数量随机练习、导出 / 导入学习数据。
 - 毛概 / ArcGIS 新题库支持：随机 20 题、今日复习（1/3/7/14/30 天）、收藏、重做、导出 / 导入。
+- 毛概、ArcGIS、自然地理、概率论和 Python 知识地图新增“问 AI”：右下角小按钮、章节旁“问 AI”、选中文字直接问；共用全站 DeepSeek Key，只做知识速查，不做花哨面板。
 - 进度、错题、收藏存在浏览器 `localStorage`，不上传服务器。
 
 ### AI 设置与隐私
@@ -169,6 +170,7 @@ python tools/sync_content.py
 - `src/arcgis_bank.json`：ArcGIS 题库、名词解释、算法、实操、论述模板
 - `src/maogai_bank.json`：毛概系统题库 1065 题
 - `src/maogai_special.json`：毛概高频考点 256 条、真题 100 道、易混对比 39 组
+- `src/maogai_essay.json`：毛概大题背诵 118 题（核心篇 47 + 后半篇 71）
 - `src/notes.json`：遥感讲义补充 61 条
 - `src/courses.json`：四个课程模块的数据
 - `src/*.html`：页面模板
@@ -228,6 +230,7 @@ tools/prepare_ebooks.py     压缩 PDF 并提取封面
 tools/extract_homework.py   遥感分章作业 -> src/homework.json
 tools/build_maogai_bank.py  毛概选择题 PDF -> src/maogai_bank.json
 tools/build_maogai_special.py 高频考点/真题/易混 -> src/maogai_special.json
+tools/build_maogai_essay.py  大题背诵 PDF -> src/maogai_essay.json
 tools/check_site.py         题库结构、答案下标、本地链接检查
 tools/build_python_topics.py 599 题主题统计 -> src/python_topics.json
 tools/export_summaries.py   六科总纲 -> 桌面 系统整理好的复习资料/

@@ -93,6 +93,64 @@
     renderPoints();
   }
 
+  /* essay bank */
+  var E = window.MAOGAI_ESSAY || { items: [] };
+  var essayBox = byId('mgEssay');
+  if (essayBox) {
+    var essays = E.items || [];
+    var et = byId('mgEssayTotal');
+    if (et) et.textContent = essays.length;
+    var ech = byId('mgEssayChapter');
+    var echapters = [];
+    essays.forEach(function (x) { if (x.chapter && echapters.indexOf(x.chapter) < 0) echapters.push(x.chapter); });
+    if (ech) echapters.forEach(function (c) { var o = document.createElement('option'); o.value = c; o.textContent = c; ech.appendChild(o); });
+    var etype = byId('mgEssayType');
+    var etag = byId('mgEssayTag');
+    var estate = { q: '', chapter: '', type: '', tag: false };
+    var eshown = 30;
+    var emore = byId('mgEssayMore');
+    function renderEssay() {
+      var list = essays.filter(function (x) {
+        if (estate.chapter && x.chapter !== estate.chapter) return false;
+        if (estate.type && x.type !== estate.type) return false;
+        if (estate.tag && !(x.tags || []).some(function (t) { return t.indexOf('课后题') >= 0; })) return false;
+        if (estate.q) {
+          var hay = (x.q + ' ' + (x.points || []).join(' ') + ' ' + (x.tip || '')).toLowerCase();
+          if (hay.indexOf(estate.q.toLowerCase()) < 0) return false;
+        }
+        return true;
+      });
+      var slice = list.slice(0, eshown);
+      essayBox.innerHTML = slice.map(function (x, i) {
+        var tags = (x.tags || []).map(function (t) { return '<span class="mg-etag">' + esc(t) + '</span>'; }).join('');
+        return '<details class="mg-essay">' +
+          '<summary><span class="mg-enum">' + String(i + 1).padStart(2, '0') + '</span>' +
+          '<span class="mg-eq">' + esc(x.q) + '</span>' +
+          '<span class="mg-etype">' + esc(x.type) + '</span></summary>' +
+          '<div class="mg-ebody">' + (tags ? '<div class="mg-etags">' + tags + '</div>' : '') +
+          '<ol class="mg-points">' + (x.points || []).map(function (p) { return '<li>' + esc(p.replace(/^[①-⑩]/, '')) + '</li>'; }).join('') + '</ol>' +
+          (x.tip ? '<div class="mg-etip"><b>提示</b>' + esc(x.tip) + '</div>' : '') +
+          '<div class="mg-ech">' + esc(x.chapter) + '</div></div></details>';
+      }).join('');
+      if (emore) emore.hidden = slice.length >= list.length;
+      var count = byId('mgEssayCount');
+      if (count) count.textContent = '显示 ' + slice.length + ' / ' + list.length + ' 题（共 ' + essays.length + ' 题）';
+    }
+    var es = byId('mgEssaySearch');
+    if (es) es.addEventListener('input', function () { estate.q = this.value.trim(); eshown = 30; renderEssay(); });
+    if (ech) ech.addEventListener('change', function () { estate.chapter = this.value; eshown = 30; renderEssay(); });
+    if (etype) etype.addEventListener('change', function () { estate.type = this.value; eshown = 30; renderEssay(); });
+    if (etag) etag.addEventListener('click', function () {
+      estate.tag = !estate.tag;
+      etag.classList.toggle('on', estate.tag);
+      etag.setAttribute('aria-pressed', String(estate.tag));
+      eshown = 30;
+      renderEssay();
+    });
+    if (emore) emore.addEventListener('click', function () { eshown += 30; renderEssay(); });
+    renderEssay();
+  }
+
   /* confusion pairs */
   var confBox = byId('mgConfusions');
   if (confBox) {

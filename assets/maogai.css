@@ -46,3 +46,24 @@
   .mg-point .kw{justify-self:start}
   .mg-tools button{min-height:44px}
 }
+
+.mg-essays{display:grid;gap:8px;margin-top:20px}
+.mg-essay{border:1px solid var(--line-soft);border-radius:12px;background:#fff;overflow:hidden}
+.mg-essay summary{list-style:none;display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:start;padding:12px 14px;cursor:pointer}
+.mg-essay summary::-webkit-details-marker{display:none}
+.mg-enum{font-family:var(--mono);font-size:9px;color:var(--faint);padding-top:2px}
+.mg-eq{font-size:13px;line-height:1.7;color:var(--ink)}
+.mg-etype{font-size:9px;color:var(--course-accent);border:1px solid color-mix(in srgb,var(--course-accent) 30%,transparent);border-radius:999px;padding:2px 7px;white-space:nowrap}
+.mg-ebody{padding:0 14px 15px 54px}
+.mg-etags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.mg-etag{font-size:9px;color:var(--course-accent);background:color-mix(in srgb,var(--course-accent) 7%,#fff);border-radius:999px;padding:2px 6px}
+.mg-points{margin:0;padding-left:18px;font-size:12px;line-height:1.85;color:var(--muted)}
+.mg-points li{margin-bottom:4px}
+.mg-etip{margin-top:10px;border-left:2px solid var(--course-accent);padding-left:9px;font-size:10.5px;line-height:1.75;color:var(--faint)}
+.mg-etip b{color:var(--course-accent);margin-right:5px}
+.mg-ech{margin-top:8px;font-size:9px;color:var(--faint)}
+@media(max-width:640px){
+  .mg-essay summary{grid-template-columns:24px 1fr;gap:8px}
+  .mg-etype{grid-column:2;justify-self:start}
+  .mg-ebody{padding-left:14px}
+}
