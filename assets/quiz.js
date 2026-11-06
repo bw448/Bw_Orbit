@@ -400,6 +400,9 @@
       var t = e.target.closest('[data-type]');
       if (t) {
         filter.type = t.dataset.type;
+        filter.random = false;
+        var rnd = root.querySelector('[data-act="random20"]');
+        if (rnd) { rnd.classList.remove('on'); rnd.setAttribute('aria-pressed', 'false'); }
         shown = perPage;
         Array.prototype.forEach.call(root.querySelectorAll('[data-type]'), function (b) {
           b.classList.toggle('on', b === t);
@@ -479,6 +482,9 @@
     root.addEventListener('input', function (e) {
       if (e.target.matches('.quiz-search input')) {
         filter.q = e.target.value.trim();
+        filter.random = false;
+        var rnd = root.querySelector('[data-act="random20"]');
+        if (rnd) { rnd.classList.remove('on'); rnd.setAttribute('aria-pressed', 'false'); }
         shown = perPage;
         render();
       }
@@ -503,12 +509,14 @@
       } else if (e.target.matches('.quiz-source')) {
         filter.source = e.target.value;
         filter.chapter = '';
+        filter.random = false;
         var ch = root.querySelector('.quiz-chapter');
         if (ch) ch.value = '';
         shown = perPage;
         render();
       } else if (e.target.matches('.quiz-chapter')) {
         filter.chapter = e.target.value;
+        filter.random = false;
         shown = perPage;
         render();
       }
