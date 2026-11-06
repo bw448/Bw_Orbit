@@ -135,7 +135,13 @@
     var src = previewMode ? book.preview : book.file;
     setLoading(true, previewMode ? '正在打开试读…' : '正在打开 PDF…');
     var token = loadToken;
-    window.pdfjsLib.getDocument(src).promise.then(function (doc) {
+    var task = window.pdfjsLib.getDocument(src);
+    task.onProgress = function (p) {
+      if (token !== loadToken || !p || !p.total) return;
+      var pct = Math.round(p.loaded / p.total * 100);
+      setLoading(true, (previewMode ? '正在打开试读… ' : '正在打开 PDF… ') + pct + '%');
+    };
+    task.promise.then(function (doc) {
       if (token !== loadToken) { doc.destroy(); return; }
       pdf = doc;
       updateControls();
