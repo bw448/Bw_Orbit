@@ -56,7 +56,7 @@
       '<div class="py-block"><div class="py-k">易错点</div><ul class="py-pitfalls">' +
       (m.pitfalls || []).map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul></div>' +
       (gap ? '<div class="py-gap"><b>题库覆盖不足</b>这一块要回到课件或原始 notebook，把代码亲手跑一遍；考试仍可能考基本用法。</div>' : '') +
-      '<div class="py-bank">题库：<a href="python.html#paper-1">按套刷</a> · <a href="python.html#practice-all">综合刷</a>' +
+      '<div class="py-bank">题库：<a href="python.html#topic-' + esc(m.id) + '">做这一块</a> · <a href="python.html#practice-all">综合刷</a>' +
       (n ? ' · 约 ' + n + ' 题涉及本主题' : '') + '</div>' +
       '</div></details>';
   }
