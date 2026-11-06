@@ -41,7 +41,7 @@
         '<span class="book-body"><span class="book-subject">' + esc(b.subject) + '</span>' +
         '<span class="book-title">' + esc(b.title) + '</span>' +
         '<span class="book-author">' + esc(b.author) + '</span>' +
-        '<span class="book-meta"><span>全页阅读 · ' + b.pages + ' 页' + parts + '</span><span>' + esc(b.size) + ' 全书</span></span>' +
+        '<span class="book-meta"><span>全页阅读 · ' + b.pages + ' 页' + parts + '</span><span>' + esc(b.webSize || b.size) + ' 压缩版</span></span>' +
         '<span class="book-open">开始阅读 <span>↗</span></span></span></button>';
     }).join('');
   }
@@ -120,9 +120,10 @@
     reader.hidden = false;
     document.body.classList.add('reader-open');
     titleEl.textContent = book.title;
-    download.href = book.file;
-    download.setAttribute('download', book.file.split('/').pop());
-    if (readFull) { readFull.hidden = false; readFull.href = book.file; }
+    var dl = book.webFile || book.file;
+    download.href = dl;
+    download.setAttribute('download', dl.split('/').pop());
+    if (readFull) { readFull.hidden = false; readFull.href = book.webFile || book.file; }
     if (previewNote) {
       previewNote.hidden = false;
       previewNote.textContent = '全页阅读 · ' + book.pages + ' 页';
