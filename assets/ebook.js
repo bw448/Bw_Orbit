@@ -16,8 +16,10 @@
   var zoomOut = document.getElementById('zoomOut');
   var zoomIn = document.getElementById('zoomIn');
   var closeBtn = document.getElementById('closeReader');
+  var previewNote = document.getElementById('readerPreviewNote');
+  var readFull = document.getElementById('readFullBook');
 
-  var pdf = null, pageNum = 1, zoom = 1, book = null, renderTask = null, loadToken = 0, touchX = 0;
+  var pdf = null, pageNum = 1, zoom = 1, book = null, renderTask = null, loadToken = 0, touchX = 0, previewMode = false;
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -35,7 +37,7 @@
         '<span class="book-body"><span class="book-subject">' + esc(b.subject) + '</span>' +
         '<span class="book-title">' + esc(b.title) + '</span>' +
         '<span class="book-author">' + esc(b.author) + '</span>' +
-        '<span class="book-meta"><span>' + b.pages + ' 页</span><span>' + esc(b.size) + '</span></span>' +
+        '<span class="book-meta"><span>试读 ' + (b.previewPages || 24) + ' 页 · 共 ' + b.pages + ' 页</span><span>' + esc(b.size) + '</span></span>' +
         '<span class="book-open">开始阅读 <span>↗</span></span></span></button>';
     }).join('');
   }
@@ -112,25 +114,35 @@
     clearCanvas();
     reader.hidden = false;
     document.body.classList.add('reader-open');
-    titleEl.textContent = book.title;
+    previewMode = !!(book.preview && book.preview !== book.file);
+    titleEl.textContent = book.title + (previewMode ? ' · 试读' : '');
     download.href = book.file;
     download.setAttribute('download', book.file.split('/').pop());
+    if (previewNote) {
+      previewNote.hidden = !previewMode;
+      previewNote.textContent = previewMode ? '试读前 ' + (book.previewPages || 24) + ' 页' : '';
+    }
+    if (readFull) {
+      readFull.hidden = !previewMode;
+      readFull.href = book.file;
+    }
     updateControls();
     if (!window.pdfjsLib) {
       showError('PDF 组件没有加载，请直接下载文件阅读。');
       return;
     }
     window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/pdfjs/pdf.worker.min.js';
-    setLoading(true, '正在打开 PDF…');
+    var src = previewMode ? book.preview : book.file;
+    setLoading(true, previewMode ? '正在打开试读…' : '正在打开 PDF…');
     var token = loadToken;
-    window.pdfjsLib.getDocument(book.file).promise.then(function (doc) {
+    window.pdfjsLib.getDocument(src).promise.then(function (doc) {
       if (token !== loadToken) { doc.destroy(); return; }
       pdf = doc;
       updateControls();
       renderPage();
     }).catch(function () {
       if (token !== loadToken) return;
-      showError('PDF 没有打开，可能是文件较大或网络中断；可以点“下载”保存后阅读。');
+      showError(previewMode ? '试读没有打开，可能是网络中断；可以点“下载”保存完整版后阅读。' : 'PDF 没有打开，可能是文件较大或网络中断；可以点“下载”保存后阅读。');
     });
   }
 

@@ -53,7 +53,7 @@
           <div class="eyebrow">Library</div>
           <h2>这一学期，<br>要读的书。</h2>
         </div>
-        <p>点击封面进入阅读器。文件是网页阅读压缩版，保留原书页序；需要原始文件时可以用阅读器里的“下载”。</p>
+        <p>点击封面进入阅读器：在线阅读为前 24 页试读，打开更快；完整版可在阅读器里下载，或点“完整版”用浏览器打开。</p>
       </div>
       <div class="book-grid" id="bookGrid"></div>
     </div>
@@ -80,6 +80,8 @@
       <div class="reader-title" id="readerTitle">电子书</div>
     </div>
     <div class="reader-tools">
+      <span class="reader-preview-note" id="readerPreviewNote" hidden></span>
+      <a id="readFullBook" class="reader-full" href="#" target="_blank" rel="noopener" hidden>完整版</a>
       <button type="button" id="zoomOut" aria-label="缩小">−</button>
       <button type="button" id="zoomIn" aria-label="放大">＋</button>
       <a id="downloadBook" class="reader-download" href="#" download>下载</a>
