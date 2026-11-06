@@ -469,6 +469,8 @@ def doc_python():
     para(doc, "注意：Matplotlib 仅约 2 题，GeoPandas、GDAL 基本为 0；这不是题库遗漏，而是十套卷按语言与 OOP 组织。"
               "这三块必须回到课件和 notebook 亲手跑代码。")
 
+    para(doc, "网站新增两个入口：知识地图每个模块的“做这一块”直接进入该主题题集；模拟卷新增“真实结构 100 分卷”（20 单选 + 10 多选 + 10 填空 + 3 代码阅读 + 3 程序设计）。")
+
     h1(doc, "四、复习路线")
     numbered(doc, [p[1] + "：" + p[2] for p in guide["plan"]])
 

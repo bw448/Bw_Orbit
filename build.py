@@ -50,7 +50,9 @@ def build_remote():
 def build_python():
     tpl = open(os.path.join(ROOT, "src", "python_template.html"), encoding="utf-8").read()
     data = json.load(open(os.path.join(ROOT, "src", "python_questions.json"), encoding="utf-8"))
+    topics = json.load(open(os.path.join(ROOT, "src", "python_topics.json"), encoding="utf-8"))
     html = tpl.replace("__PYDATA__", json.dumps(data, ensure_ascii=False))
+    html = html.replace("__PYTOPICS__", js_json(topics))
     html = wrap(html)
     out = os.path.join(ROOT, "python.html")
     open(out, "w", encoding="utf-8").write(html)

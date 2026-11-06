@@ -237,6 +237,8 @@
 <script src="assets/vendor/anime.min.js"></script>
 <script>
 const PY = __PYDATA__;
+const PYTOPICS = __PYTOPICS__;
+const TOPIC_NAMES = {basics:'基础语法与容器',functions:'函数、作用域与闭包',decorator:'迭代器、生成器与装饰器',oop1:'类与对象：封装',oop2:'继承、多态与模块',pandas:'Pandas 数据处理',matplotlib:'Matplotlib 绘图',geopandas:'GeoPandas 空间数据',gdal:'GDAL/OGR 栅格与矢量',env:'模块、文件与 Jupyter'};
 window.STUDY_KEY = 'orbit-python-v1'; window.STUDY_QUESTIONS = PY;
 const PAPERS = [...new Set(PY.map(q => q.paper))].sort((a,b) => a-b);
 const KEY = 'orbit-python-v1';
@@ -393,6 +395,7 @@ function route(){
   if ((m = h.match(/^#paper-full-(\d+)$/))) { showFullPaper(m[1]); return; }
   if ((m = h.match(/^#paper-(\d+)$/))) { showPaper(m[1]); return; }
   if ((m = h.match(/^#practice-(.+)$/))) { startPractice(m[1]); return; }
+  if ((m = h.match(/^#topic-(.+)$/))) { startTopic(m[1]); return; }
   if (h === '#exam') { showExam(); return; }
   if (h === '#wrong') { showWrong(); return; }
   if (h === '#bookmarks') { showBookmarks(); return; }
@@ -429,7 +432,15 @@ function startSection(n, sec){
   session = { mode:'practice', queue:qs, idx:0, selected:null, done:false, correct:null, title:'第 ' + n + ' 套 · ' + sec, num:'P' + String(n).padStart(2,'0'), back:'#paper-' + n, id:String(n) };
   renderPractice();
 }
+function startTopic(key){
+  const t = PYTOPICS && PYTOPICS.ids && PYTOPICS.ids[key];
+  if (!t || !t.length) { go('#modes'); return; }
+  const qs = t.map(qById).filter(Boolean);
+  session = { mode:'practice', queue:qs, idx:0, selected:null, done:false, correct:null, title:'主题 · ' + (TOPIC_NAMES[key] || key), num:'TOPIC', back:'#modes', id:'topic:' + key };
+  renderPractice();
+}
 function startPractice(id){
+  if (typeof id === 'string' && id.indexOf('topic:') === 0) { startTopic(id.slice(6)); return; }
   let qs, title, num, back;
   if (id === 'wrong') {
     qs = store.wrong.map(qById).filter(Boolean); title = '错题回看'; num = '—'; back = '#wrong';

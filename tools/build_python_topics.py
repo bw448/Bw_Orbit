@@ -38,10 +38,11 @@ def classify(q):
 
 def main():
     qs = json.load(open(SRC, encoding="utf-8"))
-    counts, samples, papers = {}, {}, {}
+    counts, samples, papers, ids = {}, {}, {}, {}
     for q in qs:
         key = classify(q)
         counts[key] = counts.get(key, 0) + 1
+        ids.setdefault(key, []).append(q["id"])
         samples.setdefault(key, [])
         if len(samples[key]) < 4:
             samples[key].append({"id": q["id"], "paper": q["paper"], "q": q["q"][:80]})
@@ -53,6 +54,7 @@ def main():
         "counts": counts,
         "samples": samples,
         "papers": papers,
+        "ids": ids,
         "note": "按题干、选项与解析中的关键词自动归类，仅用于复习导航；一题只计一次。",
     }
     json.dump(data, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
