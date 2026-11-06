@@ -48,6 +48,7 @@ body{padding-left:0;padding-right:0;background:var(--paper)}
 .reader-tools button:hover,.reader-download:hover{border-color:var(--ink)}
 .reader-download{color:var(--blue);border-color:rgba(0,113,227,.3)}
 .reader-stage{position:relative;flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:18px 12px 12px;overscroll-behavior:contain}
+.reader-cover{max-width:calc(100% - 24px);max-height:calc(100% - 30px);object-fit:contain;border-radius:2px;box-shadow:0 18px 50px rgba(25,60,100,.16);background:#fff}
 #pdfCanvas{display:block;max-width:100%;height:auto;background:#fff;box-shadow:0 18px 50px rgba(25,60,100,.16);border-radius:2px}
 .reader-loading{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:9px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.9);padding:10px 14px;border-radius:999px;border:1px solid var(--line-soft);z-index:2}
 .reader-loading[hidden]{display:none}

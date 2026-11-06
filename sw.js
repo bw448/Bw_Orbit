@@ -1,13 +1,13 @@
-const CACHE = 'orbit-shell-v31';
+const CACHE = 'orbit-shell-v32';
 const ASSETS = [
   './', './index.html', './semesters.html', './sem2-1.html', './sem2-2.html', './sem3-1.html', './sem3-2.html',
   './remote.html', './python.html', './python-guide.html', './kaoyan-remote.html', './zero-remote.html',
   './zero-python.html', './ebook.html', './bw-talk.html', './nature-geo.html', './maogai.html', './probability.html', './arcgis.html', './competitions.html', './manifest.webmanifest',
-  './assets/apple.css', './assets/landing.css', './assets/landing.css?v=5', './assets/landing.js', './assets/landing.js?v=2', './assets/ebook.css?v=2', './assets/ebook.js?v=3', './assets/python-papers.css', './assets/course.css', './assets/course.css?v=4', './assets/course.js', './assets/quiz.css?v=4', './assets/quiz.js?v=6', './assets/course-ai.css?v=1', './assets/course-ai.js?v=1', './assets/arcgis.css?v=3', './assets/arcgis.js?v=3', './assets/maogai.js?v=4', './assets/maogai.css?v=3', './assets/python-guide.css?v=2', './assets/python-guide.js?v=3', './assets/competitions.css', './assets/competitions.css?v=2', './assets/competitions.js', './assets/bw.css', './assets/bw.css?v=4', './assets/bw.js', './assets/bw.js?v=2', './assets/cloudbase-config.js', './assets/cloudbase-config.js?v=2', './assets/competitions-data.js', './assets/notes.css', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
+  './assets/apple.css', './assets/landing.css', './assets/landing.css?v=5', './assets/landing.js', './assets/landing.js?v=2', './assets/ebook.css?v=3', './assets/ebook.js?v=4', './assets/python-papers.css', './assets/course.css', './assets/course.css?v=4', './assets/course.js', './assets/quiz.css?v=4', './assets/quiz.js?v=6', './assets/course-ai.css?v=1', './assets/course-ai.js?v=1', './assets/arcgis.css?v=3', './assets/arcgis.js?v=3', './assets/maogai.js?v=4', './assets/maogai.css?v=3', './assets/python-guide.css?v=2', './assets/python-guide.js?v=3', './assets/competitions.css', './assets/competitions.css?v=2', './assets/competitions.js', './assets/bw.css', './assets/bw.css?v=4', './assets/bw.js', './assets/bw.js?v=2', './assets/cloudbase-config.js', './assets/cloudbase-config.js?v=2', './assets/competitions-data.js', './assets/notes.css', './assets/ai.css', './assets/ai.css?v=2', './assets/study.css', './assets/rs-ai.css',
   './assets/rs-ai.css?v=4', './assets/ai.js', './assets/ai.js?v=4', './assets/study.js',
   './assets/rs-ai.js', './assets/rs-ai.js?v=5', './assets/glossary.js', './assets/glossary.js?v=4',
   './assets/pwa.js',
-  './assets/ebooks/books.js',
+  './assets/ebooks/books.js?v=2',
   './assets/ebooks/covers/nature.jpg', './assets/ebooks/covers/maogai.jpg', './assets/ebooks/covers/probability.jpg', './assets/ebooks/covers/remote.jpg', './assets/ebooks/covers/arcgis.jpg',
   './assets/pdfjs/pdf.min.js', './assets/pdfjs/pdf.worker.min.js',
   './assets/codemirror/codemirror.min.css', './assets/codemirror/codemirror.min.js',

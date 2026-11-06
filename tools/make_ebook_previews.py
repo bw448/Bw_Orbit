@@ -15,9 +15,9 @@ import pymupdf
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BOOKS = os.path.join(ROOT, "assets", "ebooks", "books.js")
 OUT_DIR = os.path.join(ROOT, "assets", "ebooks", "preview")
-PREVIEW_PAGES = 24
-DPI = 110
-QUALITY = 68
+PREVIEW_PAGES = 16
+DPI = 100
+QUALITY = 64
 
 
 def book_files():

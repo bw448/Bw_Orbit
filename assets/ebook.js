@@ -18,6 +18,7 @@
   var closeBtn = document.getElementById('closeReader');
   var previewNote = document.getElementById('readerPreviewNote');
   var readFull = document.getElementById('readFullBook');
+  var coverImg = document.getElementById('readerCover');
 
   var pdf = null, pageNum = 1, zoom = 1, book = null, renderTask = null, loadToken = 0, touchX = 0, previewMode = false;
 
@@ -37,7 +38,7 @@
         '<span class="book-body"><span class="book-subject">' + esc(b.subject) + '</span>' +
         '<span class="book-title">' + esc(b.title) + '</span>' +
         '<span class="book-author">' + esc(b.author) + '</span>' +
-        '<span class="book-meta"><span>试读 ' + (b.previewPages || 24) + ' 页 · 共 ' + b.pages + ' 页</span><span>' + esc(b.size) + '</span></span>' +
+        '<span class="book-meta"><span>试读 ' + (b.previewPages || 16) + ' 页 · 共 ' + b.pages + ' 页</span><span>' + esc(b.size) + '</span></span>' +
         '<span class="book-open">开始阅读 <span>↗</span></span></span></button>';
     }).join('');
   }
@@ -87,6 +88,7 @@
       renderTask = page.render({ canvasContext: ctx, viewport: vp, transform: [dpr, 0, 0, dpr, 0, 0] });
       return renderTask.promise.then(function () {
         if (myToken !== loadToken) return;
+        if (coverImg) coverImg.hidden = true;
         setLoading(false);
         stage.scrollTop = 0;
         updateControls();
@@ -117,9 +119,13 @@
     titleEl.textContent = book.title + (previewMode ? ' · 试读' : '');
     download.href = book.file;
     download.setAttribute('download', book.file.split('/').pop());
+    if (coverImg) {
+      coverImg.src = book.cover;
+      coverImg.hidden = false;
+    }
     if (previewNote) {
       previewNote.hidden = !previewMode;
-      previewNote.textContent = previewMode ? '试读前 ' + (book.previewPages || 24) + ' 页' : '';
+      previewNote.textContent = previewMode ? '试读前 ' + (book.previewPages || 16) + ' 页' : '';
     }
     if (readFull) {
       readFull.hidden = !previewMode;
