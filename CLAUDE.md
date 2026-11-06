@@ -74,7 +74,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
   - `probability.html` 概率论
   - `arcgis.html` ArcGIS（80 道客观题 + 18 条名词解释 + 算法/实操/简答/分析/论述）
 - 竞赛顶层模块：`competitions.html`（赛事 / 备考 / 技能 / 资料）
-- 电子书：`ebook.html`（5 本教材 + PDF.js 阅读器；默认前 24 页试读，完整版下载）
+- 电子书：`ebook.html`（5 本教材 + PDF.js 阅读器；默认前 16 页试读，完整版下载）
 - BW有话说：
   - 公开页：`bw-talk.html`
   - 管理页：`bw-admin.html`（不进导航）

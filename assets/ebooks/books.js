@@ -9,7 +9,7 @@ window.ORBIT_EBOOKS = [
     size: "45.8 MB",
     file: "assets/ebooks/nature-geography.pdf",
     preview: "assets/ebooks/preview/nature.pdf",
-    previewPages: 24,
+    previewPages: 16,
     cover: "assets/ebooks/covers/nature.jpg",
     desc: "从气候、地貌、水文到土壤与生态，把自然地理的系统框架读成一条线。"
   },
@@ -22,7 +22,7 @@ window.ORBIT_EBOOKS = [
     size: "59.5 MB",
     file: "assets/ebooks/mao-zedong-thought.pdf",
     preview: "assets/ebooks/preview/maogai.pdf",
-    previewPages: 24,
+    previewPages: 16,
     cover: "assets/ebooks/covers/maogai.jpg",
     desc: "2023 年版教材；按章节阅读，适合配合课堂进度和期末复习。"
   },
@@ -35,7 +35,7 @@ window.ORBIT_EBOOKS = [
     size: "41.4 MB",
     file: "assets/ebooks/probability-statistics.pdf",
     preview: "assets/ebooks/preview/probability.pdf",
-    previewPages: 24,
+    previewPages: 16,
     cover: "assets/ebooks/covers/probability.jpg",
     desc: "概率论与数理统计的经典教材；网页版为阅读压缩版，保留公式与例题。"
   },
@@ -48,7 +48,7 @@ window.ORBIT_EBOOKS = [
     size: "25.2 MB",
     file: "assets/ebooks/remote-sensing-intro.pdf",
     preview: "assets/ebooks/preview/remote.pdf",
-    previewPages: 24,
+    previewPages: 16,
     cover: "assets/ebooks/covers/remote.jpg",
     desc: "遥感课程的教材主线；和 Orbit 的七章知识脉络、90 道题互相配合。"
   },
@@ -61,7 +61,7 @@ window.ORBIT_EBOOKS = [
     size: "58.5 MB",
     file: "assets/ebooks/arcgis-spatial-analysis.pdf",
     preview: "assets/ebooks/preview/arcgis.pdf",
-    previewPages: 24,
+    previewPages: 16,
     cover: "assets/ebooks/covers/arcgis.jpg",
     desc: "空间分析实验教程；从 ArcMap 操作到空间分析流程，适合边看边练。"
   }
