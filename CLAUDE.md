@@ -120,7 +120,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 生成后的 `arcgis.html` / `maogai.html` / `python-guide.html` 不要直接改，改 `src/` 模板与 JSON 后重新 build。
 - ArcGIS 题库答案以扫描件为准；毛概补充题库以教材/课后题为准。
 - 遥感附录 3 在这本 PDF 里只到 H（A—H），附录 4 覆盖 A—Z；不要声称附录 3 覆盖 I—Z。OCR 数据可能有少量识别误差，以书上原文为准。
-- 自然地理手写扫描/JPG 是他人手写资料，**页面不再链接**；只保留 `nature-notes.html` 的文字整理版。不要恢复 GitHub Release 里的 `key-points.jpg` / `metamorphism-notes.pdf` 链接；Release 里的原文件是否删除需本人确认。
+- 自然地理手写扫描/JPG 是他人手写资料，**页面不再链接**；只保留 `nature-notes.html` 的文字整理版。2026-11-09 已从 GitHub Release 删除 `key-points.jpg` / `metamorphism-notes.pdf`，不要恢复这两个链接。
 - 手写稿文字版是整理/改写，不是逐字照抄；原稿只列问题处标“原稿留白”，按教材补全的内容单独标出。
 - 自然地理 80 题、概率论 60 题是自编自测题，页面已标注“不是学校官方题”；不要改成“押题/真题”口径。
 - 视觉基线：浅色 Apple 风、白底、系统字体、蓝色强调；不要纯黑大面积；不要用用户生成图片，视觉用代码/SVG。
