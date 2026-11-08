@@ -44,7 +44,7 @@
     var fab = document.createElement('button');
     fab.className = 'ai-fab';
     fab.type = 'button';
-    fab.textContent = 'AI';
+    fab.innerHTML = '<span class="ai-spark">✦</span> 问 AI';
     fab.setAttribute('aria-label', '打开 AI 助教');
 
     var panel = document.createElement('div');
@@ -75,9 +75,22 @@
     document.body.appendChild(fab);
     document.body.appendChild(panel);
     document.body.appendChild(settings);
+    injectHero();
     state.el = { fab: fab, panel: panel, settings: settings, msgs: $('.ai-msgs', panel), input: $('textarea', panel), send: $('[data-act="send"]', panel), status: $('#aiStatus', settings) };
     state.messages = loadChat();
     state.messages.slice(-6).forEach(function(m){ add(m.role, m.content, m.role === 'assistant'); });
+  }
+
+  function injectHero() {
+    var actions = document.querySelector('.hero-actions') || document.querySelector('.hero-links');
+    if (!actions || actions.querySelector('.ai-hero-open')) return;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn btn-ghost ai-hero-open';
+    b.innerHTML = '<span class="ai-spark">✦</span> 问 AI';
+    b.setAttribute('aria-label', '打开 AI 助教');
+    b.addEventListener('click', open);
+    actions.appendChild(b);
   }
 
   function add(role, text, html) {

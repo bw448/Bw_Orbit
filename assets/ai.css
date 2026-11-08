@@ -1,12 +1,20 @@
 /* ORBIT AI assistant — shared across pages */
+.ai-spark{font-size:12px;line-height:1;color:var(--accent)}
 .ai-fab{
   position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));
-  z-index:90;width:52px;height:52px;border-radius:50%;border:1px solid rgba(233,162,59,.55);
-  background:var(--accent);color:var(--accent-ink);font-family:var(--mono);font-size:11px;font-weight:600;
-  letter-spacing:.08em;cursor:pointer;box-shadow:0 12px 34px rgba(0,0,0,.4);
+  z-index:90;width:auto;height:44px;border-radius:999px;border:1px solid rgba(233,162,59,.55);
+  background:var(--accent);color:var(--accent-ink);font-family:var(--mono);font-size:12px;font-weight:600;
+  letter-spacing:.02em;cursor:pointer;box-shadow:0 12px 34px rgba(0,0,0,.4);
+  display:inline-flex;align-items:center;gap:7px;padding:0 15px;
   transition:transform .25s var(--ease),background .25s var(--ease);
 }
+.ai-fab .ai-spark{color:var(--accent-ink)}
 .ai-fab:hover{transform:translateY(-2px);background:#f0b04f}
+.ai-hero-open{
+  border-color:rgba(233,162,59,.55)!important;color:var(--accent)!important;
+  background:var(--accent-soft)!important;
+}
+.ai-hero-open:hover{border-color:var(--accent)!important}
 .ai-panel{
   position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(82px,calc(env(safe-area-inset-bottom,0px) + 82px));
   z-index:95;width:min(400px,calc(100vw - 32px));max-height:min(640px,calc(100vh - 120px));

@@ -64,7 +64,9 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
   - `remote.html#appendix`：教材附录 3/4 共 807 条，背诵卡 / 英中互测 / 附录错题本
 - 自然地理 / 概率论：`nature-geo.html` / `probability.html`
   - 在课程模板里新增 `#practice`：80 / 60 道自编自测题 + 共享错题本面板
+  - 自然地理手写稿已转成 `nature-notes.html`（14 页文字版）；原手写扫描/JPG 不再在页面链接
 - 毛概 / ArcGIS：选择题答错自动进 `quiz.js` 的错题本面板（章节分布、重练、导出、清空）
+- AI 入口：`course-ai.js` 在课程页 / Python 知识地图的首屏操作区、吸顶导航、每个 section 标题下注入“问 AI”；`rs-ai.js` 在遥感首屏注入“问 AI”；Python 主页面 `ai.js` 首屏 + 右下角按钮。不要再只靠右下角小圆点。
 - Python：`python.html`
   - 599 题 / 10 套卷；**题库固定，不因新模块改动**
   - `#paper-full-N` 整卷看
@@ -98,6 +100,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - Python 知识地图：`src/python_guide.json`；题库主题统计：`src/python_topics.json`
 - 四个课程模块：`src/courses.json`
 - 自然地理自测题：`src/nature_bank.json`（80 题）
+- 自然地理手写稿文字版：`src/nature_notes.md` → `tools/build_nature_notes.py` → `src/nature-notes.html`；版式 `assets/nature-notes.css`、目录 `assets/nature-notes.js`
 - 概率论自测题：`src/probability_bank.json`（60 题）
 - 遥感教材附录：`assets/rs-appendix-data.js`（807 条；由 `tools/build_rs_appendix.py` 从 `.work/appendix` OCR JSON 生成）
 - ArcGIS 题库 / 模板：`src/arcgis_bank.json`
@@ -117,6 +120,8 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 生成后的 `arcgis.html` / `maogai.html` / `python-guide.html` 不要直接改，改 `src/` 模板与 JSON 后重新 build。
 - ArcGIS 题库答案以扫描件为准；毛概补充题库以教材/课后题为准。
 - 遥感附录 3 在这本 PDF 里只到 H（A—H），附录 4 覆盖 A—Z；不要声称附录 3 覆盖 I—Z。OCR 数据可能有少量识别误差，以书上原文为准。
+- 自然地理手写扫描/JPG 是他人手写资料，**页面不再链接**；只保留 `nature-notes.html` 的文字整理版。不要恢复 GitHub Release 里的 `key-points.jpg` / `metamorphism-notes.pdf` 链接；Release 里的原文件是否删除需本人确认。
+- 手写稿文字版是整理/改写，不是逐字照抄；原稿只列问题处标“原稿留白”，按教材补全的内容单独标出。
 - 自然地理 80 题、概率论 60 题是自编自测题，页面已标注“不是学校官方题”；不要改成“押题/真题”口径。
 - 视觉基线：浅色 Apple 风、白底、系统字体、蓝色强调；不要纯黑大面积；不要用用户生成图片，视觉用代码/SVG。
 - 手机端 390px 必须无横向溢出。

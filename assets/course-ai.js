@@ -25,10 +25,32 @@
     try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
   }
 
+  function injectTriggers() {
+    var actions = document.querySelector('.course-actions') || document.querySelector('.pg-actions');
+    if (actions && !actions.querySelector('.cai-hero')) {
+      var hero = document.createElement('button');
+      hero.type = 'button';
+      hero.className = 'cai-hero';
+      hero.innerHTML = '<span class="cai-spark">✦</span> 问 AI';
+      hero.setAttribute('aria-label', '打开 AI 问答');
+      hero.addEventListener('click', function () { open(''); });
+      actions.insertBefore(hero, actions.children[1] || null);
+    }
+    var nav = document.querySelector('.course-subnav') || document.querySelector('.pg-nav');
+    if (nav && !nav.querySelector('.cai-nav')) {
+      var navBtn = document.createElement('button');
+      navBtn.type = 'button';
+      navBtn.className = 'cai-nav';
+      navBtn.innerHTML = '<span class="cai-spark">✦</span> 问 AI';
+      navBtn.addEventListener('click', function () { open(''); });
+      nav.appendChild(navBtn);
+    }
+  }
+
   var fab = document.createElement('button');
   fab.type = 'button';
   fab.className = 'cai-fab';
-  fab.textContent = '问 AI';
+  fab.innerHTML = '<span class="cai-spark">✦</span> 问 AI';
   fab.setAttribute('aria-label', '打开 AI 问答');
 
   var panel = document.createElement('aside');
@@ -42,8 +64,10 @@
     '<div class="cai-foot"><button type="button" class="cai-key">API Key</button><button type="button" class="cai-clear">清空</button><span>DeepSeek</span></div>' +
     '<div class="cai-keybox" hidden><input type="password" placeholder="sk-..." autocomplete="off"><button type="button">保存</button><p>只存本机 localStorage，请求直接发往 api.deepseek.com。</p></div>';
 
-  document.body.appendChild(fab);
+  var hasNav = !!document.querySelector('.course-subnav, .pg-nav');
+  if (!hasNav) document.body.appendChild(fab);
   document.body.appendChild(panel);
+  injectTriggers();
 
   var log = panel.querySelector('.cai-log');
   var form = panel.querySelector('.cai-form');
@@ -155,7 +179,7 @@
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'cai-inline';
-    btn.textContent = '问 AI';
+    btn.innerHTML = '<span class="cai-spark">✦</span> 问 AI';
     btn.addEventListener('click', function () {
       open(h2.textContent.trim().replace(/\s+/g, ' '));
     });

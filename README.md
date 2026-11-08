@@ -32,7 +32,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 |---|---|---|
 | 大二上 | 遥感 | 8 章知识脉络（第五章待补）、7 套完整作业、90 道题、模拟卷、错题、收藏、75 条中英术语、807 条教材附录（背诵卡 / 英中互测 / 错题本） |
 | 大二上 | Python | 599 道题、10 套卷、按套 / 分节刷题、模拟卷、代码练习、知识地图 |
-| 大二上 | 自然地理学 | 老师勾画重点、章节框架、变质作用扫描、重点页、80 道章节自测 + 错题本 |
+| 大二上 | 自然地理学 | 老师勾画重点、章节框架、手写复习稿文字版（14 页）、80 道章节自测 + 错题本 |
 | 大二上 | 毛概 | 大题背诵、1065 题系统题库、100 道真题、256 条高频考点、39 组易混对比、错题本 |
 | 大二上 | 概率论 | 章节重点、公式、PPT 原题、2022—2023 期末卷、60 道章节自测 + 错题本 |
 | 大二上 | ArcGIS | 考试结构、80 道客观题自测 + 错题本、名词解释、算法、实操、简答/分析/论述 |
@@ -54,7 +54,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
   - `问`：围绕选中的内容继续追问，讲机制、公式、例子和易混点。
 - **知识点深聊**：每个知识点右侧有“深聊”，不必复制粘贴，直接围绕它继续对话。
 - **讲义补充**：从老师 30 页复习讲义补入 61 条遗漏知识点，按章折叠；原有七套作业题库完全不动。
-- **不设独立 AI 助手面板**：遥感页没有右下角聊天窗，AI 只在“选中 / 深聊”时出现。
+- **AI 入口**：遥感页没有右下角常驻聊天窗；首屏有“问 AI”按钮，章节有“深聊”，选中文字也会出现“译 / 问”。
 
 ### Python 模块
 
@@ -80,7 +80,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 ### 四个课程模块
 
-- **自然地理学**：按最后一节课勾画/画勾部分整理；岩石、构造、变质作用、外力地貌分章拆开，配课本、手写扫描和重点页；新增 80 道章节自测（单选/多选/判断/填空）+ 错题本。
+- **自然地理学**：按最后一节课勾画/画勾部分整理；岩石、构造、变质作用、外力地貌分章拆开。页面不再链接原来的手写扫描/JPG，改为 `nature-notes.html` 的 14 页手写稿文字版（绪论、岩石与构造、气候、地貌、水文、土壤）；新增 80 道章节自测（单选/多选/判断/填空）+ 错题本。
 - **毛概**：按“形成条件—主要内容—历史地位”搭框架；页面内分五个模块：256 条高频考点（可搜索/按章/★筛选）、1065 题系统题库（新教材 188 + 旧教材 522 + 期末补充 355）、2024/2025 真题 100 道、39 组易混对比、章节框架；选择题答错自动进错题本，可看章节分布、导出、重练；大题背诵和真题 PDF 仍可下载。
 - **概率论**：按题型和公式复习；PPT 原题、回忆版、2022—2023 期末卷和 Kira 讲义集中在一个模块；新增 60 道章节自测（分布、数字特征、估计、检验）+ 错题本。
 - **ArcGIS**：从 25 页填空题扫描件整理出 30 填空 + 20 单选 + 30 判断 + 10 简答 + 7 分析；另配 18 条名词解释（可遮住释义/随机抽 5 条）、12 条中英词汇、4 个底层算法、6 个实操流程和论述模板；80 道客观题答错自动进错题本，简答/分析可标记“会/不会”。
@@ -118,13 +118,14 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 - 答题历史、每日目标、连续打卡、10 天计划。
 - 全库搜索、按数量随机练习、导出 / 导入学习数据。
 - 毛概 / ArcGIS / 自然地理 / 概率论共用同一套刷题引擎：随机 20 题、今日复习（1/3/7/14/30 天）、收藏、重做、导出 / 导入，以及独立的错题本面板（错题数、今日到期、连对毕业、章节分布、重练全部、导出错题、清空记录）。
-- 毛概、ArcGIS、自然地理、概率论和 Python 知识地图新增“问 AI”：右下角小按钮、章节旁“问 AI”、选中文字直接问；共用全站 DeepSeek Key，只做知识速查，不做花哨面板。
+- 毛概、ArcGIS、自然地理、概率论和 Python 知识地图的“问 AI”统一放在三个显眼位置：首屏主按钮、吸顶导航右侧、每个 section 标题下；选中文字也可以直接问。共用全站 DeepSeek Key，只做知识速查，不做花哨面板。
+- Python 主页面：首屏“问 AI”按钮 + 右下角“问 AI”浮动按钮，都打开同一个 AI 助教面板。
 - 进度、错题、收藏存在浏览器 `localStorage`，不上传服务器。
 
 ### AI 设置与隐私
 
 - 全站共用一个 DeepSeek API Key，默认模型 `deepseek-chat`。
-- 在遥感页选中文字 → 出现工具条 → 点“问” → 按提示填写 Key；Python 页点右下角 `AI` → `设置`。
+- 在遥感页点首屏“问 AI”，或选中文字 → 点“问” → 按提示填写 Key；Python 页点首屏“问 AI”/右下角按钮 → `设置`。课程页的导航右侧和章节标题下也都有“问 AI”。
 - Key 只保存在本机 `localStorage`，请求直接发往 `api.deepseek.com`，不经过本项目的中转服务器。
 - 没有 Key 也可以使用全部题库、作业、术语表和学习工具；只有 AI 翻译 / 对话需要 Key。
 - 建议用 `start.bat` 的本地服务器打开，避免 `file://` 的联网和同源限制。
@@ -180,6 +181,7 @@ python tools/sync_content.py
 - `src/*.html`：页面模板
 - `assets/glossary.js`：75 条中英术语
 - `assets/rs-appendix-data.js`：教材附录 3/4 共 807 条（由 `tools/build_rs_appendix.py` 生成）
+- `src/nature_notes.md`：自然地理手写稿文字版源稿；改完后运行 `python tools/build_nature_notes.py`（需 `mistune`）再 `python build.py`
 
 生成 `index.html`（品牌首页）、`semesters.html`（学习内容）、`remote.html`、`python.html`、`sem*.html` 等完整页面。
 
@@ -196,6 +198,7 @@ python.html                Python · 期末复习
 python-guide.html          Python · 知识地图
 zero-python.html           Python · 从 0 到 1
 nature-geo.html            自然地理学模块
+nature-notes.html          自然地理 · 手写复习稿文字版（14 页）
 maogai.html                毛概模块
 probability.html           概率论模块
 arcgis.html                ArcGIS 模块（含 80 题自测）
@@ -209,6 +212,7 @@ assets/
   rs-ai.js / rs-ai.css     遥感：选中翻译 / 追问 + 术语表
   rs-appendix.js / rs-appendix.css  遥感：教材附录背诵卡 / 英中互测 / 错题本
   rs-appendix-data.js      教材附录 3/4 共 807 条
+  nature-notes.css / js    自然地理手写稿文字版：版式、目录
   glossary.js              75 条中英术语数据
   study.js / study.css     间隔复习、历史、目标、计划、搜索
   ai.js / ai.css           Python：AI 助教面板
@@ -242,6 +246,7 @@ tools/check_site.py         题库结构、答案下标、本地链接检查
 tools/build_python_topics.py 599 题主题统计 -> src/python_topics.json
 tools/export_summaries.py   六科总纲 -> 桌面 系统整理好的复习资料/
 tools/build_rs_appendix.py  教材附录 OCR JSON -> assets/rs-appendix-data.js
+tools/build_nature_notes.py 自然地理手写稿 Markdown -> src/nature-notes.html
 tools/sync_content.py       作业抽取 -> 建站 -> 总纲，一条命令同步
 tools/merge_materials.py    桌面原始文件/复习资料的分类合并（一次性）
 ```
@@ -250,6 +255,7 @@ tools/merge_materials.py    桌面原始文件/复习资料的分类合并（一
 
 - 遥感题目来自课程作业与《遥感导论》教材重点，**不是学校官方答案**；第五章“遥感图像处理”暂未生成题目，但知识脉络和中英术语可以先看。
 - 术语英文释义为课程学习用的简明定义，不替代专业词典。
+- 自然地理手写稿文字版根据课堂手写稿整理/改写，保留考点结构，不直接转载原扫描件；原稿版权归整理者，文字版仅用于个人学习。原稿只列问题、未写答案处已标注，按教材补全的内容单独标出。
 - 附录 3/4 来自教材扫描页 OCR + 人工校对；这份 PDF 的附录 3 只到 H（A—H），附录 4 覆盖 A—Z，共 807 条；个别词条可能有识别误差，以书上原文为准。
 - 自然地理 80 题、概率论 60 题为**自编自测题**（依据老师勾画、PPT、教材与真题整理），不是学校官方题；答案有争议时以教材和老师讲解为准。
 - AI 生成内容可能有误，请以教材和老师讲解为准。
@@ -290,7 +296,7 @@ After the brand landing, the learning hub asks only for a semester; the next lay
 |---|---|---|
 | Year 2 Fall | Remote Sensing | 8 chapters (chapter 5 pending), 7 homework sets, 90 questions, mock exam, wrong answers, bookmarks, 75 bilingual terms, 807 appendix terms (cards / EN–ZH drill / wrong book) |
 | Year 2 Fall | Python | 599 questions, 10 papers, paper/section practice, mock exam, code lab, knowledge map |
-| Year 2 Fall | Physical Geography | Teacher-marked key points, chapter outline, metamorphism scans, 80-question drill + wrong book |
+| Year 2 Fall | Physical Geography | Teacher-marked key points, chapter outline, 14-page handwritten-notes text edition, 80-question drill + wrong book |
 | Year 2 Fall | Maoism | Essay frameworks, 1,065-question choice bank, 2024/2025 papers, wrong book |
 | Year 2 Fall | Probability | Chapter priorities, formulas, PPT originals, 2022–2023 paper, 60-question drill + wrong book |
 | Year 2 Fall | ArcGIS | Exam map, 80-question drill + wrong book, terms, algorithms, workflows, short/analysis/essay templates |
@@ -312,7 +318,7 @@ Year 2 Spring and Year 3 are reserved and follow the same structure when courses
   - `问`: continue a conversation about the selected passage — mechanism, formula, example, common confusions.
 - **Deep chat per knowledge point**: every point has a “深聊” action, so there is no copy-paste step.
 - **Lecture-note supplement**: 61 additional points extracted from the teacher's 30-page review PDF, grouped by chapter. The original seven homework sets are untouched.
-- **No separate AI assistant panel** on the remote-sensing page. AI appears only when you select text or open a knowledge point.
+- **AI entry points** on the remote-sensing page: a “问 AI” button in the hero, “深聊” on each knowledge point, and the select-text “译 / 问” bar. There is no permanently open right-bottom chat panel.
 
 ### Python
 
@@ -331,7 +337,7 @@ The old Python project is kept read-only and untouched. This is a new implementa
 
 ### Four course modules
 
-- **Physical Geography**: built around the teacher's last-class highlights; rocks, structures, metamorphism and landforms with textbook, scanned notes and key-point page; 80-question chapter drill + wrong book.
+- **Physical Geography**: built around the teacher's last-class highlights; rocks, structures, metamorphism and landforms. The old handwritten scans/JPG are no longer republished; they are replaced by a 14-page text edition (`nature-notes.html`) covering the introduction, rocks and structures, climate, landforms, water and soil; plus an 80-question chapter drill + wrong book.
 - **Maoism**: “background — content — historical status” frameworks, essay memorization, a 1,065-question interactive choice bank and 2024/2025 papers; a dedicated wrong-book panel with chapter breakdown, export and retry.
 - **Probability**: question types and formulas, PPT originals, recall sheet, 2022–2023 paper and a Kira handout; 60-question chapter drill + wrong book.
 - **ArcGIS**: exam map, 30 fill-in + 20 single + 30 true/false + 10 short + 7 analysis questions from a 25-page scan, six terms, twelve bilingual terms, four algorithms, six workflows and essay templates; the 80-question drill has a dedicated wrong-book panel.
@@ -373,7 +379,7 @@ A top-level module with four submodules:
 ### AI key and privacy
 
 - One DeepSeek API key is shared by the site; the default model is `deepseek-chat`.
-- On the Remote Sensing page, select text → `问` → enter the key when prompted. On the Python page, use the `AI` button → `设置`.
+- On the Remote Sensing page, use the hero `问 AI` button or select text → `问` → enter the key when prompted. On the Python page, use the hero or floating `问 AI` button → `设置`. Course pages also put `问 AI` in the sticky nav and under each section heading.
 - The key is stored only in local `localStorage`. Requests go directly to `api.deepseek.com`; there is no proxy server in this project.
 - Without a key, all questions, homework, glossary and study tools still work. Only AI translation and conversation need a key.
 - Prefer `start.bat` (a local HTTP server) over opening `file://`, to avoid browser networking and same-origin limits.
@@ -429,6 +435,7 @@ python.html                Python · final review
 python-guide.html          Python · knowledge map
 zero-python.html           Python · zero-to-one
 nature-geo.html            Physical Geography module
+nature-notes.html          Physical Geography handwritten-notes text edition (14 pages)
 maogai.html                Maoism module
 probability.html           Probability module
 arcgis.html                ArcGIS module (with 80-question drill)
@@ -442,6 +449,7 @@ assets/
   rs-ai.js / rs-ai.css     Remote Sensing: select-to-translate/ask + glossary
   rs-appendix.js / rs-appendix.css  Remote Sensing: appendix cards, EN–ZH drills, wrong book
   rs-appendix-data.js      807 textbook appendix entries
+  nature-notes.css / js    Handwritten-notes text edition: layout and contents
   glossary.js              75 bilingual terms
   study.js / study.css     Spaced repetition, history, goals, plan, search
   ai.js / ai.css           Python: AI tutor panel
@@ -472,6 +480,7 @@ tools/make_ebook_compressed.py 生成 10—33 MB 压缩全书 PDF
 tools/extract_homework.py   Chapter homework docx -> src/homework.json
 tools/build_maogai_bank.py  Maoism choice PDFs -> src/maogai_bank.json
 tools/build_rs_appendix.py  Textbook appendix OCR JSON -> assets/rs-appendix-data.js
+tools/build_nature_notes.py  Nature handwritten-notes Markdown -> src/nature-notes.html
 tools/build_python_topics.py 599-question topic counts
 tools/export_summaries.py   One review master .docx per subject
 tools/sync_content.py       Homework -> build -> summaries in one command

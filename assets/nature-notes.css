@@ -1,0 +1,74 @@
+/* Orbit · 自然地理学手写稿文字版 */
+html{scroll-behavior:smooth}
+body{background:var(--paper)}
+.nn-doc h1,.nn-doc h2{scroll-margin-top:18px}
+.nn-page{overflow:hidden}
+.nn-shell{max-width:920px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.nn-hero{background:var(--paper-alt);border-bottom:1px solid var(--line-soft);padding:clamp(66px,8vw,104px) 0 clamp(40px,5vw,58px)}
+.nn-eyebrow{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--blue);text-transform:uppercase}
+.nn-hero h1{margin-top:16px;font-size:clamp(2.4rem,5.6vw,4.4rem);line-height:1.06;letter-spacing:-.045em;font-weight:600;color:var(--ink);text-wrap:balance}
+.nn-lede{max-width:660px;margin-top:18px;font-size:15px;line-height:1.85;color:var(--muted)}
+.nn-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px}
+.nn-back{font-size:12.5px;color:var(--muted);display:inline-flex;gap:5px;align-items:center}
+.nn-back span{color:var(--blue)}
+.nn-back:hover{color:var(--blue)}
+.nn-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:26px;padding-top:15px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+.nn-meta b{font-size:18px;font-weight:600;color:var(--ink);margin-right:3px}
+.nn-toc{background:#fff;border-bottom:1px solid var(--line-soft);padding:16px 0}
+.nn-toc-title{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--faint);margin-bottom:9px}
+.nn-toc-list{display:flex;gap:8px;flex-wrap:wrap}
+.nn-toc-list a{font-size:11.5px;color:var(--muted);border:1px solid var(--line-soft);border-radius:999px;padding:6px 11px;background:#fff}
+.nn-toc-list a:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
+.nn-doc{padding:clamp(44px,6vw,72px) 0 clamp(60px,8vw,90px);background:#fff}
+.nn-doc .nn-shell{max-width:860px}
+.nn-doc h1{font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.15;letter-spacing:-.035em;font-weight:600;color:var(--ink);margin:clamp(46px,6vw,70px) 0 18px;padding-top:clamp(24px,4vw,36px);border-top:1px solid var(--line)}
+.nn-doc h1:first-of-type{margin-top:0;padding-top:0;border-top:0}
+.nn-doc h2{font-size:clamp(1.25rem,2.6vw,1.65rem);line-height:1.35;letter-spacing:-.02em;font-weight:600;color:var(--ink);margin:34px 0 12px}
+.nn-doc h3{font-size:1.08rem;line-height:1.45;font-weight:600;color:var(--ink);margin:26px 0 9px}
+.nn-doc h4{font-size:.98rem;line-height:1.5;font-weight:600;color:var(--ink);margin:20px 0 7px}
+.nn-doc p{margin:0 0 11px;font-size:14px;line-height:1.95;color:var(--ink)}
+.nn-doc ul,.nn-doc ol{margin:0 0 14px;padding-left:1.45em}
+.nn-doc li{font-size:14px;line-height:1.9;color:var(--ink);margin-bottom:4px}
+.nn-doc li>ul,.nn-doc li>ol{margin-top:4px;margin-bottom:2px}
+.nn-doc strong{font-weight:600;color:var(--ink)}
+.nn-doc blockquote{margin:16px 0 20px;padding:13px 16px;background:var(--blue-soft);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;color:var(--muted);font-size:13px;line-height:1.8}
+.nn-doc blockquote p{margin:0;font-size:13px;line-height:1.8;color:var(--muted)}
+.nn-doc hr{border:0;border-top:1px solid var(--line-soft);margin:26px 0}
+.nn-table{overflow-x:auto;margin:14px 0 20px;border:1px solid var(--line-soft);border-radius:12px;-webkit-overflow-scrolling:touch}
+.nn-doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:12px;line-height:1.7;background:#fff}
+.nn-doc th,.nn-doc td{border-bottom:1px solid var(--line-soft);padding:8px 10px;text-align:left;vertical-align:top;color:var(--ink)}
+.nn-doc th{background:var(--paper-alt);font-weight:600;white-space:nowrap}
+.nn-doc tr:last-child td{border-bottom:0}
+.nn-doc code{font-family:var(--mono);font-size:11.5px;background:var(--paper-alt);border:1px solid var(--line-soft);border-radius:4px;padding:0 4px}
+.nn-note{margin:18px 0 0;font-size:10.5px;line-height:1.7;color:var(--faint)}
+.nn-foot{background:var(--paper-alt);border-top:1px solid var(--line-soft)}
+
+@media(max-width:640px){
+  .nn-shell{padding-left:16px;padding-right:16px}
+  .nn-hero{padding-top:48px}
+  .nn-hero h1{font-size:clamp(2.1rem,10vw,3rem)}
+  .nn-lede{font-size:13.5px}
+  .nn-actions{gap:10px}
+  .nn-meta{gap:14px;font-size:10.5px}
+  .nn-meta b{font-size:16px}
+  .nn-toc-list{gap:6px}
+  .nn-toc-list a{font-size:10.5px;padding:6px 9px}
+  .nn-doc h1{font-size:1.7rem}
+  .nn-doc h2{font-size:1.25rem}
+  .nn-doc h3{font-size:1.02rem}
+  .nn-doc p,.nn-doc li{font-size:13px;line-height:1.85}
+  .nn-doc table{min-width:480px;font-size:11px}
+  .nn-doc th,.nn-doc td{padding:7px 8px}
+}
+
+@media print{
+  .global-nav,.nn-hero,.nn-toc,.site-foot,.nn-actions{display:none!important}
+  body{background:#fff}
+  .nn-doc{padding:0}
+  .nn-doc .nn-shell{max-width:none;padding:0}
+  .nn-doc h1{page-break-before:always}
+  .nn-doc h1:first-of-type{page-break-before:auto}
+  .nn-doc h2,.nn-doc h3{page-break-after:avoid}
+  .nn-table{overflow:visible}
+  .nn-doc table{min-width:0;font-size:9.5pt}
+}

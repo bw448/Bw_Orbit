@@ -416,6 +416,21 @@
     }
     callAI(prompt, { pushUser: true });
   }
+  function openAsk() {
+    openCard('ASK / 提问', '问一个遥感问题', '输入问题，例如：大气窗口为什么主要在热红外？');
+    el.input.focus();
+  }
+  function injectAskTrigger() {
+    var actions = document.querySelector('.hero-actions') || document.querySelector('.kg-actions') || document.querySelector('.hero-links');
+    if (!actions || actions.querySelector('.rs-ai-open')) return;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn btn-ghost rs-ai-open';
+    b.innerHTML = '<span class="rs-ai-spark">✦</span> 问 AI';
+    b.setAttribute('aria-label', '打开 AI 问答');
+    b.addEventListener('click', openAsk);
+    actions.insertBefore(b, actions.children[1] || null);
+  }
   function settings() {
     if (el.card.hidden) openCard('SETTINGS / 设置', 'DeepSeek Key', '继续追问…');
     showKeyPanel('');
@@ -574,6 +589,7 @@
   function init() {
     build();
     bind();
+    injectAskTrigger();
     renderGlossary();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
@@ -586,6 +602,7 @@
     discussHomework: discussHomework,
     discussQuestion: discussQuestion,
     settings: settings,
+    openAsk: openAsk,
     glossaryFor: glossaryFor,
     filterGlossary: filterGlossary,
     openTerm: openTerm,
