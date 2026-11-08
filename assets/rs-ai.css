@@ -1,4 +1,12 @@
 /* ORBIT remote sensing — selection-first reading companion + bilingual glossary */
+.rs-ai-open{
+  display:inline-flex;align-items:center;gap:7px;
+  border-color:var(--ink)!important;color:#fff!important;
+  background:var(--ink)!important;
+}
+.rs-ai-open:hover{background:#000!important;border-color:#000!important}
+.rs-ai-open .rs-ai-spark{color:#8ec5ff}
+.rs-ai-spark{font-size:12px;line-height:1}
 #home .hero{padding-top:clamp(54px,7vw,84px);padding-bottom:clamp(40px,5vw,56px)}
 #home .hero h1{font-size:clamp(2.25rem,4.8vw,3.7rem)}
 .hero-en{max-width:620px;margin:14px auto 0;color:var(--faint);font-size:13px;line-height:1.65;letter-spacing:.01em}

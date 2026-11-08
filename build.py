@@ -207,6 +207,7 @@ if __name__ == "__main__":
     build_static("bw-admin.html", "bw-admin.html")
     build_static("ebook.html", "ebook.html")
     build_courses()
+    build_static("nature-notes.html", "nature-notes.html")
     build_arcgis()
     build_maogai()
     build_python_guide()

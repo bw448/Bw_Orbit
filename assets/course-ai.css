@@ -1,11 +1,30 @@
-/* Orbit course AI — small floating ask panel */
+/* Orbit course AI — visible ask triggers + small floating panel */
+.cai-spark{font-size:12px;line-height:1;color:var(--blue)}
 .cai-fab{
   position:fixed;right:18px;bottom:18px;z-index:80;
-  border:1px solid var(--line);background:#fff;color:var(--ink);
-  border-radius:999px;padding:9px 15px;font-size:12px;font-weight:500;
-  box-shadow:0 6px 20px rgba(0,0,0,.08);min-height:38px;
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid var(--ink);background:var(--ink);color:#fff;
+  border-radius:999px;padding:10px 16px;font-size:12px;font-weight:600;
+  box-shadow:0 10px 28px rgba(0,0,0,.18);min-height:42px;
 }
-.cai-fab:hover{border-color:var(--blue);color:var(--blue)}
+.cai-fab .cai-spark{color:#8ec5ff}
+.cai-fab:hover{background:#000;border-color:#000}
+.cai-hero{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--ink);background:var(--ink);color:#fff;
+  border-radius:999px;padding:11px 18px;font:inherit;font-size:13px;font-weight:500;
+  min-height:44px;box-shadow:0 6px 18px rgba(0,0,0,.1);
+}
+.cai-hero .cai-spark{color:#8ec5ff;font-size:14px}
+.cai-hero:hover{background:#000;border-color:#000}
+.cai-nav{
+  display:inline-flex;align-items:center;gap:5px;margin-left:auto;
+  border:1px solid rgba(0,113,227,.35);background:var(--blue-soft);color:var(--blue);
+  border-radius:999px;padding:4px 11px;font:inherit;font-size:11px;font-weight:500;
+  white-space:nowrap;
+}
+.cai-nav .cai-spark{font-size:10px}
+.cai-nav:hover{border-color:var(--blue);background:rgba(0,113,227,.14)}
 .cai-panel{
   position:fixed;right:18px;bottom:18px;z-index:90;width:min(380px,calc(100vw - 36px));
   max-height:min(72vh,640px);display:flex;flex-direction:column;
@@ -42,10 +61,12 @@
 .cai-keybox button{margin-top:6px;border:1px solid var(--blue);background:var(--blue);color:#fff;border-radius:999px;padding:6px 12px;font-size:11px}
 .cai-keybox p{margin:6px 0 0;font-size:9.5px;line-height:1.6;color:var(--faint)}
 .cai-inline{
-  display:inline-flex;margin:8px 0 0;border:1px solid var(--line-soft);background:#fff;
-  border-radius:999px;padding:4px 9px;font-size:10px;color:var(--muted);vertical-align:middle;
+  display:inline-flex;align-items:center;gap:5px;margin:8px 0 0;
+  border:1px solid rgba(0,113,227,.3);background:var(--blue-soft);
+  border-radius:999px;padding:4px 10px;font-size:10.5px;color:var(--blue);vertical-align:middle;
 }
-.cai-inline:hover{border-color:var(--blue);color:var(--blue)}
+.cai-inline .cai-spark{font-size:10px}
+.cai-inline:hover{border-color:var(--blue);background:rgba(0,113,227,.14)}
 .cai-sel{
   position:fixed;z-index:85;border:1px solid var(--line);background:#fff;color:var(--ink);
   border-radius:999px;padding:5px 10px;font-size:11px;box-shadow:0 4px 14px rgba(0,0,0,.1);
@@ -55,4 +76,6 @@
 @media(max-width:640px){
   .cai-fab{right:12px;bottom:12px;min-height:44px;padding:10px 15px}
   .cai-panel{right:0;left:0;bottom:0;width:100%;max-height:82vh;border-radius:16px 16px 0 0;border-left:0;border-right:0;border-bottom:0}
+  .cai-hero{padding:10px 15px;font-size:12.5px;min-height:42px}
+  .cai-nav{margin-left:0}
 }
