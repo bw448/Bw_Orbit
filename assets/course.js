@@ -43,4 +43,16 @@
       return '<a href="' + esc(l[1]) + '">' + esc(l[0]) + ' ↗</a>';
     }).join('');
   }
+
+  var bank = window.COURSE_BANK;
+  var quizMount = document.getElementById('courseQuiz');
+  if (quizMount && bank && bank.items && window.OrbitQuiz) {
+    var total = document.getElementById('courseBankTotal');
+    if (total) total.textContent = bank.items.length;
+    window.OrbitQuiz.mount(quizMount, {
+      id: 'course-' + (C._slug || 'bank'),
+      items: bank.items,
+      perPage: 10
+    });
+  }
 })();

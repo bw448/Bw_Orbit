@@ -30,12 +30,12 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 | 学期 | 科目 | 内容 |
 |---|---|---|
-| 大二上 | 遥感 | 8 章知识脉络（第五章待补）、7 套完整作业、90 道题、模拟卷、错题、收藏、75 条中英术语 |
+| 大二上 | 遥感 | 8 章知识脉络（第五章待补）、7 套完整作业、90 道题、模拟卷、错题、收藏、75 条中英术语、807 条教材附录（背诵卡 / 英中互测 / 错题本） |
 | 大二上 | Python | 599 道题、10 套卷、按套 / 分节刷题、模拟卷、代码练习、知识地图 |
-| 大二上 | 自然地理学 | 老师勾画重点、章节框架、变质作用扫描、重点页 |
-| 大二上 | 毛概 | 大题背诵、1065 题系统题库、100 道真题、256 条高频考点、39 组易混对比 |
-| 大二上 | 概率论 | 章节重点、公式、PPT 原题、2022—2023 期末卷 |
-| 大二上 | ArcGIS | 考试结构、80 道客观题自测、名词解释、算法、实操、简答/分析/论述 |
+| 大二上 | 自然地理学 | 老师勾画重点、章节框架、变质作用扫描、重点页、80 道章节自测 + 错题本 |
+| 大二上 | 毛概 | 大题背诵、1065 题系统题库、100 道真题、256 条高频考点、39 组易混对比、错题本 |
+| 大二上 | 概率论 | 章节重点、公式、PPT 原题、2022—2023 期末卷、60 道章节自测 + 错题本 |
+| 大二上 | ArcGIS | 考试结构、80 道客观题自测 + 错题本、名词解释、算法、实操、简答/分析/论述 |
 | 顶层 | 竞赛 | 6 个 GIS 赛事、备考路线、技能地图、资料库 |
 | 顶层 | BW有话说 | 文字 / 图片 / 视频 / 链接时间线；只点赞，不设评论 |
 | 跨学期 | 电子书 | 5 本大二上教材：自然地理、毛概、概率论、遥感导论、ArcGIS；在线阅读 |
@@ -48,6 +48,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 - **完整作业**：从已完成的 Word 作业抽出的原文、表格、公式和曲线图，按章单独查看。
 - **90 道题**：作业主干 + 教材补全（16 题），教材依据《遥感导论》（梅安新等）。
 - **中英术语表**：75 条核心术语，中文 + 英文 + 英文释义 + 中文解释；支持搜索、按章筛选、随机一条。
+- **教材附录 · 英语翻译**：从《遥感导论》附录 3（英文缩写、全称及中文译名，本 PDF 印到 H）与附录 4（英汉词汇选编，A—Z）整理 807 条，支持背诵卡、英→中 / 中→英自测、错题本和全文搜索；答错的词自动收进附录错题本。
 - **选中即译 / 问**：在正文、作业或题目里选中任意词句，出现极简工具条：
   - `译`：术语直接显示英文和英文释义；句子交给 AI 翻译并解释关键术语。
   - `问`：围绕选中的内容继续追问，讲机制、公式、例子和易混点。
@@ -79,10 +80,10 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 ### 四个课程模块
 
-- **自然地理学**：按最后一节课勾画/画勾部分整理；岩石、构造、变质作用、外力地貌分章拆开，配课本、手写扫描和重点页。
-- **毛概**：按“形成条件—主要内容—历史地位”搭框架；页面内分五个模块：256 条高频考点（可搜索/按章/★筛选）、1065 题系统题库（新教材 188 + 旧教材 522 + 期末补充 355）、2024/2025 真题 100 道、39 组易混对比、章节框架；大题背诵和真题 PDF 仍可下载。
-- **概率论**：按题型和公式复习；PPT 原题、回忆版、2022—2023 期末卷和 Kira 讲义集中在一个模块。
-- **ArcGIS**：从 25 页填空题扫描件整理出 30 填空 + 20 单选 + 30 判断 + 10 简答 + 7 分析；另配 18 条名词解释（可遮住释义/随机抽 5 条）、12 条中英词汇、4 个底层算法、6 个实操流程和论述模板；简答/分析可标记“会/不会”。
+- **自然地理学**：按最后一节课勾画/画勾部分整理；岩石、构造、变质作用、外力地貌分章拆开，配课本、手写扫描和重点页；新增 80 道章节自测（单选/多选/判断/填空）+ 错题本。
+- **毛概**：按“形成条件—主要内容—历史地位”搭框架；页面内分五个模块：256 条高频考点（可搜索/按章/★筛选）、1065 题系统题库（新教材 188 + 旧教材 522 + 期末补充 355）、2024/2025 真题 100 道、39 组易混对比、章节框架；选择题答错自动进错题本，可看章节分布、导出、重练；大题背诵和真题 PDF 仍可下载。
+- **概率论**：按题型和公式复习；PPT 原题、回忆版、2022—2023 期末卷和 Kira 讲义集中在一个模块；新增 60 道章节自测（分布、数字特征、估计、检验）+ 错题本。
+- **ArcGIS**：从 25 页填空题扫描件整理出 30 填空 + 20 单选 + 30 判断 + 10 简答 + 7 分析；另配 18 条名词解释（可遮住释义/随机抽 5 条）、12 条中英词汇、4 个底层算法、6 个实操流程和论述模板；80 道客观题答错自动进错题本，简答/分析可标记“会/不会”。
 
 ### 竞赛模块
 
@@ -116,7 +117,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 - 间隔复习：答错的题 1 天后回来；答对后拉长到 3 / 7 / 14 / 30 天，连对 5 次毕业。
 - 答题历史、每日目标、连续打卡、10 天计划。
 - 全库搜索、按数量随机练习、导出 / 导入学习数据。
-- 毛概 / ArcGIS 新题库支持：随机 20 题、今日复习（1/3/7/14/30 天）、收藏、重做、导出 / 导入。
+- 毛概 / ArcGIS / 自然地理 / 概率论共用同一套刷题引擎：随机 20 题、今日复习（1/3/7/14/30 天）、收藏、重做、导出 / 导入，以及独立的错题本面板（错题数、今日到期、连对毕业、章节分布、重练全部、导出错题、清空记录）。
 - 毛概、ArcGIS、自然地理、概率论和 Python 知识地图新增“问 AI”：右下角小按钮、章节旁“问 AI”、选中文字直接问；共用全站 DeepSeek Key，只做知识速查，不做花哨面板。
 - 进度、错题、收藏存在浏览器 `localStorage`，不上传服务器。
 
@@ -169,13 +170,16 @@ python tools/sync_content.py
 - `src/python_questions.json`：599 道 Python 题（固定，不改）
 - `src/python_guide.json` / `src/python_topics.json`：知识地图与题库主题统计
 - `src/arcgis_bank.json`：ArcGIS 题库、名词解释、算法、实操、论述模板
+- `src/nature_bank.json`：自然地理学 80 道自测题
+- `src/probability_bank.json`：概率论 60 道自测题
 - `src/maogai_bank.json`：毛概系统题库 1065 题
 - `src/maogai_special.json`：毛概高频考点 256 条、真题 100 道、易混对比 39 组
 - `src/maogai_essay.json`：毛概大题背诵 118 题（核心篇 47 + 后半篇 71）
 - `src/notes.json`：遥感讲义补充 61 条
-- `src/courses.json`：四个课程模块的数据
+- `src/courses.json`：四个课程模块的数据（含自然地理/概率论 practice 配置）
 - `src/*.html`：页面模板
 - `assets/glossary.js`：75 条中英术语
+- `assets/rs-appendix-data.js`：教材附录 3/4 共 807 条（由 `tools/build_rs_appendix.py` 生成）
 
 生成 `index.html`（品牌首页）、`semesters.html`（学习内容）、`remote.html`、`python.html`、`sem*.html` 等完整页面。
 
@@ -203,6 +207,8 @@ assets/
   apple.css                Apple 式浅色设计系统
   landing.css / landing.js 品牌首页：轨道动效、滚动揭示
   rs-ai.js / rs-ai.css     遥感：选中翻译 / 追问 + 术语表
+  rs-appendix.js / rs-appendix.css  遥感：教材附录背诵卡 / 英中互测 / 错题本
+  rs-appendix-data.js      教材附录 3/4 共 807 条
   glossary.js              75 条中英术语数据
   study.js / study.css     间隔复习、历史、目标、计划、搜索
   ai.js / ai.css           Python：AI 助教面板
@@ -235,6 +241,7 @@ tools/build_maogai_essay.py  大题背诵 PDF -> src/maogai_essay.json
 tools/check_site.py         题库结构、答案下标、本地链接检查
 tools/build_python_topics.py 599 题主题统计 -> src/python_topics.json
 tools/export_summaries.py   六科总纲 -> 桌面 系统整理好的复习资料/
+tools/build_rs_appendix.py  教材附录 OCR JSON -> assets/rs-appendix-data.js
 tools/sync_content.py       作业抽取 -> 建站 -> 总纲，一条命令同步
 tools/merge_materials.py    桌面原始文件/复习资料的分类合并（一次性）
 ```
@@ -243,6 +250,8 @@ tools/merge_materials.py    桌面原始文件/复习资料的分类合并（一
 
 - 遥感题目来自课程作业与《遥感导论》教材重点，**不是学校官方答案**；第五章“遥感图像处理”暂未生成题目，但知识脉络和中英术语可以先看。
 - 术语英文释义为课程学习用的简明定义，不替代专业词典。
+- 附录 3/4 来自教材扫描页 OCR + 人工校对；这份 PDF 的附录 3 只到 H（A—H），附录 4 覆盖 A—Z，共 807 条；个别词条可能有识别误差，以书上原文为准。
+- 自然地理 80 题、概率论 60 题为**自编自测题**（依据老师勾画、PPT、教材与真题整理），不是学校官方题；答案有争议时以教材和老师讲解为准。
 - AI 生成内容可能有误，请以教材和老师讲解为准。
 - 旧 Python 项目只读参考，不修改、不提交、不移动。
 - ArcGIS 题库来自课程扫描件《一填空题》25 页，答案以原件为准；个别表述保留原件写法。
@@ -279,12 +288,12 @@ After the brand landing, the learning hub asks only for a semester; the next lay
 
 | Semester | Subject | Content |
 |---|---|---|
-| Year 2 Fall | Remote Sensing | 8 chapters (chapter 5 pending), 7 homework sets, 90 questions, mock exam, wrong answers, bookmarks, 75 bilingual terms |
+| Year 2 Fall | Remote Sensing | 8 chapters (chapter 5 pending), 7 homework sets, 90 questions, mock exam, wrong answers, bookmarks, 75 bilingual terms, 807 appendix terms (cards / EN–ZH drill / wrong book) |
 | Year 2 Fall | Python | 599 questions, 10 papers, paper/section practice, mock exam, code lab, knowledge map |
-| Year 2 Fall | Physical Geography | Teacher-marked key points, chapter outline, metamorphism scans |
-| Year 2 Fall | Maoism | Essay frameworks, 1,065-question choice bank, 2024/2025 papers |
-| Year 2 Fall | Probability | Chapter priorities, formulas, PPT originals, 2022–2023 paper |
-| Year 2 Fall | ArcGIS | Exam map, 80-question drill, terms, algorithms, workflows, short/analysis/essay templates |
+| Year 2 Fall | Physical Geography | Teacher-marked key points, chapter outline, metamorphism scans, 80-question drill + wrong book |
+| Year 2 Fall | Maoism | Essay frameworks, 1,065-question choice bank, 2024/2025 papers, wrong book |
+| Year 2 Fall | Probability | Chapter priorities, formulas, PPT originals, 2022–2023 paper, 60-question drill + wrong book |
+| Year 2 Fall | ArcGIS | Exam map, 80-question drill + wrong book, terms, algorithms, workflows, short/analysis/essay templates |
 | Top level | Competitions | 6 GIS contests, prep routes, skill map and resource library |
 | Top level | BW Notes | Text / image / video / link timeline; likes only, no comments |
 | Cross-semester | E-book | 5 Year-2 Fall textbooks: physical geography, Maoism, probability, remote sensing, ArcGIS; read online |
@@ -297,6 +306,7 @@ Year 2 Spring and Year 3 are reserved and follow the same structure when courses
 - **Full homework**: original text, tables, formulas and figures extracted from completed Word assignments.
 - **90 questions**: homework core plus textbook gap-fill, based on *An Introduction to Remote Sensing* (Mei Anxin et al.).
 - **Bilingual glossary**: 75 terms with Chinese, English, an English definition and a Chinese explanation; searchable and filterable by chapter.
+- **Textbook appendix · English translation**: 807 entries from *An Introduction to Remote Sensing* appendix 3 (abbreviations, full names and Chinese, A–H in this PDF) and appendix 4 (English–Chinese glossary, A–Z); flashcard review, EN→ZH / ZH→EN drills, a dedicated wrong book and full-text search.
 - **Select to translate or ask**: select any phrase in the reading, homework or question view:
   - `译`: a known term opens its English name and English definition instantly; a sentence is translated and its key terms explained by AI.
   - `问`: continue a conversation about the selected passage — mechanism, formula, example, common confusions.
@@ -321,10 +331,10 @@ The old Python project is kept read-only and untouched. This is a new implementa
 
 ### Four course modules
 
-- **Physical Geography**: built around the teacher's last-class highlights; rocks, structures, metamorphism and landforms with textbook, scanned notes and key-point page.
-- **Maoism**: “background — content — historical status” frameworks, essay memorization, a 1,065-question interactive choice bank and 2024/2025 papers.
-- **Probability**: question types and formulas, PPT originals, recall sheet, 2022–2023 paper and a Kira handout.
-- **ArcGIS**: exam map, 30 fill-in + 20 single + 30 true/false + 10 short + 7 analysis questions from a 25-page scan, six terms, twelve bilingual terms, four algorithms, six workflows and essay templates.
+- **Physical Geography**: built around the teacher's last-class highlights; rocks, structures, metamorphism and landforms with textbook, scanned notes and key-point page; 80-question chapter drill + wrong book.
+- **Maoism**: “background — content — historical status” frameworks, essay memorization, a 1,065-question interactive choice bank and 2024/2025 papers; a dedicated wrong-book panel with chapter breakdown, export and retry.
+- **Probability**: question types and formulas, PPT originals, recall sheet, 2022–2023 paper and a Kira handout; 60-question chapter drill + wrong book.
+- **ArcGIS**: exam map, 30 fill-in + 20 single + 30 true/false + 10 short + 7 analysis questions from a 25-page scan, six terms, twelve bilingual terms, four algorithms, six workflows and essay templates; the 80-question drill has a dedicated wrong-book panel.
 
 ### Competitions
 
@@ -357,6 +367,7 @@ A top-level module with four submodules:
 - Spaced repetition: a wrong question returns after 1 day; correct answers extend the interval to 3 / 7 / 14 / 30 days; five correct answers graduate it.
 - Answer history, daily goal, streak, 10-day plan.
 - Full-text search, random practice by count, export/import of study data.
+- Maoism, ArcGIS, Physical Geography and Probability share one drill engine with a dedicated wrong-book panel: wrong count, due today, graduated items, chapter breakdown, retry all, export and clear.
 - Progress, wrong answers and bookmarks live in browser `localStorage`; nothing is uploaded to a server.
 
 ### AI key and privacy
@@ -401,6 +412,7 @@ The build uses only the Python standard library. Inputs:
 - `src/python_questions.json` — 599 Python questions
 - `src/*.html` — page templates
 - `assets/glossary.js` — 75 bilingual terms
+- `assets/rs-appendix-data.js` — 807 textbook appendix entries, generated by `tools/build_rs_appendix.py`
 
 Outputs include `index.html` (brand landing), `semesters.html` (learning hub), `remote.html`, `python.html` and the semester pages.
 
@@ -428,11 +440,13 @@ assets/
   apple.css                Apple-inspired light design system
   landing.css / landing.js Brand landing: orbit motion, scroll reveals
   rs-ai.js / rs-ai.css     Remote Sensing: select-to-translate/ask + glossary
+  rs-appendix.js / rs-appendix.css  Remote Sensing: appendix cards, EN–ZH drills, wrong book
+  rs-appendix-data.js      807 textbook appendix entries
   glossary.js              75 bilingual terms
   study.js / study.css     Spaced repetition, history, goals, plan, search
   ai.js / ai.css           Python: AI tutor panel
   course.css / course.js   Shared layout for the four course modules
-  quiz.css / quiz.js       Shared quiz engine: single/multi/judge/fill, wrong-only, progress
+  quiz.css / quiz.js       Shared quiz engine: single/multi/judge/fill, wrong-book panel, progress
   arcgis.css / arcgis.js   ArcGIS bank, terms, algorithms, workflows, essay templates
   maogai.js                Maoism choice-bank mount
   python-guide.css/js      Python knowledge map and bank coverage
@@ -457,6 +471,7 @@ tools/make_ebook_pages.py    生成全页图片与 50 页分卷 PDF
 tools/make_ebook_compressed.py 生成 10—33 MB 压缩全书 PDF
 tools/extract_homework.py   Chapter homework docx -> src/homework.json
 tools/build_maogai_bank.py  Maoism choice PDFs -> src/maogai_bank.json
+tools/build_rs_appendix.py  Textbook appendix OCR JSON -> assets/rs-appendix-data.js
 tools/build_python_topics.py 599-question topic counts
 tools/export_summaries.py   One review master .docx per subject
 tools/sync_content.py       Homework -> build -> summaries in one command
