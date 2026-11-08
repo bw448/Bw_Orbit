@@ -310,7 +310,7 @@ def doc_remote():
         "按章过知识脉络：每章能用自己的话说明“研究什么—为什么—怎么用”。",
         "重做七套作业：遮住答案写一遍，特别是英汉互译、名词解释和计算题。",
         "刷 90 题并整理错题：单选/多选自动判分，填空与简答按参考答案自评。",
-        "考前背 75 条中英术语，重点看英文释义与中文解释的对应。",
+        "考前背 75 条中英术语 + 807 条教材附录（先附录 3 缩写，再附录 4 英汉词汇），重点看英中对应。",
         "用模拟卷限时一次，检查时间分配和术语拼写。",
     ])
 
@@ -320,6 +320,7 @@ def doc_remote():
         ["七套作业原文", "划重点、计算题", "课程资料/遥感/作业分章；本文件第六节"],
         ["老师复习讲义补充", "61 条遗漏知识点", "remote.html#notes"],
         ["中英术语表", "75 条", "remote.html#glossary"],
+        ["教材附录 3/4", "807 条英中词汇 / 缩写", "remote.html#appendix"],
         ["遥感.pdf（原始）", "完整教材/扫描", "课程资料/遥感/原始/遥感.pdf"],
     ])
     h1(doc, "六、分章作业原文（1—8）")
@@ -332,7 +333,7 @@ def doc_remote():
             continue
         homework_blocks(doc, hw.get("blocks", []))
 
-    sync_note(doc, ["src/content.py", "src/homework.json", "src/notes.json", "assets/glossary.js"], ["remote.html"], num="七")
+    sync_note(doc, ["src/content.py", "src/homework.json", "src/notes.json", "assets/glossary.js", "assets/rs-appendix-data.js"], ["remote.html"], num="七")
     return "遥感复习总纲.docx", doc
 
 
@@ -361,7 +362,15 @@ def doc_course(slug, filename, title, subtitle, sources, pages, extra_rows=None,
     h1(doc, "四、资料清单")
     table(doc, ["资料", "说明", "位置"], [[r[0], r[1], short_loc(r[2])] for r in c.get("resources", [])])
 
-    h1(doc, "五、使用说明")
+    practice = c.get("practice")
+    if practice:
+        h1(doc, "五、自测题")
+        para(doc, practice.get("desc", ""))
+        para(doc, practice.get("note", ""))
+        para(doc, "题库在网站 %s#practice；答错自动进错题本，可看章节分布、导出和重练。本文档只列说明，题目以网站交互为准。" % pages[0].replace(".html", ""))
+        h1(doc, "六、使用说明")
+    else:
+        h1(doc, "五、使用说明")
     para(doc, c.get("notice", ""))
     para(doc, "网站上的模块把章节、复习路线和资料放在同一页；这份文档用于打印、离线背诵和考前快速过一遍。")
     sync_note(doc, sources, pages)
@@ -603,12 +612,12 @@ def main():
     jobs.append(doc_course(
         "nature-geo", "自然地理学复习总纲.docx",
         "自然地理学 · 期末复习总纲", "大二上 · 老师最后一节课划重点",
-        ["src/courses.json", "src/homework.json"], ["nature-geo.html"],
+        ["src/courses.json", "src/homework.json", "src/nature_bank.json"], ["nature-geo.html"],
         extra_rows=[["优先顺序", "勾画/画勾 ＞ 圈画 ＞ 手写问题 ＞ 教材通读"]]))
     jobs.append(doc_course(
         "probability", "概率论复习总纲.docx",
         "概率论与数理统计 · 期末复习总纲", "大二上 · PPT 原题优先",
-        ["src/courses.json"], ["probability.html"],
+        ["src/courses.json", "src/probability_bank.json"], ["probability.html"],
         extra_rows=[["原题优先级", "老师 PPT 上的题 > 2022—2023 期末卷 > 教材习题"]]))
     names = []
     for fname, doc in jobs:

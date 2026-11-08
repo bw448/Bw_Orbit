@@ -61,6 +61,10 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 遥感：`remote.html`
   - 原有七套作业 / 90 题固定不动
   - `remote.html#notes`：从老师复习 PDF 补的 61 条讲义补充
+  - `remote.html#appendix`：教材附录 3/4 共 807 条，背诵卡 / 英中互测 / 附录错题本
+- 自然地理 / 概率论：`nature-geo.html` / `probability.html`
+  - 在课程模板里新增 `#practice`：80 / 60 道自编自测题 + 共享错题本面板
+- 毛概 / ArcGIS：选择题答错自动进 `quiz.js` 的错题本面板（章节分布、重练、导出、清空）
 - Python：`python.html`
   - 599 题 / 10 套卷；**题库固定，不因新模块改动**
   - `#paper-full-N` 整卷看
@@ -93,6 +97,9 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - Python 599 题：`src/python_questions.json`（固定）
 - Python 知识地图：`src/python_guide.json`；题库主题统计：`src/python_topics.json`
 - 四个课程模块：`src/courses.json`
+- 自然地理自测题：`src/nature_bank.json`（80 题）
+- 概率论自测题：`src/probability_bank.json`（60 题）
+- 遥感教材附录：`assets/rs-appendix-data.js`（807 条；由 `tools/build_rs_appendix.py` 从 `.work/appendix` OCR JSON 生成）
 - ArcGIS 题库 / 模板：`src/arcgis_bank.json`
 - 毛概选择题库：`src/maogai_bank.json`；高频考点/真题/易混：`src/maogai_special.json`；大题背诵：`src/maogai_essay.json`
 - 课程总纲生成：`tools/export_summaries.py` → 桌面 `系统整理好的复习资料/`
@@ -109,6 +116,8 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 旧 Python 项目（`E:\python卷子`）保持只读，不修改、不提交。
 - 生成后的 `arcgis.html` / `maogai.html` / `python-guide.html` 不要直接改，改 `src/` 模板与 JSON 后重新 build。
 - ArcGIS 题库答案以扫描件为准；毛概补充题库以教材/课后题为准。
+- 遥感附录 3 在这本 PDF 里只到 H（A—H），附录 4 覆盖 A—Z；不要声称附录 3 覆盖 I—Z。OCR 数据可能有少量识别误差，以书上原文为准。
+- 自然地理 80 题、概率论 60 题是自编自测题，页面已标注“不是学校官方题”；不要改成“押题/真题”口径。
 - 视觉基线：浅色 Apple 风、白底、系统字体、蓝色强调；不要纯黑大面积；不要用用户生成图片，视觉用代码/SVG。
 - 手机端 390px 必须无横向溢出。
 - 不要把 SecretId / SecretKey / service_role / 数据库密码放进前端；BW 只用 publishable key。
@@ -142,6 +151,8 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 
 - 第五章遥感图像处理仍无作业与题目（知识脉络和术语可看）；把 `第五章作业.docx` 放进 `地信大二上/课程资料/遥感/作业分章` 后运行 `sync.bat`
 - 毛概选择题补充库有少量原资料错字/争议，遇到就按教材改 `src/maogai_bank.json` 或源 PDF
+- 遥感附录 3 若纸质书还有 I—Z，补进 `assets/rs-appendix-data.js`；附录 4 可继续人工校对高频词
+- 自然地理 / 概率论自测题可随老师最新勾画和 PPT 继续扩充
 - 电子书阅读器可继续做书签、搜索、笔记
 - 竞赛模块可继续补赛事日历、获奖作品、校赛信息
 - BW有话说可继续做编辑帖子、图片多图、浏览量

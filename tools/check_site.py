@@ -93,6 +93,68 @@ def check_maogai():
         print("maogai essays:", len(e.get("items", [])), "items")
 
 
+def check_course_bank(name):
+    d = load(name)
+    if not d:
+        return
+    ids = set()
+    for x in d.get("items", []):
+        qid = x.get("id", "")
+        if qid in ids:
+            err("%s duplicate id %s" % (name, qid))
+        ids.add(qid)
+        t = x.get("type")
+        if t == "fill":
+            if x.get("q", "").count("____") != len(x.get("answers", [])):
+                err("%s %s blank/answer mismatch" % (name, qid))
+        elif t in ("single", "multi"):
+            opts = x.get("options", [])
+            ans = x.get("answer", [])
+            if len(opts) != 4:
+                err("%s %s has %d options" % (name, qid, len(opts)))
+            if not ans or any(not isinstance(i, int) or not 0 <= i < len(opts) for i in ans):
+                err("%s %s bad answer index" % (name, qid))
+            if t == "single" and len(ans) != 1:
+                err("%s %s single answer not one index" % (name, qid))
+        elif t == "judge":
+            if not isinstance(x.get("answer"), bool):
+                err("%s %s judge answer not bool" % (name, qid))
+        else:
+            err("%s %s unknown type %r" % (name, qid, t))
+        if not x.get("q", "").strip():
+            err("%s %s empty stem" % (name, qid))
+    print(name + ":", len(d.get("items", [])), "items")
+
+
+def check_appendix():
+    path = os.path.join(ROOT, "assets", "rs-appendix-data.js")
+    if not os.path.exists(path):
+        err("missing assets/rs-appendix-data.js")
+        return
+    text = open(path, encoding="utf-8").read()
+    try:
+        data = json.loads(text[text.index("{"):text.rindex(";")])
+    except Exception as e:
+        err("rs-appendix-data.js: %s" % e)
+        return
+    ids = set()
+    for key in ("app3", "app4"):
+        for x in data.get(key, []):
+            qid = x.get("id", "")
+            if not qid or qid in ids:
+                err("appendix duplicate/empty id %r" % qid)
+            ids.add(qid)
+            if key == "app3":
+                if not (x.get("abbr") or x.get("en")) or not x.get("zh"):
+                    warn("appendix %s missing prompt/answer" % qid)
+            else:
+                if not x.get("en") or not x.get("zh"):
+                    err("appendix %s missing en/zh" % qid)
+            if not isinstance(x.get("page"), int):
+                err("appendix %s page not int" % qid)
+    print("appendix:", len(data.get("app3", [])), "app3 +", len(data.get("app4", [])), "app4 =", len(data.get("app3", [])) + len(data.get("app4", [])))
+
+
 def check_python():
     qs = load("python_questions.json")
     if not qs:
@@ -137,6 +199,9 @@ def check_links():
 def main():
     check_arcgis()
     check_maogai()
+    check_course_bank("nature_bank.json")
+    check_course_bank("probability_bank.json")
+    check_appendix()
     check_python()
     check_links()
     for w in WARNS:

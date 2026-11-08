@@ -157,9 +157,21 @@ def build_python_guide():
 def build_courses():
     tpl = open(os.path.join(ROOT, "src", "course_template.html"), encoding="utf-8").read()
     courses = json.load(open(os.path.join(ROOT, "src", "courses.json"), encoding="utf-8"))
+    bank_files = {
+        "nature-geo": "nature_bank.json",
+        "probability": "probability_bank.json",
+    }
     for slug, c in courses.items():
         if slug in ("arcgis", "maogai"):
             continue
+        practice = c.get("practice") or {}
+        bank = None
+        bank_path = bank_files.get(slug)
+        if bank_path:
+            bank_path = os.path.join(ROOT, "src", bank_path)
+            if os.path.exists(bank_path):
+                bank = json.load(open(bank_path, encoding="utf-8"))
+        bank_total = len(bank.get("items", [])) if bank else 0
         html = tpl
         for key, val in {
             "__TITLE__": c["title"],
@@ -171,13 +183,19 @@ def build_courses():
             "__NOTICE__": c["notice"],
             "__ACCENT__": c["accent"],
             "__DESC__": "%s 大二上复习模块：考试重点、章节勾画与资料。Orbit 地信学习站。" % c["title"],
+            "__PRACTICE_TOTAL__": str(bank_total),
+            "__PRACTICE_DESC__": practice.get("desc", "按章节刷题；答错自动进错题本。"),
+            "__PRACTICE_NOTE__": practice.get("note", "题目为自编自测，不是学校官方题。"),
         }.items():
             html = html.replace(key, val)
-        html = html.replace("__COURSE__", json.dumps(c, ensure_ascii=False))
+        course = dict(c)
+        course["_slug"] = slug
+        html = html.replace("__COURSE__", json.dumps(course, ensure_ascii=False))
+        html = html.replace("__COURSE_BANK__", js_json(bank))
         html = wrap(html)
         out = os.path.join(ROOT, slug + ".html")
         open(out, "w", encoding="utf-8").write(html)
-        print("built", out, len(html), "chars")
+        print("built", out, len(html), "chars,", bank_total, "practice questions")
 
 if __name__ == "__main__":
     build_remote()
