@@ -95,7 +95,7 @@
       ["04", "自测输出", "遮住答案，按“定义—特征—过程—例子”复述。"]
     ],
     "resources": [
-      ["自然地理学课本", "PDF · 337 页 · 45.8 MB", "assets/ebooks/nature-geography.pdf", "教材"],
+      ["自然地理学课本", "PDF · 337 页 · 30.7 MB", "assets/ebooks/download/nature.pdf", "教材"],
       ["手写复习稿 · 文字版", "HTML · 绪论/岩石/构造/气候/地貌/水文/土壤", "nature-notes.html", "文字版"],
       ["手写稿整理说明", "保留考点结构，不直接转载原扫描件", "nature-notes.html#nn-start", "说明"]
     ],
@@ -296,7 +296,7 @@
       ["概率论回忆版", "PDF · 考点回忆", "assets/resources/recall.pdf", "重点"],
       ["2022—2023 期末试卷", "PDF · 陕西师范大学", "assets/resources/past-2023.pdf", "真题"],
       ["Kira 概率统计 4 小时速通讲义", "PDF · 空白截图版", "assets/resources/kira-4h.pdf", "课程"],
-      ["概率论与数理统计（第五版）", "PDF · 443 页 · 41.4 MB", "assets/ebooks/probability-statistics.pdf", "教材"]
+      ["概率论与数理统计（第五版）", "PDF · 443 页 · 17.0 MB", "assets/ebooks/download/probability.pdf", "教材"]
     ],
     "links": [["电子书阅读器", "ebook.html"], ["毛概模块", "maogai.html"], ["竞赛模块", "competitions.html"]]
   },
@@ -384,7 +384,7 @@
       ["第 9 章 三维分析", "PDF · 2025", "assets/resources/ch9-3d.pdf", "PPT"],
       ["第 10 章 空间统计分析", "PDF · 2025", "assets/resources/ch10-statistics.pdf", "PPT"],
       ["实验 13：栅格空间分析", "PDF · 学校选址/最佳路径/密度制图", "assets/resources/experiment-13.pdf", "实验"],
-      ["ArcGIS 空间分析实验教程（第三版）", "PDF · 576 页 · 58.5 MB", "assets/ebooks/arcgis-spatial-analysis.pdf", "教材"]
+      ["ArcGIS 空间分析实验教程（第三版）", "PDF · 576 页 · 23.2 MB", "assets/ebooks/download/arcgis.pdf", "教材"]
     ],
     "links": [["电子书阅读器", "ebook.html"], ["遥感模块", "remote.html"], ["竞赛模块", "competitions.html"]]
   }
