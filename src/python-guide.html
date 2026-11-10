@@ -33,6 +33,13 @@
 </header>
 
 <main class="pg-page" data-ai-subject="Python">
+  <nav class="course-tabs" aria-label="知识地图栏目">
+    <a class="active" href="?tab=exam">考试说明</a>
+    <a href="?tab=map">知识模块</a>
+    <a href="?tab=coverage">题库覆盖</a>
+    <a href="?tab=plan">5 天路线</a>
+    <a href="?tab=sources">原始资料</a>
+  </nav>
   <section class="pg-hero">
     <div class="pg-shell">
       <div class="pg-kicker">大二上 / Python / 知识地图</div>
@@ -46,18 +53,11 @@
       </div>
       <div class="pg-actions">
         <a class="btn-primary" href="python.html">去刷 599 题</a>
-        <a class="btn-secondary" href="#map">看知识地图</a>
+        <a class="btn-secondary" href="?tab=map">看知识地图</a>
       </div>
     </div>
   </section>
 
-  <nav class="pg-nav" aria-label="本页导航">
-    <a href="#exam">考试说明</a>
-    <a href="#map">知识地图</a>
-    <a href="#coverage">题库覆盖</a>
-    <a href="#plan">复习路线</a>
-    <a href="#sources">原始资料</a>
-  </nav>
 
   <section class="pg-section" id="exam">
     <div class="pg-shell">
@@ -124,4 +124,12 @@
 <script>window.PYTOPICS = __PYTOPICS__;</script>
 <script src="assets/python-guide.js?v=3"></script>
 <script src="assets/course-ai.js?v=3" defer></script>
+<script>window.ORBIT_TABS = {course:'Python 知识地图', tabs:[
+  {id:'exam', label:'考试说明', sections:['exam'], hero:true},
+  {id:'map', label:'知识模块', sections:['map']},
+  {id:'coverage', label:'题库覆盖', sections:['coverage']},
+  {id:'plan', label:'5 天路线', sections:['plan']},
+  {id:'sources', label:'原始资料', sections:['sources']}
+]};</script>
+<script src="assets/course-tabs.js"></script>
 <script src="assets/pwa.js" defer></script>
