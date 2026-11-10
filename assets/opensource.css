@@ -127,6 +127,9 @@
 .os-sync-state.offline i{background:var(--faint)}
 .os-sync-state b{font-weight:500;color:var(--muted)}
 .os-sync a{color:var(--blue)}
+.os-retry{border:1px solid rgba(0,113,227,.28);border-radius:999px;background:#fff;color:var(--blue);font-size:10.5px;padding:4px 9px;margin-left:8px;vertical-align:1px}
+.os-retry:hover{background:var(--blue-soft)}
+.os-retry[disabled]{opacity:.55;cursor:wait}
 .os-sync a:hover{text-decoration:underline}
 
 /* ---------- closing CTA ---------- */
