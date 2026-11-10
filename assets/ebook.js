@@ -19,6 +19,7 @@
   var next = document.getElementById('nextPage');
   var zoomOut = document.getElementById('zoomOut');
   var zoomIn = document.getElementById('zoomIn');
+  var fitPage = document.getElementById('fitPage');
   var closeBtn = document.getElementById('closeReader');
 
   var pageNum = 1, zoom = 1, book = null, loadToken = 0, touchX = 0;
@@ -84,6 +85,20 @@
     im.src = pageSrc(n);
   }
 
+  function fitWidth() {
+    var nw = pageImg.naturalWidth || 827;
+    var nh = pageImg.naturalHeight || 1200;
+    var availW = Math.max(120, stage.clientWidth - 26);
+    var availH = Math.max(120, stage.clientHeight - 26);
+    var scale = Math.min(availW / nw, availH / nh);
+    return Math.max(100, Math.round(nw * scale));
+  }
+
+  function applyZoom() {
+    if (!pageImg || !book) return;
+    pageImg.style.width = Math.round(fitWidth() * zoom) + 'px';
+  }
+
   function renderPage() {
     if (!book || !pageImg) return;
     var myToken = loadToken;
@@ -93,6 +108,7 @@
       if (coverImg) coverImg.hidden = true;
       setLoading(false);
       stage.scrollTop = 0;
+      applyZoom();
       updateControls();
       prefetch(pageNum + 1);
       prefetch(pageNum + 2);
@@ -102,7 +118,7 @@
       setLoading(false);
       showError('这一页没有加载出来。可以下载本部分或完整版 PDF 阅读。');
     };
-    pageImg.style.width = Math.round(Math.max(240, stage.clientWidth - 26) * zoom) + 'px';
+    applyZoom();
     pageImg.src = pageSrc(pageNum);
     pageImg.alt = (book.title || '') + ' 第 ' + pageNum + ' 页';
   }
@@ -163,7 +179,7 @@
   function setZoom(delta) {
     if (!book || !pageImg) return;
     zoom = Math.max(0.6, Math.min(3, zoom + delta));
-    pageImg.style.width = Math.round(Math.max(240, stage.clientWidth - 26) * zoom) + 'px';
+    applyZoom();
   }
 
   if (grid) {
@@ -177,6 +193,7 @@
   if (next) next.addEventListener('click', function () { go(1); });
   if (zoomOut) zoomOut.addEventListener('click', function () { setZoom(-0.15); });
   if (zoomIn) zoomIn.addEventListener('click', function () { setZoom(0.15); });
+  if (fitPage) fitPage.addEventListener('click', function () { zoom = 1; applyZoom(); });
   if (stage) {
     stage.addEventListener('touchstart', function (e) {
       touchX = e.changedTouches[0].clientX;
@@ -193,9 +210,7 @@
     if (e.key === 'ArrowRight') go(1);
   });
   window.addEventListener('resize', function () {
-    if (book && reader && !reader.hidden && pageImg) {
-      pageImg.style.width = Math.round(Math.max(240, stage.clientWidth - 26) * zoom) + 'px';
-    }
+    if (book && reader && !reader.hidden && pageImg) applyZoom();
   });
 
   renderCards();
