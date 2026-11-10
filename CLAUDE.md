@@ -68,7 +68,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
   - 自然地理手写稿已转成 `nature-notes.html`（14 页文字版）；原手写扫描/JPG 不再在页面链接
 - 毛概 / ArcGIS：选择题答错自动进 `quiz.js` 的错题本面板（章节分布、重练、导出、清空）
 - AI 入口：`course-ai.js` 在课程页 / Python 知识地图的首屏操作区、吸顶导航、每个 section 标题下注入“问 AI”；`rs-ai.js` 在遥感首屏注入“问 AI”；Python 主页面 `ai.js` 首屏 + 右下角按钮。不要再只靠右下角小圆点。
-- 长页面大标签页：毛概 / ArcGIS / 遥感 / 自然地理 / 概率论用 `assets/course-tabs.js` + 页面里的 `window.ORBIT_TABS`。每个 tab 只显示一组 section，顶部固定大号 tab 条；默认第一个 tab（带 hero），其余 tab 隐藏 hero；`?tab=id` 直达，旧 `#id` 会自动映射到所在 tab。新增 section 要同步 tabs 配置。
+- 长页面大标签页：毛概 / ArcGIS / 遥感 / 自然地理 / 概率论 / 竞赛 / Python 知识地图用 `assets/course-tabs.js` + 页面里的 `window.ORBIT_TABS`。每个 tab 只显示一组 section，顶部固定大号 tab 条；默认第一个 tab（带 hero），其余 tab 隐藏 hero；`?tab=id` 直达，旧 `#id` 会自动映射到所在 tab。新增 section 要同步 tabs 配置。
 - Python：`python.html`
   - 599 题 / 10 套卷；2026-11-10 完成答案与解析校订（补全/重写 300+ 条解析、纠正错误与错位答案、修复 OCR 截断题干与选项）
   - **不重排、不删题**；只允许修复明显 OCR 损坏和错误的答案 / 解析

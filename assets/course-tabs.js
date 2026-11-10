@@ -58,7 +58,7 @@
     sec.hidden = active.sections.indexOf(sec.id) < 0;
   });
 
-  var hero = document.querySelector('.course-hero, .comp-hero, .hero');
+  var hero = document.querySelector('.course-hero, .comp-hero, .pg-hero, .hero');
   if (hero) hero.hidden = !active.hero;
   var marquee = document.querySelector('.marquee');
   if (marquee) marquee.hidden = !active.hero;
