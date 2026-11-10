@@ -37,6 +37,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 | 大二上 | 概率论 | 章节重点、公式、PPT 原题、2022—2023 期末卷、60 道章节自测 + 错题本 |
 | 大二上 | ArcGIS | 考试结构、80 道客观题自测 + 错题本、名词解释、算法、实操、简答/分析/论述 |
 | 顶层 | 竞赛 | 6 个 GIS 赛事、备考路线、技能地图、资料库 |
+| 顶层 | 开源项目 | 7 个 bw448 GitHub 项目：Folio、JARVIS LOCAL、Orbit、bw_python、两个 Claude Code 写作技能、moon-wav；按分类 / 搜索浏览，打开页面自动同步 Star 与新仓库 |
 | 顶层 | BW有话说 | 文字 / 图片 / 视频 / 链接时间线；只点赞，不设评论 |
 | 跨学期 | 电子书 | 5 本大二上教材：自然地理、毛概、概率论、遥感导论、ArcGIS；在线阅读 |
 
@@ -60,7 +61,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 旧 Python 项目（`E:\python卷子` / 原 GitHub 仓库）保持只读、没有改动。新项目独立重做：
 
-- 599 题 / 10 套卷：按套刷、分节刷、综合刷、模拟卷。
+- 599 题 / 10 套卷：按套刷、分节刷、综合刷、模拟卷；2026-11-10 完成答案与解析校订（补全缺失解析、修正错位答案、修复 OCR 截断的题干 / 选项）。
 - **整卷阅读与下载**：十套卷都能在一页看完题目 + 答案 + 解析；每套可下载 PDF / Word，十套也有合集。
 - 单选、多选自动判分；填空、代码阅读、设计题按参考答案自评。
 - 错题本、收藏夹、分套进度、数据页。
@@ -69,7 +70,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 #### Python 知识地图
 
-`python-guide.html` 是题库之外的“第二入口”，不改动 599 题：
+`python-guide.html` 是题库之外的“第二入口”，不重排 599 题：
 
 - **考试说明**：按《考试.txt》拆成单选 20×1、多选 10×3、填空 10×1.5、代码阅读 3 题 20 分、程序设计 5 选 3。
 - **十个知识模块**：基础语法、函数与作用域、迭代器/生成器/装饰器、类与对象、继承与多态、Pandas、Matplotlib、GeoPandas、GDAL/OGR、模块与 Jupyter。
@@ -262,7 +263,7 @@ tools/merge_materials.py    桌面原始文件/复习资料的分类合并（一
 - 旧 Python 项目只读参考，不修改、不提交、不移动。
 - ArcGIS 题库来自课程扫描件《一填空题》25 页，答案以原件为准；个别表述保留原件写法。
 - 毛概选择题 1065 题由 710 题去重汇总与《毛概期末考试题库》补充合并；原资料个别答案有争议，以教材和课后题为准。
-- Python 599 题保持原样；知识地图只做导航、统计和课件补充，不改题、不删题。
+- Python 599 题不重排、不删题；允许修复明显 OCR 损坏和错误的答案 / 解析；知识地图只做导航、统计和课件补充。
 - 本项目用于个人学习与教学交流；教材、课程资料版权归原作者 / 原出版社所有。
 
 ### 课程总纲（桌面）
@@ -333,7 +334,7 @@ The old Python project is kept read-only and untouched. This is a new implementa
 
 #### Python knowledge map
 
-`python-guide.html` is a second entrance that leaves the 599-question bank untouched: the exam structure from the teacher's `考试.txt`, ten knowledge modules (syntax, scope, iterators/decorators, OOP, inheritance, Pandas, Matplotlib, GeoPandas, GDAL/OGR, tooling), bank coverage per topic, and a five-day route. It flags the three areas the bank barely covers: Matplotlib, GeoPandas and GDAL.
+`python-guide.html` is a second entrance that does not reorder the 599-question bank: the exam structure from the teacher's `考试.txt`, ten knowledge modules (syntax, scope, iterators/decorators, OOP, inheritance, Pandas, Matplotlib, GeoPandas, GDAL/OGR, tooling), bank coverage per topic, and a five-day route. It flags the three areas the bank barely covers: Matplotlib, GeoPandas and GDAL.
 
 ### Four course modules
 
@@ -493,6 +494,6 @@ tools/sync_content.py       Homework -> build -> summaries in one command
 - AI output can be wrong; always check against the textbook and your instructor's notes.
 - ArcGIS questions come from the 25-page scanned fill-in bank; answers follow the scan.
 - The Maoism choice bank merges the 710-question summary with 355 deduplicated questions from the final-exam bank; a few source answers are disputed, so trust the textbook and post-class questions.
-- The Python 599-question bank is fixed; the knowledge map only adds navigation, counts and courseware notes.
+- The Python 599-question bank is not reordered or trimmed; obvious OCR damage and wrong answers/explanations may be repaired. The knowledge map only adds navigation, counts and courseware notes.
 - The old Python project is read-only and is not modified, committed or moved.
 - This project is for personal study and teaching exchange. Copyright in textbooks and course materials remains with their original authors and publishers.
