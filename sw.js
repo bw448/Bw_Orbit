@@ -1,4 +1,4 @@
-﻿const CACHE = 'orbit-shell-v37';
+﻿const CACHE = 'orbit-shell-v38';
 const ASSETS = [
   './', './index.html', './semesters.html', './sem2-1.html', './sem2-2.html', './sem3-1.html', './sem3-2.html',
   './remote.html', './python.html', './python-guide.html', './kaoyan-remote.html', './zero-remote.html',

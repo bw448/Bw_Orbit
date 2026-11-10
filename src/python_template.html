@@ -178,7 +178,7 @@
       <div class="paper-downloads" id="paperDownloads">
         <div class="paper-dl-head">
           <div><div class="eyebrow">FULL PAPERS</div><h3>十套完整卷</h3><p>整卷阅读，或下载 PDF / Word。</p></div>
-          <div class="paper-dl-all"><a href="assets/papers/python-all-papers.pdf" download>全部 PDF ↓</a><a href="assets/papers/python-all-papers.docx" download>Word ↓</a></div>
+          <div class="paper-dl-all"><a href="assets/papers/python-all-papers.pdf" download target="_blank" rel="noopener">全部 PDF ↓</a><a href="assets/papers/python-all-papers.docx" download target="_blank" rel="noopener">Word ↓</a></div>
         </div>
         <div class="paper-dl-grid" id="paperDlGrid"></div>
       </div>
@@ -340,7 +340,7 @@ function renderPaperDownloads(){
     const pdf = 'assets/papers/paper-' + String(n).padStart(2,'0') + '.pdf';
     const docx = 'assets/papers/paper-' + String(n).padStart(2,'0') + '.docx';
     return '<div class="paper-dl-card"><b>第 ' + String(n).padStart(2,'0') + ' 套</b><small>' + qs.length + ' 题</small>' +
-      '<div><a href="#paper-full-' + n + '">整卷看</a><a href="' + pdf + '" download>PDF</a><a href="' + docx + '" download>Word</a></div></div>';
+      '<div><a href="#paper-full-' + n + '">整卷看</a><a href="' + pdf + '" download target="_blank" rel="noopener">PDF</a><a href="' + docx + '" download target="_blank" rel="noopener">Word</a></div></div>';
   }).join('');
 }
 function showFullPaper(n){
@@ -374,8 +374,8 @@ function showFullPaper(n){
     '<h1>第 ' + n + ' 套 · 完整卷</h1>' +
     '<p class="lede">' + qs.length + ' 题 · 单选 ' + c.single + ' / 多选 ' + c.multiple + ' / 填空简答 ' + c.short + '。题目、答案、解析都在这一页。</p>' +
     '<div class="full-tools">' +
-      '<a class="btn btn-accent" href="' + pdf + '" download>下载 PDF</a>' +
-      '<a class="btn btn-ghost" href="' + docx + '" download>下载 Word</a>' +
+      '<a class="btn btn-accent" href="' + pdf + '" download target="_blank" rel="noopener">下载 PDF</a>' +
+      '<a class="btn btn-ghost" href="' + docx + '" download target="_blank" rel="noopener">下载 Word</a>' +
       '<button class="btn btn-ghost" onclick="go(\'#paper-' + n + '\')">本套详情</button>' +
       '<button class="btn btn-ghost" onclick="go(\'#papers\')">返回试卷</button>' +
     '</div><div class="full-toc">' + toc + '</div></div>' +
@@ -424,8 +424,8 @@ function showPaper(n){
     '<p>自动判分题直接出结果；填空、代码阅读、设计题按参考答案自评。</p>' +
     '<div class="q-actions"><button class="btn btn-accent btn-wide" onclick="go(\'#paper-full-' + n + '\')">完整试卷</button>' +
     '<button class="btn btn-ghost btn-wide" onclick="go(\'#practice-' + n + '\')">开始本套</button>' +
-    '<a class="btn btn-ghost btn-wide" href="assets/papers/paper-' + String(n).padStart(2,'0') + '.pdf" download>下载 PDF</a>' +
-    '<a class="btn btn-ghost btn-wide" href="assets/papers/paper-' + String(n).padStart(2,'0') + '.docx" download>下载 Word</a>' +
+    '<a class="btn btn-ghost btn-wide" href="assets/papers/paper-' + String(n).padStart(2,'0') + '.pdf" download target="_blank" rel="noopener">下载 PDF</a>' +
+    '<a class="btn btn-ghost btn-wide" href="assets/papers/paper-' + String(n).padStart(2,'0') + '.docx" download target="_blank" rel="noopener">下载 Word</a>' +
     '<button class="btn btn-ghost btn-wide" onclick="go(\'#papers\')">返回试卷</button></div></aside></div>', 'PAPER ' + String(n).padStart(2,'0'));
 }
 

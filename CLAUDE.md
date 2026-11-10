@@ -111,6 +111,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 数据检查：`tools/check_site.py`（题库结构、答案下标、本地链接）
 - 电子书书目：`assets/ebooks/books.js`
 - 竞赛数据：`assets/competitions-data.js`
+- 课程资料 PDF：`assets/resources/`（从 GitHub Release 镜像到站内，约 80MB；课程页资源卡直接下载，手机不再依赖 GitHub 域名）
 - 开源项目页：`src/opensource_projects.json` → `python build.py` 生成 `assets/opensource-data.js`；页面运行时再请求 GitHub API 更新 Star 并自动收录新仓库。新增项目要精美介绍就编辑 JSON；只新建仓库也会自动出现在“其他项目”
 - BW 的 CloudBase 配置：`assets/cloudbase-config.js`
 - BW 数据库 / RPC：`cloudbase/schema.sql`
@@ -129,7 +130,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 视觉基线：浅色 Apple 风、白底、系统字体、蓝色强调；不要纯黑大面积；不要用用户生成图片，视觉用代码/SVG。
 - 手机端 390px 必须无横向溢出。
 - 不要把 SecretId / SecretKey / service_role / 数据库密码放进前端；BW 只用 publishable key。
-- `assets/courses/` 已在 `.gitignore`，课程 PDF 放在 GitHub Release，不要重新 commit 大文件。
+- 旧 `assets/courses/` 仍是本地课程原稿目录，已在 `.gitignore`；站内下载用 `assets/resources/` 的镜像 PDF（不要改回 GitHub Release 外链）。
 - 电子书 PDF 已在仓库中（约 231MB），不要重复复制。
 - 教材 / 课程资料版权归原作者；仅个人学习使用。
 
