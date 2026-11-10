@@ -68,6 +68,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
   - 自然地理手写稿已转成 `nature-notes.html`（14 页文字版）；原手写扫描/JPG 不再在页面链接
 - 毛概 / ArcGIS：选择题答错自动进 `quiz.js` 的错题本面板（章节分布、重练、导出、清空）
 - AI 入口：`course-ai.js` 在课程页 / Python 知识地图的首屏操作区、吸顶导航、每个 section 标题下注入“问 AI”；`rs-ai.js` 在遥感首屏注入“问 AI”；Python 主页面 `ai.js` 首屏 + 右下角按钮。不要再只靠右下角小圆点。
+- 长页面二级视图：毛概 / ArcGIS / 遥感 / 自然地理 / 概率论用 `assets/split-view.js` + 页面里的 `window.ORBIT_SPLIT`。总览隐藏长 section，显示 `#moreEntries` 卡片；`?view=more#id` 显示二级视图，顶部固定“返回总览”条。新增模块要同步这两个列表。
 - Python：`python.html`
   - 599 题 / 10 套卷；2026-11-10 完成答案与解析校订（补全/重写 300+ 条解析、纠正错误与错位答案、修复 OCR 截断题干与选项）
   - **不重排、不删题**；只允许修复明显 OCR 损坏和错误的答案 / 解析
@@ -78,7 +79,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
   - 数据：`src/python_guide.json` + `src/python_topics.json`
 - 四个课程模块：
   - `nature-geo.html` 自然地理学
-  - `maogai.html` 毛概（1065 题系统题库 + 100 道真题 + 256 条高频考点 + 39 组易混对比）
+  - `maogai.html` 毛概（1063 题系统题库 + 97 道真题 + 256 条高频考点 + 39 组易混对比）
   - `probability.html` 概率论
   - `arcgis.html` ArcGIS（80 道客观题 + 18 条名词解释 + 算法/实操/简答/分析/论述）
 - 竞赛顶层模块：`competitions.html`（赛事 / 备考 / 技能 / 资料）
@@ -106,7 +107,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 概率论自测题：`src/probability_bank.json`（60 题）
 - 遥感教材附录：`assets/rs-appendix-data.js`（807 条；由 `tools/build_rs_appendix.py` 从 `.work/appendix` OCR JSON 生成）
 - ArcGIS 题库 / 模板：`src/arcgis_bank.json`
-- 毛概选择题库：`src/maogai_bank.json`；高频考点/真题/易混：`src/maogai_special.json`；大题背诵：`src/maogai_essay.json`
+- 毛概选择题库：`src/maogai_bank.json`（1063 题，已去掉 2 道完全重复）；高频考点/真题/易混：`src/maogai_special.json`；大题背诵：`src/maogai_essay.json`
 - 课程总纲生成：`tools/export_summaries.py` → 桌面 `系统整理好的复习资料/`
 - 数据检查：`tools/check_site.py`（题库结构、答案下标、本地链接）
 - 电子书书目：`assets/ebooks/books.js`

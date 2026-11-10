@@ -96,3 +96,27 @@
 .course-guide a:hover b{background:var(--blue-soft);color:var(--blue)}
 .course-guide .note{margin-left:auto;font-size:10.5px;color:var(--faint)}
 @media(max-width:640px){.course-guide-inner{gap:10px 14px;padding:10px 16px}.course-guide .note{display:none}.course-guide a{font-size:11px}}
+
+/* secondary view + entry cards */
+.split-head{background:var(--paper-alt);border-bottom:1px solid var(--line-soft)}
+.split-head-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;flex-wrap:wrap;padding:clamp(34px,5vw,58px) clamp(18px,4vw,44px)}
+.split-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
+.split-head h1{font-size:clamp(2rem,4vw,3.1rem);line-height:1.08;letter-spacing:-.04em;font-weight:600;margin-top:8px}
+.split-back{font-size:12px;color:var(--blue);white-space:nowrap;border-bottom:1px solid rgba(0,113,227,.3);padding-bottom:3px}
+.split-back:hover{border-color:var(--blue)}
+.entry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:30px}
+.entry-card{display:flex;flex-direction:column;gap:5px;min-width:0;background:#fff;border:1px solid var(--line-soft);border-radius:16px;padding:20px 22px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
+.entry-card:hover{transform:translateY(-2px);border-color:rgba(0,113,227,.3);box-shadow:0 14px 34px rgba(31,58,95,.08)}
+.entry-tag{font-family:var(--mono);font-size:9px;letter-spacing:.09em;color:var(--blue);text-transform:uppercase}
+.entry-card b{font-size:18px;font-weight:600;letter-spacing:-.02em;line-height:1.25}
+.entry-card small{font-size:12px;line-height:1.7;color:var(--muted)}
+.entry-card:only-child{grid-column:1/-1}
+.entry-card em{margin-top:5px;font-style:normal;font-size:11.5px;color:var(--blue)}
+@media(max-width:640px){.entry-grid{grid-template-columns:1fr}.split-head-inner{padding:28px 16px}.split-head h1{font-size:1.8rem}}
+
+.split-bar{position:fixed;left:0;right:0;top:48px;z-index:38;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px clamp(18px,4vw,44px);background:rgba(255,255,255,.94);border-bottom:1px solid var(--line-soft);-webkit-backdrop-filter:saturate(180%) blur(16px);backdrop-filter:saturate(180%) blur(16px);font-size:11.5px;color:var(--muted)}
+.split-bar b{font-weight:600;color:var(--ink)}
+.split-bar a{color:var(--blue);white-space:nowrap}
+@media(max-width:640px){.split-bar{top:48px;padding:9px 14px;font-size:10.5px}}
+
+.split-spacer{height:40px}

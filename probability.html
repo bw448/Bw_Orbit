@@ -47,7 +47,7 @@
         <div class="course-en">Probability & Statistics</div>
         <p class="course-lead">先把题型认出来，再把公式用熟；老师 PPT 上的原题优先级最高。</p>
         <div class="course-actions">
-          <a class="btn-primary" href="#practice">开始刷题</a>
+          <a class="btn-primary" href="?view=more#practice">开始刷题</a>
           <a class="course-back" href="#sections">看重点 <span>↗</span></a>
           <a class="course-back" href="sem2-1.html">返回大二上 <span>↗</span></a>
         </div>
@@ -62,7 +62,7 @@
 
   <nav class="course-subnav" aria-label="本页导航">
     <a href="#exam">考试与重点</a>
-    <a href="#practice">刷题 · 错题本</a>
+    <a href="?view=more#practice">刷题 · 错题本</a>
     <a href="#sections">重点内容</a>
     <a href="#resources">资料</a>
     <details class="submore">
@@ -75,7 +75,7 @@
     <div class="course-guide-inner">
       <span class="label">第一次来？</span>
       <a href="#exam"><b>1</b>看考什么</a>
-      <a href="#practice"><b>2</b>做一组题</a>
+      <a href="?view=more#practice"><b>2</b>做一组题</a>
       <a href="#plan"><b>3</b>按路线复习</a>
       <span class="note">先走一遍，再按章节补。</span>
     </div>
@@ -89,6 +89,23 @@
       </div>
       <div class="exam-grid" id="examGrid"></div>
       <div class="course-notice"><b>划重点</b><span id="courseNotice">大二上经验：看老师 PPT 上的题，考过一些原题；基本解题方法要会。</span></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="moreEntries">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">More / 二级目录</div><h2>刷题，<br>单独一页。</h2></div>
+        <p class="section-lede">主页面只留考试和重点；60 道自测题和错题本放在二级页，点下面的卡片进入。</p>
+      </div>
+      <div class="entry-grid">
+        <a class="entry-card" href="?view=more#practice">
+          <span class="entry-tag">Practice</span>
+          <b>60 道章节自测</b>
+          <small>单选 / 多选 / 判断 / 填空，答错自动进错题本，按 1 / 3 / 7 / 14 / 30 天复习。</small>
+          <em>进入刷题页 →</em>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -149,6 +166,8 @@
 <script src="assets/quiz.js?v=10"></script>
 <script src="assets/course.js"></script>
 <script src="assets/course-ai.js?v=3" defer></script>
+<script>window.ORBIT_SPLIT = {more:['practice'], title:'概率论与数理统计', heading:'自测题和错题本。', back:'probability.html', backLabel:'课程'};</script>
+<script src="assets/split-view.js"></script>
 <script src="assets/pwa.js" defer></script>
 </body>
 </html>

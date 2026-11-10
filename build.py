@@ -193,6 +193,7 @@ def build_courses():
             "__NOTICE__": c["notice"],
             "__ACCENT__": c["accent"],
             "__DESC__": "%s 大二上复习模块：考试重点、章节勾画与资料。Orbit 地信学习站。" % c["title"],
+            "__SLUG__": slug,
             "__PRACTICE_TOTAL__": str(bank_total),
             "__PRACTICE_DESC__": practice.get("desc", "按章节刷题；答错自动进错题本。"),
             "__PRACTICE_NOTE__": practice.get("note", "题目为自编自测，不是学校官方题。"),
