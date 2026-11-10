@@ -108,7 +108,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 ### 电子书模块
 
 - 大二上 5 本教材：自然地理学、毛概（2023 版）、概率论与数理统计（第五版）、遥感导论、ArcGIS 空间分析实验教程（第三版）。
-- 共 1,981 页、约 231 MB；网页阅读版做了压缩，保留原书页序。
+- 共 1,981 页；站内保留压缩下载版约 105 MB（原书约 231 MB），保留原书页序。
 - 自带轻量阅读器：翻页、缩放、键盘方向键、手机滑动翻页；全页图片按需加载，支持分卷和整本下载。
 - 在线阅读为全页图片：翻到哪页加载哪页，打开快、可看完全书；每 50 页另有 3—6 MB 的分卷 PDF；完整版为 10—33 MB 压缩 PDF，下载也更快。
 - 版权归原作者和出版社；仅用于个人学习与课程复习，不用于商业传播。
@@ -365,7 +365,7 @@ A top-level module with four submodules:
 ### E-books
 
 - Five Year-2 Fall textbooks: Physical Geography, Mao Zedong Thought (2023), Probability and Statistics (5th ed.), Introduction to Remote Sensing, and the ArcGIS Spatial Analysis lab manual (3rd ed.).
-- 1,981 pages, about 231 MB; the web reading copies are compressed but keep the original page order.
+- 1,981 pages; the site keeps compressed download copies (about 105 MB in total; the original books are about 231 MB) while preserving the original page order.
 - Includes a small PDF.js reader: page turns, zoom, fullscreen, arrow keys, mobile swipe, and direct download.
 - Copyright remains with the authors and publishers; provided for personal study and course review only.
 
