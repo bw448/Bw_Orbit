@@ -85,3 +85,14 @@
   .study-tabs{padding:8px 10px}
   .study-mobile-hint{display:block;font-size:11px;color:var(--faint);margin-top:8px}
 }
+
+/* first-visit guide strip */
+.course-guide{background:#fff;border-bottom:1px solid var(--line-soft)}
+.course-guide-inner{max-width:1120px;margin:0 auto;padding:11px clamp(18px,4vw,44px);display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.course-guide .label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase}
+.course-guide a{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ink);transition:color .2s var(--ease)}
+.course-guide a b{width:19px;height:19px;border-radius:50%;background:rgba(29,29,31,.06);color:var(--ink);display:inline-grid;place-items:center;font-size:10px;font-weight:600}
+.course-guide a:hover{color:var(--blue)}
+.course-guide a:hover b{background:var(--blue-soft);color:var(--blue)}
+.course-guide .note{margin-left:auto;font-size:10.5px;color:var(--faint)}
+@media(max-width:640px){.course-guide-inner{gap:10px 14px;padding:10px 16px}.course-guide .note{display:none}.course-guide a{font-size:11px}}

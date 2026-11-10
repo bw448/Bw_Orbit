@@ -231,9 +231,10 @@
   var res = byId('agResources');
   if (res) {
     res.innerHTML = (A.resources || []).map(function (r) {
-      return '<a class="resource-card" href="' + esc(r[2]) + '" target="_blank" rel="noopener">' +
+      var isPdf = /\.pdf$/i.test(r[2] || '');
+      return '<a class="resource-card" href="' + esc(r[2]) + '" target="_blank" rel="noopener"' + (isPdf ? ' download' : '') + '>' +
         '<span class="tag">' + esc(r[3]) + '</span><b>' + esc(r[0]) + '</b><small>' + esc(r[1]) + '</small>' +
-        '<span class="go">打开资料 <span>↗</span></span></a>';
+        '<span class="go">' + (isPdf ? '打开 / 下载' : '打开资料') + ' <span>↗</span></span></a>';
     }).join('');
   }
 })();

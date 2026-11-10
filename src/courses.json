@@ -192,12 +192,12 @@
       ["04", "真题默写", "用 2024/2025 真题限时写大题，再对照背诵版补要点。"]
     ],
     "resources": [
-      ["大题背诵版 · 核心篇", "PDF · 导论—第四章", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/maogai-big-core.pdf", "大题"],
-      ["大题背诵版 · 后半篇", "PDF · 第五章—跨章节", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/maogai-big-back.pdf", "大题"],
-      ["选择题专项", "PDF · 高频考点 + 2024—2025 真题", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/maogai-choice-special.pdf", "选择题"],
-      ["选择题题库（去重）", "PDF · 汇总题库", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/maogai-choice-bank.pdf", "选择题"],
-      ["2024 年毛概真题", "PDF · 带答案", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/past-2024.pdf", "真题"],
-      ["2025 年毛概真题", "PDF · 带答案", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/past-2025.pdf", "真题"]
+      ["大题背诵版 · 核心篇", "PDF · 导论—第四章", "assets/resources/maogai-big-core.pdf", "大题"],
+      ["大题背诵版 · 后半篇", "PDF · 第五章—跨章节", "assets/resources/maogai-big-back.pdf", "大题"],
+      ["选择题专项", "PDF · 高频考点 + 2024—2025 真题", "assets/resources/maogai-choice-special.pdf", "选择题"],
+      ["选择题题库（去重）", "PDF · 汇总题库", "assets/resources/maogai-choice-bank.pdf", "选择题"],
+      ["2024 年毛概真题", "PDF · 带答案", "assets/resources/past-2024.pdf", "真题"],
+      ["2025 年毛概真题", "PDF · 带答案", "assets/resources/past-2025.pdf", "真题"]
     ],
     "links": [["电子书阅读器", "ebook.html"], ["自然地理模块", "nature-geo.html"], ["竞赛模块", "competitions.html"]]
   },
@@ -293,9 +293,9 @@
       ["04", "限时真题", "用 2022—2023 期末卷限时完成，错题回到对应章节。"]
     ],
     "resources": [
-      ["概率论回忆版", "PDF · 考点回忆", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/recall.pdf", "重点"],
-      ["2022—2023 期末试卷", "PDF · 陕西师范大学", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/past-2023.pdf", "真题"],
-      ["Kira 概率统计 4 小时速通讲义", "PDF · 空白截图版", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/kira-4h.pdf", "课程"],
+      ["概率论回忆版", "PDF · 考点回忆", "assets/resources/recall.pdf", "重点"],
+      ["2022—2023 期末试卷", "PDF · 陕西师范大学", "assets/resources/past-2023.pdf", "真题"],
+      ["Kira 概率统计 4 小时速通讲义", "PDF · 空白截图版", "assets/resources/kira-4h.pdf", "课程"],
       ["概率论与数理统计（第五版）", "PDF · 443 页 · 41.4 MB", "assets/ebooks/probability-statistics.pdf", "教材"]
     ],
     "links": [["电子书阅读器", "ebook.html"], ["毛概模块", "maogai.html"], ["竞赛模块", "competitions.html"]]
@@ -375,15 +375,15 @@
       ["04", "刷题型", "按名词解释/单选/判断/简答/实验/论述分题型练，判断题一定写理由。"]
     ],
     "resources": [
-      ["ArcGIS 操作题", "PDF · 32.4 MB", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/operations.pdf", "实操"],
-      ["第 1 章 ArcGIS 概述", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch1-overview.pdf", "PPT"],
-      ["第 2 章 快速入门", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch2-quickstart.pdf", "PPT"],
-      ["第 6 章 空间分析导论", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch6-intro.pdf", "PPT"],
-      ["第 7 章 矢量空间分析", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch7-vector.pdf", "PPT"],
-      ["第 8 章 栅格空间分析", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch8-raster.pdf", "PPT"],
-      ["第 9 章 三维分析", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch9-3d.pdf", "PPT"],
-      ["第 10 章 空间统计分析", "PDF · 2025", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/ch10-statistics.pdf", "PPT"],
-      ["实验 13：栅格空间分析", "PDF · 学校选址/最佳路径/密度制图", "https://github.com/bw448/Bw_Orbit/releases/download/course-resources-v1/experiment-13.pdf", "实验"],
+      ["ArcGIS 操作题", "PDF · 32.4 MB", "assets/resources/operations.pdf", "实操"],
+      ["第 1 章 ArcGIS 概述", "PDF · 2025", "assets/resources/ch1-overview.pdf", "PPT"],
+      ["第 2 章 快速入门", "PDF · 2025", "assets/resources/ch2-quickstart.pdf", "PPT"],
+      ["第 6 章 空间分析导论", "PDF · 2025", "assets/resources/ch6-intro.pdf", "PPT"],
+      ["第 7 章 矢量空间分析", "PDF · 2025", "assets/resources/ch7-vector.pdf", "PPT"],
+      ["第 8 章 栅格空间分析", "PDF · 2025", "assets/resources/ch8-raster.pdf", "PPT"],
+      ["第 9 章 三维分析", "PDF · 2025", "assets/resources/ch9-3d.pdf", "PPT"],
+      ["第 10 章 空间统计分析", "PDF · 2025", "assets/resources/ch10-statistics.pdf", "PPT"],
+      ["实验 13：栅格空间分析", "PDF · 学校选址/最佳路径/密度制图", "assets/resources/experiment-13.pdf", "实验"],
       ["ArcGIS 空间分析实验教程（第三版）", "PDF · 576 页 · 58.5 MB", "assets/ebooks/arcgis-spatial-analysis.pdf", "教材"]
     ],
     "links": [["电子书阅读器", "ebook.html"], ["遥感模块", "remote.html"], ["竞赛模块", "competitions.html"]]
