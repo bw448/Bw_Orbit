@@ -57,3 +57,18 @@
     });
   }
 })();
+
+
+/* course subnav: close "more" after choosing a link / clicking outside */
+(function () {
+  var more = document.querySelectorAll('.course-subnav .submore');
+  more.forEach(function (d) {
+    d.addEventListener('click', function (e) {
+      if (e.target.closest('a')) d.removeAttribute('open');
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.submore')) return;
+    more.forEach(function (d) { d.removeAttribute('open'); });
+  });
+})();

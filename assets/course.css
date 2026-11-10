@@ -37,6 +37,14 @@ body{padding-left:0;padding-right:0;background:var(--paper)}
 }
 .course-subnav a{font-size:12px;color:var(--muted);padding:5px 0;border-bottom:2px solid transparent}
 .course-subnav a:hover{color:var(--ink);border-color:var(--course-accent)}
+.course-subnav .submore{position:relative}
+.course-subnav summary{list-style:none;cursor:pointer;font-size:12px;color:var(--muted);padding:5px 0;border-bottom:2px solid transparent;display:inline-flex;align-items:center;gap:4px}
+.course-subnav summary::-webkit-details-marker{display:none}
+.course-subnav summary:after{content:"⌄";font-size:10px;line-height:1;color:var(--faint)}
+.course-subnav details[open] summary{color:var(--ink);border-color:var(--course-accent)}
+.submore-panel{position:absolute;right:0;top:calc(100% + 8px);z-index:40;min-width:168px;padding:7px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px rgba(20,40,70,.12);display:grid;gap:2px}
+.submore-panel a{padding:8px 10px;border-radius:8px;border:0;font-size:12px;color:var(--muted);white-space:nowrap}
+.submore-panel a:hover{background:var(--paper-alt);color:var(--ink)}
 .course-section{padding:clamp(70px,9vw,110px) 0;background:#fff;border-top:1px solid var(--line-soft);scroll-margin-top:88px}
 .course-section-alt{background:var(--paper-alt)}
 .course-section .section-head{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end}
@@ -109,7 +117,10 @@ body{padding-left:0;padding-right:0;background:var(--paper)}
   .course-hero h1{font-size:clamp(2.1rem,10.5vw,3.4rem)}
   .course-lead{font-size:14px}
   .course-subnav{top:0;gap:16px;padding:9px 12px;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}
-  .course-subnav a{white-space:nowrap;font-size:11px}
+  .course-subnav a,.course-subnav summary{white-space:nowrap;font-size:11px}
+  .course-subnav{flex-wrap:wrap;overflow:visible}
+  .course-subnav .submore{position:relative}
+  .submore-panel{right:0;top:calc(100% + 6px);min-width:150px}
   .course-section .section-head{gap:10px}
   .exam-grid{grid-template-columns:1fr}
   .exam-item{border-right:0;padding-right:0}
