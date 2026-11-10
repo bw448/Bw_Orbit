@@ -15,7 +15,7 @@ BODY_START = re.compile(r"(?=<(?:header|main|div|section|nav|svg|article)\b)", r
 
 def js_json(obj):
     """JSON safe to embed inside a <script> block."""
-    return json.dumps(obj, ensure_ascii=False).replace("</", "<\\/")
+    return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
 
 def wrap(html, lang="zh-CN"):
@@ -38,7 +38,7 @@ def build_remote():
     tpl = open(os.path.join(ROOT, "src", "template.html"), encoding="utf-8").read()
     homework = json.load(open(os.path.join(ROOT, "src", "homework.json"), encoding="utf-8"))
     notes = json.load(open(os.path.join(ROOT, "src", "notes.json"), encoding="utf-8"))
-    html = tpl.replace("__DATA__", json.dumps(DATA, ensure_ascii=False))
+    html = tpl.replace("__DATA__", js_json(DATA))
     html = html.replace("__HOMEWORK__", json.dumps(homework, ensure_ascii=False))
     html = html.replace("__NOTES__", json.dumps(notes, ensure_ascii=False))
     html = wrap(html)
@@ -51,7 +51,7 @@ def build_python():
     tpl = open(os.path.join(ROOT, "src", "python_template.html"), encoding="utf-8").read()
     data = json.load(open(os.path.join(ROOT, "src", "python_questions.json"), encoding="utf-8"))
     topics = json.load(open(os.path.join(ROOT, "src", "python_topics.json"), encoding="utf-8"))
-    html = tpl.replace("__PYDATA__", json.dumps(data, ensure_ascii=False))
+    html = tpl.replace("__PYDATA__", js_json(data))
     html = html.replace("__PYTOPICS__", js_json(topics))
     html = wrap(html)
     out = os.path.join(ROOT, "python.html")
