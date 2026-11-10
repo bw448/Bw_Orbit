@@ -83,7 +83,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
   - `probability.html` 概率论
   - `arcgis.html` ArcGIS（80 道客观题 + 18 条名词解释 + 算法/实操/简答/分析/论述）
 - 竞赛顶层模块：`competitions.html`（赛事 / 备考 / 技能 / 资料）
-- 电子书：`ebook.html`（5 本教材 + PDF.js 阅读器；全页图片阅读 + 50 页分卷下载 + 完整版下载）
+- 电子书：`ebook.html`（5 本教材 + PDF.js 阅读器；全页图片阅读 + 整本压缩版下载）
 - BW有话说：
   - 公开页：`bw-talk.html`
   - 管理页：`bw-admin.html`（不进导航）
@@ -132,7 +132,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 手机端 390px 必须无横向溢出。
 - 不要把 SecretId / SecretKey / service_role / 数据库密码放进前端；BW 只用 publishable key。
 - 旧 `assets/courses/` 仍是本地课程原稿目录，已在 `.gitignore`；站内下载用 `assets/resources/` 的镜像 PDF（不要改回 GitHub Release 外链）。
-- 电子书站内只保留压缩下载版（约 105MB）；原书 PDF 备份在本机 `.work/ebooks_full/`，不要再复制进仓库，避免 Pages 部署超时。
+- 电子书站内只保留压缩下载版（约 105MB）；原书 PDF 备份在本机 `.work/ebooks_full/`，分卷 PDF 备份在 `.work/ebooks_parts/`；不要再复制进仓库，避免 Pages 部署超时。
 - 教材 / 课程资料版权归原作者；仅个人学习使用。
 
 ## BW有话说（CloudBase）要点
