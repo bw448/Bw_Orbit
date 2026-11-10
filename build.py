@@ -154,15 +154,80 @@ def build_python_guide():
     print("built", out, len(html), "chars")
 
 
+def _infer_opensource_category(repo):
+    text = " ".join([
+        " ".join(repo.get("topics") or []),
+        repo.get("description") or "",
+        repo.get("name") or "",
+    ]).lower()
+    if any(k in text for k in ("claude", "skill", "agent")):
+        return "skills"
+    if any(k in text for k in ("education", "study", "quiz", "exam", "gis", "remote-sensing", "learning", "campus", "course")):
+        return "study"
+    if any(k in text for k in ("library", "audio", "wav", "toolkit", "sdk", "parser", "moonbit")):
+        return "library"
+    if any(k in text for k in ("desktop", "reader", "assistant", "local-first", "windows", "app")):
+        return "app"
+    return "other"
+
+
 def build_opensource():
-    """Build the open-source showcase page and its curated snapshot."""
+    """Build the open-source showcase page, merging curated text with the latest snapshot."""
     data = json.load(open(os.path.join(ROOT, "src", "opensource_projects.json"), encoding="utf-8"))
+    snapshot_path = os.path.join(ROOT, "src", "opensource_snapshot.json")
+    if os.path.exists(snapshot_path):
+        snap = json.load(open(snapshot_path, encoding="utf-8"))
+        repos = [r for r in (snap.get("repos") or []) if r.get("name") and not r.get("fork") and not r.get("archived")]
+        by_repo = {p["repo"].lower(): p for p in data["projects"]}
+        added = 0
+        for r in repos:
+            key = r["name"].lower()
+            p = by_repo.get(key)
+            lic = r.get("license") or ""
+            if p:
+                p["stars"] = r.get("stargazers_count", p.get("stars", 0))
+                if r.get("language"):
+                    p["language"] = r["language"]
+                if r.get("homepage"):
+                    p["site"] = r["homepage"]
+                if r.get("pushed_at"):
+                    p["updated"] = r["pushed_at"]
+                if r.get("topics"):
+                    p["topics"] = list(r["topics"])
+                if lic and not p.get("license"):
+                    p["license"] = lic
+                continue
+            desc = (r.get("description") or "").strip()
+            item = {
+                "repo": r["name"],
+                "category": _infer_opensource_category(r),
+                "title": r["name"],
+                "subtitle": desc.split("。")[0].split(".")[0][:80] or "GitHub 新项目",
+                "description": desc or "这个仓库还没有填写简介。",
+                "highlights": [],
+                "tags": list(r.get("topics") or [])[:5],
+                "topics": list(r.get("topics") or []),
+                "language": r.get("language") or "",
+                "license": lic,
+                "site": r.get("homepage") or "",
+                "stars": r.get("stargazers_count") or 0,
+                "featured": False,
+                "order": 900 + added,
+                "updated": r.get("pushed_at") or "",
+                "_new": True,
+            }
+            added += 1
+            data["projects"].append(item)
+        data["synced_at"] = snap.get("synced_at") or ""
+        if data["synced_at"]:
+            data["updated"] = data["synced_at"][:10]
+    else:
+        data["synced_at"] = data.get("synced_at") or data.get("updated", "")
     js = "window.ORBIT_OPENSOURCE = " + js_json(data) + ";\n"
     data_path = os.path.join(ROOT, "assets", "opensource-data.js")
     open(data_path, "w", encoding="utf-8").write(js)
     print("built", data_path, len(js), "chars,", len(data["projects"]), "projects")
     build_static("opensource.html", "opensource.html")
-
 
 def build_courses():
     tpl = open(os.path.join(ROOT, "src", "course_template.html"), encoding="utf-8").read()

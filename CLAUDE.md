@@ -56,7 +56,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 ## 当前结构
 
 - `index.html`：Orbit 品牌首页（动效、介绍、进入内容）
-- `opensource.html`：开源项目展示页（分类 / 搜索 / GitHub 实时同步；数据 `src/opensource_projects.json`）
+- `opensource.html`：开源项目展示页（分类 / 搜索 / 内置快照 + GitHub API 增强；数据 `src/opensource_projects.json` + `src/opensource_snapshot.json`）
 - `semesters.html`：学习内容，选学期
 - `sem2-1.html`：大二上，六门课 + 电子书
 - 遥感：`remote.html`
@@ -113,7 +113,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 电子书书目：`assets/ebooks/books.js`
 - 竞赛数据：`assets/competitions-data.js`
 - 课程资料 PDF：`assets/resources/`（从 GitHub Release 镜像到站内，约 80MB；课程页资源卡直接下载，手机不再依赖 GitHub 域名）
-- 开源项目页：`src/opensource_projects.json` → `python build.py` 生成 `assets/opensource-data.js`；页面运行时再请求 GitHub API 更新 Star 并自动收录新仓库。新增项目要精美介绍就编辑 JSON；只新建仓库也会自动出现在“其他项目”
+- 开源项目页：`src/opensource_projects.json`（手写介绍/分类）+ `src/opensource_snapshot.json`（GitHub Action 每 6 小时生成）→ `python build.py` 合并成 `assets/opensource-data.js`。页面先读站内快照，运行时再尝试 GitHub API（5 秒超时、30 分钟缓存、失败可点“重新同步”）。新增仓库由 Action 自动收录；要精美中文介绍再编辑 curated JSON。`.github/workflows/sync-opensource.yml` + `tools/sync_opensource.py` 负责定时同步
 - BW 的 CloudBase 配置：`assets/cloudbase-config.js`
 - BW 数据库 / RPC：`cloudbase/schema.sql`
 

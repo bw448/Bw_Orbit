@@ -1,0 +1,162 @@
+{
+ "user": "bw448",
+ "synced_at": "2026-11-10T13:04:18Z",
+ "repos": [
+  {
+   "name": "Bw_Orbit",
+   "description": "Orbit · 地信学习站 — a bilingual remote-sensing and Python learning system for GIS undergraduates.",
+   "stargazers_count": 1,
+   "language": "HTML",
+   "homepage": "https://bw448.github.io/Bw_Orbit/",
+   "topics": [
+    "chinese",
+    "education",
+    "gis",
+    "pwa",
+    "python",
+    "remote-sensing",
+    "static-site"
+   ],
+   "pushed_at": "2026-11-10T12:42:09Z",
+   "fork": false,
+   "archived": false,
+   "html_url": "https://github.com/bw448/Bw_Orbit",
+   "license": null
+  },
+  {
+   "name": "folio",
+   "description": "Folio：本地优先的英文阅读、四六级学习与科研工作台。PDF/EPUB、离线词典、AI 讲解、错题本、文献发现。 | Local-first reading, CET-4/6 study and research workbench.",
+   "stargazers_count": 0,
+   "language": "Python",
+   "homepage": "",
+   "topics": [
+    "ai",
+    "cet4",
+    "cet6",
+    "education",
+    "epub",
+    "fastapi",
+    "fsrs",
+    "literature-review",
+    "local-first",
+    "pdf-reader",
+    "pymupdf",
+    "reading",
+    "research-tool",
+    "spaced-repetition",
+    "windows"
+   ],
+   "pushed_at": "2026-11-10T03:23:44Z",
+   "fork": false,
+   "archived": false,
+   "html_url": "https://github.com/bw448/folio",
+   "license": "AGPL-3.0"
+  },
+  {
+   "name": "bw_python",
+   "description": "599 道 Python 刷题 + 错题间隔复习 + AI 助教 | Python quiz & spaced review web app",
+   "stargazers_count": 0,
+   "language": "HTML",
+   "homepage": "https://bw448.github.io/bw_python/",
+   "topics": [
+    "github-pages",
+    "pwa",
+    "python",
+    "quiz",
+    "spaced-repetition",
+    "study"
+   ],
+   "pushed_at": "2026-11-03T16:50:34Z",
+   "fork": false,
+   "archived": false,
+   "html_url": "https://github.com/bw448/bw_python",
+   "license": null
+  },
+  {
+   "name": "moon-wav",
+   "description": "MoonBit WAV 音频工具库 — 效果器、波形生成与格式处理 | MoonBit WAV toolkit: effects, waveform generation, format conversion",
+   "stargazers_count": 0,
+   "language": "MoonBit",
+   "homepage": "",
+   "topics": [],
+   "pushed_at": "2026-08-25T07:53:20Z",
+   "fork": false,
+   "archived": false,
+   "html_url": "https://github.com/bw448/moon-wav",
+   "license": "Apache-2.0"
+  },
+  {
+   "name": "JARVIS-LOCAL",
+   "description": "Local AI assistant desktop app — offline-capable, privacy-first personal productivity tool",
+   "stargazers_count": 2,
+   "language": "Python",
+   "homepage": "",
+   "topics": [
+    "ai-assistants",
+    "jarvis",
+    "kokoro",
+    "local-first",
+    "offline-first",
+    "python",
+    "speech-to-text",
+    "tts",
+    "voice-assistant",
+    "whisper",
+    "windows"
+   ],
+   "pushed_at": "2026-08-23T12:12:40Z",
+   "fork": false,
+   "archived": false,
+   "html_url": "https://github.com/bw448/JARVIS-LOCAL",
+   "license": "MIT"
+  },
+  {
+   "name": "novel-writing-skills",
+   "description": "Claude Code 长篇小说创作三件套：搭大纲 → 拆章节 → 写正文",
+   "stargazers_count": 3,
+   "language": "Shell",
+   "homepage": "",
+   "topics": [
+    "ai-writing",
+    "chinese-web-novel",
+    "claude-code",
+    "claude-skills",
+    "creative-writing",
+    "fiction",
+    "llm",
+    "novel-writing",
+    "storytelling",
+    "webnovel"
+   ],
+   "pushed_at": "2026-08-13T04:01:03Z",
+   "fork": false,
+   "archived": false,
+   "html_url": "https://github.com/bw448/novel-writing-skills",
+   "license": "MIT"
+  },
+  {
+   "name": "satirical-fiction-skill",
+   "description": "Claude Code 讽刺短篇小说创作：随机配方生成，每篇风格不重复",
+   "stargazers_count": 1,
+   "language": "",
+   "homepage": "",
+   "topics": [
+    "ai-writing",
+    "claude-code",
+    "claude-skills",
+    "creative-writing",
+    "satire",
+    "satirical-fiction",
+    "short-fiction",
+    "short-story",
+    "storytelling",
+    "writing-prompts"
+   ],
+   "pushed_at": "2026-08-13T04:01:09Z",
+   "fork": false,
+   "archived": false,
+   "html_url": "https://github.com/bw448/satirical-fiction-skill",
+   "license": "MIT"
+  }
+ ]
+}

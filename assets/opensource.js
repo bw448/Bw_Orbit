@@ -33,7 +33,10 @@
   });
   var syncState = 'syncing';
   var live = false;
-  var CACHE_KEY = 'orbit-os-repos-v1';
+  var fetching = false;
+  var CACHE_KEY = 'orbit-os-repos-v2';
+  var CACHE_TTL = 30 * 60 * 1000;
+  var API_TIMEOUT = 5000;
 
   function $(sel) { return document.querySelector(sel); }
   function esc(s) {
@@ -48,6 +51,13 @@
     return String(n);
   }
   function fmtDate(iso) { return iso ? String(iso).slice(0, 10) : ''; }
+  function fmtSync(iso) {
+    if (!iso) return '未知时间';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return String(iso).slice(0, 16).replace('T', ' ');
+    function p(n) { return (n < 10 ? '0' : '') + n; }
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
   function catOf(p) { return CAT_MAP[p.category] || CAT_MAP.other; }
   function langColor(lang) { return LANG_COLORS[lang] || '#9bb6d4'; }
   function starSvg() {
@@ -259,7 +269,8 @@
     var bar = $('#osSync');
     if (bar) {
       var cls = stateName === 'syncing' ? 'syncing' : stateName === 'cache' ? 'cache' : stateName === 'offline' || stateName === 'fallback' ? 'offline' : '';
-      bar.innerHTML = '<span class="os-sync-state ' + cls + '"><i></i><b>' + esc(main) + '</b></span><span>' + esc(sub || '') + ' <a href="' + PROFILE + '" target="_blank" rel="noopener">去 GitHub 看最新</a></span>';
+      var retry = '<button type="button" class="os-retry" data-retry' + (stateName === 'syncing' ? ' disabled' : '') + '>' + (stateName === 'syncing' ? '同步中…' : '重新同步') + '</button>';
+      bar.innerHTML = '<span class="os-sync-state ' + cls + '"><i></i><b>' + esc(main) + '</b></span><span>' + esc(sub || '') + retry + ' <a href="' + PROFILE + '" target="_blank" rel="noopener">去 GitHub 看最新</a></span>';
     }
   }
 
@@ -270,29 +281,38 @@
       if (!raw) return null;
       var obj = JSON.parse(raw);
       if (!obj || !obj.t || !Array.isArray(obj.repos)) return null;
-      if (Date.now() - obj.t > 10 * 60 * 1000) return null;
-      return obj.repos;
+      if (Date.now() - obj.t > CACHE_TTL) return null;
+      return obj;
     } catch (e) { return null; }
   }
   function writeCache(repos) {
     try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), repos: repos })); } catch (e) {}
   }
 
-  function sync() {
-    var cached = readCache();
-    if (cached && cached.length) {
-      applyRepos(cached);
+  function sync(force) {
+    if (fetching) return;
+    var cached = force ? null : readCache();
+    if (cached && cached.repos && cached.repos.length) {
       live = true;
+      applyRepos(cached.repos);
       renderAll();
-      setSync('cache', '显示 10 分钟内的 GitHub 缓存', '下次打开会重新拉取；');
+      setSync('cache', '显示 30 分钟内的站内缓存', '缓存于 ' + fmtSync(new Date(cached.t).toISOString()) + '；');
+      if (!force) return;
+      setSync('syncing', '正在尝试 GitHub API…', '内置快照同步于 ' + fmtSync(DATA.synced_at) + '；');
     } else {
-      setSync('syncing', '正在同步 GitHub…', 'Star 数与新仓库会自动更新；');
+      setSync('syncing', '正在尝试 GitHub API…', '内置快照同步于 ' + fmtSync(DATA.synced_at) + '；');
     }
-    if (cached && cached.length) return;
-
+    if (navigator.onLine === false) {
+      setSync('fallback', '当前处于离线状态', '显示内置快照（同步于 ' + fmtSync(DATA.synced_at) + '）；');
+      return;
+    }
+    fetching = true;
     var ctrl = null;
     var timer = null;
-    try { ctrl = new AbortController(); timer = setTimeout(function () { ctrl.abort(); }, 8000); } catch (e) {}
+    try {
+      ctrl = new AbortController();
+      timer = setTimeout(function () { ctrl.abort(); }, API_TIMEOUT);
+    } catch (e) {}
     fetch('https://api.github.com/users/' + encodeURIComponent(USER) + '/repos?per_page=100&sort=updated', {
       headers: { Accept: 'application/vnd.github+json' },
       signal: ctrl ? ctrl.signal : undefined
@@ -307,15 +327,16 @@
       applyRepos(real);
       writeCache(real);
       renderAll();
-      setSync('live', 'GitHub 实时数据 · 刚刚同步', 'Star 数与新仓库会自动更新；');
+      setSync('live', 'GitHub 实时数据 · 刚刚同步', '同步于 ' + fmtSync(new Date().toISOString()) + '；');
     }).catch(function () {
-      if (!live) {
-        setSync('fallback', 'GitHub 暂时不可用，显示内置快照', '网络恢复后重新打开即可自动更新；');
+      if (live) {
+        setSync('cache', 'GitHub 暂时不可用，显示缓存', '网络恢复后可点“重新同步”；');
       } else {
-        setSync('cache', '显示缓存数据', '网络恢复后重新打开即可更新；');
+        setSync('fallback', 'GitHub 暂时不可用，显示内置快照', '快照同步于 ' + fmtSync(DATA.synced_at) + '；');
       }
     }).then(function () {
       if (timer) clearTimeout(timer);
+      fetching = false;
     });
   }
 
@@ -347,6 +368,13 @@
         renderGrid();
       });
     });
+    var bar = $('#osSync');
+    if (bar) bar.addEventListener('click', function (e) {
+      if (e.target.closest('[data-retry]')) {
+        e.preventDefault();
+        sync(true);
+      }
+    });
     var copy = $('#osCopyBtn');
     var cmd = $('#osInstallCmd');
     if (copy && cmd) copy.addEventListener('click', function () {
@@ -372,5 +400,9 @@
 
   renderAll();
   bind();
-  sync();
+  function scheduleSync() {
+    setTimeout(function () { sync(false); }, 350);
+  }
+  if (document.readyState === 'complete') scheduleSync();
+  else window.addEventListener('load', scheduleSync);
 })();
