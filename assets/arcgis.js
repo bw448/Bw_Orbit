@@ -37,7 +37,7 @@
 
   /* quiz */
   if (byId('agQuiz') && window.OrbitQuiz) {
-    window.OrbitQuiz.mount(byId('agQuiz'), { id: 'arcgis', items: A.bank, perPage: 12 });
+    window.OrbitQuiz.mount(byId('agQuiz'), { id: 'arcgis', items: A.bank, perPage: 8 });
   }
 
   /* terms */

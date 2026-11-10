@@ -23,7 +23,7 @@
       if (total) total.textContent = items.length;
       var primary = byId('mgPrimary');
       if (primary) primary.textContent = items.length;
-      window.OrbitQuiz.mount(mount, { id: 'maogai', items: items, perPage: 12 });
+      window.OrbitQuiz.mount(mount, { id: 'maogai', items: items, perPage: 8 });
     }
   }
 
@@ -31,7 +31,7 @@
   if (S.real && S.real.length && window.OrbitQuiz) {
     var realMount = byId('mgRealQuiz');
     if (realMount) {
-      window.OrbitQuiz.mount(realMount, { id: 'maogai-real', items: S.real, perPage: 10 });
+      window.OrbitQuiz.mount(realMount, { id: 'maogai-real', items: S.real, perPage: 8 });
     }
   }
 
@@ -55,7 +55,7 @@
       });
     }
     var state = { q: '', chapter: '', star: false };
-    var shown = 40;
+    var shown = 12;
     var more = byId('mgPointMore');
     function renderPoints() {
       var list = points.filter(function (p) {
@@ -79,15 +79,15 @@
       if (count) count.textContent = '显示 ' + slice.length + ' / ' + list.length + ' 条（共 ' + points.length + ' 条）';
     }
     var search = byId('mgPointSearch');
-    if (search) search.addEventListener('input', function () { state.q = this.value.trim(); shown = 40; renderPoints(); });
-    if (chSel) chSel.addEventListener('change', function () { state.chapter = this.value; shown = 40; renderPoints(); });
-    if (more) more.addEventListener('click', function () { shown += 40; renderPoints(); });
+    if (search) search.addEventListener('input', function () { state.q = this.value.trim(); shown = 12; renderPoints(); });
+    if (chSel) chSel.addEventListener('change', function () { state.chapter = this.value; shown = 12; renderPoints(); });
+    if (more) more.addEventListener('click', function () { shown += 12; renderPoints(); });
     var star = byId('mgPointStar');
     if (star) star.addEventListener('click', function () {
       state.star = !state.star;
       star.classList.toggle('on', state.star);
       star.setAttribute('aria-pressed', String(state.star));
-      shown = 40;
+      shown = 12;
       renderPoints();
     });
     renderPoints();
@@ -107,7 +107,7 @@
     var etype = byId('mgEssayType');
     var etag = byId('mgEssayTag');
     var estate = { q: '', chapter: '', type: '', tag: false };
-    var eshown = 30;
+    var eshown = 10;
     var emore = byId('mgEssayMore');
     function renderEssay() {
       var list = essays.filter(function (x) {
@@ -137,17 +137,17 @@
       if (count) count.textContent = '显示 ' + slice.length + ' / ' + list.length + ' 题（共 ' + essays.length + ' 题）';
     }
     var es = byId('mgEssaySearch');
-    if (es) es.addEventListener('input', function () { estate.q = this.value.trim(); eshown = 30; renderEssay(); });
-    if (ech) ech.addEventListener('change', function () { estate.chapter = this.value; eshown = 30; renderEssay(); });
-    if (etype) etype.addEventListener('change', function () { estate.type = this.value; eshown = 30; renderEssay(); });
+    if (es) es.addEventListener('input', function () { estate.q = this.value.trim(); eshown = 10; renderEssay(); });
+    if (ech) ech.addEventListener('change', function () { estate.chapter = this.value; eshown = 10; renderEssay(); });
+    if (etype) etype.addEventListener('change', function () { estate.type = this.value; eshown = 10; renderEssay(); });
     if (etag) etag.addEventListener('click', function () {
       estate.tag = !estate.tag;
       etag.classList.toggle('on', estate.tag);
       etag.setAttribute('aria-pressed', String(estate.tag));
-      eshown = 30;
+      eshown = 10;
       renderEssay();
     });
-    if (emore) emore.addEventListener('click', function () { eshown += 30; renderEssay(); });
+    if (emore) emore.addEventListener('click', function () { eshown += 10; renderEssay(); });
     renderEssay();
   }
 
@@ -157,10 +157,20 @@
     var conf = S.confusions || [];
     var confTotal = byId('mgConfTotal');
     if (confTotal) confTotal.textContent = conf.length;
-    confBox.innerHTML = conf.map(function (c) {
-      return '<article class="mg-conf"><div class="mg-conf-head">' +
-        '<span class="a">' + esc(c.a) + '</span><span class="vs">VS</span><span class="b">' + esc(c.b) + '</span></div>' +
-        '<p>' + esc(c.diff) + '</p></article>';
-    }).join('');
+    var confShown = 8;
+    var confMore = byId('mgConfMore');
+    var confCount = byId('mgConfCount');
+    function renderConf() {
+      var slice = conf.slice(0, confShown);
+      confBox.innerHTML = slice.map(function (c) {
+        return '<article class="mg-conf"><div class="mg-conf-head">' +
+          '<span class="a">' + esc(c.a) + '</span><span class="vs">VS</span><span class="b">' + esc(c.b) + '</span></div>' +
+          '<p>' + esc(c.diff) + '</p></article>';
+      }).join('');
+      if (confMore) confMore.hidden = slice.length >= conf.length;
+      if (confCount) confCount.textContent = '显示 ' + slice.length + ' / ' + conf.length + ' 组';
+    }
+    if (confMore) confMore.addEventListener('click', function () { confShown += 8; renderConf(); });
+    renderConf();
   }
 })();

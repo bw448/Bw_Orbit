@@ -53,7 +53,7 @@
     window.OrbitQuiz.mount(quizMount, {
       id: 'course-' + (C._slug || 'bank'),
       items: bank.items,
-      perPage: 10
+      perPage: 8
     });
   }
 })();
