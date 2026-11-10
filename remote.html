@@ -24,7 +24,7 @@
 <div class="scroll-progress"><i id="scrollBar"></i></div>
 <header class="nav">
   <a class="brand" href="index.html" aria-label="Orbit 遥感"><svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".5" transform="rotate(34 16 16)"/></svg><span class="brand-word">Orbit</span><span class="brand-sub">遥感</span></a>
-  <nav class="gn-links" aria-label="学期模块"><a href="semesters.html">学习内容</a><a href="opensource.html">开源项目</a><a class="active" href="sem2-1.html">大二上</a><a href="sem2-2.html">大二下</a><a href="sem3-1.html">大三上</a><a href="sem3-2.html">大三下</a><a href="ebook.html">电子书</a><a href="?view=more#glossary">术语</a><a href="?view=more#appendix">附录</a><a href="#notes">补充</a>
+  <nav class="gn-links" aria-label="学期模块"><a href="semesters.html">学习内容</a><a href="opensource.html">开源项目</a><a class="active" href="sem2-1.html">大二上</a><a href="sem2-2.html">大二下</a><a href="sem3-1.html">大三上</a><a href="sem3-2.html">大三下</a><a href="ebook.html">电子书</a><a href="?tab=glossary">术语</a><a href="?tab=appendix">附录</a><a href="#notes">补充</a>
       <a href="competitions.html">竞赛</a>
       <a href="bw-talk.html">BW有话说</a>
     </nav>
@@ -143,28 +143,6 @@
     </div>
   </section>
 
-  <section class="section" id="moreEntries">
-    <div class="section-inner">
-      <div class="section-head">
-        <div><div class="eyebrow">More / 二级目录</div><h2>术语和附录，<br>单独一页。</h2></div>
-        <p class="lede">主页面保留章节和刷法；75 条中英术语、807 条教材附录放在二级页，点卡片进入。背完术语再去做附录自测。</p>
-      </div>
-      <div class="entry-grid">
-        <a class="entry-card" href="?view=more#glossary">
-          <span class="entry-tag">Glossary</span>
-          <b>75 条中英术语</b>
-          <small>中文 + 英文 + 英文释义 + 中文解释，可搜索、按章筛选、随机抽一条。</small>
-          <em>进入术语表 →</em>
-        </a>
-        <a class="entry-card" href="?view=more#appendix">
-          <span class="entry-tag">Appendix</span>
-          <b>807 条教材附录</b>
-          <small>附录 3 缩写 203 条 + 附录 4 英汉词汇 604 条；背诵卡、英中互测、错题本。</small>
-          <em>进入附录训练 →</em>
-        </a>
-      </div>
-    </div>
-  </section>
 
   <section class="section" id="glossary">
     <div class="section-inner">
@@ -1042,8 +1020,13 @@ boot();
 <script src="assets/rs-ai.js?v=8"></script>
 <script src="assets/study.js"></script>
 
-<script>window.ORBIT_SPLIT = {more:['glossary','appendix'], title:'遥感', heading:'术语和教材附录。', back:'remote.html', backLabel:'遥感'};</script>
-<script src="assets/split-view.js"></script>
+<script>window.ORBIT_TABS = {course:'遥感', tabs:[
+  {id:'chapters', label:'章节', sections:['chapters','coverage','demo'], hero:true},
+  {id:'modes', label:'刷法', sections:['modes']},
+  {id:'glossary', label:'术语', sections:['glossary']},
+  {id:'appendix', label:'附录', sections:['appendix']}
+]};</script>
+<script src="assets/course-tabs.js"></script>
 <script src="assets/pwa.js" defer></script>
 </body>
 </html>
