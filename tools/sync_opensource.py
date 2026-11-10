@@ -53,6 +53,21 @@ def main():
             "license": lic.get("spdx_id") if lic.get("spdx_id") != "NOASSERTION" else "",
         })
 
+    def stable(repos):
+        # pushed_at changes whenever the workflow commits to Bw_Orbit; ignore it
+        # for the change check so the snapshot does not self-trigger a commit loop.
+        return [{k: v for k, v in r.items() if k != "pushed_at"} for r in repos]
+
+    previous = {}
+    if SNAPSHOT.exists():
+        try:
+            previous = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
+        except Exception:
+            previous = {}
+    if stable(previous.get("repos") or []) == stable(clean):
+        print("No repository changes; snapshot left untouched.")
+        return
+
     now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)
     snapshot = {
         "user": user,
