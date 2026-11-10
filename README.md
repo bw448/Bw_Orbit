@@ -109,8 +109,8 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 - 大二上 5 本教材：自然地理学、毛概（2023 版）、概率论与数理统计（第五版）、遥感导论、ArcGIS 空间分析实验教程（第三版）。
 - 共 1,981 页；站内保留压缩下载版约 105 MB（原书约 231 MB），保留原书页序。
-- 自带轻量阅读器：翻页、缩放、键盘方向键、手机滑动翻页；全页图片按需加载，支持分卷和整本下载。
-- 在线阅读为全页图片：翻到哪页加载哪页，打开快、可看完全书；每 50 页另有 3—6 MB 的分卷 PDF；完整版为 10—33 MB 压缩 PDF，下载也更快。
+- 自带轻量阅读器：翻页、缩放、键盘方向键、手机滑动翻页；全页图片按需加载，支持整本压缩版下载。
+- 在线阅读为全页图片：翻到哪页加载哪页，打开快、可看完全书；完整版为 10—33 MB 压缩 PDF，下载也更快。
 - 版权归原作者和出版社；仅用于个人学习与课程复习，不用于商业传播。
 
 ### 学习工具
@@ -476,7 +476,7 @@ build.py                   Build script
 start.bat                  Local server
 tools/make_python_papers.py Generate full paper PDFs / Word files
 tools/prepare_ebooks.py     Compress PDFs and extract covers
-tools/make_ebook_pages.py    生成全页图片与 50 页分卷 PDF
+tools/make_ebook_pages.py    生成全页图片（分卷已移除，站内只保留整本压缩 PDF）
 tools/make_ebook_compressed.py 生成 10—33 MB 压缩全书 PDF
 tools/extract_homework.py   Chapter homework docx -> src/homework.json
 tools/build_maogai_bank.py  Maoism choice PDFs -> src/maogai_bank.json

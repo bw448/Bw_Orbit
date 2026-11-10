@@ -11,9 +11,6 @@ window.ORBIT_EBOOKS = [
     webFile: "assets/ebooks/download/nature.pdf",
     webSize: "30.7 MB",
     pagesDir: "assets/ebooks/pages/nature/",
-    partsDir: "assets/ebooks/parts/nature/",
-    parts: 7,
-    partPages: 50,
     cover: "assets/ebooks/covers/nature.jpg",
     desc: "从气候、地貌、水文到土壤与生态，把自然地理的系统框架读成一条线。"
   },
@@ -28,9 +25,6 @@ window.ORBIT_EBOOKS = [
     webFile: "assets/ebooks/download/maogai.pdf",
     webSize: "11.6 MB",
     pagesDir: "assets/ebooks/pages/maogai/",
-    partsDir: "assets/ebooks/parts/maogai/",
-    parts: 6,
-    partPages: 50,
     cover: "assets/ebooks/covers/maogai.jpg",
     desc: "2023 年版教材；按章节阅读，适合配合课堂进度和期末复习。"
   },
@@ -45,9 +39,6 @@ window.ORBIT_EBOOKS = [
     webFile: "assets/ebooks/download/probability.pdf",
     webSize: "17.0 MB",
     pagesDir: "assets/ebooks/pages/probability/",
-    partsDir: "assets/ebooks/parts/probability/",
-    parts: 9,
-    partPages: 50,
     cover: "assets/ebooks/covers/probability.jpg",
     desc: "概率论与数理统计的经典教材；网页版为阅读压缩版，保留公式与例题。"
   },
@@ -62,9 +53,6 @@ window.ORBIT_EBOOKS = [
     webFile: "assets/ebooks/download/remote.pdf",
     webSize: "26.9 MB",
     pagesDir: "assets/ebooks/pages/remote/",
-    partsDir: "assets/ebooks/parts/remote/",
-    parts: 7,
-    partPages: 50,
     cover: "assets/ebooks/covers/remote.jpg",
     desc: "遥感课程的教材主线；和 Orbit 的七章知识脉络、90 道题互相配合。"
   },
@@ -79,9 +67,6 @@ window.ORBIT_EBOOKS = [
     webFile: "assets/ebooks/download/arcgis.pdf",
     webSize: "23.2 MB",
     pagesDir: "assets/ebooks/pages/arcgis/",
-    partsDir: "assets/ebooks/parts/arcgis/",
-    parts: 12,
-    partPages: 50,
     cover: "assets/ebooks/covers/arcgis.jpg",
     desc: "空间分析实验教程；从 ArcMap 操作到空间分析流程，适合边看边练。"
   }

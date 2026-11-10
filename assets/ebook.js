@@ -56,12 +56,13 @@
   function totalPages() { return book ? book.pages : 0; }
 
   function updateControls() {
+    if (downloadPart && book && (!book.partsDir || !book.parts)) downloadPart.hidden = true;
     var total = totalPages();
     if (pageLabel) pageLabel.textContent = total ? (pageNum + ' / ' + total) : '— / —';
     if (progress) progress.style.width = total ? (pageNum / total * 100) + '%' : '0%';
     if (prev) prev.disabled = !total || pageNum <= 1;
     if (next) next.disabled = !total || pageNum >= total;
-    if (downloadPart && book) {
+    if (downloadPart && book && book.partsDir && book.parts) {
       var per = book.partPages || 50;
       var part = Math.floor((pageNum - 1) / per) + 1;
       var start = (part - 1) * per + 1;
