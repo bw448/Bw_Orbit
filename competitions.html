@@ -36,6 +36,12 @@
 </header>
 
 <main class="comp-page">
+  <nav class="course-tabs" aria-label="竞赛栏目">
+    <a class="active" href="?tab=events">赛事</a>
+    <a href="?tab=prepare">备考</a>
+    <a href="?tab=skills">技能</a>
+    <a href="?tab=resources">资料</a>
+  </nav>
   <section class="comp-hero">
     <div class="comp-grid" aria-hidden="true"></div>
     <div class="comp-shell comp-hero-inner">
@@ -45,7 +51,7 @@
         <p class="comp-lead">比赛不是另一门课。它是把 GIS、遥感、编程和表达放进一个真实作品里的方式。先选赛道，再补技能，最后按时间线交作品。</p>
         <div class="comp-actions">
           <a class="btn-primary" href="#events">看赛事</a>
-          <a class="comp-link" href="#prepare">怎么备考 <span>↓</span></a>
+          <a class="comp-link" href="?tab=prepare">怎么备考 <span>↓</span></a>
         </div>
         <div class="comp-stats">
           <span><b>06</b> 个赛事</span><span><b>04</b> 个模块</span><span><b>03</b> 条路线</span>
@@ -73,12 +79,6 @@
     </div>
   </section>
 
-  <nav class="comp-subnav" aria-label="竞赛模块导航">
-    <a href="#events">赛事总览</a>
-    <a href="#prepare">怎么备考</a>
-    <a href="#skills">技能地图</a>
-    <a href="#resources">资料库</a>
-  </nav>
 
   <section class="comp-section" id="events">
     <div class="comp-shell">
@@ -155,6 +155,13 @@
 
 <script src="assets/competitions-data.js"></script>
 <script src="assets/competitions.js"></script>
+<script>window.ORBIT_TABS = {course:'竞赛', tabs:[
+  {id:'events', label:'赛事', sections:['events'], hero:true},
+  {id:'prepare', label:'备考', sections:['prepare']},
+  {id:'skills', label:'技能', sections:['skills']},
+  {id:'resources', label:'资料', sections:['resources']}
+]};</script>
+<script src="assets/course-tabs.js"></script>
 <script src="assets/pwa.js" defer></script>
 </body>
 </html>
