@@ -33,9 +33,9 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 | 大二上 | 遥感 | 8 章知识脉络（第五章待补）、7 套完整作业、90 道题、模拟卷、错题、收藏、75 条中英术语、807 条教材附录（背诵卡 / 英中互测 / 错题本） |
 | 大二上 | Python | 599 道题、10 套卷、按套 / 分节刷题、模拟卷、代码练习、知识地图 |
 | 大二上 | 自然地理学 | 老师勾画重点、章节框架、手写复习稿文字版（14 页）、80 道章节自测 + 错题本 |
-| 大二上 | 毛概 | 大题背诵、1065 题系统题库、100 道真题、256 条高频考点、39 组易混对比、错题本 |
+| 大二上 | 毛概 | 大题背诵、1063 题系统题库、97 道真题、256 条高频考点、39 组易混对比、错题本 |
 | 大二上 | 概率论 | 章节重点、公式、PPT 原题、2022—2023 期末卷、60 道章节自测 + 错题本 |
-| 大二上 | ArcGIS | 考试结构、80 道客观题自测 + 错题本、名词解释、算法、实操、简答/分析/论述 |
+| 大二上 | ArcGIS | 考试结构、79 道客观题自测 + 错题本、名词解释、算法、实操、简答/分析/论述 |
 | 顶层 | 竞赛 | 6 个 GIS 赛事、备考路线、技能地图、资料库 |
 | 顶层 | 开源项目 | 7 个 bw448 GitHub 项目：Folio、JARVIS LOCAL、Orbit、bw_python、两个 Claude Code 写作技能、moon-wav；按分类 / 搜索浏览，打开页面自动同步 Star 与新仓库 |
 | 顶层 | BW有话说 | 文字 / 图片 / 视频 / 链接时间线；只点赞，不设评论 |
@@ -82,9 +82,9 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 ### 四个课程模块
 
 - **自然地理学**：按最后一节课勾画/画勾部分整理；岩石、构造、变质作用、外力地貌分章拆开。页面不再链接原来的手写扫描/JPG，改为 `nature-notes.html` 的 14 页手写稿文字版（绪论、岩石与构造、气候、地貌、水文、土壤）；新增 80 道章节自测（单选/多选/判断/填空）+ 错题本。
-- **毛概**：按“形成条件—主要内容—历史地位”搭框架；页面内分五个模块：256 条高频考点（可搜索/按章/★筛选）、1065 题系统题库（新教材 188 + 旧教材 522 + 期末补充 355）、2024/2025 真题 100 道、39 组易混对比、章节框架；选择题答错自动进错题本，可看章节分布、导出、重练；大题背诵和真题 PDF 仍可下载。
+- **毛概**：按“形成条件—主要内容—历史地位”搭框架；页面内分五个模块：256 条高频考点（可搜索/按章/★筛选）、1063 题系统题库（新教材 188 + 旧教材 520 + 期末补充 355）、2024/2025 真题 97 道、39 组易混对比、章节框架；选择题答错自动进错题本，可看章节分布、导出、重练；大题背诵和真题 PDF 仍可下载。
 - **概率论**：按题型和公式复习；PPT 原题、回忆版、2022—2023 期末卷和 Kira 讲义集中在一个模块；新增 60 道章节自测（分布、数字特征、估计、检验）+ 错题本。
-- **ArcGIS**：从 25 页填空题扫描件整理出 30 填空 + 20 单选 + 30 判断 + 10 简答 + 7 分析；另配 18 条名词解释（可遮住释义/随机抽 5 条）、12 条中英词汇、4 个底层算法、6 个实操流程和论述模板；80 道客观题答错自动进错题本，简答/分析可标记“会/不会”。
+- **ArcGIS**：从 25 页填空题扫描件整理出 30 填空 + 20 单选 + 29 判断 + 10 简答 + 7 分析；另配 18 条名词解释（可遮住释义/随机抽 5 条）、12 条中英词汇、4 个底层算法、6 个实操流程和论述模板；79 道客观题答错自动进错题本，简答/分析可标记“会/不会”。
 
 ### 竞赛模块
 
@@ -174,8 +174,8 @@ python tools/sync_content.py
 - `src/arcgis_bank.json`：ArcGIS 题库、名词解释、算法、实操、论述模板
 - `src/nature_bank.json`：自然地理学 80 道自测题
 - `src/probability_bank.json`：概率论 60 道自测题
-- `src/maogai_bank.json`：毛概系统题库 1065 题
-- `src/maogai_special.json`：毛概高频考点 256 条、真题 100 道、易混对比 39 组
+- `src/maogai_bank.json`：毛概系统题库 1063 题
+- `src/maogai_special.json`：毛概高频考点 256 条、真题 97 道、易混对比 39 组
 - `src/maogai_essay.json`：毛概大题背诵 118 题（核心篇 47 + 后半篇 71）
 - `src/notes.json`：遥感讲义补充 61 条
 - `src/courses.json`：四个课程模块的数据（含自然地理/概率论 practice 配置）
@@ -202,7 +202,7 @@ nature-geo.html            自然地理学模块
 nature-notes.html          自然地理 · 手写复习稿文字版（14 页）
 maogai.html                毛概模块
 probability.html           概率论模块
-arcgis.html                ArcGIS 模块（含 80 题自测）
+arcgis.html                ArcGIS 模块（含 79 题自测）
 competitions.html          竞赛顶层模块（4 个子模块）
 bw-talk.html               BW有话说：公开时间线
 bw-admin.html              BW有话说：管理员登录/发帖/删除
@@ -262,7 +262,7 @@ tools/merge_materials.py    桌面原始文件/复习资料的分类合并（一
 - AI 生成内容可能有误，请以教材和老师讲解为准。
 - 旧 Python 项目只读参考，不修改、不提交、不移动。
 - ArcGIS 题库来自课程扫描件《一填空题》25 页，答案以原件为准；个别表述保留原件写法。
-- 毛概选择题 1065 题由 710 题去重汇总与《毛概期末考试题库》补充合并；原资料个别答案有争议，以教材和课后题为准。
+- 毛概选择题 1063 题由 708 题去重汇总与《毛概期末考试题库》补充合并；原资料个别答案有争议，以教材和课后题为准。
 - Python 599 题不重排、不删题；允许修复明显 OCR 损坏和错误的答案 / 解析；知识地图只做导航、统计和课件补充。
 - 本项目用于个人学习与教学交流；教材、课程资料版权归原作者 / 原出版社所有。
 
@@ -297,10 +297,10 @@ After the brand landing, the learning hub asks only for a semester; the next lay
 |---|---|---|
 | Year 2 Fall | Remote Sensing | 8 chapters (chapter 5 pending), 7 homework sets, 90 questions, mock exam, wrong answers, bookmarks, 75 bilingual terms, 807 appendix terms (cards / EN–ZH drill / wrong book) |
 | Year 2 Fall | Python | 599 questions, 10 papers, paper/section practice, mock exam, code lab, knowledge map |
-| Year 2 Fall | Physical Geography | Teacher-marked key points, chapter outline, 14-page handwritten-notes text edition, 80-question drill + wrong book |
+| Year 2 Fall | Physical Geography | Teacher-marked key points, chapter outline, 14-page handwritten-notes text edition, 79-question drill + wrong book |
 | Year 2 Fall | Maoism | Essay frameworks, 1,065-question choice bank, 2024/2025 papers, wrong book |
 | Year 2 Fall | Probability | Chapter priorities, formulas, PPT originals, 2022–2023 paper, 60-question drill + wrong book |
-| Year 2 Fall | ArcGIS | Exam map, 80-question drill + wrong book, terms, algorithms, workflows, short/analysis/essay templates |
+| Year 2 Fall | ArcGIS | Exam map, 79-question drill + wrong book, terms, algorithms, workflows, short/analysis/essay templates |
 | Top level | Competitions | 6 GIS contests, prep routes, skill map and resource library |
 | Top level | BW Notes | Text / image / video / link timeline; likes only, no comments |
 | Cross-semester | E-book | 5 Year-2 Fall textbooks: physical geography, Maoism, probability, remote sensing, ArcGIS; read online |
@@ -341,7 +341,7 @@ The old Python project is kept read-only and untouched. This is a new implementa
 - **Physical Geography**: built around the teacher's last-class highlights; rocks, structures, metamorphism and landforms. The old handwritten scans/JPG are no longer republished; they are replaced by a 14-page text edition (`nature-notes.html`) covering the introduction, rocks and structures, climate, landforms, water and soil; plus an 80-question chapter drill + wrong book.
 - **Maoism**: “background — content — historical status” frameworks, essay memorization, a 1,065-question interactive choice bank and 2024/2025 papers; a dedicated wrong-book panel with chapter breakdown, export and retry.
 - **Probability**: question types and formulas, PPT originals, recall sheet, 2022–2023 paper and a Kira handout; 60-question chapter drill + wrong book.
-- **ArcGIS**: exam map, 30 fill-in + 20 single + 30 true/false + 10 short + 7 analysis questions from a 25-page scan, six terms, twelve bilingual terms, four algorithms, six workflows and essay templates; the 80-question drill has a dedicated wrong-book panel.
+- **ArcGIS**: exam map, 30 fill-in + 20 single + 29 true/false + 10 short + 7 analysis questions from a 25-page scan, six terms, twelve bilingual terms, four algorithms, six workflows and essay templates; the 79-question drill has a dedicated wrong-book panel.
 
 ### Competitions
 
@@ -439,7 +439,7 @@ nature-geo.html            Physical Geography module
 nature-notes.html          Physical Geography handwritten-notes text edition (14 pages)
 maogai.html                Maoism module
 probability.html           Probability module
-arcgis.html                ArcGIS module (with 80-question drill)
+arcgis.html                ArcGIS module (with 79-question drill)
 competitions.html          Competitions: events/prepare/skills/resources
 bw-talk.html               BW Notes: public timeline
 bw-admin.html              BW Notes: admin login/publish/delete

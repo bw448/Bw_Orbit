@@ -44,7 +44,7 @@
         <div class="course-en">__EN__</div>
         <p class="course-lead">__LEAD__</p>
         <div class="course-actions">
-          <a class="btn-primary" href="#choice">刷选择题</a>
+          <a class="btn-primary" href="?view=more#choice">刷选择题</a>
           <a class="course-back" href="sem2-1.html">返回大二上 <span>↗</span></a>
         </div>
       </div>
@@ -58,17 +58,17 @@
 
   <nav class="course-subnav" aria-label="本页导航">
     <a href="#exam">考试与重点</a>
-    <a href="#choice">系统题库</a>
-    <a href="#essay">大题背诵</a>
+    <a href="?view=more#choice">系统题库</a>
+    <a href="?view=more#essay">大题背诵</a>
     <a href="#resources">资料</a>
     <details class="submore">
       <summary>更多</summary>
       <div class="submore-panel">
-        <a href="#points">高频考点</a>
-        <a href="#real">真题</a>
-        <a href="#confusions">易混对比</a>
-        <a href="#sections">章节框架</a>
-        <a href="#plan">复习路线</a>
+        <a href="?view=more#points">高频考点</a>
+        <a href="?view=more#real">真题</a>
+        <a href="?view=more#confusions">易混对比</a>
+        <a href="?view=more#sections">章节框架</a>
+        <a href="?view=more#plan">复习路线</a>
       </div>
     </details>
   </nav>
@@ -77,8 +77,8 @@
     <div class="course-guide-inner">
       <span class="label">第一次来？</span>
       <a href="#exam"><b>1</b>看考什么</a>
-      <a href="#choice"><b>2</b>做选择题</a>
-      <a href="#plan"><b>3</b>按路线复习</a>
+      <a href="?view=more#choice"><b>2</b>做选择题</a>
+      <a href="?view=more#plan"><b>3</b>按路线复习</a>
       <span class="note">先走一遍，再按章节补。</span>
     </div>
   </div>
@@ -91,6 +91,41 @@
       </div>
       <div class="exam-grid" id="examGrid"></div>
       <div class="course-notice"><b>划重点</b><span id="courseNotice">__NOTICE__</span></div>
+    </div>
+  </section>
+
+  <section class="course-section course-section-alt" id="moreEntries">
+    <div class="course-shell">
+      <div class="section-head">
+        <div><div class="eyebrow">More / 二级目录</div><h2>内容多，<br>按入口进。</h2></div>
+        <p class="section-lede">主页面只留考试地图和资料；题库、真题、考点和大题放在二级页，点下面的卡片进入。</p>
+      </div>
+      <div class="entry-grid">
+        <a class="entry-card" href="?view=more#choice">
+          <span class="entry-tag">Choice bank</span>
+          <b>1063 道系统选择题</b>
+          <small>新教材 / 旧教材 / 期末补充，按章节刷；答错自动进错题本。</small>
+          <em>进入系统题库 →</em>
+        </a>
+        <a class="entry-card" href="?view=more#real">
+          <span class="entry-tag">Real papers</span>
+          <b>2024 / 2025 真题 97 道</b>
+          <small>按年份和试卷刷，带答案与一句考点解析。</small>
+          <em>进入真题 →</em>
+        </a>
+        <a class="entry-card" href="?view=more#points">
+          <span class="entry-tag">Key points</span>
+          <b>256 条高频考点 + 39 组易混</b>
+          <small>按关键词和章节记；易混点放一起对比。</small>
+          <em>进入考点 →</em>
+        </a>
+        <a class="entry-card" href="?view=more#essay">
+          <span class="entry-tag">Essay</span>
+          <b>118 道大题 + 章节框架</b>
+          <small>按得分点背；附复习路线和章节框架。</small>
+          <em>进入大题 →</em>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -114,12 +149,12 @@
   <section class="course-section" id="choice">
     <div class="course-shell">
       <div class="section-head">
-        <div><div class="eyebrow">Choice bank · <span id="mgTotal">1065</span></div><h2>一千道，<br>按章节刷。</h2></div>
-        <p class="section-lede">新教材 188 题、旧教材 522 题、期末补充 355 题，去重后共 <b id="mgPrimary">1065</b> 题。单选自动判分，多选少选/错选不得分；答错自动进“错题本”，点工具栏“错题本”看章节分布、导出和重练。</p>
+        <div><div class="eyebrow">Choice bank · <span id="mgTotal">1063</span></div><h2>一千道，<br>按章节刷。</h2></div>
+        <p class="section-lede">新教材 188 题、旧教材 520 题、期末补充 355 题，去重后共 <b id="mgPrimary">1063</b> 题。单选自动判分，多选少选/错选不得分；答错自动进“错题本”，点工具栏“错题本”看章节分布、导出和重练。</p>
       </div>
       <div class="quiz-shell" id="mgQuiz"></div>
       <p class="ag-note" style="margin-top:16px;font-size:10.5px;line-height:1.75;color:var(--faint)">
-        题库来自《毛概选择题题库（去重汇总）》710 题与《毛概期末考试题库》扫描件；后者按题干去重后补充 355 题。系统题库只给答案，不逐题写解析；要理解考点，看「高频考点」「章节框架」和带解析的真题。原资料个别题目存在错字或答案争议，以教材和课后题答案为准。
+        题库来自《毛概选择题题库（去重汇总）》708 题与《毛概期末考试题库》扫描件；后者按题干去重后补充 355 题。系统题库只给答案，不逐题写解析；要理解考点，看「高频考点」「章节框架」和带解析的真题。原资料个别题目存在错字或答案争议，以教材和课后题答案为准。
       </p>
     </div>
   </section>
@@ -127,8 +162,8 @@
   <section class="course-section course-section-alt" id="real">
     <div class="course-shell">
       <div class="section-head">
-        <div><div class="eyebrow">Real papers · 100</div><h2>两年真题，<br>按卷刷。</h2></div>
-        <p class="section-lede">2024、2025 年真题选择题各 50 道，带答案和一句考点解析。单选自动判分，多选少选/错选不得分。</p>
+        <div><div class="eyebrow">Real papers · 97</div><h2>两年真题，<br>按卷刷。</h2></div>
+        <p class="section-lede">2024 年 50 道、2025 年 47 道（去重后），带答案和一句考点解析。单选自动判分，多选少选/错选不得分。</p>
       </div>
       <div class="quiz-shell" id="mgRealQuiz"></div>
     </div>
@@ -210,4 +245,6 @@
 <script src="assets/quiz.js?v=10"></script>
 <script src="assets/maogai.js?v=4"></script>
 <script src="assets/course-ai.js?v=3" defer></script>
+<script>window.ORBIT_SPLIT = {more:['points','choice','real','confusions','essay','sections','plan'], title:'毛概', heading:'题库、考点和大题。', back:'maogai.html', backLabel:'毛概'};</script>
+<script src="assets/split-view.js"></script>
 <script src="assets/pwa.js" defer></script>

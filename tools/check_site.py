@@ -77,8 +77,8 @@ def check_maogai():
         print("maogai:", len(d.get("items", [])), "items", d.get("meta", {}))
     s = load("maogai_special.json")
     if s:
-        if len(s.get("real", [])) != 100:
-            err("maogai_special real != 100")
+        if len(s.get("real", [])) != s.get("meta", {}).get("real"):
+            err("maogai_special real != meta.real")
         for x in s.get("real", []):
             if len(x.get("options", [])) != 4 or not x.get("answer"):
                 err("maogai_special %s bad options/answer" % x.get("id"))
@@ -186,7 +186,9 @@ def check_links():
             if any(ch in url for ch in "'\"+{}"):
                 continue
             url = url.split("#")[0].split("?")[0]
-            if not url or not os.path.exists(os.path.join(ROOT, url)):
+            if not url:
+                continue  # same-page link with only ?query / #hash
+            if not os.path.exists(os.path.join(ROOT, url)):
                 # PDFs/DOCX may intentionally live only in a GitHub release
                 if re.search(r"\.(pdf|docx|zip|mp4)$", url, re.I):
                     warn("%s -> missing download %s" % (page, url))
