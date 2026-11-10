@@ -69,6 +69,10 @@
 
 .q-title.code{font-family:var(--mono);font-size:1.02rem;font-weight:400;line-height:1.75;letter-spacing:0;white-space:pre-wrap;text-wrap:pretty}
 .explain{white-space:pre-wrap}
+.feedback .ans{padding-top:2px}
+.feedback .ans b{font-weight:600;color:var(--accent);margin-right:6px}
+.feedback .explain{margin-top:2px;color:var(--ink);font-size:13.5px;line-height:1.85}
+.explain-label{margin-top:10px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
 .opt span{white-space:pre-wrap}
 
 .code-app{border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;background:var(--paper-alt)}
@@ -103,7 +107,7 @@
 
 <header class="nav">
   <a class="brand" href="index.html" aria-label="Orbit Python"><svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".5" transform="rotate(34 16 16)"/></svg><span class="brand-word">Orbit</span><span class="brand-sub">Python</span></a>
-  <nav class="gn-links" aria-label="学期模块"><a href="semesters.html">学习内容</a><a class="active" href="sem2-1.html">大二上</a><a href="sem2-2.html">大二下</a><a href="sem3-1.html">大三上</a><a href="sem3-2.html">大三下</a><a href="ebook.html">电子书</a>
+  <nav class="gn-links" aria-label="学期模块"><a href="semesters.html">学习内容</a><a href="opensource.html">开源项目</a><a class="active" href="sem2-1.html">大二上</a><a href="sem2-2.html">大二下</a><a href="sem3-1.html">大三上</a><a href="sem3-2.html">大三下</a><a href="ebook.html">电子书</a>
       <a href="competitions.html">竞赛</a>
       <a href="bw-talk.html">BW有话说</a>
     </nav>
@@ -470,7 +474,7 @@ function optsHTML(q, selected, handler){
 function isCorrect(q, val){
   if (q.type === 'single') return val === q.a;
   if (q.type === 'multiple') {
-    if (!Array.isArray(val)) return false;
+    if (!Array.isArray(val) || !Array.isArray(q.a)) return false;
     return [...q.a].sort().join(',') === [...val].sort().join(',');
   }
   return false;
@@ -483,11 +487,15 @@ function tagsHTML(q){
 function feedbackHTML(q, ok, selected){
   if (ok === null) return '';
   let ans = '';
-  if (q.type === 'single') ans = q.options[q.a];
-  else if (q.type === 'multiple') ans = q.a.map(i => q.options[i]).join('；');
+  if (q.type === 'single') {
+    ans = String.fromCharCode(65 + q.a) + '. ' + q.options[q.a];
+  } else if (q.type === 'multiple') {
+    ans = (Array.isArray(q.a) ? q.a : []).map(i => String.fromCharCode(65 + i) + '. ' + q.options[i]).join('；');
+  }
+  const explain = (q.e || '').trim();
   return '<div class="feedback ' + (ok?'ok':'bad') + '"><div class="res">' + (ok?'正确':'再想想') + '</div>' +
-    (ok?'':'<p class="ans">正确答案：' + esc(ans) + '</p>') +
-    '<p class="explain">' + esc(q.e) + '</p></div>';
+    '<p class="ans"><b>正确答案</b>' + esc(ans) + '</p>' +
+    (explain ? '<div class="explain-label">解析</div><p class="explain">' + esc(explain) + '</p>' : '') + '</div>';
 }
 function renderPractice(){
   if (!session) return;
@@ -506,16 +514,18 @@ function renderPractice(){
     (s.done ? '<button class="btn btn-accent" onclick="nextQuestion()">' + (s.idx === s.queue.length-1 ? '完成' : '下一题') + '</button>' :
       (q.type === 'single' || q.type === 'multiple' ? '<button class="btn btn-accent" id="submitBtn" onclick="submitChoice()" disabled>提交答案</button>' : '')) +
     '</div></div>';
-  const ansText = q.type === 'single' ? q.options[q.a] : (q.type === 'multiple' ? q.a.map(i => q.options[i]).join('；') : q.a);
+  const ansText = q.type === 'single' ? q.options[q.a] : (q.type === 'multiple' ? (Array.isArray(q.a) ? q.a : []).map(i => q.options[i]).join('；') : q.a);
   window.ORBIT_CONTEXT = { module:'Python', paper:q.paper, section:q.section, question:q.q, type:q.type, options:q.options || [], answer:ansText };
   showView('<div class="practice"><div class="practice-top"><span>' + s.num + ' · ' + s.title + '</span><span>' + String(s.idx+1).padStart(2,'0') + ' / ' + String(s.queue.length).padStart(2,'0') + '</span></div>' +
     '<div class="progress-line"><i style="width:' + pct + '%"></i></div><div class="q-wrap">' + body + '</div></div>', 'PRACTICE · ' + s.title);
   if (s.done) disableOpts(q, s.selected);
 }
 function disableOpts(q, selected){
+  const answerSet = q.type === 'multiple' ? new Set(Array.isArray(q.a) ? q.a : []) : null;
   document.querySelectorAll('#view .opt').forEach((b,i) => {
     b.disabled = true;
-    if (i === q.a) b.classList.add('ok');
+    const isAnswer = q.type === 'multiple' ? answerSet.has(i) : i === q.a;
+    if (isAnswer) b.classList.add('ok');
     else if (q.type === 'single' ? i === selected : (Array.isArray(selected) && selected.includes(i))) b.classList.add('bad');
   });
 }
@@ -549,9 +559,12 @@ function revealShort(){
   const old = wrap.querySelector('.self-grade'); if (old) old.remove();
   const ref = document.createElement('div');
   ref.className = 'feedback';
+  const explain = (q.e || '').trim();
   ref.innerHTML = '<div class="res" style="color:var(--accent)">参考答案</div><p class="ans" style="white-space:pre-wrap">' + esc(q.a) + '</p>' +
+    (explain ? '<div class="explain-label">解析</div><p class="explain">' + esc(explain) + '</p>' : '') +
     '<div class="self-grade"><button class="btn btn-ghost" onclick="selfGrade(true)">我答对了</button><button class="btn btn-ghost" onclick="selfGrade(false)">没答全</button></div>';
-  wrap.appendChild(ref);
+  const tools = wrap.querySelector('.ai-tools');
+  if (tools) wrap.insertBefore(ref, tools); else wrap.appendChild(ref);
 }
 function selfGrade(ok){ if (!session) return; const q = session.queue[session.idx]; session.correct = ok; record(q, ok, session.selected); renderPractice(); }
 function nextQuestion(){

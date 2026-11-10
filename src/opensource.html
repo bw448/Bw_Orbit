@@ -1,0 +1,151 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<title>开源项目 · 把做过的东西开源出来 / Orbit</title>
+<meta name="description" content="bw448 的开源项目：Folio 本地优先阅读工作台、JARVIS LOCAL 语音助手、Orbit 地信学习站、Python 刷题站、Claude Code 写作技能与 MoonBit 音频库。按分类浏览，自动同步 GitHub。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/apple.css">
+<link rel="stylesheet" href="assets/opensource.css?v=2">
+
+<header class="global-nav">
+  <div class="gn-inner">
+    <a class="gn-brand" href="index.html" aria-label="Orbit">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="2.6" fill="currentColor"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" transform="rotate(-24 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45" transform="rotate(34 16 16)"/></svg>
+      Orbit
+    </a>
+    <nav class="gn-links" aria-label="主导航">
+      <a href="semesters.html">学习内容</a>
+      <a href="sem2-1.html">大二上</a>
+      <a href="sem2-2.html">大二下</a>
+      <a href="sem3-1.html">大三上</a>
+      <a href="sem3-2.html">大三下</a>
+      <a href="ebook.html">电子书</a>
+      <a href="competitions.html">竞赛</a>
+      <a href="bw-talk.html">BW有话说</a>
+      <a class="active" href="opensource.html">开源项目</a>
+    </nav>
+    <div class="gn-right"><span>开源 / <b>7</b> 个项目</span></div>
+  </div>
+</header>
+
+<main class="os-page">
+  <section class="os-hero">
+    <div class="os-grid-bg" aria-hidden="true"></div>
+    <div class="os-shell os-hero-inner">
+      <div class="os-hero-copy">
+        <div class="os-kicker">OPEN SOURCE · BW448</div>
+        <h1>把做过的东西，<br><span>开源</span>出来。</h1>
+        <p class="os-lead">学习工具、桌面应用、Claude Code 技能和小型开发库。每一个都能直接用，也能读源码；如果你刚好需要，Star 是最直接的支持。</p>
+        <div class="os-actions">
+          <a class="btn-primary" href="https://github.com/bw448" target="_blank" rel="noopener">在 GitHub 看全部 <span>↗</span></a>
+          <a class="os-textlink" href="#projects">按分类找项目 <span>↓</span></a>
+        </div>
+        <div class="os-stats" aria-label="项目统计">
+          <span><b id="osStatProjects">7</b> 个项目</span>
+          <span><b id="osStatStars">7</b> Stars</span>
+          <span><b id="osStatCats">4</b> 个分类</span>
+          <span class="os-sync-dot" id="osSyncDot"><i></i> GitHub 自动同步</span>
+        </div>
+      </div>
+      <div class="os-term" aria-hidden="true">
+        <div class="os-term-bar"><i></i><i></i><i></i><span>bw448 — repos</span><em>zsh</em></div>
+        <div class="os-term-body" id="osTermRows">
+          <div class="os-term-line"><span class="os-term-cmd">$ gh repo list bw448 --limit 7</span></div>
+          <div class="os-term-line"><b>folio</b><span>local-first reading workbench</span><em>★ 0</em></div>
+          <div class="os-term-line"><b>Bw_Orbit</b><span>GIS learning system</span><em>★ 1</em></div>
+          <div class="os-term-line"><b>bw_python</b><span>599-question Python quiz</span><em>★ 0</em></div>
+          <div class="os-term-line"><b>moon-wav</b><span>MoonBit WAV toolkit</span><em>★ 0</em></div>
+          <div class="os-term-line"><b>JARVIS-LOCAL</b><span>offline AI voice assistant</span><em>★ 2</em></div>
+          <div class="os-term-line"><b>novel-writing-skills</b><span>Claude Code novel skills</span><em>★ 3</em></div>
+          <div class="os-term-line"><b>satirical-fiction-skill</b><span>satirical short fiction</span><em>★ 1</em></div>
+          <div class="os-term-line os-term-cursor"><span class="os-term-cmd">$</span><i class="os-cursor"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="os-spot" aria-labelledby="osSkillTitle">
+    <div class="os-shell os-spot-inner">
+      <div class="os-spot-copy">
+        <div class="os-kicker">LOOKING FOR A SKILL?</div>
+        <h2 id="osSkillTitle">想找 Claude Code 的<br><span>写作 Skill？</span></h2>
+        <p>两个写作技能，复制文件夹就能用。一个写长篇：从大纲、章节到正文；一个写短篇：每次随机换风格、题材和讽刺角度。</p>
+        <div class="os-copy-row">
+          <code id="osInstallCmd">cp -r skills/* ~/.claude/skills/</code>
+          <button class="os-copy-btn" id="osCopyBtn" type="button">复制</button>
+        </div>
+        <p class="os-copy-note">在对应仓库根目录执行。Windows PowerShell 用 <code>Copy-Item -Recurse skills\* ~\.claude\skills\</code>。</p>
+        <a class="os-textlink" href="#projects" data-goto-cat="skills">只看 Skills 分类 <span>↓</span></a>
+      </div>
+      <div class="os-spot-cards">
+        <a class="os-spot-card" href="https://github.com/bw448/novel-writing-skills" target="_blank" rel="noopener">
+          <span class="os-spot-tag">长篇 · 三个技能</span>
+          <b>novel-writing-skills</b>
+          <p>搭大纲 → 拆章节 → 写正文</p>
+          <em>★ 3 · MIT</em>
+        </a>
+        <a class="os-spot-card" href="https://github.com/bw448/satirical-fiction-skill" target="_blank" rel="noopener">
+          <span class="os-spot-tag">短篇 · 随机配方</span>
+          <b>satirical-fiction-skill</b>
+          <p>风格 × 题材 × 讽刺角度</p>
+          <em>★ 1 · MIT</em>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="os-projects" id="projects" aria-labelledby="osProjectsTitle">
+    <div class="os-shell">
+      <div class="os-head">
+        <div>
+          <div class="os-kicker">PROJECTS / <span id="osProjectCount">07</span></div>
+          <h2 id="osProjectsTitle">按你需要的，<br><span>直接找。</span></h2>
+        </div>
+        <div class="os-tools">
+          <label class="os-search">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12.7 12.7 17 17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <input id="osSearch" type="search" placeholder="搜项目、技术栈、用途…" autocomplete="off" aria-label="搜索开源项目">
+          </label>
+        </div>
+      </div>
+      <div class="os-filters" id="osFilters" role="group" aria-label="项目分类"></div>
+      <div class="os-grid" id="osGrid"></div>
+      <div class="os-empty" id="osEmpty" hidden>
+        <b>没有找到匹配的项目。</b>
+        <p>换个关键词，或者回到“全部”看看。</p>
+        <button class="os-textlink" id="osReset" type="button">清空筛选</button>
+      </div>
+      <div class="os-sync" id="osSync" aria-live="polite">
+        <span class="os-sync-state"><i></i><b>正在同步 GitHub…</b></span>
+        <span>Star 数与新仓库会自动更新；同步失败时显示内置快照。</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="os-cta">
+    <div class="os-shell os-cta-inner">
+      <div class="os-kicker">STARS HELP</div>
+      <h2>如果某个项目<br>刚好帮到你。</h2>
+      <p>点一个 Star，是最直接的支持。也可以把这一页转给正在找工具的人。</p>
+      <div class="os-cta-actions">
+        <a class="btn-primary" href="https://github.com/bw448" target="_blank" rel="noopener">去 GitHub 看看 <span>↗</span></a>
+        <a class="os-textlink" href="#projects">回到项目 <span>↑</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="foot-inner">
+    <span>Orbit · 开源项目 / bw448</span>
+    <div class="foot-links"><a href="index.html">首页</a><a href="semesters.html">学习内容</a><a href="competitions.html">竞赛</a><a href="opensource.html">开源项目</a><a href="https://github.com/bw448" target="_blank" rel="noopener">GitHub</a></div>
+  </div>
+</footer>
+
+<script src="assets/opensource-data.js?v=20261110"></script>
+<script src="assets/opensource.js?v=1"></script>
+<script src="assets/pwa.js" defer></script>

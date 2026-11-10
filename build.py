@@ -154,6 +154,16 @@ def build_python_guide():
     print("built", out, len(html), "chars")
 
 
+def build_opensource():
+    """Build the open-source showcase page and its curated snapshot."""
+    data = json.load(open(os.path.join(ROOT, "src", "opensource_projects.json"), encoding="utf-8"))
+    js = "window.ORBIT_OPENSOURCE = " + js_json(data) + ";\n"
+    data_path = os.path.join(ROOT, "assets", "opensource-data.js")
+    open(data_path, "w", encoding="utf-8").write(js)
+    print("built", data_path, len(js), "chars,", len(data["projects"]), "projects")
+    build_static("opensource.html", "opensource.html")
+
+
 def build_courses():
     tpl = open(os.path.join(ROOT, "src", "course_template.html"), encoding="utf-8").read()
     courses = json.load(open(os.path.join(ROOT, "src", "courses.json"), encoding="utf-8"))
@@ -211,6 +221,7 @@ if __name__ == "__main__":
     build_arcgis()
     build_maogai()
     build_python_guide()
+    build_opensource()
     build_static("sem2-1.html", "sem2-1.html")
     build_static("kaoyan-remote.html", "kaoyan-remote.html")
     build_static("zero-remote.html", "zero-remote.html")

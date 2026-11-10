@@ -56,6 +56,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 ## 当前结构
 
 - `index.html`：Orbit 品牌首页（动效、介绍、进入内容）
+- `opensource.html`：开源项目展示页（分类 / 搜索 / GitHub 实时同步；数据 `src/opensource_projects.json`）
 - `semesters.html`：学习内容，选学期
 - `sem2-1.html`：大二上，六门课 + 电子书
 - 遥感：`remote.html`
@@ -68,7 +69,8 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 毛概 / ArcGIS：选择题答错自动进 `quiz.js` 的错题本面板（章节分布、重练、导出、清空）
 - AI 入口：`course-ai.js` 在课程页 / Python 知识地图的首屏操作区、吸顶导航、每个 section 标题下注入“问 AI”；`rs-ai.js` 在遥感首屏注入“问 AI”；Python 主页面 `ai.js` 首屏 + 右下角按钮。不要再只靠右下角小圆点。
 - Python：`python.html`
-  - 599 题 / 10 套卷；**题库固定，不因新模块改动**
+  - 599 题 / 10 套卷；2026-11-10 完成答案与解析校订（补全/重写 300+ 条解析、纠正错误与错位答案、修复 OCR 截断题干与选项）
+  - **不重排、不删题**；只允许修复明显 OCR 损坏和错误的答案 / 解析
   - `#paper-full-N` 整卷看
   - `assets/papers/`：十套 PDF / Word + 合集
 - Python 知识地图：`python-guide.html`
@@ -96,7 +98,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 遥感题库 / 章节：`src/content.py`
 - 遥感作业正文：`src/homework.json`
 - 遥感讲义补充：`src/notes.json`
-- Python 599 题：`src/python_questions.json`（固定）
+- Python 599 题：`src/python_questions.json`（已校订；不要重排 / 删题）
 - Python 知识地图：`src/python_guide.json`；题库主题统计：`src/python_topics.json`
 - 四个课程模块：`src/courses.json`
 - 自然地理自测题：`src/nature_bank.json`（80 题）
@@ -109,13 +111,14 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - 数据检查：`tools/check_site.py`（题库结构、答案下标、本地链接）
 - 电子书书目：`assets/ebooks/books.js`
 - 竞赛数据：`assets/competitions-data.js`
+- 开源项目页：`src/opensource_projects.json` → `python build.py` 生成 `assets/opensource-data.js`；页面运行时再请求 GitHub API 更新 Star 并自动收录新仓库。新增项目要精美介绍就编辑 JSON；只新建仓库也会自动出现在“其他项目”
 - BW 的 CloudBase 配置：`assets/cloudbase-config.js`
 - BW 数据库 / RPC：`cloudbase/schema.sql`
 
 ## 不能动 / 注意
 
 - **遥感原有七套作业题库是固定的**，补充内容只能加到 `src/notes.json` 或新模块，不要改原题。
-- **Python 599 题 / 10 套卷是固定的**，知识地图只能新增导航，不改题、不删题、不重排。
+- **Python 599 题 / 10 套卷不重排、不删题**；允许修复明显 OCR 损坏和错误的答案 / 解析；知识地图只能新增导航。
 - 旧 Python 项目（`E:\python卷子`）保持只读，不修改、不提交。
 - 生成后的 `arcgis.html` / `maogai.html` / `python-guide.html` 不要直接改，改 `src/` 模板与 JSON 后重新 build。
 - ArcGIS 题库答案以扫描件为准；毛概补充题库以教材/课后题为准。
@@ -169,7 +172,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 
 ```text
 项目在 E:\地信复习系统。先读 CLAUDE.md 和 README.md，了解当前结构；
-不要改遥感原有固定题库，不要动旧 Python 项目，也不要改 Python 599 题。
+不要改遥感原有固定题库，不要动旧 Python 项目；Python 599 题不要重排 / 删题，只修复明显 OCR 与错误答案 / 解析。
 桌面资料在 C:\Users\Lenovo\Desktop\地信大二上\课程资料；总纲在 系统整理好的复习资料。
 这次我想优化：……
 改完请 build、导出总纲、检查 390px、commit 并 push。
