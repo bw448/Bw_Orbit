@@ -1,6 +1,6 @@
 /* Orbit course modules — shared light layout for Nature / Mao / Probability / ArcGIS */
 body{padding-left:0;padding-right:0;background:var(--paper)}
-.course-page{overflow:hidden;--course-accent:#0071e3}
+.course-page{overflow:visible;--course-accent:#0071e3}
 .course-shell{max-width:1120px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
 
 .course-hero{
@@ -159,7 +159,7 @@ body{padding-left:0;padding-right:0;background:var(--paper)}
 .split-spacer{height:40px}
 
 /* big course tabs — primary navigation, not a hidden menu */
-.course-tabs{position:fixed;left:0;right:0;top:48px;z-index:46;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:rgba(255,255,255,.96);border-bottom:1px solid var(--line-soft);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);overflow-x:auto;scrollbar-width:none}
+.course-tabs{position:sticky;top:48px;z-index:46;width:100%;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:rgba(255,255,255,.96);border-bottom:1px solid var(--line-soft);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);overflow-x:auto;scrollbar-width:none}
 .course-tabs::-webkit-scrollbar{display:none}
 .course-tabs a{display:inline-flex;align-items:center;gap:7px;flex:none;padding:10px 16px;border:1px solid var(--line-soft);border-radius:999px;background:#fff;color:var(--muted);font-size:14px;font-weight:500;line-height:1.2;white-space:nowrap;transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
 .course-tabs a:hover{color:var(--ink);border-color:var(--line)}
@@ -167,7 +167,7 @@ body{padding-left:0;padding-right:0;background:var(--paper)}
 .course-tabs a b{font-family:var(--mono);font-size:10px;font-weight:500;opacity:.62}
 .course-tabs a.active b{opacity:.72}
 .course-tabs-spacer{height:58px}
-@media(max-width:760px){.course-tabs{justify-content:center;flex-wrap:wrap;overflow:visible;gap:5px;padding:7px 12px}.course-tabs a{padding:9px 13px;font-size:13px}.course-tabs-spacer{height:53px}}
+@media(max-width:760px){.course-tabs{justify-content:center;flex-wrap:wrap;overflow:visible;gap:5px;padding:7px 12px}.course-tabs a{padding:9px 13px;font-size:13px}.course-tabs-spacer{height:58px}}
 
 .course-tabs ~ .course-section{padding-top:clamp(34px,4vw,54px);scroll-margin-top:calc(48px + var(--tabs-h,58px) + 10px)}
 .course-tabs ~ .section{padding-top:clamp(34px,4vw,54px);scroll-margin-top:calc(48px + var(--tabs-h,58px) + 10px)}

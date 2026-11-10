@@ -26,31 +26,29 @@
   if (!active) active = tabForSection(hash);
   if (!active) active = tabs[0];
 
-  var nav = document.createElement('nav');
-  nav.className = 'course-tabs';
-  nav.setAttribute('aria-label', '课程栏目');
-  nav.innerHTML = tabs.map(function (t) {
-    var cls = t.id === active.id ? ' class="active"' : '';
-    var count = t.count ? '<b>' + t.count + '</b>' : '';
-    return '<a href="?tab=' + encodeURIComponent(t.id) + '"' + cls + ' data-tab="' + t.id + '">' + t.label + count + '</a>';
-  }).join('');
-  main.insertBefore(nav, main.firstChild);
-  var spacer = document.createElement('div');
-  spacer.className = 'course-tabs-spacer';
-  main.insertBefore(spacer, nav.nextSibling);
+  var nav = document.querySelector('.course-tabs');
+  if (!nav) {
+    nav = document.createElement('nav');
+    nav.className = 'course-tabs';
+    nav.setAttribute('aria-label', '课程栏目');
+    nav.innerHTML = tabs.map(function (t) {
+      var count = t.count ? '<b>' + t.count + '</b>' : '';
+      return '<a href="?tab=' + encodeURIComponent(t.id) + '" data-tab="' + t.id + '">' + t.label + count + '</a>';
+    }).join('');
+    main.insertBefore(nav, main.firstChild);
+  }
+  // Mark the active tab (the markup is static so there is no layout shift).
+  Array.prototype.forEach.call(nav.querySelectorAll('a'), function (a) {
+    var href = a.getAttribute('href') || '';
+    a.classList.toggle('active', href === '?tab=' + active.id);
+  });
   function syncTabsHeight() {
     var h = nav.offsetHeight || 52;
-    spacer.style.height = h + 'px';
     document.documentElement.style.setProperty('--tabs-h', h + 'px');
   }
   syncTabsHeight();
   window.addEventListener('resize', syncTabsHeight);
 
-  // The old subnav / guide / entry cards are no longer the primary navigation.
-  ['.course-subnav', '.course-guide', '#moreEntries'].forEach(function (sel) {
-    var el = document.querySelector(sel);
-    if (el) el.hidden = true;
-  });
 
   var sections = Array.prototype.filter.call(main.children, function (el) {
     return el.tagName === 'SECTION';
