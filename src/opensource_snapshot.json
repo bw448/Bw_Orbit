@@ -1,28 +1,7 @@
 {
  "user": "bw448",
- "synced_at": "2026-11-10T13:26:35Z",
+ "synced_at": "2026-11-11T19:36:24Z",
  "repos": [
-  {
-   "name": "Bw_Orbit",
-   "description": "Orbit · 地信学习站 — a bilingual remote-sensing and Python learning system for GIS undergraduates.",
-   "stargazers_count": 1,
-   "language": "HTML",
-   "homepage": "https://bw448.github.io/Bw_Orbit/",
-   "topics": [
-    "chinese",
-    "education",
-    "gis",
-    "pwa",
-    "python",
-    "remote-sensing",
-    "static-site"
-   ],
-   "pushed_at": "2026-11-10T13:24:18Z",
-   "fork": false,
-   "archived": false,
-   "html_url": "https://github.com/bw448/Bw_Orbit",
-   "license": null
-  },
   {
    "name": "folio",
    "description": "Folio：本地优先的英文阅读、四六级学习与科研工作台。PDF/EPUB、离线词典、AI 讲解、错题本、文献发现。 | Local-first reading, CET-4/6 study and research workbench.",
@@ -46,11 +25,32 @@
     "spaced-repetition",
     "windows"
    ],
-   "pushed_at": "2026-11-10T03:23:44Z",
+   "pushed_at": "2026-11-11T15:15:06Z",
    "fork": false,
    "archived": false,
    "html_url": "https://github.com/bw448/folio",
    "license": "AGPL-3.0"
+  },
+  {
+   "name": "Bw_Orbit",
+   "description": "Orbit · 地信学习站 — a bilingual remote-sensing and Python learning system for GIS undergraduates.",
+   "stargazers_count": 1,
+   "language": "HTML",
+   "homepage": "https://bw448.github.io/Bw_Orbit/",
+   "topics": [
+    "chinese",
+    "education",
+    "gis",
+    "pwa",
+    "python",
+    "remote-sensing",
+    "static-site"
+   ],
+   "pushed_at": "2026-11-10T14:10:36Z",
+   "fork": false,
+   "archived": false,
+   "html_url": "https://github.com/bw448/Bw_Orbit",
+   "license": null
   },
   {
    "name": "bw_python",
