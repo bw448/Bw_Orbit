@@ -262,6 +262,10 @@ def build_courses():
             "__PRACTICE_TOTAL__": str(bank_total),
             "__PRACTICE_DESC__": practice.get("desc", "按章节刷题；答错自动进错题本。"),
             "__PRACTICE_NOTE__": practice.get("note", "题目为自编自测，不是学校官方题。"),
+            "__HANDBOOK__": {
+                "nature-geo": "nature-handbook-2026-11.pdf",
+                "probability": "probability-handbook-2026-11.pdf",
+            }.get(slug, ""),
         }.items():
             html = html.replace(key, val)
         course = dict(c)

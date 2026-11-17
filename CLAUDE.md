@@ -60,6 +60,10 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - `opensource.html`：开源项目展示页（分类 / 搜索 / 内置快照 + GitHub API 增强；数据 `src/opensource_projects.json` + `src/opensource_snapshot.json`）
 - `semesters.html`：学习内容，选学期
 - `sem2-1.html`：大二上，六门课 + 电子书
+- 复习手册：`assets/handbooks/` 六科可打印 PDF（2026-11 版）；六科课程页首屏与 `sem2-1.html` 卡片都有“复习手册 PDF”下载入口
+  - 生成：`python tools/build_handbooks.py`（全部）或 `python tools/build_handbooks.py remote`（单科）
+  - 输出同时写到桌面 `地信大二上\复习汇总\`；DOCX 中间件在 `.work/handbooks/docx/`
+  - 内容源：`tools/handbook_content*.py` + 网站 `src/*.json`；改题库后重跑即可刷新
 - 遥感：`remote.html`
   - 原有七套作业 / 90 题固定不动
   - `remote.html#notes`：从老师复习 PDF 补的 61 条讲义补充
