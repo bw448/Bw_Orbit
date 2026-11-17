@@ -285,12 +285,15 @@
       '<div class="mono" style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:16px">' + typeName(q.type) + ' · ' + esc(q.tag || '') + '</div>' +
       '<div class="study-qtext ' + (/\n/.test(q.q) ? 'code' : '') + '">' + esc(q.q) + '</div>';
     if (q.type === 'single' || q.type === 'multiple') {
+      var answerIdx = q.type === 'multiple'
+        ? (Array.isArray(q.a) ? q.a : [q.a])
+        : [q.a];
       h += '<div class="study-opts">' + q.options.map(function (o, i) {
         var cls = 'study-opt';
         var on = q.type === 'multiple' ? (Array.isArray(s.selected) && s.selected.includes(i)) : s.selected === i;
         if (on) cls += ' sel';
-        if (s.done && i === q.a) cls += ' ok';
-        if (s.done && on && i !== q.a) cls += ' bad';
+        if (s.done && answerIdx.indexOf(i) >= 0) cls += ' ok';
+        if (s.done && on && answerIdx.indexOf(i) < 0) cls += ' bad';
         return '<button type="button" class="' + cls + '" data-opt="' + i + '" ' + (s.done ? 'disabled' : '') + '><span class="k">' + String.fromCharCode(65 + i) + '</span><span>' + esc(o) + '</span></button>';
       }).join('') + '</div>';
     } else if (q.type === 'fill') {

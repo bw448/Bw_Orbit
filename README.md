@@ -26,6 +26,8 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 
 首页先展示 Orbit 是什么；点“进入学习内容”后，第一层才让你选学期，第二层选科目，第三层进入具体内容。这样第一次打开网站不会一上来就被功能淹没。
 
+如果还是不知道从哪开始：首页首次访问会弹出三步引导；也可以随时打开 `guide.html`（使用指南），里面有“三步开始 / 网站地图 / 三条路线 / 常见问题”。
+
 目前已经上线：
 
 | 学期 | 科目 | 内容 |
@@ -36,6 +38,7 @@ Orbit 不是把资料堆在一个页面里，而是把大学课程拆成一条�
 | 大二上 | 毛概 | 大题背诵、1063 题系统题库、97 道真题、256 条高频考点、39 组易混对比、错题本 |
 | 大二上 | 概率论 | 章节重点、公式、PPT 原题、2022—2023 期末卷、60 道章节自测 + 错题本 |
 | 大二上 | ArcGIS | 考试结构、79 道客观题自测 + 错题本、名词解释、算法、实操、简答/分析/论述 |
+| 顶层 | 使用指南 | 第一次来先看这里：三步开始、网站地图、三条复习路线、常见问题；首页首次访问也会弹出引导 |
 | 顶层 | 竞赛 | 6 个 GIS 赛事、备考路线、技能地图、资料库 |
 | 顶层 | 开源项目 | 7 个 bw448 GitHub 项目：Folio、JARVIS LOCAL、Orbit、bw_python、两个 Claude Code 写作技能、moon-wav；按分类 / 搜索浏览，打开页面自动同步 Star 与新仓库 |
 | 顶层 | BW有话说 | 文字 / 图片 / 视频 / 链接时间线；只点赞，不设评论 |
@@ -189,7 +192,8 @@ python tools/sync_content.py
 ### 目录
 
 ```
-index.html                 Orbit 品牌首页：介绍 + 动效 + 进入内容
+index.html                 Orbit 品牌首页：介绍 + 动效 + 首次访问引导
+guide.html                 使用指南：三步开始 / 网站地图 / 路线 / 常见问题
 semesters.html             学习内容：选学期
 sem2-1.html                大二上：选科目
 remote.html                遥感 · 期末复习
@@ -210,6 +214,8 @@ ebook.html                 电子书：5 本教材 + 全页图片阅读器
 assets/
   apple.css                Apple 式浅色设计系统
   landing.css / landing.js 品牌首页：轨道动效、滚动揭示
+  guide.css / guide.js     使用指南：目录高亮与章节导航
+  onboarding.js            首页首次访问：三步引导弹窗
   rs-ai.js / rs-ai.css     遥感：选中翻译 / 追问 + 术语表
   rs-appendix.js / rs-appendix.css  遥感：教材附录背诵卡 / 英中互测 / 错题本
   rs-appendix-data.js      教材附录 3/4 共 807 条
@@ -426,7 +432,8 @@ Outputs include `index.html` (brand landing), `semesters.html` (learning hub), `
 ### Project structure
 
 ```
-index.html                 Brand landing: Orbit intro, motion, enter content
+index.html                 Brand landing: Orbit intro, motion, first-visit guide
+guide.html                 How to use: 3 steps / site map / routes / FAQ
 semesters.html             Learning hub: choose a semester
 sem2-1.html                Year 2 Fall: choose a subject
 remote.html                Remote Sensing · final review
@@ -447,6 +454,8 @@ ebook.html                 E-books: 5 textbooks + PDF reader
 assets/
   apple.css                Apple-inspired light design system
   landing.css / landing.js Brand landing: orbit motion, scroll reveals
+  guide.css / guide.js     How-to guide: section nav and active state
+  onboarding.js            First-visit three-step welcome
   rs-ai.js / rs-ai.css     Remote Sensing: select-to-translate/ask + glossary
   rs-appendix.js / rs-appendix.css  Remote Sensing: appendix cards, EN–ZH drills, wrong book
   rs-appendix-data.js      807 textbook appendix entries

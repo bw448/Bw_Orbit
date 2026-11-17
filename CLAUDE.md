@@ -55,7 +55,8 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 
 ## 当前结构
 
-- `index.html`：Orbit 品牌首页（动效、介绍、进入内容）
+- `index.html`：Orbit 品牌首页（动效、介绍、进入内容、首次访问三步引导）
+- `guide.html`：使用指南（三步开始 / 网站地图 / 三条路线 / 常见问题）；首页、学习内容、大二上导航及全站课程页导航都有入口。不要在课程页里复制一套指南
 - `opensource.html`：开源项目展示页（分类 / 搜索 / 内置快照 + GitHub API 增强；数据 `src/opensource_projects.json` + `src/opensource_snapshot.json`）
 - `semesters.html`：学习内容，选学期
 - `sem2-1.html`：大二上，六门课 + 电子书
@@ -67,6 +68,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
   - 在课程模板里新增 `#practice`：80 / 60 道自编自测题 + 共享错题本面板
   - 自然地理手写稿已转成 `nature-notes.html`（14 页文字版）；原手写扫描/JPG 不再在页面链接
 - 毛概 / ArcGIS：选择题答错自动进 `quiz.js` 的错题本面板（章节分布、重练、导出、清空）
+- 2026-11-17 修复了两处“多选答对仍标红”：`assets/study.js`（遥感 / Python 的“学习”浮动面板）和 `src/template.html` 的 `disableOpts`（遥感章节练习）。根因都是把答案数组 `q.a` 和单个选项索引直接比较；生成后的 `remote.html` 也一并修复。
 - AI 入口：`course-ai.js` 在课程页 / Python 知识地图的首屏操作区、吸顶导航、每个 section 标题下注入“问 AI”；`rs-ai.js` 在遥感首屏注入“问 AI”；Python 主页面 `ai.js` 首屏 + 右下角按钮。不要再只靠右下角小圆点。
 - 长页面大标签页：毛概 / ArcGIS / 遥感 / 自然地理 / 概率论 / 竞赛 / Python 知识地图用 `assets/course-tabs.js` + 页面里的 `window.ORBIT_TABS`。每个 tab 只显示一组 section，顶部固定大号 tab 条；默认第一个 tab（带 hero），其余 tab 隐藏 hero；`?tab=id` 直达，旧 `#id` 会自动映射到所在 tab。新增 section 要同步 tabs 配置。
 - Python：`python.html`
@@ -169,6 +171,7 @@ GitHub Pages 从 `main` 根目录构建；push 后等 10—30 秒。
 - Python 模拟卷可做 60/90/120 分钟与题量配置
 - 全站可继续做 Lighthouse / 无障碍 / 弱网检查
 - 宣传：宣传片 / 公众号推文 / 抖音简介待做；见本机 `.work/promo/后续任务-宣传.md`（不进仓库），不要擅自改网站
+- 使用指南影片（2026-11-17）：`.work/promo/交付_Orbit使用指南_2026-11-17/`，1:48 / 1080p60 / 有旁白；工程与重制命令见同目录 `交付说明.md`；视频不进仓库
 
 ## 新对话开场模板
 

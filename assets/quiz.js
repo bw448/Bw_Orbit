@@ -152,7 +152,7 @@
           var hay = (it.q + ' ' + (it.options || []).join(' ') + ' ' + (it.explain || '')).toLowerCase();
           if (hay.indexOf(filter.q.toLowerCase()) < 0) return false;
         }
-        if (filter.wrong && !(state[it.id] && state[it.id].ok === false)) return false;
+        if (filter.wrong && !(state[it.id] && state[it.id].ok === false && !state[it.id].revealed)) return false;
         if (filter.marked && !(state[it.id] && state[it.id].bm)) return false;
         if (filter.due) {
           var st = state[it.id];
@@ -190,7 +190,7 @@
     function wrongItems() {
       return items.filter(function (it) {
         var st = state[it.id];
-        return st && st.ok === false;
+        return st && st.ok === false && !st.revealed;
       });
     }
 
@@ -416,8 +416,11 @@
 
       var redo = e.target.closest('.qredo');
       if (redo) {
+        // Keep the recorded result (so a wrong card stays in the wrong book),
+        // but unlock it for another attempt.
         var st = state[it.id] || {};
-        delete st.ok; delete st.a; delete st.v; delete st.revealed; delete st.redo;
+        st.redo = true;
+        delete st.a; delete st.v; delete st.revealed;
         state[it.id] = st;
         save(key, state);
         render();

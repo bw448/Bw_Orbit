@@ -10,7 +10,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/apple.css">
-<link rel="stylesheet" href="assets/landing.css?v=5">
+<link rel="stylesheet" href="assets/landing.css?v=7">
 
 <header class="land-nav" id="landNav">
   <a class="land-brand" href="index.html" aria-label="Orbit 首页">
@@ -23,6 +23,7 @@
     <a href="semesters.html">学习内容</a>
     <a href="opensource.html">开源项目</a>
     <a href="competitions.html">竞赛</a>
+    <a href="guide.html">使用指南</a>
     <a href="bw-talk.html">BW有话说</a>
     <a class="land-github" href="https://github.com/bw448/Bw_Orbit" target="_blank" rel="noopener">GitHub <span>↗</span></a>
   </nav>
@@ -73,13 +74,40 @@
       <p class="hero-sub">从大二上的第一章，到毕业前的最后一次复习。<br>先看它怎么走，再进入你的内容。</p>
       <div class="hero-actions">
         <a class="btn-primary" href="semesters.html">进入学习内容</a>
-        <a class="land-textlink" href="#story">先看看 Orbit 是什么 <span>↓</span></a>
+        <a class="land-textlink" href="guide.html">第一次来？看使用指南 <span>→</span></a>
       </div>
     </div>
 
     <div class="hero-foot">
       <span>REMOTE SENSING</span><i></i><span>PYTHON</span><i></i><span>GIS</span>
       <span class="hero-scroll">SCROLL <b>↓</b></span>
+    </div>
+  </section>
+
+  <section class="land-start" id="start">
+    <div class="start-inner">
+      <div class="start-head">
+        <div>
+          <div class="land-kicker">START HERE</div>
+          <h2>不知道从哪开始？<br>先走这三步。</h2>
+        </div>
+        <a class="land-textlink" href="guide.html">看完整使用指南 <span>→</span></a>
+      </div>
+      <div class="start-steps">
+        <a class="start-step" href="semesters.html">
+          <b>01</b><span>选学期</span>
+          <small>先站到你所在的位置。现在的内容在大二上。</small>
+        </a>
+        <a class="start-step" href="sem2-1.html">
+          <b>02</b><span>选科目</span>
+          <small>遥感、Python、毛概、ArcGIS、自然地理、概率论。</small>
+        </a>
+        <a class="start-step" href="python.html#practice-1">
+          <b>03</b><span>做一组题</span>
+          <small>以 Python 第 1 套为例；提交后看解析，错题自动回来。</small>
+        </a>
+      </div>
+      <p class="start-note">不需要注册。错题、收藏和进度只存在你这个浏览器里；换设备不会同步。</p>
     </div>
   </section>
 
@@ -202,7 +230,7 @@
       <div class="land-kicker reveal">05 / THE PATH</div>
       <h2 class="reveal">从大二上，<br>一直走到毕业。</h2>
       <div class="path-track reveal">
-        <div class="path-stop on"><b>01</b><span>大二上</span><small>遥感 / Python</small></div>
+        <div class="path-stop on"><b>01</b><span>大二上</span><small>六门课</small></div>
         <div class="path-stop"><b>02</b><span>大二下</span><small>继续接入</small></div>
         <div class="path-stop"><b>03</b><span>大三上</span><small>课程 / 题库</small></div>
         <div class="path-stop"><b>04</b><span>大三下</span><small>方向 / 实践</small></div>
@@ -216,10 +244,31 @@
   <footer class="land-foot">
     <div class="land-foot-inner">
       <span>Orbit · 地信学习站 · 2026</span>
-      <div><a href="semesters.html">学习内容</a><a href="opensource.html">开源项目</a><a href="competitions.html">竞赛</a><a href="https://github.com/bw448/Bw_Orbit" target="_blank" rel="noopener">GitHub</a><a href="#top">回到顶部 ↑</a></div>
+      <div><a href="semesters.html">学习内容</a><a href="guide.html">使用指南</a><a href="opensource.html">开源项目</a><a href="competitions.html">竞赛</a><a href="https://github.com/bw448/Bw_Orbit" target="_blank" rel="noopener">GitHub</a><a href="#top">回到顶部 ↑</a></div>
     </div>
   </footer>
 </main>
 
+<div class="welcome" id="welcome" hidden>
+  <div class="welcome-backdrop" data-welcome-close></div>
+  <section class="welcome-card" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" tabindex="-1">
+    <button class="welcome-x" type="button" data-welcome-close aria-label="关闭">×</button>
+    <div class="land-kicker">FIRST VISIT / 第一次来</div>
+    <h2 id="welcomeTitle">Orbit 怎么用？</h2>
+    <p class="welcome-lede">这是一条按学期整理的个人学习轨道：选一门课，做一组题，错题会自己回来。</p>
+    <ol class="welcome-steps">
+      <li><b>01</b><span><em>选学期</em><small>从大二上开始</small></span></li>
+      <li><b>02</b><span><em>选科目</em><small>六门课任选一门</small></span></li>
+      <li><b>03</b><span><em>做一组题</em><small>答错的自动进错题本</small></span></li>
+    </ol>
+    <p class="welcome-note">个人学习站，不是学校官方平台；无需登录，进度只存本机。</p>
+    <div class="welcome-actions">
+      <a class="btn-primary" href="guide.html" data-welcome-close>看使用指南</a>
+      <a class="welcome-later" href="semesters.html" data-welcome-close>直接开始 <span>→</span></a>
+    </div>
+  </section>
+</div>
+
 <script src="assets/landing.js?v=2"></script>
+<script src="assets/onboarding.js?v=1" defer></script>
 <script src="assets/pwa.js" defer></script>

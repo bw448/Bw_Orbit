@@ -277,6 +277,7 @@ if __name__ == "__main__":
     build_remote()
     build_python()
     build_static("landing.html", "index.html")
+    build_static("guide.html", "guide.html")
     build_static("semesters.html", "semesters.html")
     build_static("competitions.html", "competitions.html")
     build_static("bw-talk.html", "bw-talk.html")
