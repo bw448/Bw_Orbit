@@ -21,6 +21,8 @@
   var zoomIn = document.getElementById('zoomIn');
   var fitPage = document.getElementById('fitPage');
   var closeBtn = document.getElementById('closeReader');
+  var pageJump = document.getElementById('pageJump');
+  var jumpPage = document.getElementById('jumpPage');
 
   var pageNum = 1, zoom = 1, book = null, loadToken = 0, touchX = 0;
 
@@ -63,6 +65,10 @@
     if (progress) progress.style.width = total ? (pageNum / total * 100) + '%' : '0%';
     if (prev) prev.disabled = !total || pageNum <= 1;
     if (next) next.disabled = !total || pageNum >= total;
+    if (pageJump) {
+      pageJump.max = total || '';
+      if (document.activeElement !== pageJump) pageJump.value = total ? pageNum : '';
+    }
     if (downloadPart && book && book.partsDir && book.parts) {
       var per = book.partPages || 50;
       var part = Math.floor((pageNum - 1) / per) + 1;
@@ -134,6 +140,7 @@
     if (!book) return;
     loadToken++;
     pageNum = 1; zoom = 1;
+    if (pageJump) { pageJump.max = book.pages; pageJump.value = 1; pageJump.placeholder = '1—' + book.pages; }
     reader.hidden = false;
     document.body.classList.add('reader-open');
     titleEl.textContent = book.title;
@@ -176,6 +183,15 @@
     renderPage();
   }
 
+  function jumpToPage() {
+    if (!book || !pageJump) return;
+    var n = parseInt(pageJump.value, 10);
+    if (!isFinite(n)) { pageJump.focus(); return; }
+    n = Math.max(1, Math.min(totalPages(), n));
+    pageNum = n;
+    renderPage();
+  }
+
   function setZoom(delta) {
     if (!book || !pageImg) return;
     zoom = Math.max(0.6, Math.min(3, zoom + delta));
@@ -191,6 +207,10 @@
   if (closeBtn) closeBtn.addEventListener('click', closeReader);
   if (prev) prev.addEventListener('click', function () { go(-1); });
   if (next) next.addEventListener('click', function () { go(1); });
+  if (jumpPage) jumpPage.addEventListener('click', jumpToPage);
+  if (pageJump) pageJump.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); jumpToPage(); }
+  });
   if (zoomOut) zoomOut.addEventListener('click', function () { setZoom(-0.15); });
   if (zoomIn) zoomIn.addEventListener('click', function () { setZoom(0.15); });
   if (fitPage) fitPage.addEventListener('click', function () { zoom = 1; applyZoom(); });

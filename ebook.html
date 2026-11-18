@@ -13,7 +13,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3' fill='%230071e3'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='6' fill='none' stroke='%231d1d1f' stroke-width='1.2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/apple.css">
-<link rel="stylesheet" href="assets/ebook.css?v=5">
+<link rel="stylesheet" href="assets/ebook.css?v=7">
 </head>
 <body>
 <header class="global-nav">
@@ -42,7 +42,7 @@
     <div class="ebook-shell">
       <div class="eyebrow">E-BOOKS · 大二上</div>
       <h1>五本教材，<br>放进同一条轨道。</h1>
-      <p class="ebook-lede">自然地理、毛概、概率论、遥感导论、ArcGIS 空间分析。打开就能读，支持翻页、缩放、全屏和下载。</p>
+      <p class="ebook-lede">自然地理、毛概、概率论、遥感导论、ArcGIS 空间分析。打开就能读，支持翻页、页码跳转、缩放、全屏和下载。</p>
       <p class="ebook-download-note">手机下载大文件建议连 Wi-Fi；如果点“下载”没反应，长按按钮选择“在新标签页打开”，再保存到本机。</p>
       <div class="ebook-meta"><span><b>05</b> 本教材</span><span><b>1,981</b> 页</span><span><b>105</b> MB</span><span><b>PDF</b> 在线阅读</span></div>
       <div class="ebook-actions">
@@ -59,7 +59,7 @@
           <div class="eyebrow">Library</div>
           <h2>这一学期，<br>要读的书。</h2>
         </div>
-        <p>点击封面进入阅读器：全页图片按需加载，打开快、可看完全书；完整版为 10—33 MB 压缩 PDF，下载也更快。</p>
+        <p>点击封面进入阅读器：全页图片按需加载，打开快、可看完全书；底部输入页码即可跳转。完整版为 10—33 MB 压缩 PDF，下载也更快。</p>
       </div>
       <div class="book-grid" id="bookGrid"></div>
     </div>
@@ -105,13 +105,17 @@
     <button type="button" id="prevPage" aria-label="上一页">← 上一页</button>
     <span id="pageLabel">— / —</span>
     <button type="button" id="nextPage" aria-label="下一页">下一页 →</button>
+    <span class="reader-jump">
+      <input id="pageJump" type="number" min="1" inputmode="numeric" placeholder="页码" aria-label="输入页码">
+      <button type="button" id="jumpPage">跳转</button>
+    </span>
     <a id="downloadPart" class="reader-part" href="#" download target="_blank" rel="noopener" hidden>下载本部分</a>
-    <span class="reader-hint">方向键翻页 · Esc 关闭</span>
+    <span class="reader-hint">方向键翻页 · 回车跳页 · Esc 关闭</span>
   </div>
 </div>
 
 <script src="assets/ebooks/books.js?v=5"></script>
-<script src="assets/ebook.js?v=7"></script>
+<script src="assets/ebook.js?v=8"></script>
 <script src="assets/pwa.js" defer></script>
 </body>
 </html>
