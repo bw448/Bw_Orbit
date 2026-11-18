@@ -424,7 +424,13 @@ def build_nature():
         for i, q in enumerate(items, 1):
             mcq(doc, i, q, size=8.7)
 
-    part_checklist(doc, "第六部分 考前清单", C.NATURE_CHECKLIST, meta["accent"])
+    h1(doc, "第六部分 气候/地貌/水文/土壤自测 40 问（自编）")
+    note(doc, "这 40 问是本册依据手写讲稿与教材自编的自测题，不是学校官方题；答案按讲稿/教材整理，遇到分歧以教材和老师讲解为准。", size=8.5)
+    table(doc, ["#", "问题", "答案"],
+          [[str(i), q, a] for i, (tag, q, a) in enumerate(C.NATURE_SELFTEST, 1)],
+          widths=[1.0, 7.0, 9.0], size=8.0)
+
+    part_checklist(doc, "第七部分 考前清单", C.NATURE_CHECKLIST, meta["accent"])
     return meta, doc
 
 
@@ -482,9 +488,8 @@ def build_probability():
             mcq(doc, i, q, size=8.7)
 
     h1(doc, "第五部分 真题：最近一次 + 2022—2023 精选")
-    h2(doc, "2025—2026 第二学期（2024 级回忆版）· 计算题精选 3 道")
-    note(doc, "原卷计算题 5 道（5×6=30），综合题 2 道（2×15=30）；本册收计算题第 1—3 题。"
-              "第 4、5 题与综合题见课程资料中的回忆版 PDF。", size=8.6)
+    h2(doc, "2025—2026 第二学期（2024 级回忆版）· 计算题 5 道 + 综合题 2 道（全收）")
+    note(doc, "原卷计算题 5 道（5×6=30）、综合题 2 道（2×15=30）；本册全部收录。", size=8.6)
     for title, q, sol in C.PROB_REAL_2026:
         h3(doc, title)
         p(doc, q, size=9.4)
@@ -497,9 +502,17 @@ def build_probability():
     table(doc, ["#", "题干", "答案", "要点"],
           [[a, b, c, d] for a, b, c, d in C.PROB_FILL_2023],
           widths=[0.9, 8.6, 2.6, 4.9], size=7.9)
+    h2(doc, "2022—2023 学年 · 计算题 2 道")
+    for title, q, sol in C.PROB_REAL_2023_CALC:
+        h3(doc, title)
+        p(doc, q, size=9.3)
+        bullets(doc, sol, size=9.1)
     h2(doc, C.PROB_REAL_2023_APP[0])
     p(doc, C.PROB_REAL_2023_APP[1], size=9.3)
     bullets(doc, C.PROB_REAL_2023_APP[2], size=9.2)
+    h2(doc, C.PROB_REAL_2023_APP2[0])
+    p(doc, C.PROB_REAL_2023_APP2[1], size=9.3)
+    bullets(doc, C.PROB_REAL_2023_APP2[2], size=9.1)
     note(doc, "2022—2023 为扫描件，个别字迹按题意整理；完整试卷在 assets/resources/past-2023.pdf。")
 
     part_checklist(doc, "第六部分 考前清单", C.PROB_CHECKLIST, meta["accent"])
