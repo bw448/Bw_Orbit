@@ -14,7 +14,7 @@ import datetime
 import os
 import shutil
 
-BASE = r"%USERPROFILE%\Desktop\地信大二上"
+BASE = os.path.expanduser(r"~\Desktop\地信大二上")
 SRC_ROOT = os.path.join(BASE, "原始文件")
 REV_ROOT = os.path.join(BASE, "复习资料")
 DEST = os.path.join(BASE, "课程资料")

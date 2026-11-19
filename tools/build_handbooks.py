@@ -31,7 +31,7 @@ import handbook_content as C  # noqa: E402
 SRC = os.path.join(ROOT, "src")
 WORK = os.path.join(ROOT, ".work", "handbooks")
 DOCX_DIR = os.path.join(WORK, "docx")
-PDF_DIR = r"%USERPROFILE%\Desktop\地信大二上\复习汇总"
+PDF_DIR = os.path.expanduser(r"~\Desktop\地信大二上\复习汇总")
 SITE_DIR = os.path.join(ROOT, "assets", "handbooks")
 PS1 = os.path.join(WORK, "docx2pdf.ps1")
 

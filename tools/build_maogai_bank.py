@@ -15,7 +15,7 @@ import sys
 import unicodedata
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DESKTOP = r"%USERPROFILE%\Desktop\地信大二上"
+DESKTOP = os.path.expanduser(r"~\Desktop\地信大二上")
 BASE_710 = os.path.join(DESKTOP, r"课程资料\毛概\整理稿\PDF版\毛概选择题题库（去重汇总）.pdf")
 BASE_EXTRA = os.path.join(DESKTOP, r"课程资料\毛概\原始\选择题\毛概期末考试题库 1.pdf")
 OUT = os.path.join(ROOT, "src", "maogai_bank.json")

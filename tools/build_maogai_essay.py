@@ -11,7 +11,7 @@ import re
 import pymupdf
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE = r"%USERPROFILE%\Desktop\地信大二上\课程资料\毛概\整理稿\PDF版"
+BASE = os.path.expanduser(r"~\Desktop\地信大二上\课程资料\毛概\整理稿\PDF版")
 FILES = [
     ("毛概大题背诵版（核心篇·导论—第四章）.pdf", "核心篇"),
     ("毛概大题背诵版（后半篇·第五章—跨章节）.pdf", "后半篇"),

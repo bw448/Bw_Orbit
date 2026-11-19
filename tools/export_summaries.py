@@ -22,7 +22,7 @@ from docx.shared import Cm, Pt, RGBColor
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "src"))
-OUT_DIR = r"%USERPROFILE%\Desktop\地信大二上\系统整理好的复习资料"
+OUT_DIR = os.path.expanduser(r"~\Desktop\地信大二上\系统整理好的复习资料")
 TODAY = datetime.date.today().isoformat()
 
 INK = RGBColor(0x1D, 0x1D, 0x1F)

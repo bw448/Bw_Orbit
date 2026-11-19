@@ -12,7 +12,7 @@ import re
 import pymupdf
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PDF = r"%USERPROFILE%\Desktop\地信大二上\课程资料\毛概\整理稿\PDF版\毛概选择题专项（高频考点+2024-2025真题）.pdf"
+PDF = os.path.expanduser(r"~\Desktop\地信大二上\课程资料\毛概\整理稿\PDF版\毛概选择题专项（高频考点+2024-2025真题）.pdf")
 OUT = os.path.join(ROOT, "src", "maogai_special.json")
 
 
