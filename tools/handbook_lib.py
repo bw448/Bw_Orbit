@@ -107,6 +107,13 @@ def cant_split(row):
     trPr.append(el)
 
 
+def keep_row_with_next(row, flag=True):
+    """让整行"与下段同页"：单元格段落设 keep_with_next，Word 据此不在此行后分页。"""
+    for cell in row.cells:
+        for par in cell.paragraphs:
+            par.paragraph_format.keep_with_next = flag
+
+
 # ---------------------------------------------------------------- fonts/styles
 def set_run_font(run, name=BODY_FONT, size=None, bold=None, color=None, italic=None):
     run.font.name = name
@@ -358,7 +365,8 @@ def numbered(doc, items, size=10.0):
 
 
 def table(doc, headers, rows, widths=None, size=8.6, header_fill=None,
-          zebra=True, first_col_bold=False, align_center=None, merge_first_col=False):
+          zebra=True, first_col_bold=False, align_center=None, merge_first_col=False,
+          keep_together=None, keep_auto_max=12):
     ncols = len(headers)
     t = doc.add_table(rows=1, cols=ncols)
     t.style = "Table Grid"
@@ -379,6 +387,10 @@ def table(doc, headers, rows, widths=None, size=8.6, header_fill=None,
         par.paragraph_format.line_spacing = 1.1
         r = par.add_run(str(h))
         set_run_font(r, size=size, bold=True, color=INK)
+    # 表头永远跟着第一条数据走，避免"只剩表头"落在页脚
+    keep_row_with_next(hdr, True)
+    if keep_together is None:
+        keep_together = len(rows) <= keep_auto_max
     for ridx, row in enumerate(rows):
         tr = t.add_row()
         cant_split(tr)
@@ -396,6 +408,8 @@ def table(doc, headers, rows, widths=None, size=8.6, header_fill=None,
             if align_center and i in align_center:
                 par.alignment = WD_ALIGN_PARAGRAPH.CENTER
             add_rich(par, val, size=size, bold=(first_col_bold and i == 0))
+        if keep_together and ridx < len(rows) - 1:
+            keep_row_with_next(tr, True)
     if widths:
         set_col_widths(t, widths)
     if merge_first_col:

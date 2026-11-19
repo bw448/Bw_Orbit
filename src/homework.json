@@ -942,6 +942,7 @@
     },
     {
      "type": "table",
+     "keep_together": true,
      "rows": [
       [
        "卫星",

@@ -146,15 +146,19 @@ def short_q(doc, idx, item, kind="fill", size=8.9):
 
 
 def render_homework_blocks(doc, blocks):
+    last_par = None  # 表格前的"……如下表："要跟表头一起走
     for b in blocks or []:
         t = b.get("type")
         if t == "h2":
+            last_par = None
             h3(doc, b.get("text", ""))
         elif t == "q":
-            p(doc, b.get("text", ""), size=9.3, bold=True, space_after=1)
+            last_par = p(doc, b.get("text", ""), size=9.3, bold=True, space_after=1)
+            last_par.paragraph_format.keep_with_next = True  # 题干别单独落在页脚
         elif t == "answer":
-            p(doc, b.get("text", ""), size=9.2, space_after=1, indent=0.2)
+            last_par = p(doc, b.get("text", ""), size=9.2, space_after=1, indent=0.2)
         elif t == "bullet":
+            last_par = None
             txt = b.get("text", "")
             txt = re.sub(r"^[•·]\s*", "", txt)
             if re.match(r"^[①-⑩]", txt):
@@ -162,15 +166,26 @@ def render_homework_blocks(doc, blocks):
             else:
                 bullets(doc, [txt], size=9.2)
         elif t == "p":
+            last_par = None
             note(doc, b.get("text", ""))
         elif t == "note":
+            last_par = None
             note(doc, b.get("text", ""))
         elif t == "formula":
+            last_par = None
             code(doc, b.get("text", ""))
         elif t == "table":
             rows = b.get("rows") or []
+            if rows and last_par is not None:
+                last_par.paragraph_format.keep_with_next = True
+            last_par = None
             if rows:
-                table(doc, rows[0], rows[1:], widths=b.get("widths"), size=b.get("size", 8.2), merge_first_col=b.get("merge_first_col", False))
+                kt = b.get("keep_together")
+                if kt is None and len(rows) - 1 <= 20 and len(rows[0]) >= 5:
+                    kt = True  # 宽表（卫星参数那种）宁可整表换页，也不拆成孤行
+                table(doc, rows[0], rows[1:], widths=b.get("widths"), size=b.get("size", 8.2),
+                      merge_first_col=b.get("merge_first_col", False),
+                      keep_together=kt)
         elif t == "image":
             src = b.get("src", "")
             path = os.path.join(ROOT, src.replace("/", os.sep))
