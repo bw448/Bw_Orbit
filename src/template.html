@@ -450,12 +450,19 @@ window.addEventListener('hashchange', route);
 
 /* ---------- homework view ---------- */
 function hwTable(rows){
+  var spans = {}, last = -1;
+  for (var ri = 1; ri < rows.length; ri++) {
+    if ((rows[ri][0] || '') === '' && last >= 0) { spans[last] = (spans[last] || 1) + 1; spans[ri] = 0; }
+    else { last = ri; spans[ri] = 1; }
+  }
   var html = '<div class="hw-table-wrap"><table class="hw-table">';
   rows.forEach(function(row, ri){
     html += '<tr>';
-    row.forEach(function(cell){
+    row.forEach(function(cell, ci){
+      if (ci === 0 && ri > 0 && spans[ri] === 0) return;
       var tag = ri === 0 ? 'th' : 'td';
-      html += '<' + tag + '>' + esc(cell || '') + '</' + tag + '>';
+      var attr = (ci === 0 && spans[ri] > 1) ? ' rowspan="' + spans[ri] + '"' : '';
+      html += '<' + tag + attr + '>' + esc(cell || '') + '</' + tag + '>';
     });
     html += '</tr>';
   });

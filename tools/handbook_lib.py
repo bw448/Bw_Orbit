@@ -358,7 +358,7 @@ def numbered(doc, items, size=9.8):
 
 
 def table(doc, headers, rows, widths=None, size=8.6, header_fill=None,
-          zebra=True, first_col_bold=False, align_center=None):
+          zebra=True, first_col_bold=False, align_center=None, merge_first_col=False):
     ncols = len(headers)
     t = doc.add_table(rows=1, cols=ncols)
     t.style = "Table Grid"
@@ -398,6 +398,15 @@ def table(doc, headers, rows, widths=None, size=8.6, header_fill=None,
             add_rich(par, val, size=size, bold=(first_col_bold and i == 0))
     if widths:
         set_col_widths(t, widths)
+    if merge_first_col:
+        idx = 1
+        while idx < len(t.rows):
+            start = idx
+            idx += 1
+            while idx < len(t.rows) and str(rows[idx - 1][0]).strip() == "":
+                idx += 1
+            if idx - start > 1:
+                t.cell(start, 0).merge(t.cell(idx - 1, 0))
     spacer = doc.add_paragraph()
     spacer.paragraph_format.space_after = Pt(2)
     spacer.paragraph_format.line_spacing = 0.6

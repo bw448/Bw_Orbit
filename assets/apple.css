@@ -483,3 +483,6 @@ body{background:var(--paper);color:var(--ink)}
   .mobile-nav-panel a{padding:11px 12px;border-radius:9px;font-size:13px;color:var(--ink)}
   .mobile-nav-panel a:hover,.mobile-nav-panel a.active{background:var(--paper-alt)}
 }
+
+/* merged satellite cells in homework tables */
+.hw-table td[rowspan]{vertical-align:middle;font-weight:600;color:var(--ink)}
