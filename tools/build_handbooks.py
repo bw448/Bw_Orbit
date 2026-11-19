@@ -122,22 +122,24 @@ def mcq_compact(doc, idx, item, size=8.6):
     q = clean(item.get("q", ""))
     if item.get("type") == "multi":
         q = "（多选）" + q
-    p(doc, "%d. %s" % (idx, q), size=size, space_after=0.5)
+    p(doc, "%d. %s" % (idx, q), size=size, space_after=0.5, keep=True)
     opts = item.get("options") or []
     if opts:
         line = "　".join("%s. %s" % ("ABCDEFGH"[i], clean(o)) for i, o in enumerate(opts))
-        p(doc, line, size=size - 0.5, space_after=0.5, indent=0.35)
+        p(doc, line, size=size - 0.5, space_after=0.5, indent=0.35, keep=True)
     p(doc, "答案：%s" % answer_text(item), size=size - 0.8, color=MUTED, space_after=4, indent=0.35)
 
 
 def short_q(doc, idx, item, kind="fill", size=8.9):
     q = clean(item.get("q", ""))
-    p_plain(doc, "%d. %s" % (idx, q), size=size, space_after=1)
+    stem = p_plain(doc, "%d. %s" % (idx, q), size=size, space_after=1, keep=True)
+    if "\n" in q and len(q.split("\n")) <= 22:
+        stem.paragraph_format.keep_together = True  # 题干里的代码别拆两页
     ans = clean(item.get("a", ""))
     expl = clean(item.get("e", ""), limit=420)
     if ans:
         if "\n" in ans and re.search(r"(def |class |import |print\()", ans):
-            p_plain(doc, "参考答案：", size=size - 0.5, color=MUTED, space_after=1, indent=0.35)
+            p_plain(doc, "参考答案：", size=size - 0.5, color=MUTED, space_after=1, indent=0.35, keep=True)
             code(doc, ans, size=7.4)
         else:
             p_plain(doc, "答案：%s" % ans, size=size - 0.5, color=INK, space_after=1, indent=0.35)
@@ -424,7 +426,9 @@ def build_nature():
     p(doc, "以下按手写稿的五部分整理；标“原稿留白”的是原稿只列问题、本册按教材补全的内容，答题以教材为准。",
       size=9.4)
     note(doc, "讲稿中的“教材 Pxx”沿用课程扫描 PDF 的页码，可能与纸质书印刷页码差 10 页左右；按章节标题找内容更稳。", size=8.2)
-    md_to_doc(doc, read("nature_notes.md"), meta["accent"])
+    # 第五部分紧接“海岸地貌”剩两行，强制换页会留下近乎空白的整页
+    md_to_doc(doc, read("nature_notes.md"), meta["accent"],
+              no_break=("手写稿 · 第五部分 · 海洋、陆地水与土壤",))
     h2(doc, "手写稿留白补全（续）：教材有、原稿没展开的考点")
     note(doc, "以下按教材与课程重点补全，不是手写稿原文；页码沿用课程 PDF 的扫描页码。", size=8.4)
     bullets(doc, [
@@ -520,7 +524,7 @@ def build_probability():
         h2(doc, title)
         bullets(doc, items, size=9.2)
 
-    h1(doc, "第四部分 60 题自测（附解析）")
+    h1(doc, "第四部分 60 题自测（附解析）", page_break=False)
     bank = load("probability_bank.json")["items"]
     p(doc, "按章节刷；计算题先自己写，再对照解析。自编题不是官方题，遇到分歧以教材/老师为准。", size=9.4)
     for typ, label in (("single", "一、单项选择题"), ("multi", "二、多项选择题"),
@@ -825,12 +829,11 @@ def build_arcgis():
     h3(doc, "第 10 章 空间统计分析")
     bullets(doc, [
         "空间统计分析：用统计方法分析地理现象的空间分布，关注空间依赖性和分布特征。",
-        "地统计分析：空间统计的分支，关注空间变异性和结构性，以半变异函数为基本工具。",
-        "常用：空间自相关、半变异函数拟合、克里格插值、空间预测。",
+        "地统计分析：空间统计的分支，关注空间变异性和结构性，以半变异函数为基本工具；常用空间自相关、半变异函数拟合、克里格插值、空间预测。",
     ], size=9.0)
 
     a = load("arcgis_bank.json")
-    h1(doc, "第三部分 名词解释：18 个必背 + 12 条中英词汇")
+    h1(doc, "第三部分 名词解释：18 个必背 + 12 条中英词汇", page_break=False)
     p(doc, "按“英文全称 → 中文定义 → 核心特征”写；下面每条都给了记忆骨架。", size=9.4)
     note(doc, "前 6 条（地理配准、矢量数据、空间分析、DEM、专题图、投影变换）来自扫描件“应急提分版”标准答法；"
               "后 12 条是按教材/PPT 补充的自编释义，用来覆盖名词解释可能抽到的其他概念。")
@@ -881,7 +884,7 @@ def build_arcgis():
             bullets(doc, wf["notes"], size=8.8)
         p(doc, "考场写法：" + wf["exam"], size=9.1)
 
-    h1(doc, "第六部分 79 道客观题（附答案）")
+    h1(doc, "第六部分 79 道客观题（附答案）", page_break=False)
     note(doc, "口径说明：f17/f18 的“缓冲/叠置/网络”是教材三分法；老师 PPT 第 7 章按“邻域分析、叠置分析、网络分析、追踪分析”四类。两种口径都能解释，考试遇到分类题以老师 PPT/题目为准。", size=8.4)
     h2(doc, "一、填空题 30 道")
     fill = [x for x in a["bank"] if x["type"] == "fill"]

@@ -289,7 +289,11 @@ def p_plain(doc, text="", size=10.2, color=INK, bold=False, italic=False, align=
         par.paragraph_format.left_indent = Cm(indent)
     if keep:
         par.paragraph_format.keep_with_next = True
+    elif str(text).rstrip().endswith("："):
+        par.paragraph_format.keep_with_next = True  # 中文引导冒号，正文跟着走
     lines = ("" if text is None else str(text)).replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    if len(lines) > 1 and len(lines) <= 22:
+        par.paragraph_format.keep_together = True  # 短多行块不跨页；长代码允许自然分页
     for i, line in enumerate(lines):
         if i:
             par.add_run().add_break()
@@ -311,6 +315,11 @@ def p(doc, text="", size=10.2, color=INK, bold=False, italic=False, align=None,
         par.paragraph_format.left_indent = Cm(indent)
     if keep:
         par.paragraph_format.keep_with_next = True
+    elif str(text).rstrip().endswith(("：", ":")):
+        par.paragraph_format.keep_with_next = True  # “……如下：”别单独落在页脚
+    _lines = ("" if text is None else str(text)).replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    if len(_lines) > 1 and len(_lines) <= 22:
+        par.paragraph_format.keep_together = True  # 短多行块不跨页；长代码允许自然分页
     add_rich(par, text, size=size, color=color, bold=bold, italic=italic)
     return par
 
@@ -434,8 +443,10 @@ def code(doc, text, size=7.8):
     par.paragraph_format.space_before = Pt(2)
     par.paragraph_format.space_after = Pt(4)
     par.paragraph_format.line_spacing = 1.05
-    shade_paragraph(par, "F5F5F7")
     lines = str(text).replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    if len(lines) <= 22:
+        par.paragraph_format.keep_together = True  # 短代码块不跨页拆开（长块强制整块换页会留大片空白）
+    shade_paragraph(par, "F5F5F7")
     for i, line in enumerate(lines):
         if i:
             par.add_run().add_break()
@@ -553,7 +564,7 @@ def make_document(title, en, subtitle, accent, meta_rows, running_title, toc_lev
 
 
 # ---------------------------------------------------------------- markdown
-def md_to_doc(doc, text, accent, skip_title=True):
+def md_to_doc(doc, text, accent, skip_title=True, no_break=()):
     """Render the site's nature-notes markdown into the handbook."""
     lines = text.replace("\r\n", "\n").split("\n")
     i = 0
@@ -581,7 +592,7 @@ def md_to_doc(doc, text, accent, skip_title=True):
             heading = s[2:].strip()
             if heading.startswith("第") and "部分" in heading:
                 heading = "手写稿 · " + heading
-            h1(doc, heading, page_break=True)
+            h1(doc, heading, page_break=heading not in no_break)
         elif s.startswith("## "):
             h2(doc, s[3:].strip())
         elif s.startswith("### "):
