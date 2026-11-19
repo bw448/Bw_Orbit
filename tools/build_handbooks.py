@@ -63,7 +63,7 @@ def clean(text, limit=None):
                 best = pos + len(sep)
         if best > 0:
             cut = cut[:best]
-        s = cut.rstrip() + "\n……（完整解析见网站）"
+        s = cut.rstrip() + "\n……"
     return s
 
 
@@ -492,8 +492,14 @@ def build_probability():
         h3(doc, title)
         p(doc, q, size=9.2)
         bullets(doc, sol, size=9.0)
+    h2(doc, "PPT 常考例题 12 道")
+    note(doc, "例 1—6 来自 PPT 原题，例 7—12 按 PPT 知识点配套；答案已逐题复算。", size=8.5)
+    for title, q, sol in C.PROB_PPT_EXAMPLES:
+        h3(doc, title)
+        p(doc, q, size=9.2)
+        bullets(doc, sol, size=9.0)
 
-    h1(doc, "第三部分 题型模板：看到题就知道怎么写")
+    h1(doc, "第三部分 题型模板：看到题就知道怎么写", page_break=False)
     note(doc, "模板标题里的分值是常见区间【推断】，具体以当年卷面为准；步骤本身按“设—公式—代入—结论”组织。", size=8.6)
     for title, items in C.PROB_TEMPLATES:
         h2(doc, title)
@@ -537,7 +543,7 @@ def build_probability():
     h2(doc, C.PROB_REAL_2023_APP2[0])
     p(doc, C.PROB_REAL_2023_APP2[1], size=9.3)
     bullets(doc, C.PROB_REAL_2023_APP2[2], size=9.1)
-    note(doc, "2022—2023 为扫描件，个别字迹按题意整理；完整试卷在 assets/resources/past-2023.pdf。")
+    note(doc, "2022—2023 为扫描件，个别字迹按题意整理。")
 
     part_checklist(doc, "第六部分 考前清单", C.PROB_CHECKLIST, meta["accent"])
     return meta, doc
@@ -633,7 +639,7 @@ def build_maogai():
             mcq(doc, i, q, size=8.6)
 
     h1(doc, "第六部分 选择题强化 300 道")
-    note(doc, "从网站 1063 道题库中选取，已去掉与前面 97 道真题重复的题；完整题库在 maogai.html 刷。", size=8.6)
+    note(doc, "本节从 1063 道题库中选取，已去掉与前面 97 道真题重复的题；答案在题后。期末补充部分保留旧教材章节编号（第十章—第十五章），作为补充；2023 版教材以导论—第八章为准。", size=8.6)
     bank = load("maogai_bank.json")["items"]
     real = load("maogai_special.json")["real"]
     def norm_q(t):
@@ -762,23 +768,51 @@ def build_arcgis():
     ], meta["running"])
     part_exam(doc, C.AG_EXAM)
 
-    course = load("courses.json")["arcgis"]
-    h1(doc, "第二部分 章节框架：理论、算法、实操三条线")
-    for i, s in enumerate(course.get("sections", []), 1):
-        h2(doc, "%02d %s" % (i, s["title"]))
-        bullets(doc, s.get("points", []), size=9.2)
-    h2(doc, "PPT 重点索引（按章，PPT 为主线）")
-    p(doc, "下面这些是老师 PPT 的章节主线；先把标题、图和工具名过一遍，再用第三—七部分的名词、算法、实操和题库查漏。", size=9.2)
-    table(doc, ["PPT", "章节主线", "必须能说出"], [
-        ["第 1 章 概述", "ArcGIS 平台能做什么、产品历史、家族成员", "ArcGIS Desktop/Pro/Server/Online 的分工；GIS 的定义与组成"],
-        ["第 2 章 快速入门", "ArcMap、ArcCatalog、ArcToolbox、ArcScene/ArcGlobe、ArcReader/Earth", "每个应用窗口的组成与典型操作"],
-        ["第 6 章 空间分析导论", "空间分析定义、数据模型、基本原理与方法、ArcGIS 分析模块", "空间分析的任务；矢量/栅格数据模型的选择"],
-        ["第 7 章 矢量分析", "邻域分析（缓冲、泰森、近邻）、叠置分析、网络分析、追踪分析", "缓冲参数、叠加工具、网络分析六类、追踪分析功能"],
-        ["第 8 章 栅格分析", "距离制图、密度制图、表面分析、单元/邻域/分类区统计、重分类、栅格计算、多元分析", "Spatial Analyst 工具链；重分类与栅格计算器"],
-        ["第 9 章 三维分析", "三维数据管理、表面创建、表面分析、ArcScene/ArcGlobe", "3D 点/线/表面/体数据；坡度坡向、可视域、剖面"],
-        ["第 10 章 空间统计", "空间统计 vs 地统计、变异函数、插值、空间预测", "半变异函数、克里格、空间自相关"],
-    ], widths=[2.8, 8.2, 6.0], size=8.4)
-    note(doc, "第 3—5 章（数据转换、拓扑、网络等）按扫描件与操作题补；PPT 里没有单独成章的内容，以教材和实验流程为准。", size=8.4)
+    h1(doc, "第二部分 PPT 分章要点")
+    p(doc, "按老师 PPT 的章节顺序，把可能直接出名词解释、简答、判断和实验题的内容写成正文。", size=9.4)
+    h3(doc, "第 1 章 ArcGIS 概述")
+    bullets(doc, [
+        "ArcGIS 是制图、分析、数据管理和开发平台；支持 shapefile、文件地理数据库、CAD、栅格，以及 SQL Server、Oracle、PostgreSQL 等企业库和大数据/云存储。",
+        "主要能力（PPT 三项）：数据管理、制图和可视化、地理处理和分析。",
+        "产品家族（PPT 本节）：ArcGIS for Desktop，包括 ArcMap、ArcCatalog、ArcToolbox、ArcGlobe、ArcScene、ModelBuilder；Pro/Online/Server 等作为其他产品了解。",
+    ], size=9.0)
+    h3(doc, "第 2 章 ArcGIS 快速入门")
+    bullets(doc, [
+        "ArcMap：数据输入、编辑、查询、分析、制图；地图文档为 .mxd。",
+        "地图文档用绝对路径时，移动文件夹或换电脑会丢失数据源；应设置相对路径，或用“修改数据源”修复。",
+        "ArcCatalog：浏览和管理数据、查看元数据与坐标系；ArcToolbox：地理处理工具；ArcScene/ArcGlobe：三维显示；ArcReader/ArcGIS Earth：浏览。",
+    ], size=9.0)
+    h3(doc, "第 6 章 GIS 空间分析导论")
+    bullets(doc, [
+        "空间分析：基于地理对象的位置和形态特征，提取和传输空间信息；是 GIS 的主要特征和评价 GIS 功能的重要指标。",
+        "数据模型：矢量模型、栅格模型，以及矢量栅格一体化、三维、时空数据模型。",
+        "基本方法：量算、叠加、缓冲、网络、空间统计、地形分析；ArcGIS 对应 Spatial Analyst、3D Analyst、Network Analyst、Geostatistical Analyst 等模块。",
+    ], size=9.0)
+    h3(doc, "第 7 章 矢量数据的空间分析")
+    bullets(doc, [
+        "邻域分析：缓冲区（点/线/面，距离可由常量或字段指定）、泰森多边形（输入必须是点要素）、近邻分析。",
+        "叠置分析：Intersect、Union、Erase、Identity 等；叠加前必须统一坐标系；Union 用“or”，Intersect 用“and”。",
+        "网络分析分两类：传输网络分析（Network Analyst）和效用网络分析（Utility Network Analyst）。传输网络分析六项基本功能：路径、服务区、最近设施、OD 成本矩阵、车辆路径（VRP）、位置分配。",
+        "追踪分析：给数据加时间字段，用回放管理器做历史回放、动画和时间序列图表。",
+    ], size=9.0)
+    h3(doc, "第 8 章 栅格数据的空间分析")
+    bullets(doc, [
+        "分析环境：工作目录、栅格单元大小、分析区域、坐标基准的配准模式（坐标系统）、分析过程文件的管理；环境设置分应用程序、工具、模型、模型流程四级。",
+        "距离制图、密度制图、表面分析（查询表面值、坡度、坡向、等值线、可视性、山体阴影）、重分类、栅格计算器、分类区统计、多元分析。",
+        "重分类：Spatial Analyst → Reclass → Reclassify；用于统一分级、旧值→新值和成本栅格。",
+    ], size=9.0)
+    h3(doc, "第 9 章 三维分析")
+    bullets(doc, [
+        "三维数据：3D 点、3D 线、表面数据和体数据；表面数据常用栅格表面、TIN、Terrain。",
+        "表面创建：栅格表面用插值法生成；TIN 由点/线/面等矢量要素创建，也可由栅格或 Terrain 转换。表面分析：坡向、坡度、山体阴影、填挖方、等值线、视域、面体积。",
+        "ArcScene 适合小范围三维场景，ArcGlobe 适合大范围全球三维显示。",
+    ], size=9.0)
+    h3(doc, "第 10 章 空间统计分析")
+    bullets(doc, [
+        "空间统计分析：用统计方法分析地理现象的空间分布，关注空间依赖性和分布特征。",
+        "地统计分析：空间统计的分支，关注空间变异性和结构性，以半变异函数为基本工具。",
+        "常用：空间自相关、半变异函数拟合、克里格插值、空间预测。",
+    ], size=9.0)
 
     a = load("arcgis_bank.json")
     h1(doc, "第三部分 名词解释：18 个必背 + 12 条中英词汇")
