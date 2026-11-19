@@ -93,7 +93,7 @@ def answer_text(item):
 
 def mcq(doc, idx, item, size=8.9):
     q = clean(item.get("q", ""))
-    if item.get("type") in ("multiple", "multi"):
+    if item.get("type") in ("multiple", "multi") and not q.startswith("（多选）"):
         q = "（多选）" + q
     p(doc, "%d. %s" % (idx, q), size=size, space_after=0.5, keep=True)
     opts = item.get("options") or []
@@ -116,6 +116,18 @@ def mcq_no_expl(doc, idx, item, size=8.7):
         line = "　".join("%s. %s" % ("ABCDEFGH"[i], clean(o)) for i, o in enumerate(opts))
         p_plain(doc, line, size=size - 0.5, color=INK, space_after=0.5, indent=0.35, keep=True)
     p_plain(doc, "答案：%s" % answer_text(item), size=size - 0.8, color=MUTED, space_after=5, indent=0.35)
+
+
+def mcq_compact(doc, idx, item, size=8.6):
+    q = clean(item.get("q", ""))
+    if item.get("type") == "multi":
+        q = "（多选）" + q
+    p(doc, "%d. %s" % (idx, q), size=size, space_after=0.5)
+    opts = item.get("options") or []
+    if opts:
+        line = "　".join("%s. %s" % ("ABCDEFGH"[i], clean(o)) for i, o in enumerate(opts))
+        p(doc, line, size=size - 0.5, space_after=0.5, indent=0.35)
+    p(doc, "答案：%s" % answer_text(item), size=size - 0.8, color=MUTED, space_after=4, indent=0.35)
 
 
 def short_q(doc, idx, item, kind="fill", size=8.9):
@@ -345,7 +357,7 @@ def build_remote():
             continue
         render_homework_blocks(doc, hw.get("blocks", []))
 
-    h1(doc, "第五部分 90 题自测（附答案）")
+    h1(doc, "第五部分 90 题自测（附答案）", page_break=False)
     p(doc, "先遮住答案做，再对照解析；错题回到对应章节，不要只抄答案。本部分含单选、多选、填空、简答；多选题已标“（多选）”，答案列出全部正确选项。第 5 章无题库，见知识体系第 5 章。", size=9.3)
     for ch in DATA["chapters"]:
         qs = ch.get("questions", [])
@@ -366,7 +378,7 @@ def build_remote():
     rows = [[str(g["ch"]), g["zh"], g["en"], g["zh_def"]] for g in gloss]
     table(doc, ["章", "中文", "English", "中文释义"], rows, widths=[1.0, 3.0, 4.2, 8.8], size=7.9)
 
-    h1(doc, "第七部分 教材附录 807 条（速查）")
+    h1(doc, "第七部分 教材附录 807 条（速查）", page_break=False)
     app = parse_appendix()
     p(doc, "附录 3：缩写 %d 条；附录 4：英汉词汇 %d 条。用于最后查漏和英中互测，不要求全背。"
       % (len(app.get("app3", [])), len(app.get("app4", []))), size=9.4)
@@ -455,7 +467,7 @@ def build_probability():
         ("适用", "期末复习 / 公式速查 / 计算题"),
         ("数据", "Orbit probability.html；60 题自测；2022—2023 期末卷；2025—2026 回忆版"),
         ("版本", "v1.0 · " + C.TODAY),
-    ], meta["running"])
+    ], meta["running"], toc_levels="1-1")
     part_exam(doc, C.PROB_EXAM)
 
     h1(doc, "第二部分 知识体系：7 章公式与题型")
@@ -620,7 +632,47 @@ def build_maogai():
         for i, q in enumerate(items, 1):
             mcq(doc, i, q, size=8.6)
 
-    h1(doc, "第六部分 答题模板与考前清单")
+    h1(doc, "第六部分 选择题强化 300 道")
+    note(doc, "从网站 1063 道题库中选取，已去掉与前面 97 道真题重复的题；完整题库在 maogai.html 刷。", size=8.6)
+    bank = load("maogai_bank.json")["items"]
+    real = load("maogai_special.json")["real"]
+    def norm_q(t):
+        return re.sub(r"[\s，。；：、（）()\"“”]", "", t or "")
+    real_keys = {norm_q(x.get("q", "")) for x in real}
+    cand = [x for x in bank if x.get("options") and x.get("answer") and norm_q(x.get("q", "")) not in real_keys]
+    new_items = [x for x in cand if x.get("source") == "新教材"]
+    sup_items = [x for x in cand if x.get("source") == "期末补充"]
+    # take all new items, then supplement round-robin by chapter until 300
+    selected = list(new_items[:300])
+    by_ch = {}
+    for x in sup_items:
+        by_ch.setdefault(x.get("chapter", ""), []).append(x)
+    order = list(by_ch)
+    i = 0
+    while len(selected) < 300 and order:
+        for ch in list(order):
+            if len(selected) >= 300:
+                break
+            if by_ch[ch]:
+                selected.append(by_ch[ch].pop(0))
+            else:
+                order.remove(ch)
+    n = 0
+    for label, items in [("一、新教材题库", [x for x in selected if x.get("source") == "新教材"]),
+                         ("二、期末补充题库", [x for x in selected if x.get("source") == "期末补充"])]:
+        if not items:
+            continue
+        h2(doc, "%s（%d 道）" % (label, len(items)))
+        groups = {}
+        for x in items:
+            groups.setdefault(x.get("chapter", ""), []).append(x)
+        for ch, qs in groups.items():
+            h3(doc, ch)
+            for x in qs:
+                n += 1
+                mcq_compact(doc, n, x)
+
+    h1(doc, "第七部分 答题模板与考前清单")
     for title, items in C.MAOGAI_TEMPLATES:
         h2(doc, title)
         bullets(doc, items, size=9.2)

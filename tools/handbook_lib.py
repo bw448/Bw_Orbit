@@ -484,7 +484,7 @@ def quote(doc, text, accent):
 
 
 # ---------------------------------------------------------------- cover
-def make_document(title, en, subtitle, accent, meta_rows, running_title):
+def make_document(title, en, subtitle, accent, meta_rows, running_title, toc_levels="1-2"):
     doc = Document()
     setup_styles(doc, accent)
     sec = setup_page(doc)
@@ -534,7 +534,7 @@ def make_document(title, en, subtitle, accent, meta_rows, running_title):
     p(doc, "目  录", size=20, bold=True, space_after=2)
     p(doc, "CONTENTS", size=8.5, color=FAINT, space_after=10)
     add_bottom_border(doc.paragraphs[-1], "000000", sz=8, space=2)
-    add_toc(doc)
+    add_toc(doc, levels=toc_levels)
     return doc
 
 
