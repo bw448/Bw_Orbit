@@ -199,39 +199,28 @@ def common_intro(doc):
     note(doc, "生成日期：%s。本册与网站数据同源；如遇内容更新，以网站最新版为准。" % C.TODAY)
 
 
-def part_exam(doc, exam, title="第一部分 考试情报：怎么考、考什么"):
+def part_exam(doc, exam, title="第一部分 考试信息"):
     h1(doc, title)
-    h2(doc, "1.1 一页看懂")
-    table(doc, ["项目", "内容"], exam["one_page"], widths=[4.2, 12.8], size=8.8)
-    h2(doc, "1.2 考什么：章节权重")
+    rows = exam.get("brief") or exam["one_page"][:4]
+    table(doc, ["项目", "内容"], rows, widths=[3.2, 13.8], size=9.2)
+
+    h2(doc, "章节重点")
     weights = exam["weights"]
     if weights and len(weights[0]) == 3:
-        table(doc, ["章节/模块", "权重", "高频内容"], weights,
-              widths=[5.2, 2.0, 9.8], size=8.4)
+        table(doc, ["章节/模块", "权重", "重点"], weights,
+              widths=[6.0, 2.5, 8.5], size=8.8)
     else:
-        table(doc, ["章节/模块", exam.get("weight_head", "题量/分值"), "权重", "高频内容"], weights,
-              widths=[4.8, 2.4, 1.6, 8.2], size=8.4)
-    if exam.get("weight_note"):
-        note(doc, exam["weight_note"])
-    h2(doc, "1.3 命题规律")
-    bullets(doc, exam["rules"], size=9.4)
-    h2(doc, "1.4 满分策略：时间怎么分")
-    table(doc, ["时间", "任务", "完成标准"], exam["strategy"],
-          widths=[2.2, 5.0, 9.8], size=8.6)
-    h2(doc, "1.5 本课最容易丢分的地方")
-    bullets(doc, exam["pitfalls"], size=9.3)
+        table(doc, ["章节/模块", "题量/分值", "权重"], [r[:3] for r in weights],
+              widths=[7.0, 3.0, 7.0], size=8.8)
+    h2(doc, "易错点")
+    bullets(doc, exam["pitfalls"][:6], size=9.8)
 
 
 def part_checklist(doc, title, items, accent):
     h1(doc, title)
-    p(doc, "考前最后一遍：下面每一条都要能不看书画勾；打不了勾的，回到对应章节，不要再开新题。", size=9.6)
+    p(doc, "考前逐条打勾；打不了勾的回到对应章节，不再开新题。", size=9.8)
     for i, it in enumerate(items, 1):
-        p(doc, "□  %d. %s" % (i, it), size=9.6, space_after=3)
-    callout(doc, "考场三句话", [
-        "先易后难：把能拿的分先拿到，再回头啃难题。",
-        "主观题分点：①②③比一大段更容易得分。",
-        "写公式/依据：计算题、判断题、简答题都要让阅卷老师看到“为什么”。",
-    ], accent)
+        p(doc, "□  %d. %s" % (i, it), size=10.0, space_after=3)
 
 
 # ---------------------------------------------------------------------------
@@ -243,7 +232,6 @@ def build_remote():
         ("数据", "Orbit remote.html；7 套作业；老师 30 页手写复习；90 题；807 条附录"),
         ("版本", "v1.0 · " + C.TODAY),
     ], meta["running"])
-    common_intro(doc)
     note(doc, "遥感分册答案校订来源：老师 PPT 截图（遥感10.30 PDF）、教材《遥感导论》（梅安新等）、30 页真实手写复习、老师复习讲义；四处交叉比对，未联网搜索。", size=8.5)
     part_exam(doc, C.REMOTE_EXAM)
 
@@ -252,7 +240,7 @@ def build_remote():
     notes = load("notes.json")
     homework = load("homework.json")["chapters"]
     for ch in DATA["chapters"]:
-        h2(doc, "%02d %s（%s）" % (ch["id"], ch["title"], ch.get("en", "")), page_break=True)
+        h2(doc, "%02d %s（%s）" % (ch["id"], ch["title"], ch.get("en", "")))
         p(doc, ch.get("desc", ""), size=9.5, color=MUTED)
         h3(doc, "课堂主线")
         bullets(doc, ch.get("points", []), size=9.3)
@@ -303,7 +291,6 @@ def build_remote():
                 "应用：更广泛、实用化、商业化、国际化。",
                 "面向其他星球：火星等深空探测将有较大发展。",
             ], meta["accent"])
-            note(doc, "AI、大数据、数字孪生可作为“再补一句”，但不要替代上面五方面。")
 
     h2(doc, "PPT 常考补充：波段、分辨率、摄影与地学作用")
     h3(doc, "波段范围与典型应用")
@@ -404,7 +391,6 @@ def build_nature():
         ("数据", "Orbit nature-geo.html；手写复习稿文字版；80 题自测"),
         ("版本", "v1.0 · " + C.TODAY),
     ], meta["running"])
-    common_intro(doc)
     part_exam(doc, C.NATURE_EXAM)
 
     h1(doc, "第二部分 知识体系：手写复习稿（文字版）")
@@ -470,7 +456,6 @@ def build_probability():
         ("数据", "Orbit probability.html；60 题自测；2022—2023 期末卷；2025—2026 回忆版"),
         ("版本", "v1.0 · " + C.TODAY),
     ], meta["running"])
-    common_intro(doc)
     part_exam(doc, C.PROB_EXAM)
 
     h1(doc, "第二部分 知识体系：7 章公式与题型")
@@ -555,7 +540,6 @@ def build_maogai():
         ("数据", "Orbit maogai.html；118 道大题；256 条考点；97 道真题；39 组易混"),
         ("版本", "v1.0 · " + C.TODAY),
     ], meta["running"])
-    common_intro(doc)
     part_exam(doc, C.MAOGAI_EXAM)
 
     course = load("courses.json")["maogai"]
@@ -599,7 +583,7 @@ def build_maogai():
         ch = "跨章节综合论述" if cross else item.get("chapter", "")
         if ch != cur:
             cur = ch
-            h2(doc, ch, page_break=True)
+            h2(doc, ch)
         tags = "".join(item.get("tags", []))
         h3(doc, "%d. %s%s" % (idx, item.get("q", ""), ("　" + tags) if tags else ""))
         bullets(doc, item.get("points", []), size=8.9)
@@ -655,7 +639,6 @@ def build_python():
         ("数据", "Orbit python.html + python-guide.html；599 题；考试.txt"),
         ("版本", "v1.0 · " + C.TODAY),
     ], meta["running"])
-    common_intro(doc)
     part_exam(doc, C.PY_EXAM)
     note(doc, "题库统计：上表合计 598；另有 py-287 一题标签误归 GDAL，实为 Pandas 时间序列重采样题，按题干计入后共 599。"
               "Matplotlib/GeoPandas/GDAL 在十套卷中题量很少，必须回到课件 notebook 亲手跑。", size=8.6)
@@ -663,7 +646,7 @@ def build_python():
     guide = load("python_guide.json")
     h1(doc, "第二部分 知识地图：10 个模块")
     for layer in guide["layers"]:
-        h2(doc, "%s（%s）" % (layer["name"], layer["en"]), page_break=True)
+        h2(doc, "%s（%s）" % (layer["name"], layer["en"]))
         for m in [x for x in guide["modules"] if x["layer"] == layer["id"]]:
             h3(doc, "%s · %s" % (m["title"], m["en"]))
             p(doc, m.get("why", ""), size=9.2, color=MUTED)
@@ -725,7 +708,6 @@ def build_arcgis():
         ("数据", "Orbit arcgis.html；79 道客观题；18 个名词；4 个算法；6 个实操"),
         ("版本", "v1.0 · " + C.TODAY),
     ], meta["running"])
-    common_intro(doc)
     part_exam(doc, C.AG_EXAM)
 
     course = load("courses.json")["arcgis"]

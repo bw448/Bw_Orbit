@@ -17,11 +17,12 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
-INK = RGBColor(0x1D, 0x1D, 0x1F)
-MUTED = RGBColor(0x6E, 0x6E, 0x73)
-FAINT = RGBColor(0x8E, 0x8E, 0x93)
+INK = RGBColor(0x00, 0x00, 0x00)
+MUTED = RGBColor(0x33, 0x33, 0x33)
+FAINT = RGBColor(0x66, 0x66, 0x66)
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
-BODY_FONT = "微软雅黑"
+BODY_FONT = "宋体"
+HEAD_FONT = "黑体"
 CODE_FONT = "Consolas"
 
 
@@ -127,27 +128,26 @@ def set_run_font(run, name=BODY_FONT, size=None, bold=None, color=None, italic=N
 def setup_styles(doc, accent):
     normal = doc.styles["Normal"]
     normal.font.name = BODY_FONT
-    normal.font.size = Pt(10)
+    normal.font.size = Pt(10.5)
     normal.font.color.rgb = INK
     normal.element.get_or_add_rPr().get_or_add_rFonts().set(qn("w:eastAsia"), BODY_FONT)
     pf = normal.paragraph_format
-    pf.line_spacing = 1.34
-    pf.space_after = Pt(3)
+    pf.line_spacing = 1.35
+    pf.space_after = Pt(2.5)
     pf.space_before = Pt(0)
 
-    accent_rgb = _rgb(accent)
     specs = {
-        "Heading 1": (17, accent_rgb, 14, 6),
-        "Heading 2": (12.5, INK, 12, 4),
-        "Heading 3": (10.8, accent_rgb, 8, 2),
+        "Heading 1": (16, INK, 12, 5),
+        "Heading 2": (13, INK, 10, 3),
+        "Heading 3": (11, INK, 7, 2),
     }
     for name, (size, color, before, after) in specs.items():
         st = doc.styles[name]
-        st.font.name = BODY_FONT
+        st.font.name = HEAD_FONT
         st.font.size = Pt(size)
         st.font.bold = True
         st.font.color.rgb = color
-        st.element.get_or_add_rPr().get_or_add_rFonts().set(qn("w:eastAsia"), BODY_FONT)
+        st.element.get_or_add_rPr().get_or_add_rFonts().set(qn("w:eastAsia"), HEAD_FONT)
         st.paragraph_format.space_before = Pt(before)
         st.paragraph_format.space_after = Pt(after)
         st.paragraph_format.keep_with_next = True
@@ -156,7 +156,7 @@ def setup_styles(doc, accent):
     for name in ("List Bullet", "List Number"):
         st = doc.styles[name]
         st.font.name = BODY_FONT
-        st.font.size = Pt(9.8)
+        st.font.size = Pt(10)
         st.element.get_or_add_rPr().get_or_add_rFonts().set(qn("w:eastAsia"), BODY_FONT)
         st.paragraph_format.space_after = Pt(1.5)
         st.paragraph_format.line_spacing = 1.28
@@ -234,7 +234,7 @@ def setup_chrome(doc, sec, running_title, accent):
     set_run_font(r, size=8, color=FAINT)
     r = hp.add_run("\tOrbit · 期末满分手册 · 2026")
     set_run_font(r, size=8, color=FAINT)
-    add_bottom_border(hp, tint(accent, 0.65), sz=4, space=2)
+    add_bottom_border(hp, "C0C0C0", sz=4, space=2)
 
     footer = sec.footer
     fp = footer.paragraphs[0]
@@ -268,7 +268,7 @@ def h3(doc, text):
     return doc.add_heading(text, level=3)
 
 
-def p_plain(doc, text="", size=10, color=INK, bold=False, italic=False, align=None,
+def p_plain(doc, text="", size=10.2, color=INK, bold=False, italic=False, align=None,
             space_after=None, indent=None, keep=False):
     """Paragraph without markdown parsing — required for Python code/options."""
     par = doc.add_paragraph()
@@ -291,7 +291,7 @@ def p_plain(doc, text="", size=10, color=INK, bold=False, italic=False, align=No
     return par
 
 
-def p(doc, text="", size=10, color=INK, bold=False, italic=False, align=None,
+def p(doc, text="", size=10.2, color=INK, bold=False, italic=False, align=None,
       space_after=None, indent=None, keep=False):
     par = doc.add_paragraph()
     if align == "center":
@@ -338,7 +338,7 @@ def add_rich(par, text, size=10, color=INK, bold=False, italic=False):
             set_run_font(r, size=size, bold=bold, color=color, italic=italic)
 
 
-def bullets(doc, items, size=9.8, level=0):
+def bullets(doc, items, size=10.0, level=0):
     for it in items:
         par = doc.add_paragraph(style="List Bullet")
         if level:
@@ -346,7 +346,7 @@ def bullets(doc, items, size=9.8, level=0):
         add_rich(par, it, size=size)
 
 
-def numbered(doc, items, size=9.8):
+def numbered(doc, items, size=10.0):
     """Manual numbering so every list restarts at 1 (Word's List Number does not)."""
     for i, it in enumerate(items, 1):
         par = doc.add_paragraph()
@@ -431,21 +431,21 @@ def code(doc, text, size=7.8):
     return par
 
 
-def callout(doc, title, lines, accent, fill=None, size=9.2):
+def callout(doc, title, lines, accent, fill=None, size=9.4):
     t = doc.add_table(rows=1, cols=1)
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     t.autofit = False
-    set_table_borders(t, tint(accent, 0.55), 4)
+    set_table_borders(t, "B0B0B0", 4)
     cell = t.rows[0].cells[0]
     cell.text = ""
     cell_margins(cell, 90, 90, 140, 120)
-    shade_cell(cell, fill or tint(accent, 0.93))
-    add_left_border(cell, accent, sz=20)
+    shade_cell(cell, "F7F7F7")
+    add_left_border(cell, "555555", sz=16)
     par = cell.paragraphs[0]
     par.paragraph_format.space_after = Pt(2)
     if title:
         r = par.add_run(title)
-        set_run_font(r, size=size + 0.4, bold=True, color=_rgb(accent))
+        set_run_font(r, size=size + 0.4, bold=True, color=INK)
     first = not bool(title)
     for line in lines:
         if not first:
@@ -463,19 +463,19 @@ def note(doc, text, size=8.4):
     par = doc.add_paragraph()
     par.paragraph_format.left_indent = Cm(0.2)
     par.paragraph_format.space_after = Pt(3)
-    add_rich(par, text, size=size, color=MUTED, italic=True)
+    add_rich(par, text, size=size, color=MUTED, italic=False)
 
 
 def quote(doc, text, accent):
     t = doc.add_table(rows=1, cols=1)
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     t.autofit = False
-    set_table_borders(t, tint(accent, 0.6), 4)
+    set_table_borders(t, "C0C0C0", 4)
     cell = t.rows[0].cells[0]
     cell.text = ""
     cell_margins(cell, 80, 80, 120, 100)
-    shade_cell(cell, "FBFBFD")
-    add_left_border(cell, accent, sz=16)
+    shade_cell(cell, "FAFAFA")
+    add_left_border(cell, "555555", sz=12)
     par = cell.paragraphs[0]
     add_rich(par, text, size=9.4, color=INK, italic=True)
     spacer = doc.add_paragraph()
@@ -495,66 +495,45 @@ def make_document(title, en, subtitle, accent, meta_rows, running_title):
     doc.core_properties.keywords = "期末复习, 大二上, " + title
     doc.core_properties.comments = "由 Orbit 地信复习系统数据生成；仅供个人学习使用。"
 
-    # cover band
-    band = doc.add_table(rows=1, cols=1)
-    band.alignment = WD_TABLE_ALIGNMENT.CENTER
-    band.autofit = False
-    set_table_borders(band, accent, 0, inside=False)
-    cell = band.rows[0].cells[0]
-    cell.text = ""
-    cell.width = Cm(17.0)
-    cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-    shade_cell(cell, accent)
-    cell_margins(cell, 520, 520, 460, 360)
-    par = cell.paragraphs[0]
-    par.paragraph_format.space_after = Pt(10)
-    r = par.add_run("ORBIT  ·  期末满分手册")
-    set_run_font(r, size=8.5, bold=True, color=WHITE)
-    par = cell.add_paragraph()
-    par.paragraph_format.space_after = Pt(6)
-    par.paragraph_format.line_spacing = 1.05
+    p(doc, "ORBIT · 期末复习手册", size=8.5, bold=True, color=MUTED, space_after=4)
+    p(doc, "2026 秋季学期 · 大二上 · 个人复习资料", size=9, color=MUTED, space_after=18)
+    par = doc.add_paragraph()
+    par.paragraph_format.space_after = Pt(4)
     r = par.add_run(title)
-    set_run_font(r, size=25 if len(title) <= 14 else 21, bold=True, color=WHITE)
-    par = cell.add_paragraph()
-    par.paragraph_format.space_after = Pt(0)
-    r = par.add_run(en)
-    set_run_font(r, size=9.5, color=RGBColor(0xE8, 0xF2, 0xFF))
-
-    p(doc, "", size=6, space_after=0)
-    p(doc, "2026 年秋季学期  ·  大二上  ·  个人复习资料", size=9, color=MUTED, space_after=10)
-    p(doc, subtitle, size=15, bold=True, space_after=8)
-    p(doc, "把这一科，复习到没有意外。", size=10.5, color=MUTED, italic=True, space_after=22)
+    set_run_font(r, name=HEAD_FONT, size=26 if len(title) <= 14 else 22, bold=True, color=INK)
+    p(doc, en, size=9.5, color=MUTED, space_after=8)
+    rule = doc.add_paragraph()
+    rule.paragraph_format.space_after = Pt(10)
+    add_bottom_border(rule, "000000", sz=10, space=2)
+    p(doc, subtitle, size=12, bold=True, space_after=14)
 
     meta = doc.add_table(rows=0, cols=2)
     meta.autofit = False
-    set_table_borders(meta, "E5E5EA", 4)
-    for k, v in meta_rows:
+    set_table_borders(meta, "C8C8C8", 4)
+    for k, v in [(a, b) for a, b in meta_rows if a != "数据"]:
         row = meta.add_row()
         c0, c1 = row.cells
         c0.text = ""
         c1.text = ""
-        shade_cell(c0, "F7F7F9")
+        shade_cell(c0, "F2F2F2")
         cell_margins(c0, 70, 70, 110, 90)
         cell_margins(c1, 70, 70, 110, 90)
         r = c0.paragraphs[0].add_run(k)
-        set_run_font(r, size=9, bold=True, color=MUTED)
+        set_run_font(r, size=9, bold=True, color=INK)
         c0.paragraphs[0].paragraph_format.space_after = Pt(0)
         add_rich(c1.paragraphs[0], v, size=9, color=INK)
         c1.paragraphs[0].paragraph_format.space_after = Pt(0)
     set_col_widths(meta, [4.6, 12.4])
 
     p(doc, "", size=6, space_after=0)
-    p(doc, "本册由 Orbit 地信复习系统的题库、真题、讲义与课程资料汇总生成。"
-           "标注“推断”的内容是根据现有材料反推，不是学校官方说明；一切以老师最后一节课为准。",
-      size=8.2, color=FAINT, space_after=4)
-    p(doc, "版本 v1.0  ·  生成日期 2026-11-18  ·  仅供个人学习，请勿商业传播",
-      size=8.2, color=FAINT)
+    p(doc, "资料来源：课程 PPT、教材、手写稿、作业与真题参考答案；仅供个人复习，请勿商业传播。",
+      size=8, color=MUTED, space_after=3)
 
     # TOC page
     doc.add_page_break()
     p(doc, "目  录", size=20, bold=True, space_after=2)
     p(doc, "CONTENTS", size=8.5, color=FAINT, space_after=10)
-    add_bottom_border(doc.paragraphs[-1], tint(accent, 0.55), sz=8, space=2)
+    add_bottom_border(doc.paragraphs[-1], "000000", sz=8, space=2)
     add_toc(doc)
     return doc
 
