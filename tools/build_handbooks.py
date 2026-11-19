@@ -158,7 +158,7 @@ def render_homework_blocks(doc, blocks):
         elif t == "table":
             rows = b.get("rows") or []
             if rows:
-                table(doc, rows[0], rows[1:], size=8.2)
+                table(doc, rows[0], rows[1:], widths=b.get("widths"), size=b.get("size", 8.2))
         elif t == "image":
             src = b.get("src", "")
             path = os.path.join(ROOT, src.replace("/", os.sep))
