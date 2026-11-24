@@ -1,11 +1,11 @@
 {
  "user": "bw448",
- "synced_at": "2026-11-12T07:10:56Z",
+ "synced_at": "2026-11-24T22:26:41Z",
  "repos": [
   {
    "name": "Bw_Orbit",
    "description": "Orbit · 地信学习站 — a bilingual remote-sensing and Python learning system for GIS undergraduates.",
-   "stargazers_count": 1,
+   "stargazers_count": 2,
    "language": "HTML",
    "homepage": "https://bw448.github.io/Bw_Orbit/",
    "topics": [
@@ -17,7 +17,7 @@
     "remote-sensing",
     "static-site"
    ],
-   "pushed_at": "2026-11-11T19:36:26Z",
+   "pushed_at": "2026-11-19T14:55:18Z",
    "fork": false,
    "archived": false,
    "html_url": "https://github.com/bw448/Bw_Orbit",
@@ -46,7 +46,7 @@
     "spaced-repetition",
     "windows"
    ],
-   "pushed_at": "2026-11-11T15:15:06Z",
+   "pushed_at": "2026-11-19T13:05:10Z",
    "fork": false,
    "archived": false,
    "html_url": "https://github.com/bw448/folio",
